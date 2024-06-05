@@ -1,9 +1,10 @@
+import Image from '../assets/heroImage.jpg'
 import  { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import Image from '../assets/heroImage.jpg'
+
 // eslint-disable-next-line react/prop-types
-const Services = ({ question, answer, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Services = ({ question, answer, title, index, currentIndex, setCurrentIndex }) => {
+  const [isOpen, setIsOpen] = useState(currentIndex === index);
   const answerRef = useRef(null);
   const itemRef = useRef(null);
 
@@ -14,6 +15,16 @@ const Services = ({ question, answer, title }) => {
       gsap.to(answerRef.current, { height: 0, opacity: 0, duration: 0.1 });
     }
   }, [isOpen]);
+
+  const handleToggle = () => {
+    if (isOpen && currentIndex === index) {
+      setIsOpen(false);
+      setCurrentIndex(null);
+    } else {
+      setIsOpen(true);
+      setCurrentIndex(index);
+    }
+  };
 
   const handleMouseEnter = () => {
     gsap.to(itemRef.current, { scale: 1.05, duration: 0.3 });
@@ -32,12 +43,12 @@ const Services = ({ question, answer, title }) => {
     >
       <button
         className="w-full  text-left focus:outline-none "
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
       >
         <h3 className="text-lg font-semibold text-gray-900">{question}</h3>
         <p className="mt-2 text-sm text-gray-700">{answer}</p>
       </button>
-      <div ref={answerRef} className="overflow-hidden h-0 opacity-0 transition-all">
+      <div ref={answerRef} className={`overflow-hidden ${isOpen ? 'h-auto' : 'h-0'} opacity-${isOpen ? '100' : '0'} transition-all`}>
         {isOpen && (
           <div className="mt-4">
             <h4 className="text-md font-bold text-center">{title}</h4>
@@ -51,7 +62,8 @@ const Services = ({ question, answer, title }) => {
 };
 
 const ServiceList = () => {
-  
+  const [currentIndex, setCurrentIndex] = useState(null);
+
   const list = [
     {
       question: "What is Fruitful?",
@@ -79,10 +91,16 @@ const ServiceList = () => {
   ];
 
   return (
-    <div className=" max-w-2xl mx-auto p-4">
+    <div className="max-w-2xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-6 text-center">Services</h2>
-      {list.map((list, index) => (
-        <Services key={index} {...list} />
+      {list.map((item, index) => (
+        <Services
+          key={index}
+          index={index}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          {...item}
+        />
       ))}
     </div>
   );

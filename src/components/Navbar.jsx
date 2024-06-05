@@ -1,30 +1,66 @@
 import navLogo from '../assets/logo.svg'
+import  { useState, useEffect } from 'react';
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // Adjust breakpoint as needed
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000]">
-      <nav className=" flex items-center justify-around p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
-        <div className="logo flex gap-1 cursor-pointer" >
-          <img src={navLogo} width={20}  alt="logo" />
+      <nav className="flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
+        <div className="logo flex gap-1 cursor-pointer">
+          <img src={navLogo} width={20} alt="logo" />
           Enrich
         </div>
-        <div className="list-items">
+        <div className="list-items hidden lg:flex">
           <ul>
-            <li className="flex gap-6 text-black tracking-wide ">
+            <li className="flex gap-6 text-black tracking-wide">
               <a className='hover:text-yellow-600 transition delay-75' href="#">Home</a>
-              <a className='hover:text-yellow-600 transition delay-75' href="">Services</a>
+              <a className='hover:text-yellow-600 transition delay-75' href="#">Services</a>
               <a className='hover:text-yellow-600 transition delay-75' href="#">Pricing</a>
               <a className='hover:text-yellow-600 transition delay-75' href="#">Testimonials</a>
             </li>
           </ul>
         </div>
-        <div className="cta-btn flex items-center justify-center gap-4">
-          <a className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700 ' href="#">Blogs</a>
-          <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 '>Free Trial</button>
+        <div className="cta-btn hidden lg:flex items-center justify-center gap-4">
+          <a className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' href="#">Blogs</a>
+          <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600'>Free Trial</button>
+        </div>
+        <div className="lg:hidden">
+          <button onClick={toggleMenu} className="text-black focus:outline-none">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
         </div>
       </nav>
+      <div className={`${menuOpen ? 'block' : 'hidden'} lg:hidden`}>
+        <ul className="flex flex-col gap-6 p-5 bg-white/70 border-[1px] border-yellow-600 rounded-md">
+          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Home</a></li>
+          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Services</a></li>
+          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Pricing</a></li>
+          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Testimonials</a></li>
+          <li><a className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' href="#">Blogs</a></li>
+          <li><button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600'>Free Trial</button></li>
+        </ul>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

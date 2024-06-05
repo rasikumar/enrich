@@ -112,11 +112,6 @@ const Testimonials = () => {
         ))}
       </div>
       <button onClick={handleNext} className="bg-yellow-600 text-white px-4 py-2 rounded-full">Next</button>
-
-      {/* Navigation Buttons */}
-      <div className="flex gap-4 mt-6">
-        
-      </div>
     </div>
   );
 };
