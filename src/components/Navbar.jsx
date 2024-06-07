@@ -24,14 +24,14 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000]">
-      <nav className="flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
+      <nav className="xl:text-lg flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
         <div className="logo flex gap-1 cursor-pointer">
           <img src={navLogo} width={20} alt="logo" />
           Enrich
         </div>
-        <div className="list-items hidden lg:flex">
+        <div className="list-items hidden lg:flex ">
           <ul>
-            <li className="flex gap-6 text-black tracking-wide">
+            <li className="flex gap-6  text-black tracking-wide">
               <AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75' >Home</AnchorLink>
               <AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75' >Services</AnchorLink>
               <AnchorLink href='#' className='hover:text-yellow-600 transition delay-75' >Pricing</AnchorLink>
