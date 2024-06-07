@@ -5,6 +5,7 @@ import Testimonials from "./components/Testimonials"
 import Blog from "./components/Blog"
 import { useEffect } from "react"
 import Lenis from 'lenis';
+import Footer from "./components/Footer"
 
 const App = () => {
   useEffect( () => {
@@ -24,6 +25,7 @@ const App = () => {
       <Services/>
       <Testimonials/>
       <Blog/>
+      <Footer/>
 
     </div>
   )

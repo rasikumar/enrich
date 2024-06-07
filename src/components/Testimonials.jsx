@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Person from '../assets/heroImage.jpg';
 import quote from '../assets/quote1.svg';
+import rightArrow from '../assets/rightarrow.svg';
+import leftArrow from '../assets/leftarrow.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,7 +100,7 @@ const Testimonials = () => {
         <span className="bg-yellow-600 rounded-full w-6 h-6"></span>
       </div>
       <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-0">
-        <button onClick={handlePrev} className="bg-yellow-600 text-white px-4 py-2 rounded-full">Prev</button>
+        <button onClick={handlePrev} className="bg-yellow-600 text-white px-4 py-2 rounded-full"><img src={leftArrow} width={20} alt="leftarrow" /></button>
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-10">
           {[0, 1].map(i => (
             <div
@@ -114,7 +116,7 @@ const Testimonials = () => {
             </div>
           ))}
         </div>
-        <button onClick={handleNext} className="bg-yellow-600 text-white px-4 py-2 rounded-full">Next</button>
+        <button onClick={handleNext} className="bg-yellow-600 text-white px-4 py-2 rounded-full"><img src={rightArrow} width={20} alt="rightarrow" /></button>
       </div>
     </div>
   );
