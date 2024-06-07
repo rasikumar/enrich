@@ -1,5 +1,7 @@
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import navLogo from '../assets/logo.svg'
 import  { useState, useEffect } from 'react';
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,15 +32,15 @@ const Navbar = () => {
         <div className="list-items hidden lg:flex">
           <ul>
             <li className="flex gap-6 text-black tracking-wide">
-              <a className='hover:text-yellow-600 transition delay-75' href="#">Home</a>
-              <a className='hover:text-yellow-600 transition delay-75' href="#">Services</a>
-              <a className='hover:text-yellow-600 transition delay-75' href="#">Pricing</a>
-              <a className='hover:text-yellow-600 transition delay-75' href="#">Testimonials</a>
+              <AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75' >Home</AnchorLink>
+              <AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75' >Services</AnchorLink>
+              <AnchorLink href='#' className='hover:text-yellow-600 transition delay-75' >Pricing</AnchorLink>
+              <AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75' >Testimonials</AnchorLink>
             </li>
           </ul>
         </div>
         <div className="cta-btn hidden lg:flex items-center justify-center gap-4">
-          <a className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' href="#">Blogs</a>
+          <AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' >Blogs</AnchorLink>
           <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600'>Free Trial</button>
         </div>
         <div className="lg:hidden">
@@ -51,11 +53,11 @@ const Navbar = () => {
       </nav>
       <div className={`${menuOpen ? 'block' : 'hidden'} lg:hidden`}>
         <ul className="flex flex-col gap-6 p-5 bg-white/70 border-[1px] border-yellow-600 rounded-md">
-          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Home</a></li>
-          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Services</a></li>
-          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Pricing</a></li>
-          <li><a className='hover:text-yellow-600 transition delay-75' href="#">Testimonials</a></li>
-          <li><a className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' href="#">Blogs</a></li>
+          <li><AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75' >Home</AnchorLink></li>
+          <li><AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75' >Services</AnchorLink></li>
+          <li><AnchorLink href='#' className='hover:text-yellow-600 transition delay-75' >Pricing</AnchorLink></li>
+          <li><AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75' >Testimonials</AnchorLink></li>
+          <li><AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' >Blogs</AnchorLink></li>
           <li><button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600'>Free Trial</button></li>
         </ul>
       </div>

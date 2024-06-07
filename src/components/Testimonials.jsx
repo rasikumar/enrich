@@ -91,7 +91,7 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div ref={testimonialsRef} className="w-full bg-[#E8E8E8] flex flex-col lg:flex-row items-center justify-evenly mb-20 p-10">
+    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex flex-col lg:flex-row items-center justify-evenly mb-20 p-10">
       <div className="flex flex-col gap-4 mt-18">
         <h4 className="text-black text-2xl font-semibold">Testimonials</h4>
         <h1 className="text-4xl w-96 font-[600]">Don&apos;t believe us. Check what clients think of us</h1>

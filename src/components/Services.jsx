@@ -35,7 +35,7 @@ const Services = ({ question, answer, title, index, currentIndex, setCurrentInde
   };
 
   return (
-    <div
+    <div 
       ref={itemRef}
       className="border px-4 border-yellow-600 rounded-sm mt-5 py-4"
       onMouseEnter={handleMouseEnter}
@@ -91,7 +91,7 @@ const ServiceList = () => {
   ];
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="max-w-2xl mx-auto p-4" id='serivce'>
       <h2 className="text-2xl font-bold mb-6 text-center">Services</h2>
       {list.map((item, index) => (
         <Services
