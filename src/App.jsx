@@ -1,13 +1,19 @@
-import Services from "./components/Services"
-import Hero from "./components/Hero"
 import Navbar from "./components/Navbar"
+import Hero from "./components/Hero"
+import Services from "./components/Services"
 import Testimonials from "./components/Testimonials"
 import Blog from "./components/Blog"
-import { useEffect } from "react"
-import Lenis from 'lenis';
 import Footer from "./components/Footer"
 
+import { useEffect,useState } from "react"
+
+import Lenis from 'lenis';
+import { SquareLoader } from "react-spinners"
+import Program from "./components/Program"
+
 const App = () => {
+
+  // this is using for smooth-scrooling
   useEffect( () => {
     const lenis = new Lenis()
 
@@ -18,15 +24,40 @@ const App = () => {
 
     requestAnimationFrame(raf)
   }, [])
+
+  // this is using for preloading
+  const [loading, setLoading] = useState (false)
+  useEffect(()=>{
+      setLoading(true);
+      setTimeout(() => {
+          setLoading(false)
+      }, 2000);
+  },[])
+  
+
   return (
     <div className="scroll-smooth">
-      <Navbar/>
-      <Hero/>
-      <Services/>
-      <Testimonials/>
-      <Blog/>
-      <Footer/>
+      {loading ? (
+        <SquareLoader
+        color={'yellow'}
+        loading={loading}
+        size={50}
+        className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2  w-full h-full z-[1000]"
+      />
+      ):(
+        <>
 
+        <Navbar />
+        <Hero/>
+        <Services/>
+        <Program/>
+        <Testimonials/>
+        <Blog/>
+        <Footer/>
+        
+        </>
+      )
+      }
     </div>
   )
 }
