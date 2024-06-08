@@ -9,7 +9,7 @@ const Hero = () => {
             <div className='w-full md:w-[480px]  flex flex-col gap-6  hero-content'>
                 <h1 className='text-2xl md:text-4xl font-semibold xl:text-6xl'>Enrich Your Life From Scratch</h1>
                 <p className='text-xs md:text-sm text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt beatae nam dolorum excepturi eligendi, provident dicta in nihil mollitia. Nostrum architecto, sint quas nulla alias distinctio molestias corrupti aperiam quam!</p>
-                <button className='px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 transition delay-75'>Book Appointment</button>
+                <button className='btn-primary'>Book Appointment</button>
             </div>
             <div className="relative">
                 <img 
