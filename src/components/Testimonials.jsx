@@ -101,7 +101,7 @@ const Testimonials = () => {
       </div>
       <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-0">
         <button onClick={handlePrev} className="bg-yellow-600 text-white px-4 py-2 rounded-full"><img src={leftArrow} width={20} alt="leftarrow" /></button>
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-10">
+        <div className="flex lg:flex-row gap-4 lg:gap-10">
           {[0, 1].map(i => (
             <div
               key={testimonialsData[(currentIndex + i) % testimonialsData.length].id}
