@@ -32,16 +32,16 @@ const Navbar = () => {
         <div className="list-items hidden lg:flex ">
           <ul>
             <li className="flex gap-6  text-black tracking-wide">
-              <AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75' >Home</AnchorLink>
-              <AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75' >Services</AnchorLink>
-              <AnchorLink href='#program' className='hover:text-yellow-600 transition delay-75' >Program</AnchorLink>
-              <AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75' >Testimonials</AnchorLink>
+              <AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75  md:text-sm' >Home</AnchorLink>
+              <AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Services</AnchorLink>
+              <AnchorLink href='#program' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Program</AnchorLink>
+              <AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Testimonials</AnchorLink>
             </li>
           </ul>
         </div>
         <div className="cta-btn hidden lg:flex items-center justify-center gap-4">
-          <AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' >Blogs</AnchorLink>
-          <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600'>Free Trial</button>
+          <AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700 md:text-sm' >Blogs</AnchorLink>
+          <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm'>Free Trial</button>
         </div>
         <div className="lg:hidden">
           <button onClick={toggleMenu} className="text-black focus:outline-none">

@@ -22,8 +22,11 @@ import Programlist from "./Programlist"
 const Program = () => {
   return (
     <div id="program" className="flex flex-col items-center p-10 bg-slate-50">
-      <h2 className="text-2xl font-bold mt-2 xl:text-4xl mb-8">Programs</h2>
-      <p className="text-sm text-gray-500 split">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic esse adipisci itaque amet quam dicta quia, doloribus nisi harum maxime non </p>
+      <div className='flex flex-col gap-4 px-10'>
+        <h2 className="text-black text-2xl font-semibold text-center">Programs</h2>
+        <h2 className='text-center text-4xl w-full  font-[600]'>Explore our programs</h2>
+        <p className="text-sm text-gray-500 md:w-[90%] m-auto">Whether you&apos;re an individual looking to flourish or a company ready to empower, Evvi Solutions offers a range of programs that cater to your aspirations. To explore our programs, or to discuss how we can customize a solution for your unique needs, reach out to us. Our dedicated coordinators are here to guide you on a transformational journey that aligns with your goals and vision.</p>
+      </div>
       <Programlist/>
     </div>
   )

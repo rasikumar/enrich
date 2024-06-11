@@ -52,7 +52,7 @@ const Programlist = () => {
   return (
     <div>
       <a href="#">
-        <div className='flex flex-wrap w-[90%] items-center m-auto gap-14 py-10 justify-center'>
+        <div className='flex flex-wrap w-full items-center m-auto gap-14 py-10 justify-center'>
           {program.map((value, index) => {
             return (
               <div key={index} className='card-container'>

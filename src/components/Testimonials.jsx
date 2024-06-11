@@ -93,10 +93,10 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex flex-wrap items-center justify-evenly mb-20 p-10">
+    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex  items-center justify-evenly mb-20 p-10">
       <div className="flex flex-col gap-4 mt-18">
         <h4 className="text-black text-2xl font-semibold">Testimonials</h4>
-        <h1 className="text-4xl w-full lg:w-96 font-[600]">Don&apos;t believe us. Check what clients think of us</h1>
+        <h1 className="text-4xl w-full lg:w-96 font-[600]">Echoes of Success: Hear from Our Clients</h1>
         <span className="bg-yellow-600 rounded-full w-6 h-6"></span>
       </div>
       <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-0">
