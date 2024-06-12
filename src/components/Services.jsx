@@ -53,7 +53,7 @@ const Services = ({ question, answer, title,more, index, currentIndex, setCurren
         {isOpen && (
           <div className="mt-4">
             <h4 className="text-md font-bold text-center ">{title}</h4>
-            <img src={Image} width={200}  alt={title} className="mb-4 mt-2 rounded-md ml-[200px]" />
+            <img src={Image} width={200}  alt={title} className="mb-4 mt-2 rounded-md m-auto" />
             <p className="text-sm text-gray-600">{more}</p>
           </div>
         )}
