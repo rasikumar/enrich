@@ -2,7 +2,7 @@
 
 export default function Content() {
   return (
-    <div className='bg-gradient-to-r to-yellow-100 from-yellow-200 py-8 px-12 h-[100%]  w-full flex flex-col justify-between '>
+    <div className='bg-gradient-to-r to-[#D4F2D2] from-[#f3fff3] py-8 px-12 h-[100%]  w-full flex flex-col justify-between '>
         <Section1 />
         <Section2 />
         <Section3 />
