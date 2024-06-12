@@ -1,5 +1,5 @@
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import navLogo from '../assets/logo.svg'
+import navLogo from '../assets/logo.png'
 import  { useState, useEffect } from 'react';
 
 
@@ -26,8 +26,7 @@ const Navbar = () => {
     <div className="sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000]">
       <nav className="xl:text-lg flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
         <div className="logo flex gap-1 cursor-pointer">
-          <img src={navLogo} width={20} alt="logo" />
-          Enrich
+          <img src={navLogo} width={150} alt="logo" />
         </div>
         <div className="list-items hidden lg:flex ">
           <ul>

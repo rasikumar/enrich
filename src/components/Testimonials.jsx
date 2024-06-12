@@ -3,8 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Person from '../assets/heroImage.jpg';
 import quote from '../assets/quote1.svg';
-import rightArrow from '../assets/rightarrow.svg';
-import leftArrow from '../assets/leftarrow.svg';
+import rightArrow from '../assets/right.png';
+import leftArrow from '../assets/left.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,20 +93,22 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex  items-center justify-evenly mb-20 p-10">
-      <div className="flex flex-col gap-4 mt-18">
+    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex flex-col lg:flex-row items-center justify-evenly mb-20 p-10">
+      <div className="flex flex-col gap-4 mt-18 text-center lg:text-left">
         <h4 className="text-black text-2xl font-semibold">Testimonials</h4>
         <h1 className="text-4xl w-full lg:w-96 font-[600]">Echoes of Success: Hear from Our Clients</h1>
-        <span className="bg-yellow-600 rounded-full w-6 h-6"></span>
+        <span className="bg-yellow-600 rounded-full w-6 h-6 mx-auto lg:mx-0"></span>
       </div>
       <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-0">
-        <button onClick={handlePrev} className="bg-yellow-600 text-white px-4 py-2 rounded-full"><img src={leftArrow} width={20} alt="leftarrow" /></button>
+        <button onClick={handlePrev} className="bg-yellow-600 text-white p-4 rounded-full">
+          <img src={leftArrow} width={20} alt="leftarrow" />
+        </button>
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-10">
           {[0, 1].map(i => (
             <div
               key={testimonialsData[(currentIndex + i) % testimonialsData.length].id}
               ref={el => (cardsRef.current[i] = el)}
-              className='testimonial-card flex flex-col items-center gap-4 bg-white p-6 py-8 shadow-lg rounded-xl transform transition-transform duration-500 hover:scale-105 w-80'
+              className='testimonial-card flex flex-col items-center gap-4 bg-white p-6 py-8 shadow-lg rounded-xl transform transition-transform duration-500 hover:scale-105 w-80 mx-auto lg:mx-0'
             >
               <img src={testimonialsData[(currentIndex + i) % testimonialsData.length].img} width={50} height={100} className='rounded-full w-20 h-20 object-cover' />
               <img src={quote} width={20} className='mt-4' />
@@ -116,7 +118,9 @@ const Testimonials = () => {
             </div>
           ))}
         </div>
-        <button onClick={handleNext} className="bg-yellow-600 text-white px-4 py-2 rounded-full"><img src={rightArrow} width={20} alt="rightarrow" /></button>
+        <button onClick={handleNext} className="bg-yellow-600 text-white p-4 rounded-full">
+          <img src={rightArrow} width={20} alt="rightarrow" />
+        </button>
       </div>
     </div>
   );
