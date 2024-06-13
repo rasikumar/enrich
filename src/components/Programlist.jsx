@@ -46,7 +46,22 @@ const program = [
     content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
     icon: arrow,
     bgImg: image6,
-  }
+  },{
+    title: 'Personal Effectiveness Power Pack',
+    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+    icon: arrow,
+    bgImg: image1,
+  },{
+    title: 'Personal Effectiveness Power Pack',
+    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+    icon: arrow,
+    bgImg: image1,
+  },{
+    title: 'Personal Effectiveness Power Pack',
+    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+    icon: arrow,
+    bgImg: image1,
+  },
 ];
 
 const Programlist = () => {

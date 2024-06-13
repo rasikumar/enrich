@@ -1,9 +1,9 @@
-import Image from '../assets/heroImage.jpg'
+import Image from '../assets/hero.png'
 import  { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
 // eslint-disable-next-line react/prop-types
-const Services = ({ question, answer, title,more, index, currentIndex, setCurrentIndex }) => {
+const Services = ({ question, answer, title, btn,index, currentIndex, setCurrentIndex }) => {
   const [isOpen, setIsOpen] = useState(currentIndex === index);
   const answerRef = useRef(null);
   const itemRef = useRef(null);
@@ -45,16 +45,17 @@ const Services = ({ question, answer, title,more, index, currentIndex, setCurren
         className="w-full  text-left focus:outline-none "
         onClick={handleToggle}
       >
-        <h3 className="text-lg font-semibold text-gray-900">{question}</h3>
-        <p className="mt-2 text-sm text-gray-700">{answer}</p>
-        <p className='text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3'>Readmore</p>
+        <h3 className="text-center text-3xl font-semibold text-gray-900">{question}</h3>
       </button>
       <div ref={answerRef} className={`overflow-hidden ${isOpen ? 'h-auto' : 'h-0'} opacity-${isOpen ? '100' : '0'} transition-all`}>
         {isOpen && (
           <div className="mt-4">
             <h4 className="text-md font-bold text-center ">{title}</h4>
             <img src={Image} width={200}  alt={title} className="mb-4 mt-2 rounded-md m-auto" />
-            <p className="text-sm text-gray-600">{more}</p>
+        <p className="mt-2 text-sm text-gray-700">{answer}</p>
+        <p className='text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3'>{btn}</p>
+
+
           </div>
         )}
       </div>
@@ -68,31 +69,37 @@ const ServiceList = () => {
   const list = [
     
     {
-      question: "For Individuals Seeking Transformation:",
-      answer: "If you're an individual aiming to sharpen your communication, cultivate mindfulness, or enhance your emotional well-being,...",
+      question: "Corporate Training",
+      answer: "Customized programs designed to enhance essential soft skills for any work environment. We serve businesses of all sizes and industries, providing your team with tools for effective communication, leadership, teamwork, and more...",
       image: 'Image',
       title: "Benefits of Fruitful",
-      more : " explore our individual training and coaching programs. Let us guide you on a journey of self-improvement and empowerment."
+      more : " explore our individual training and coaching programs. Let us guide you on a journey of self-improvement and empowerment.",
+      btn:'Learn More'
     },
     {
-      question: "For Companies Focused on Empowerment",
-      answer: "For companies striving to equip their teams with essential behavioral skills, our corporate training programs are designed to elevate performance...",
+      question: "Behavioral Skills for Individuals",
+      answer: "Empower yourself with specialized behavioral training. Ideal for professionals, fresh graduates, and anyone aiming for personal growth. Develop crucial skills like emotional intelligence, communication, and work-life balance.",
       image: "Image",
       title: "Benefits of Fruitful",
-      more : "and foster collaboration Unleash the full potential of your workforce and witness the positive impact on your organization."
+      more : "and foster collaboration Unleash the full potential of your workforce and witness the positive impact on your organization.",
+      btn:'Explore Programs'
     },{
-      question: "Compliance Training:",
-      answer: "It helps reduce financial stress by offering expert guidance, a clear financial plan, and easy ways to save and invest...",
+      question: "Compliance Trainings",
+      answer: "Stay compliant and ensure a safe workplace with comprehensive compliance training. Offerings include Prevention of Sexual Harassment (POSH) training, employee sensitization, and more, ensuring your organization meets all standards.",
       image: "Image",
       title: "Benefits of Fruitful",
-      more : "fff"
+      more : "fff",
+      btn:'View Services'
+
     },
     {
-      question: "",
-      answer: "",
+      question: "1:1 Coaching",
+      answer: "Achieve excellence with personalized coaching sessions. Whether you're looking to transform behavior, optimize brain function, or focus on self-improvement, our expert coaches are here to guide you.",
       image: "Image",
       title: "About Fruitful",
-      more : ''
+      more : '',
+      btn:'Book a Session'
+
     },
   ];
 
