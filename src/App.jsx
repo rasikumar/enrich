@@ -10,6 +10,8 @@ import { useEffect,useState } from "react"
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
 import Program from "./components/Program"
+import Introduction from "./components/Introduction"
+import AboutUs from "./components/AboutUs"
 
 const App = () => {
 
@@ -49,6 +51,8 @@ const App = () => {
 
         <Navbar />
         <Hero/>
+        <Introduction/>
+        <AboutUs/>
         <Services/>
         <Program/>
         <Testimonials/>
