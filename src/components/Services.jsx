@@ -1,59 +1,128 @@
-import  { useEffect, useRef } from 'react';
+import Image from '../assets/hero.png'
+import  { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import blogImage from '../assets/hero.png';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const articles = [
-  { title: "Article 1", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-  { title: "Article 2", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-  { title: "Article 3", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-  { title: "Article 4", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-];
-
-const BlogsList = () => {
-  const articlesRef = useRef([]);
+// eslint-disable-next-line react/prop-types
+const Services = ({ question, answer, title, btn,index, currentIndex, setCurrentIndex }) => {
+  const [isOpen, setIsOpen] = useState(currentIndex === index);
+  const answerRef = useRef(null);
+  const itemRef = useRef(null);
 
   useEffect(() => {
-    articlesRef.current.forEach((article, ) => {
-      gsap.fromTo(article, {
-        opacity: 0,
-        y: 50,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: article,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
-    });
-  }, []);
+    if (isOpen) {
+      gsap.to(answerRef.current, { height: 'auto', opacity: 1, duration: 0.1 });
+    } else {
+      gsap.to(answerRef.current, { height: 0, opacity: 0, duration: 0.1 });
+    }
+  }, [isOpen]);
+
+  const handleToggle = () => {
+    if (isOpen && currentIndex === index) {
+      setIsOpen(false);
+      setCurrentIndex(null);
+    } else {
+      setIsOpen(true);
+      setCurrentIndex(index);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    gsap.to(itemRef.current, { scale: 1.05, duration: 0.3 });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(itemRef.current, { scale: 1, duration: 0.3 });
+  };
 
   return (
-    <div className="flex flex-wrap justify-center pb-8">
-      {articles.map((article, index) => (
-        <div
-          key={index}
-          ref={el => articlesRef.current[index] = el}
-          className="relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 duration-300 m-4 w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.3333%-2rem)] lg:w-[calc(25%-2rem)]"
-        >
-          <div className="relative overflow-hidden rounded-t-xl">
-            <img src={article.image} alt={article.title} className="w-full h-48 object-cover transform transition-transform duration-500 hover:scale-105" />
+    <div 
+      ref={itemRef}
+      className="border max-w-2xl m-auto  px-4 border-yellow-600 rounded-sm mt-5 py-4 mb-6"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className="w-full  text-left focus:outline-none "
+        onClick={handleToggle}
+      >
+        <h3 className="text-center text-3xl font-semibold text-gray-900">{question}</h3>
+      </button>
+      <div ref={answerRef} className={`overflow-hidden ${isOpen ? 'h-auto' : 'h-0'} opacity-${isOpen ? '100' : '0'} transition-all`}>
+        {isOpen && (
+          <div className="mt-4">
+            <h4 className="text-md font-bold text-center ">{title}</h4>
+            <img src={Image} width={200}  alt={title} className="mb-4 mt-2 rounded-md m-auto" />
+        <p className="mt-2 text-sm text-gray-700">{answer}</p>
+        <p className='text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3'>{btn}</p>
+
+
           </div>
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
-            <p className="text-gray-700 text-sm mb-4">{article.content}</p>
-            <button className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</button>
-          </div>
-        </div>
-      ))}
+        )}
+      </div>
     </div>
   );
 };
 
-export default BlogsList;
+const ServiceList = () => {
+  const [currentIndex, setCurrentIndex] = useState(null);
+
+  const list = [
+    
+    {
+      question: "Corporate Training",
+      answer: "Customized programs designed to enhance essential soft skills for any work environment. We serve businesses of all sizes and industries, providing your team with tools for effective communication, leadership, teamwork, and more...",
+      image: 'Image',
+      title: "Benefits of Fruitful",
+      more : " explore our individual training and coaching programs. Let us guide you on a journey of self-improvement and empowerment.",
+      btn:'Learn More'
+    },
+    {
+      question: "Behavioral Skills for Individuals",
+      answer: "Empower yourself with specialized behavioral training. Ideal for professionals, fresh graduates, and anyone aiming for personal growth. Develop crucial skills like emotional intelligence, communication, and work-life balance.",
+      image: "Image",
+      title: "Benefits of Fruitful",
+      more : "and foster collaboration Unleash the full potential of your workforce and witness the positive impact on your organization.",
+      btn:'Explore Programs'
+    },{
+      question: "Compliance Trainings",
+      answer: "Stay compliant and ensure a safe workplace with comprehensive compliance training. Offerings include Prevention of Sexual Harassment (POSH) training, employee sensitization, and more, ensuring your organization meets all standards.",
+      image: "Image",
+      title: "Benefits of Fruitful",
+      more : "fff",
+      btn:'View Services'
+
+    },
+    {
+      question: "1:1 Coaching",
+      answer: "Achieve excellence with personalized coaching sessions. Whether you're looking to transform behavior, optimize brain function, or focus on self-improvement, our expert coaches are here to guide you.",
+      image: "Image",
+      title: "About Fruitful",
+      more : '',
+      btn:'Book a Session'
+
+    },
+  ];
+
+  return (
+    <div className="bg-white">
+    <div className=" mx-auto p-4" id='serivce'>
+      <div className='flex flex-col gap-4 px-10 '>
+         <h2 className="text-black text-2xl font-semibold text-center">Services</h2>
+         <h3 className='text-center text-4xl w-full font-[600]'>Discover Your Journey: Tailored for You</h3>
+         <p className="text-sm text-gray-500 md:w-[90%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
+      </div>
+      {list.map((item, index) => (
+        <Services
+          key={index}
+          index={index}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          {...item}
+        />
+      ))}
+      </div>
+    </div>
+  );
+};
+
+export default ServiceList;
