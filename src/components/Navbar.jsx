@@ -32,6 +32,7 @@ const Navbar = () => {
           <ul>
             <li className="flex gap-6  text-black tracking-wide">
               <AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75  md:text-sm' >Home</AnchorLink>
+              <AnchorLink href='#about' className='hover:text-yellow-600 transition delay-75 md:text-sm' >About us</AnchorLink>
               <AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Services</AnchorLink>
               <AnchorLink href='#program' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Program</AnchorLink>
               <AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75 md:text-sm' >Testimonials</AnchorLink>
@@ -54,6 +55,7 @@ const Navbar = () => {
         <ul className="flex flex-col gap-6 p-5 bg-white/70 border-[1px] border-yellow-600 rounded-md">
           <li><AnchorLink href='#hero' className='hover:text-yellow-600 transition delay-75' >Home</AnchorLink></li>
           <li><AnchorLink href='#serivce' className='hover:text-yellow-600 transition delay-75' >Services</AnchorLink></li>
+          <li><AnchorLink href='#about' className='hover:text-yellow-600 transition delay-75 md:text-sm' >About us</AnchorLink></li>
           <li><AnchorLink href='#program' className='hover:text-yellow-600 transition delay-75' >Program</AnchorLink></li>
           <li><AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75' >Testimonials</AnchorLink></li>
           <li><AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' >Blogs</AnchorLink></li>
