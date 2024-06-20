@@ -92,12 +92,12 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex flex-col items-center justify-center mb-20 p-10">
-      <div className="flex flex-col gap-4 text-center">
-        <h4 className="text-black text-2xl font-semibold">Testimonials</h4>
-        <h1 className="text-4xl w-full font-[600]">Echoes of Success: Hear from Our Clients</h1>
+    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex items-center justify-center mb-20 p-10">
+      <div className="flex flex-col gap-4 ">
+        <h4 className="text-black text-4xl font-semibold">Testimonials</h4>
+        <h1 className="text-2xl w-full font-[600]">Echoes of Success: Hear from Our Clients</h1>
         <p className='text-sm text-gray-500 max-w-2xl mx-auto'>Hear from those who have transformed their skills and lives with Enrich. Our client&apos;s success stories speak volumes about the impact of our training programs.</p>
-        <span className="bg-yellow-600 rounded-full w-6 h-6 mx-auto mt-4"></span>
+        <span className="bg-yellow-600 rounded-full w-6 h-6  mt-4 flex text-start"></span>
       </div>
       <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-16">
         <button onClick={handlePrev} className="bg-yellow-600 text-white p-4 rounded-full hover:bg-yellow-700 transition duration-300">

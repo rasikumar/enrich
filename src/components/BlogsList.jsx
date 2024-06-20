@@ -49,7 +49,7 @@ const BlogsList = () => {
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
             <p className="text-gray-700 text-sm mb-4">{article.content}</p>
-            <Link to={`/BlogRouter/${article.id}`} className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</Link>
+            <Link to={`BlogRouter/${article.id}`} className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</Link>
           </div>
         </div>
       ))}

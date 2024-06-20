@@ -33,7 +33,7 @@ const App = () => {
       setLoading(true);
       setTimeout(() => {
           setLoading(false)
-      }, 100);
+      }, 2000);
   },[])
   
 

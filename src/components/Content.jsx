@@ -33,21 +33,15 @@ const Section2 = () => {
 }
 const Nav = () => {
     return (
-        <div className='flex shrink-0 gap-20 mt-[300px]'>
-            <div className='flex flex-col gap-2'>
-                <h3 className=' uppercase text-black'>About</h3>
-                <p className="hover:text-white transition delay-75">Home</p>
-                <p className="hover:text-white transition delay-75">Projects</p>
-                <p className="hover:text-white transition delay-75">Our Mission</p>
-                <p className="hover:text-white transition delay-75">Contact Us</p>
+        <div className='flex shrink-0 mt-[300px]'>
+            <div className='flex  gap-2'>
+                <a className=' uppercase text-black'>About</a>
+                <a className="hover:text-white transition delay-75">Home</a>
+                <a className="hover:text-white transition delay-75">Projects</a>
+                <a className="hover:text-white transition delay-75">Our Mission</a>
+                <a className="hover:text-white transition delay-75">Contact Us</a>
             </div>
-            <div className='flex flex-col gap-2'>
-                <h3 className=' uppercase text-black'>Education</h3>
-                <p className="hover:text-white transition delay-75">News</p>
-                <p className="hover:text-white transition delay-75">Learn</p>
-                <p className="hover:text-white transition delay-75">Certification</p>
-                <p className="hover:text-white transition delay-75">Publications</p>
-            </div>
+            
         </div>
     )
 }

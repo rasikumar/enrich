@@ -104,12 +104,12 @@ const ServiceList = () => {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-7">
     <div className=" mx-auto p-4" id='serivce'>
       <div className='flex flex-col gap-4 px-10 '>
-         <h2 className="text-black text-2xl font-semibold text-center">Services</h2>
-         <h3 className='text-center text-4xl w-full font-[600]'>Discover Your Journey: Tailored for You</h3>
-         <p className="text-sm text-gray-500 md:w-[90%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
+         <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
+         <h3 className='text-center text-2xl w-full font-[600]'>Discover Your Journey: Tailored for You</h3>
+         <p className="text-sm text-gray-500 md:w-[80%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
       </div>
       {list.map((item, index) => (
         <Services
