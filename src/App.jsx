@@ -4,14 +4,14 @@ import Services from "./components/Services"
 import Testimonials from "./components/Testimonials"
 import Blog from "./components/Blog"
 import Footer from "./components/Footer"
+import Program from "./components/Program"
+import Introduction from "./components/Introduction"
+import AboutUs from "./components/AboutUs"
 
 import { useEffect,useState } from "react"
 
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
-import Program from "./components/Program"
-import Introduction from "./components/Introduction"
-import AboutUs from "./components/AboutUs"
 
 const App = () => {
 
