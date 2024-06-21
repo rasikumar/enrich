@@ -92,7 +92,7 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div ref={testimonialsRef} id='testimonials' className="w-full bg-[#E8E8E8] flex items-center justify-center mb-20 p-10">
+    <div ref={testimonialsRef} id='testimonials' className="w-full bg-gradient-to-r to-yellow-50 via-yellow-100 from-yellow-200 flex  items-center justify-center mb-20 p-10">
       <div className="flex flex-col gap-4 ">
         <h4 className="text-black text-4xl font-semibold">Testimonials</h4>
         <h1 className="text-2xl w-full font-[600]">Echoes of Success: Hear from Our Clients</h1>
