@@ -24,7 +24,7 @@ export default {
                 '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
             },
             backgroundImage:{
-                'Hero' : "url('/src/assets/hero/4.png')"
+                'Hero' : "url('/src/assets/hero/2.png')"
             },
             fontFamily:{
                 reggae:['Reggae One','system-ui'],
