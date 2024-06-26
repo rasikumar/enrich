@@ -1,17 +1,10 @@
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import Services from "./components/Services"
-import Testimonials from "./components/Testimonials"
-import Blog from "./components/Blog"
-import Footer from "./components/Footer"
+import Heart from './components/Heart'
+import BlogDetails from './components/BlogDetails';
 
 import { useEffect,useState } from "react"
-
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
-import Program from "./components/Program"
-import Introduction from "./components/Introduction"
-import AboutUs from "./components/AboutUs"
+import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
 
@@ -33,7 +26,7 @@ const App = () => {
       setLoading(true);
       setTimeout(() => {
           setLoading(false)
-      }, 2000);
+      }, 200);
   },[])
   
 
@@ -48,17 +41,10 @@ const App = () => {
       />
       ):(
         <>
-
-        <Navbar />
-        <Hero/>
-        <Introduction/>
-        <AboutUs/>
-        <Services/>
-        <Program/>
-        <Testimonials/>
-        <Blog/>
-        <Footer/>
-        
+        <Routes>
+          <Route path='/' element={<Heart/>}/>
+          <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
+        </Routes>
         </>
       )
       }

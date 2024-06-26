@@ -1,14 +1,17 @@
-import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import  { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import blogImage from '../assets/hero.png';
+import { Link } from 'react-router-dom';
+
+import retreatImage from '../assets/blogs/retreatImage.jpeg';
+import valuableImage from '../assets/blogs/valuableImage.jpeg';
+import blogImage from '../assets/blogs/valuableImage.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const articles = [
-  { id: 1, title: "Article 1", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-  { id: 2, title: "Article 2", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
+  { id: 1, title: "Retreat", content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.", image: retreatImage },
+  { id: 2, title: "Valuable", content: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.", image: valuableImage },
   { id: 3, title: "Article 3", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
   { id: 4, title: "Article 4", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
 ];
@@ -17,7 +20,7 @@ const BlogsList = () => {
   const articlesRef = useRef([]);
 
   useEffect(() => {
-    articlesRef.current.forEach((article, ) => {
+    articlesRef.current.forEach((article) => {
       gsap.fromTo(article, {
         opacity: 0,
         y: 50,
@@ -49,7 +52,7 @@ const BlogsList = () => {
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
             <p className="text-gray-700 text-sm mb-4">{article.content}</p>
-            <Link to={`BlogRouter/${article.id}`} className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</Link>
+            <Link to={`/BlogsList/${article.id}`} className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</Link>
           </div>
         </div>
       ))}

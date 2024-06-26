@@ -40,7 +40,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="cta-btn hidden lg:flex items-center justify-center gap-4">
-          <AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700 md:text-sm' >Blogs</AnchorLink>
+          <AnchorLink href='#blog'   className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700 md:text-sm' >Blogs</AnchorLink>
           <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm'>Free Trial</button>
         </div>
         <div className="lg:hidden">
