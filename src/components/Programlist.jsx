@@ -46,22 +46,23 @@ const program = [
     content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
     icon: arrow,
     bgImg: image6,
-  },{
-    title: 'Personal Effectiveness Power Pack',
-    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
-    bgImg: image1,
-  },{
-    title: 'Personal Effectiveness Power Pack',
-    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
-    bgImg: image1,
-  },{
-    title: 'Personal Effectiveness Power Pack',
-    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
-    bgImg: image1,
   },
+  // {
+  //   title: 'Personal Effectiveness Power Pack',
+  //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+  //   icon: arrow,
+  //   bgImg: image1,
+  // },{
+  //   title: 'Personal Effectiveness Power Pack',
+  //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+  //   icon: arrow,
+  //   bgImg: image1,
+  // },{
+  //   title: 'Personal Effectiveness Power Pack',
+  //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+  //   icon: arrow,
+  //   bgImg: image1,
+  // },
 ];
 
 const Programlist = () => {
@@ -77,8 +78,8 @@ const Programlist = () => {
                   <img src={value.icon} alt={value.title} />
                 </div>
                 <div className='card-content'>
-                  <h1 className='text-[18px] leading-5 mb-2 font-semibold text-center'>{value.title}</h1>
-                  <p className='text-[10px] text-center'>{value.content}</p>
+                  <h1 className='text-[18px] text-white leading-5 mb-2 font-semibold text-center'>{value.title}</h1>
+                  <p className='text-[10px] text-white text-justify  '>{value.content}</p>
                 </div>
               </div>
             );

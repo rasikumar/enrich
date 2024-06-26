@@ -39,9 +39,10 @@ const BlogsList = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center pb-8">
+    <div className="flex flex-wrap justify-center">
       {articles.map((article, index) => (
-        <div
+        <Link
+           to={`/BlogsList/${article.id}`}
           key={index}
           ref={el => articlesRef.current[index] = el}
           className="relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 duration-300 m-4 w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.3333%-2rem)] lg:w-[calc(25%-2rem)]"
@@ -51,10 +52,10 @@ const BlogsList = () => {
           </div>
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
-            <p className="text-gray-700 text-sm mb-4">{article.content}</p>
-            <Link to={`/BlogsList/${article.id}`} className="text-blue-600 hover:text-blue-800 transition duration-300">Read more</Link>
+            <p className="text-gray-700 text-sm mb-4 h-32 overflow-hidden overflow-y-auto">{article.content}</p>
+            <Link to={`/BlogsList/${article.id}`} className="text-white-600 btn-primary  transition duration-300">Read more</Link>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -7,7 +7,6 @@ import Program from "./Program"
 import Testimonials from "./Testimonials"
 import Blog from "./Blog"
 import Footer from "./Footer"
-
 const Heart = () => {
   return (
         <>
@@ -23,4 +22,4 @@ const Heart = () => {
         </>
       )
     }
-export default Heart
+export default Heart;
