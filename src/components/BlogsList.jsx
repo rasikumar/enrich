@@ -5,15 +5,16 @@ import { Link } from 'react-router-dom';
 
 import retreatImage from '../assets/blogs/retreatImage.jpeg';
 import valuableImage from '../assets/blogs/valuableImage.jpeg';
-import blogImage from '../assets/blogs/valuableImage.jpeg';
+import awarnessImage from '../assets/blogs/awarnessImage.jpeg';
+import listeningImage from '../assets/blogs/listeningImage.jpeg';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const articles = [
   { id: 1, title: "Retreat", content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.", image: retreatImage },
   { id: 2, title: "Valuable", content: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.", image: valuableImage },
-  { id: 3, title: "Article 3", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
-  { id: 4, title: "Article 4", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa necessitatibus facilis quos doloremque excepturi, cumque dolor quia deserunt harum alias.", image: blogImage },
+  { id: 3, title: "Active listening", content: "Imagine this: you're in a pivotal team meeting. Your colleagues are sharing ideas, thoughts, and concerns. You're not just hearing their words; you're understanding their emotions, needs, and motivations. ", image: listeningImage },
+  { id: 4, title: "Self-Awareness", content: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.", image: awarnessImage },
 ];
 
 const BlogsList = () => {

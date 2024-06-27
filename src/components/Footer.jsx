@@ -29,7 +29,7 @@ const Footer = () => {
         </div>
       </div>
       <div className='bg-yellow-600 w-full p-5'>
-        <div className='m-auto bg-black w-full md:w-fit flex flex-col md:flex-row justify-center items-center'>
+        <div className='m-auto bg-slate-900 w-full md:w-fit flex flex-col md:flex-row justify-center items-center'>
           <input type="text" placeholder="Enter Your Mail" className='border-none px-8 bg-transparent text-white py-2 outline-none mb-4 md:mb-0 md:mr-4 w-full md:w-auto' />
           <button className='bg-white py-4 px-8 rounded-r-sm hover:bg-slate-200 transition delay-100 w-full md:w-auto'>Subscribe</button>
         </div>
