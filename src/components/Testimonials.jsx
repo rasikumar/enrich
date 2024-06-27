@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Person from '../assets/hero.png';
+import Person from '../assets/hero.jpg';
 import rightArrow from '../assets/right.png';
 import leftArrow from '../assets/left.png';
 

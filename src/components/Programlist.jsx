@@ -1,11 +1,11 @@
 import arrow from '../assets/arrow.svg';
 
-import image1 from '../assets/programs/1.png';
-import image2 from '../assets/programs/2.png';
-import image3 from '../assets/programs/3.png';
-import image4 from '../assets/programs/4.png';
-import image5 from '../assets/programs/5.png';
-import image6 from '../assets/programs/6.png';
+import image1 from '../assets/programs/1.jpg';
+import image2 from '../assets/programs/2.jpg';
+import image3 from '../assets/programs/3.jpg';
+import image4 from '../assets/programs/4.jpg';
+import image5 from '../assets/programs/5.jpg';
+import image6 from '../assets/programs/6.jpg';
 
 // import logo from '../assets/logo.svg';
 import '../components/Program.css'

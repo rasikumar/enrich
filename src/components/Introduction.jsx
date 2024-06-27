@@ -1,4 +1,4 @@
-import trainingImage from '../assets/intro.png'; // Ensure you have an image in the assets folder
+import trainingImage from '../assets/intro.jpg'; // Ensure you have an image in the assets folder
 
 const Introduction = () => {
   return (

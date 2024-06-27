@@ -52,7 +52,7 @@ const BlogsList = () => {
           </div>
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
-            <p className="text-gray-700 text-sm mb-4 h-32 overflow-hidden overflow-y-auto">{article.content}</p>
+            <p className="text-gray-700 text-sm mb-4 h-32 overflow-hidden overflow-y-auto text-justify">{article.content}</p>
             <Link to={`/BlogsList/${article.id}`} className="text-white-600 btn-primary  transition duration-300">Read more</Link>
           </div>
         </Link>

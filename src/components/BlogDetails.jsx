@@ -1,4 +1,6 @@
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { IoArrowBackCircle } from "react-icons/io5";
 
 import retreatImage from '../assets/blogs/retreatImage.jpeg';
 import valuableImage from '../assets/blogs/valuableImage.jpeg';
@@ -24,7 +26,8 @@ const BlogDetail = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden">
+      <Link to={'/'} className='text-4xl'><IoArrowBackCircle/></Link>
+      <div className="bg-white rounded-xl border  border-gray-200 shadow-md overflow-hidden">
         <img src={article.image} alt={article.title} className="w-full h-64 object-cover" />
         <div className="p-6">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{article.title}</h1>
