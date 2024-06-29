@@ -2,6 +2,7 @@ import Logo from '../assets/logo.png'
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const Footer = () => {
   return (
@@ -12,12 +13,12 @@ const Footer = () => {
         </div>
         <div className="mb-4 lg:mb-0">
           <ul className='flex flex-col lg:flex-row gap-3 text-center lg:text-left'>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Home</li>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>About Us</li>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</li>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Program</li>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Testimonials</li>
-            <li className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</li>
+            <AnchorLink href='#hero' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Home</AnchorLink>
+            <AnchorLink href='#about' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>About Us</AnchorLink>
+            <AnchorLink href='#serivce' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</AnchorLink>
+            <AnchorLink href='#program' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Program</AnchorLink>
+            <AnchorLink href='#testimonials' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Testimonials</AnchorLink>
+            <AnchorLink href='blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</AnchorLink>
           </ul>
         </div>
         <div>

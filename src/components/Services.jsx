@@ -1,31 +1,51 @@
-import corporate from '../assets/services/corporate.png'
-import behavioral from '../assets/services/behavioral.png'
-import onetraining from '../assets/services/onetraining.png'
-import compliance from '../assets/services/compliance.png'
+import corporate from '../assets/services/corporate.png';
+import behavioral from '../assets/services/behavioral.png';
+import onetraining from '../assets/services/onetraining.png';
+import compliance from '../assets/services/compliance.png';
 
-import  { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
+// Arrow Icon Component
 // eslint-disable-next-line react/prop-types
-const Services = ({ question,image, answer, title, btn,index, currentIndex, setCurrentIndex }) => {
-  const [isOpen, setIsOpen] = useState(currentIndex === index);
+const ArrowIcon = ({ isOpen }) => (
+  <svg
+    className={`transform transition-transform duration-300 ${isOpen ? 'rotate-90' : 'rotate-0'}`}
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9 18L15 12L9 6"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+// eslint-disable-next-line react/prop-types
+const Services = ({ question, image, answer, title, btn, index, currentIndex, setCurrentIndex }) => {
   const answerRef = useRef(null);
   const itemRef = useRef(null);
+  const isOpen = currentIndex === index;
 
   useEffect(() => {
+    const tl = gsap.timeline();
     if (isOpen) {
-      gsap.to(answerRef.current, { height: 'auto', opacity: 1, duration: 0.1 });
+      tl.to(answerRef.current, { height: 'auto', opacity: 1, duration: 0.3 });
     } else {
-      gsap.to(answerRef.current, { height: 0, opacity: 0, duration: 0.1 });
+      tl.to(answerRef.current, { height: 0, opacity: 0, duration: 0.3 });
     }
   }, [isOpen]);
 
   const handleToggle = () => {
-    if (isOpen && currentIndex === index) {
-      setIsOpen(false);
+    if (isOpen) {
       setCurrentIndex(null);
     } else {
-      setIsOpen(true);
       setCurrentIndex(index);
     }
   };
@@ -39,24 +59,25 @@ const Services = ({ question,image, answer, title, btn,index, currentIndex, setC
   };
 
   return (
-    <div 
+    <div
       ref={itemRef}
-      className="border max-w-2xl m-auto  px-4 border-yellow-600 rounded-sm mt-5 py-4 mb-6"
+      className="border max-w-2xl m-auto px-4 border-yellow-600 rounded-sm mt-5 py-4 mb-6"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className="w-full  text-left focus:outline-none "
+        className="w-full text-left focus:outline-none flex items-center justify-between"
         onClick={handleToggle}
       >
         <h3 className="text-center text-3xl font-semibold text-gray-900">{question}</h3>
+        <ArrowIcon isOpen={isOpen} />
       </button>
-      <div ref={answerRef} className={`overflow-hidden ${isOpen ? 'h-auto' : 'h-0'} opacity-${isOpen ? '100' : '0'} transition-all`}>
+      <div ref={answerRef} className={`overflow-hidden transition-all duration-300`}>
         {isOpen && (
           <div className="mt-4">
-            <img src={image} width={200}  alt={title} className="mb-4 mt-2 rounded-md m-auto" />
+            <img src={image} width={200} loading="lazy" alt={title} className="mb-4 mt-2 rounded-md m-auto" />
             <p className="mt-2 text-sm text-gray-700">{answer}</p>
-            <p className='text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3'>{btn}</p>
+            <p className="text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3">{btn}</p>
           </div>
         )}
       </div>
@@ -68,55 +89,49 @@ const ServiceList = () => {
   const [currentIndex, setCurrentIndex] = useState(null);
 
   const list = [
-    
     {
       question: "Corporate Training",
       answer: "Customized programs designed to enhance essential soft skills for any work environment. We serve businesses of all sizes and industries, providing your team with tools for effective communication, leadership, teamwork, and more...",
       image: corporate,
-      more : " explore our individual training and coaching programs. Let us guide you on a journey of self-improvement and empowerment.",
-      btn:'Learn More'
+      btn: 'Learn More'
     },
     {
       question: "Behavioral Skills for Individuals",
       answer: "Empower yourself with specialized behavioral training. Ideal for professionals, fresh graduates, and anyone aiming for personal growth. Develop crucial skills like emotional intelligence, communication, and work-life balance.",
       image: behavioral,
-      more : "and foster collaboration Unleash the full potential of your workforce and witness the positive impact on your organization.",
-      btn:'Explore Programs'
-    },{
+      btn: 'Explore Programs'
+    },
+    {
       question: "Compliance Trainings",
       answer: "Stay compliant and ensure a safe workplace with comprehensive compliance training. Offerings include Prevention of Sexual Harassment (POSH) training, employee sensitization, and more, ensuring your organization meets all standards.",
       image: compliance,
-      more : "fff",
-      btn:'View Services'
-
+      btn: 'View Services'
     },
     {
       question: "1:1 Coaching",
       answer: "Achieve excellence with personalized coaching sessions. Whether you're looking to transform behavior, optimize brain function, or focus on self-improvement, our expert coaches are here to guide you.",
       image: onetraining,
-      more : 's',
-      btn:'Book a Session'
-
+      btn: 'Book a Session'
     },
   ];
 
   return (
     <div className="bg-white mt-7">
-    <div className=" mx-auto p-4" id='serivce'>
-      <div className='flex flex-col gap-4 px-10 '>
-         <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
-         <h3 className='text-center text-2xl w-full font-[600]'>Discover Your Journey: Tailored for You</h3>
-         <p className="text-sm text-gray-500 md:w-[80%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
-      </div>
-      {list.map((item, index) => (
-        <Services
-          key={index}
-          index={index}
-          currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
-          {...item}
-        />
-      ))}
+      <div className="mx-auto p-4" id="service">
+        <div className="flex flex-col gap-4 px-10">
+          <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
+          <h3 className="text-center text-2xl w-full font-[600]">Discover Your Journey: Tailored for You</h3>
+          <p className="text-sm text-gray-500 md:w-[80%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
+        </div>
+        {list.map((item, index) => (
+          <Services
+            key={index}
+            index={index}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            {...item}
+          />
+        ))}
       </div>
     </div>
   );
