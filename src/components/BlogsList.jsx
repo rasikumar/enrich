@@ -49,7 +49,7 @@ const BlogsList = () => {
           className="relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 duration-300 m-4 w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.3333%-2rem)] lg:w-[calc(25%-2rem)]"
         >
           <div className="relative overflow-hidden rounded-t-xl">
-            <img src={article.image} alt={article.title} className="w-full h-48 object-cover transform transition-transform duration-500 hover:scale-105" />
+            <img src={article.image} alt={article.title} className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" />
           </div>
           <div className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
