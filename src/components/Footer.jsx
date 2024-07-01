@@ -22,8 +22,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className='flex gap-2 flex-wrap'>
-          <input type="text" placeholder="Enter Your Mail" className=' placeholder:text-slate-600 p-2 border-gray-400 border bg-transparent outline-none text-slate-900 bg-slate-200'/>
-          <button className='delay-75 px-4 py-2 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 m-auto'>Subscribe</button>
+          <input type="text" placeholder="Enter Your Mail" className=' placeholder:text-slate-600 xl:p-1 xl:px-2 p-2 border-gray-400 border bg-transparent outline-none text-slate-900 bg-slate-200'/>
+          <button className='delay-75 px-4 py-2 rounded text-slate-100 xl:text-sm bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 m-auto'>Subscribe</button>
         </div>
         <div>
           <ul className='flex justify-center lg:justify-end gap-4 text-3xl'>
