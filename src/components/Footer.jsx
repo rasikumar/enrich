@@ -18,7 +18,7 @@ const Footer = () => {
             <AnchorLink href='#service' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</AnchorLink>
             <AnchorLink href='#program' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Program</AnchorLink>
             <AnchorLink href='#testimonials' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Testimonials</AnchorLink>
-            <AnchorLink href='blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</AnchorLink>
+            <AnchorLink href='#blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</AnchorLink>
           </ul>
         </div>
         <div className='flex gap-2 flex-wrap'>
