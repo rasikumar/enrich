@@ -61,7 +61,7 @@ const Services = ({ question, image, answer, title, btn, index, currentIndex, se
   return (
     <div
       ref={itemRef}
-      className="border max-w-2xl m-auto px-4 border-yellow-600 rounded-sm mt-5 py-4 mb-6"
+      className="border max-w-2xl m-auto px-4 bg-gray-200 rounded-sm mt-5 py-4 mb-6"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -69,7 +69,7 @@ const Services = ({ question, image, answer, title, btn, index, currentIndex, se
         className="w-full text-left focus:outline-none flex items-center justify-between"
         onClick={handleToggle}
       >
-        <h3 className="text-center text-3xl font-semibold text-gray-900">{question}</h3>
+        <h3 className="xl:text-2xl text-start font-semibold text-gray-900">{question}</h3>
         <ArrowIcon isOpen={isOpen} />
       </button>
       <div ref={answerRef} className={`overflow-hidden transition-all duration-300`}>
@@ -121,7 +121,7 @@ const ServiceList = () => {
         <div className="flex flex-col gap-4 px-10">
           <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
           <h3 className="text-center text-2xl w-full font-[600]">Discover Your Journey: Tailored for You</h3>
-          <p className="text-sm text-gray-500 md:w-[80%] m-auto">At Enrich, we recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
+          <p className="text-sm text-gray-500 md:w-[80%] m-auto">We recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
         </div>
         {list.map((item, index) => (
           <Services

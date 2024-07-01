@@ -6,20 +6,24 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const Footer = () => {
   return (
-    <div className="bg-slate-100">
-      <div className="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-10">
+    <div className="bg-slate-100 ">
+      <div className="flex flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10">
         <div className="mb-4 lg:mb-0">
           <img src={Logo} alt="logo" width={150} />
         </div>
         <div className="mb-4 lg:mb-0">
-          <ul className='flex flex-col lg:flex-row gap-3 text-center lg:text-left'>
+          <ul className='flex flex-col lg:flex-row gap-3 text-sm text-center lg:text-left'>
             <AnchorLink href='#hero' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Home</AnchorLink>
             <AnchorLink href='#about' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>About Us</AnchorLink>
-            <AnchorLink href='#serivce' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</AnchorLink>
+            <AnchorLink href='#service' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</AnchorLink>
             <AnchorLink href='#program' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Program</AnchorLink>
             <AnchorLink href='#testimonials' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Testimonials</AnchorLink>
             <AnchorLink href='blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</AnchorLink>
           </ul>
+        </div>
+        <div className='flex gap-2 flex-wrap'>
+          <input type="text" placeholder="Enter Your Mail" className=' placeholder:text-slate-600 p-2 border-gray-400 border bg-transparent outline-none text-slate-900 bg-slate-200'/>
+          <button className='delay-75 px-4 py-2 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 m-auto'>Subscribe</button>
         </div>
         <div>
           <ul className='flex justify-center lg:justify-end gap-4 text-3xl'>
@@ -29,12 +33,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className='bg-yellow-600 w-full p-5'>
-        <div className='m-auto bg-slate-900 w-full md:w-fit flex flex-col md:flex-row justify-center items-center'>
-          <input type="text" placeholder="Enter Your Mail" className='border-none px-8 bg-transparent text-white py-2 outline-none mb-4 md:mb-0 md:mr-4 w-full md:w-auto' />
-          <button className='bg-white py-4 px-8 rounded-r-sm hover:bg-slate-200 transition delay-100 w-full md:w-auto'>Subscribe</button>
-        </div>
-      </div>
+      
     </div>
   )
 }

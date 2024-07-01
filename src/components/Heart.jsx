@@ -1,6 +1,5 @@
 import Navbar from "./Navbar"
 import Hero from "./Hero"
-import Introduction from "./Introduction"
 import AboutUs from "./AboutUs"
 import Services from "./Services"
 import Program from "./Program"
@@ -12,7 +11,6 @@ const Heart = () => {
         <>
             <Navbar />
             <Hero/>
-            <Introduction/>
             <AboutUs/>
             <Services/>
             <Program/>

@@ -5,10 +5,10 @@ const Hero = () => {
     
 
     return (
-        <div id='hero' className="bg-Hero bg-no-repeat -mt-[5.4rem] bg-cover  bg-center p-4 md:p-10 py-26 flex flex-col-reverse md:flex-row justify-evenly items-center min-h-64 z-0  md:h-[520px] xl:h-[620px]">
-            <div className='w-full md:w-[480px] flex flex-col gap-6 hero-content bg-opacity-30 '>
-                <h1 className='text-2xl font-reggae md:text-4xl xl:text-4xl xl:leading-[3.5rem]'>Enrich Your Life,<br /> One Skill at a Time</h1>
-                <p className='xl:text-2xl md:text-sm text-gray-600 mb-5'>Comprehensive Training in Behavioral and People Skills</p>
+        <div id='hero' className="bg-Hero bg-no-repeat -mt-[5.4rem] bg-cover bg-center p-4 md:p-10 py-26 flex flex-col-reverse md:flex-row justify-evenly items-center min-h-64 z-0  md:h-[520px] xl:h-[620px]">
+            <div className='w-full md:w-[480px] flex flex-col gap-10 hero-content '>
+                <h1 className='text-2xl font-reggae md:text-4xl xl:text-4xl '>Enrich Your Life,<br /> One Skill at a Time</h1>
+                <p className='xl:text-2xl md:text-sm text-gray-600 text-justify mb-3'>Comprehensive Training in Behavioral and People Skills</p>
                 <button className='btn-primary'>Get Started</button>
             </div>
             <div className="relative">

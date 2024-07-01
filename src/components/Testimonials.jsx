@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Person from '../assets/hero.jpg';
-import rightArrow from '../assets/right.png';
-import leftArrow from '../assets/left.png';
+import { TiArrowRightThick } from "react-icons/ti";
+import { TiArrowLeftThick } from "react-icons/ti";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,7 +103,7 @@ const Testimonials = () => {
         </div>
         <div className="card flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-16">
           <button onClick={handlePrev} className="bg-yellow-600 text-white p-4 rounded-full hover:bg-yellow-700 transition duration-300">
-            <img src={leftArrow} width={20} alt="left arrow" />
+          <TiArrowLeftThick/>
           </button>
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-10">
             {[0, 1].map(i => (
@@ -119,7 +120,7 @@ const Testimonials = () => {
             ))}
           </div>
           <button onClick={handleNext} className="bg-yellow-600 text-white p-4 rounded-full hover:bg-yellow-700 transition duration-300">
-            <img src={rightArrow} width={20} alt="right arrow" />
+            <TiArrowRightThick/>
           </button>
         </div>
       </div>
