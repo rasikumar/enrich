@@ -9,7 +9,7 @@ const Hero = () => {
             <div className='w-full md:w-[480px] flex flex-col gap-10 hero-content '>
                 <h1 className='text-2xl font-reggae md:text-4xl xl:text-4xl '>Enrich Your Life,<br /> One Skill at a Time</h1>
                 <p className='xl:text-2xl md:text-sm text-gray-600 text-justify mb-3'>Comprehensive Training in Behavioral and People Skills</p>
-                <button className='btn-primary'>Get Started</button>
+                <button className='btn-primary'>Get In Touch</button>
             </div>
             <div className="relative">
                 <img 

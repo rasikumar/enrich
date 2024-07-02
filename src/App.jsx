@@ -5,6 +5,7 @@ import { useEffect,useState } from "react"
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
 import { Route, Routes } from 'react-router-dom';
+import AboutUs from './components/AboutUs';
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Heart/>}/>
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
+          <Route path='/Aboutus' element={<AboutUs/>}/>
         </Routes>
         </>
       )

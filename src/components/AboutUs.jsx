@@ -25,7 +25,6 @@ const AboutUs = () => {
               evvisolutions.com
             </a>.
           </p>
-          <button className='btn-primary xl:text-sm'>Learn more</button>
         </div>
         <div className="lg:w-1/2 w-full p-6">
           <div className="rounded-lg drop-shadow-4xl overflow-hidden">

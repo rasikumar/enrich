@@ -1,21 +1,63 @@
 import  { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
-
+import { IoIosArrowForward } from "react-icons/io";
 import retreatImage from '../assets/blogs/retreatImage.jpeg';
 import valuableImage from '../assets/blogs/valuableImage.jpeg';
 import awarnessImage from '../assets/blogs/awarnessImage.jpeg';
 import listeningImage from '../assets/blogs/listeningImage.jpeg';
+import blog from '../assets/blogs/blog.jpg'
 
 gsap.registerPlugin(ScrollTrigger);
 
 const articles = [
-  { id: 1, title: "Retreat", content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.", image: retreatImage },
-  { id: 2, title: "Valuable", content: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.", image: valuableImage },
-  { id: 3, title: "Active listening", content: "Imagine this: you're in a pivotal team meeting. Your colleagues are sharing ideas, thoughts, and concerns. You're not just hearing their words; you're understanding their emotions, needs, and motivations. ", image: listeningImage },
-  { id: 4, title: "Self-Awareness", content: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.", image: awarnessImage },
+  {
+    id: 1,
+    title: "Retreat",
+    content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.",
+    image: blog,
+  },
+  {
+    id: 1,
+    title: "Retreat",
+    content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.",
+    image: retreatImage,
+  },
+  {
+    id: 2,
+    title: "Valuable",
+    content: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.",
+    image: valuableImage,
+  },
+  {
+    id: 3,
+    title: "Active listening",
+    content: "Imagine this: you're in a pivotal team meeting. Your colleagues are sharing ideas, thoughts, and concerns. You're not just hearing their words; you're understanding their emotions, needs, and motivations.",
+    image: listeningImage,
+  },
+  {
+    id: 4,
+    title: "Self-Awareness",
+    content: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.",
+    image: awarnessImage,
+  },
 ];
+
+// eslint-disable-next-line react/prop-types
+const Card = ({ imageSrc, title, description, large, link }) => {
+  return (
+    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'col-span-2 row-span-1' : 'md:col-span-1'}`}>
+      <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'h-96' : ''} `} />
+      {large ? '':''}
+      <div className={`absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-4 ${large ? 'hidden' : ''}`}>
+        <h3 className="text-lg font-bold">{title}</h3>
+        <p className={`text-gray-600 line-clamp-3 ${large ? 'hidden' : ''} text-justify `}>{description}</p>
+        <Link to={link} className="btn-primary xl:text-sm flex items-center justify-center mt-2">Read more <IoIosArrowForward/></Link>
+      </div>
+    </div>
+  );
+};
 
 const BlogsList = () => {
   const articlesRef = useRef([]);
@@ -40,24 +82,21 @@ const BlogsList = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center">
-      {articles.map((article, index) => (
-        <Link
-           to={`/BlogsList/${article.id}`}
-          key={index}
-          ref={el => articlesRef.current[index] = el}
-          className="relative bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden transition-transform transform hover:-translate-y-2 duration-300 m-4 w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.3333%-2rem)] lg:w-[calc(25%-2rem)]"
-        >
-          <div className="relative overflow-hidden rounded-t-xl">
-            <img src={article.image} alt={article.title} className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" />
-          </div>
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">{article.title}</h2>
-            <p className="text-gray-700 text-sm mb-4 h-32 overflow-hidden overflow-y-auto text-justify">{article.content}</p>
-            <Link to={`/BlogsList/${article.id}`} className="xl:text-sm text-white-600 btn-primary  transition duration-300">Read more</Link>
-          </div>
-        </Link>
-      ))}
+    <div className="container mx-auto p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {articles.map((article, index) => (
+          <Card
+            key={index}
+            imageSrc={article.image}
+            title={article.title}
+            description={article.content}
+            link={`/BlogsList/${article.id}`}
+            large={index === 0} // First card is large
+            ref={el => articlesRef.current[index] = el}
+          />
+        ))}
+      </div>
+      
     </div>
   );
 };

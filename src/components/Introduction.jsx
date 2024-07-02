@@ -1,4 +1,5 @@
 import trainingImage from '../assets/intro.jpg'; // Ensure you have an image in the assets folder
+import { Link } from 'react-router-dom';
 
 const Introduction = () => {
   return (
@@ -7,17 +8,23 @@ const Introduction = () => {
         <div className="lg:w-[400px] w-full lg:mr-10">
           <img src={trainingImage} alt="Corporate Training" className="rounded-lg transition delay-100 hover:shadow-2xl" />
         </div>
-        <div className="lg:w-[50vw] w-full mb-6 lg:mb-0">
+        <div className="lg:w-[50vw] w-full flex flex-col gap-5">
           <h2 className="text-4xl font-bold text-gray-800 leading-tight">
             Intro 
           </h2>
-          <p className="mt-4 text-gray-600 text-sm text-justify ">
+          <p className="mt-2 text-gray-600 text-sm flex flex-col gap-3 text-justify ">
+            <div>
             At Enrich, we specialize in corporate training, behavioral skills, and soft skills development. Our transformative programs elevate team performance, enhance individual capabilities, and ensure compliance.
-            <br /> 
+            </div>
+            <div>
             Whether you&apos;re a business seeking to improve communication and leadership or an individual aiming to upskill for career advancement, our expert-led sessions are tailored to meet your needs.
-            <br />
             Join Enrich to empower yourself with essential skills for lasting success and growth.
+            </div>
+            
           </p>
+          <Link to={'/Aboutus'} >
+            <button className='btn-primary xl:text-sm'>Know More</button>
+          </Link>
         </div>
       </div>
     </section>
