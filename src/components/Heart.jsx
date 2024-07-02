@@ -5,6 +5,7 @@ import Services from "./Services"
 import Program from "./Program"
 import Testimonials from "./Testimonials"
 import Blog from "./Blog"
+import GetIn from "./GetIn"
 import Footer from "./Footer"
 
 const Heart = () => {
@@ -17,6 +18,7 @@ const Heart = () => {
             <Program/>
             <Testimonials/>
             <Blog/>
+            <GetIn/>
             <Footer/>
         </>
       )

@@ -14,8 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 const articles = [
   {
     id: 1,
-    title: "Retreat",
-    content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.",
     image: blog,
   },
   {
@@ -48,10 +46,10 @@ const articles = [
 const Card = ({ imageSrc, title, description, large, link }) => {
   return (
     <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'col-span-1 md:col-span-2 md:row-span-1' : 'col-span-1'}`}>
-      <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'h-96' : ''} `} />
-      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''}`}>
-        <h3 className={`text-lg font-bold ${large ? 'hidden' : ''}`}>{title}</h3>
-        <p className={`text-gray-600 line-clamp-3 ${large ? 'hidden' : ''} text-justify `}>{description}</p>
+      <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'xl:h-[30rem]' : ''} `} />
+      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''} ${large ? '' : 'xl:h-[35%]'}`}>
+        <h3 className={`xl:text-xl text-base font-bold`}>{title}</h3>
+        <p className={`text-gray-600 xl:line-clamp-3 line-clamp-2 text-xs xl:text-base text-justify `}>{description}</p>
         <Link to={link} className={`btn-primary xl:text-sm flex items-center justify-center mt-2  ${large ? 'hidden' : ''}`}>Read more <IoIosArrowForward/></Link>
       </div>
     </div>

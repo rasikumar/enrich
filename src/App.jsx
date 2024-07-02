@@ -43,7 +43,7 @@ const App = () => {
       ):(
         <>
         <Routes>
-          <Route path='/' element={<Heart/>}/>
+          <Route index element={<Heart/>}/>
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
           <Route path='/Aboutus' element={<AboutUs/>}/>
         </Routes>
