@@ -1,4 +1,4 @@
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -47,13 +47,12 @@ const articles = [
 // eslint-disable-next-line react/prop-types
 const Card = ({ imageSrc, title, description, large, link }) => {
   return (
-    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'col-span-2 row-span-1' : 'md:col-span-1'}`}>
+    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'col-span-1 md:col-span-2 md:row-span-1' : 'col-span-1'}`}>
       <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'h-96' : ''} `} />
-      {large ? '':''}
-      <div className={`absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-4 ${large ? 'hidden' : ''}`}>
-        <h3 className="text-lg font-bold">{title}</h3>
+      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''}`}>
+        <h3 className={`text-lg font-bold ${large ? 'hidden' : ''}`}>{title}</h3>
         <p className={`text-gray-600 line-clamp-3 ${large ? 'hidden' : ''} text-justify `}>{description}</p>
-        <Link to={link} className="btn-primary xl:text-sm flex items-center justify-center mt-2">Read more <IoIosArrowForward/></Link>
+        <Link to={link} className={`btn-primary xl:text-sm flex items-center justify-center mt-2  ${large ? 'hidden' : ''}`}>Read more <IoIosArrowForward/></Link>
       </div>
     </div>
   );
@@ -83,7 +82,7 @@ const BlogsList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {articles.map((article, index) => (
           <Card
             key={index}
