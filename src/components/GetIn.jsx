@@ -1,5 +1,36 @@
+import { useState } from "react";
+import axios from 'axios';
+
 
 const GetIn = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Submitting form data:', formData);
+  
+    try {
+      const response = await axios.post('http://localhost:5000/api/contact', formData);
+      console.log('Server response:', response);
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error.response || error.message);
+      alert('Error sending message.');
+    }
+  };
+
+  
   return (
       <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
 
@@ -19,7 +50,7 @@ const GetIn = () => {
           </div>
       </div>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
@@ -27,6 +58,8 @@ const GetIn = () => {
               name="name"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your Name"
+              value={formData.name} 
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -36,6 +69,8 @@ const GetIn = () => {
               name="email"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter a valid email address"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -44,17 +79,9 @@ const GetIn = () => {
               name="message"
               className="mt-1 block resize-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your message"
+              value={formData.message}
+              onChange={handleChange}
             />
-          </div>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="terms"
-              className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            />
-            <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
-              I accept the <a href="#" className="text-indigo-600 hover:text-indigo-500">Terms of Service</a>
-            </label>
           </div>
           <div>
             <button
