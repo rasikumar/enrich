@@ -120,7 +120,7 @@ const ServiceList = () => {
       <div className="mx-auto p-4" id="service">
         <div className="flex flex-col gap-4 px-10">
           <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
-          <h3 className="text-center text-2xl w-full font-[600]">Discover Your Journey: Tailored for You</h3>
+          <h3 className="text-center xl:text-2xl text-lg w-full font-[600]">Discover Your Journey: Tailored for You</h3>
           <p className="text-sm text-gray-500 md:w-[80%] m-auto">We recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
         </div>
         {list.map((item, index) => (

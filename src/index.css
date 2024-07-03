@@ -13,6 +13,9 @@
     .highlight-color{
         @apply text-black font-medium
     }
+    .heading{
+        @apply text-4xl font-bold text-gray-800 leading-tight
+    }
 }
 
 * {

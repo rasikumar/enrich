@@ -10,7 +10,7 @@ const Introduction = () => {
         </div>
         <div className="lg:w-[50vw] w-full flex flex-col gap-5">
           <h2 className="text-4xl font-bold text-gray-800 leading-tight">
-            Intro 
+            Welcome to Enrich 
           </h2>
           <p className="mt-2 text-gray-600 text-sm flex flex-col gap-3 text-justify ">
             <div>

@@ -47,7 +47,7 @@ const Card = ({ imageSrc, title, description, large, link }) => {
   return (
     <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'col-span-1 md:col-span-2 md:row-span-1' : 'col-span-1'}`}>
       <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'xl:h-[30rem]' : ''} `} />
-      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''} ${large ? '' : 'xl:h-[35%]'}`}>
+      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''} ${large ? '' : 'xl:h-[40%]'}`}>
         <h3 className={`xl:text-xl text-base font-bold`}>{title}</h3>
         <p className={`text-gray-600 xl:line-clamp-3 line-clamp-2 text-xs xl:text-base text-justify `}>{description}</p>
         <Link to={link} className={`btn-primary xl:text-sm flex items-center justify-center mt-2  ${large ? 'hidden' : ''}`}>Read more <IoIosArrowForward/></Link>

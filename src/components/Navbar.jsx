@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
         <div className="cta-btn hidden lg:flex items-center justify-center gap-4">
           <AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700 md:text-sm' onClick={closeMenu}>Blogs</AnchorLink>
-          <button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm'>Get In Touch</button>
+          <AnchorLink href='#getIn' className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm'>Get In Touch</AnchorLink>
         </div>
         <div className="lg:hidden">
           <button onClick={toggleMenu} className="text-black focus:outline-none">
@@ -63,7 +63,7 @@ const Navbar = () => {
           <li><AnchorLink href='#program' className='hover:text-yellow-600 transition delay-75' onClick={closeMenu}>Program</AnchorLink></li>
           <li><AnchorLink href='#testimonials' className='hover:text-yellow-600 transition delay-75' onClick={closeMenu}>Testimonials</AnchorLink></li>
           <li><AnchorLink href='#blog' className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' onClick={closeMenu}>Blogs</AnchorLink></li>
-          <li><button className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600' onClick={closeMenu}>Get In Touch</button></li>
+          <li><AnchorLink href='#getIn' className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600' onClick={closeMenu}>Get In Touch</AnchorLink></li>
         </ul>
       </div>
     </div>

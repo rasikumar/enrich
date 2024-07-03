@@ -1,20 +1,25 @@
 
 const GetIn = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg">
-        <h2 className="text-2xl font-bold mb-6">Get in touch</h2>
-        <p className="mb-6">Use our contact form for all information requests or contact us directly using the contact information below.</p>
-        <div className="mb-6">
-          <h3 className="font-semibold">Our Office Location</h3>
-          <p>The Interior Design Studio Company</p>
-          <p>The Courtyard, Al Quoz 1, Colorado, USA</p>
-        </div>
-        <div className="mb-6">
-          <h3 className="font-semibold">Phone (Landline)</h3>
-          <p>+912 3 567 8987</p>
-        </div>
-        <form className="space-y-4">
+      <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
+
+      <div className="md:w-[40%] flex flex-col gap-5 mb-10 ">
+          <h2 className="heading">Get in touch</h2>
+          <p className="primary-color text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
+          <div className="primary-color xl:text-base sm:text-sm">
+            <h3 className="highlight-color mb-3">Our Office Location</h3>
+            <p>Evvi Solutions Private Limited</p>
+            <p>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
+            <p>Thiagarajar College of Engineering Campus,</p>
+            <p>Thiruparankundram, Madurai -625015</p>
+          </div>
+          <div className=" primary-color">
+           <h3 className="highlight-color mb-3">Email</h3>
+            <p>info@evvisolutions.com</p>
+          </div>
+      </div>
+
+      <form className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
@@ -37,7 +42,7 @@ const GetIn = () => {
             <label className="block text-sm font-medium text-gray-700">Message</label>
             <textarea
               name="message"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block resize-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your message"
             />
           </div>
@@ -54,14 +59,13 @@ const GetIn = () => {
           <div>
             <button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
+              className="w-full btn-primary"
             >
               Submit your request
             </button>
           </div>
         </form>
       </div>
-    </div>
   );
 };
 

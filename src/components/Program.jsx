@@ -24,11 +24,11 @@ const Program = () => {
     <div id="program" className="flex flex-col items-center p-3 bg-slate-50">
       <div className='flex flex-col gap-4 px-10'>
         <h2 className="text-black text-4xl font-semibold text-center ">Programs</h2>
-        <h2 className='text-center text-2xl w-full font-[600]'>Explore our programs</h2>
+        <h2 className='text-center xl:text-2xl text-xl w-full font-[600]'>Explore our programs</h2>
         <p className="text-sm text-gray-500 md:w-[80%] m-auto">Explore our bestselling programs designed to enhance your skills and empower your success. Click below to discover more about these transformative offerings.</p>
       </div>
       <Programlist/>
-      <p className="p-4 text-gray-500">Discover our full range of programs designed to meet your unique needs and goals.</p>
+      <p className="p-4 text-gray-700 xl:text-base text-sm">Discover our full range of programs designed to meet your unique needs and goals.</p>
       <button className="btn-primary">Know more</button>
     </div>
   )
