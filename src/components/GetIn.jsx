@@ -4,7 +4,7 @@ const GetIn = () => {
       <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
 
       <div className="md:w-[40%] flex flex-col gap-5 mb-10 ">
-          <h2 className="heading">Get in touch</h2>
+          <h2 className="heading text-red-600">Get in touch</h2>
           <p className="primary-color text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
           <div className="primary-color xl:text-base sm:text-sm">
             <h3 className="highlight-color mb-3">Our Office Location</h3>
