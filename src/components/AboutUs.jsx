@@ -5,7 +5,7 @@ const AboutUs = () => {
     <section 
       className="relative bg-cover bg-center py-20"
       id='about'
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage : `url(${backgroundImage})` }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center bg-white bg-opacity-90 rounded-lg shadow-lg py-10">
