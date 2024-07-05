@@ -1,14 +1,14 @@
-import arrow from '../assets/arrow.svg';
+import arrow from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/arrow.svg'
 
-import image1 from '../assets/programs/1.jpg';
-import image2 from '../assets/programs/2.jpg';
-import image3 from '../assets/programs/3.jpg';
-import image6 from '../assets/programs/6.jpg';
+import image1 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/1.jpg';
+import image2 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/2.jpg';
+import image3 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/3.jpg';
+import image6 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/6.jpg';
 
-// import image4 from '../assets/programs/4.jpg';
-// import image5 from '../assets/programs/5.jpg';
-// import logo from '../assets/logo.svg';
-import '../components/Program.css'
+// import image4 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/4.jpg';
+// import image5 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/5.jpg';
+// import logo from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/logo.svg';
+import './Program.css'
 
 const program = [
   {

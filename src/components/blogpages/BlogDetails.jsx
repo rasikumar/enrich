@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBackCircle } from "react-icons/io5";
 
-import retreatImage from '../assets/blogs/Fullsize/retreatImage.jpg';
-import valuableImage from '../assets/blogs/Fullsize/valuableImage.jpg';
-import listeningImage from '../assets/blogs/Fullsize/listeningImage.jpg';
-import awarnessImage from '../assets/blogs/Fullsize/awarnessImage.jpg'
-import AwarnessArticle from '../components/blogpages/AwarnessArticle'
-import RetreatArticle from '../components/blogpages/RetreatArticle'
-import ListeningArticle from '../components/blogpages/ListeningArticle'
-import ValuableArticle from '../components/blogpages/ValuableArticle'
+import retreatImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/retreatImage.jpg';
+import valuableImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/valuableImage.jpg';
+import listeningImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/listeningImage.jpg';
+import awarnessImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/awarnessImage.jpg'
+import AwarnessArticle from './AwarnessArticle'
+import RetreatArticle from './RetreatArticle'
+import ListeningArticle from './ListeningArticle'
+import ValuableArticle from './ValuableArticle'
 
 
 const articles = [

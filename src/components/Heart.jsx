@@ -2,9 +2,9 @@ import Navbar from "./Navbar"
 import Hero from "./Hero"
 import Introduction from './Introduction'
 import Services from "./Services"
-import Program from "./Program"
+import Program from "./allprogram/Program"
 import Testimonials from "./Testimonials"
-import Blog from "./Blog"
+import Blog from "../components/blogpages/Blog"
 import GetIn from "./GetIn"
 import Footer from "./Footer"
 

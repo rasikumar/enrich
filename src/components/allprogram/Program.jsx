@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Programlist from "./Programlist"
 
 // import gsap from "gsap";
@@ -29,8 +30,10 @@ const Program = () => {
       </div>
       <Programlist/>
       <p className="p-4 text-gray-700 xl:text-base text-sm">Discover our full range of programs designed to meet your unique needs and goals.</p>
-      <button className="btn-primary">Know more</button>
-    </div>
+      <Link to={'/AllProgram'}>
+        <button className="btn-primary">Know more</button>
+      </Link>
+    </div> 
   )
 }
 

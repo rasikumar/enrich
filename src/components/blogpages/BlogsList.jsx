@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { IoIosArrowForward } from "react-icons/io";
-import retreatImage from '../assets/blogs/retreatImage.jpeg';
-import valuableImage from '../assets/blogs/valuableImage.jpeg';
-import awarnessImage from '../assets/blogs/awarnessImage.jpeg';
-import listeningImage from '../assets/blogs/listeningImage.jpeg';
-import blog from '../assets/blogs/blog.jpg';
+import retreatImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/retreatImage.jpeg';
+import valuableImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/valuableImage.jpeg';
+import awarnessImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/awarnessImage.jpeg';
+import listeningImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/listeningImage.jpeg';
+import blog from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/blog.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

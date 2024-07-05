@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import BlogsList from './BlogsList';
 
 const App = () => {
@@ -12,6 +13,9 @@ const App = () => {
       <main>
         <BlogsList />
       </main>
+      <Link to={'/BlogDisplay'}>
+        <button className='btn-primary'>More Blogs</button>
+      </Link>
     </div>
   );
 };

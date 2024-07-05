@@ -1,11 +1,13 @@
 import Heart from './components/Heart'
-import BlogDetails from './components/BlogDetails';
+import BlogDetails from './components/blogpages/BlogDetails';
+import ProgramsAll from './components/allprogram/ProgramsAll'
+import AboutUs from './components/AboutUs';
 
 import { useEffect,useState } from "react"
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
 import { Route, Routes } from 'react-router-dom';
-import AboutUs from './components/AboutUs';
+import BlogDisplay from './components/blogpages/BlogDisplay';
 
 const App = () => {
 
@@ -46,7 +48,9 @@ const App = () => {
           <Route index element={<Heart/>}/>
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
           <Route path='/Aboutus' element={<AboutUs/>}/>
-        </Routes>
+          <Route path='/AllProgram' element={<ProgramsAll/>}/>
+          <Route path='/BlogDisplay' element={<BlogDisplay/>} />
+        </Routes> 
         </>
       )
       }
