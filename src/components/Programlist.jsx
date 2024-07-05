@@ -3,10 +3,10 @@ import arrow from '../assets/arrow.svg';
 import image1 from '../assets/programs/1.jpg';
 import image2 from '../assets/programs/2.jpg';
 import image3 from '../assets/programs/3.jpg';
-import image4 from '../assets/programs/4.jpg';
-import image5 from '../assets/programs/5.jpg';
 import image6 from '../assets/programs/6.jpg';
 
+// import image4 from '../assets/programs/4.jpg';
+// import image5 from '../assets/programs/5.jpg';
 // import logo from '../assets/logo.svg';
 import '../components/Program.css'
 
@@ -30,34 +30,34 @@ const program = [
     bgImg: image3,
   },
   {
-    title: 'Executive Leadership Mastery',
-    content: "Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.",
-    icon: arrow,
-    bgImg: image4,
-  },
-  {
-    title: 'Strategic Thinking Toolbox',
-    content: "Customized for decision-makers and problem-solvers eager to sharpen their strategic thinking abilities and drive organizational success.",
-    icon: arrow,
-    bgImg: image5,
-  },
-  {
     title: 'Launchpad to Corporate Success',
     content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
     icon: arrow,
     bgImg: image6,
   },
-  {
-    title: 'Personal Effectiveness Power Pack',
-    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
-    bgImg: image1,
-  },{
-    title: 'Personal Effectiveness Power Pack',
-    content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
-    bgImg: image1,
-  },
+  // {
+  //   title: 'Executive Leadership Mastery',
+  //   content: "Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.",
+  //   icon: arrow,
+  //   bgImg: image4,
+  // },
+  // {
+  //   title: 'Strategic Thinking Toolbox',
+  //   content: "Customized for decision-makers and problem-solvers eager to sharpen their strategic thinking abilities and drive organizational success.",
+  //   icon: arrow,
+  //   bgImg: image5,
+  // },
+  // {
+  //   title: 'Personal Effectiveness Power Pack',
+  //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+  //   icon: arrow,
+  //   bgImg: image1,
+  // },{
+  //   title: 'Personal Effectiveness Power Pack',
+  //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+  //   icon: arrow,
+  //   bgImg: image1,
+  // },
   // {
   //   title: 'Personal Effectiveness Power Pack',
   //   content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
@@ -69,14 +69,13 @@ const program = [
 const Programlist = () => {
   return (
     <div>
-      <a href="#">
+      <a>
         <div className='flex flex-wrap w-full items-center m-auto gap-14 py-10 justify-center'>
           {program.map((value, index) => {
             return (
               <div key={index} className='card-container'>
                 <img src={value.bgImg} alt={value.title} className='card-image' />
                 <div className='card-icons'>
-                  <img src={value.icon} alt={value.title} />
                 </div>
                 <div className='card-content'>
                   <h1 className='text-[18px] text-white leading-5 mb-2 font-semibold text-center'>{value.title}</h1>

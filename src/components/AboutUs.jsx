@@ -2,6 +2,7 @@ import backgroundImage from '../assets/about.png'; // Add an appropriate backgro
 
 const AboutUs = () => {
   return (
+    
     <section 
       className="relative bg-cover bg-center py-20"
       id='about'
