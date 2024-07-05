@@ -1,4 +1,4 @@
-import backgroundImage from '../assets/about.png'; // Add an appropriate background image in the assets folder
+import { aboutimage } from '../assets/'; // Add an appropriate background image in the assets folder
 
 const AboutUs = () => {
   return (
@@ -6,7 +6,7 @@ const AboutUs = () => {
     <section 
       className="relative bg-cover bg-center py-20"
       id='about'
-      style={{ backgroundImage : `url(${backgroundImage})` }}
+      style={{ backgroundImage : `url(${aboutimage})` }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center bg-white bg-opacity-90 rounded-lg shadow-lg py-10">
@@ -29,7 +29,7 @@ const AboutUs = () => {
         </div>
         <div className="lg:w-1/2 w-full p-6">
           <div className="rounded-lg drop-shadow-4xl overflow-hidden">
-            <img src={backgroundImage} alt="About Us" className="w-full h-full object-cover" />
+            <img src={aboutimage} alt="About Us" className="w-full h-full object-cover" />
           </div>
         </div>
       </div>

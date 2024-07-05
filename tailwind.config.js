@@ -35,7 +35,7 @@ export default {
                 'custom-border': 'rgba(255, 255, 255, 0.3)',
               },
             backgroundImage:{
-                'Hero' : "url('/src/assets/hero/2.png')"
+                'Hero' : "url('/src/assets/hero/heroBg.png')"
             },
             fontFamily:{
                 reggae:['Reggae One','system-ui'],
