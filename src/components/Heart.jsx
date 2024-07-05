@@ -1,4 +1,4 @@
-import Navbar from "./Navbar"
+import ScrollAlert from "./ScrollMsg"
 import Hero from "./Hero"
 import Introduction from './Introduction'
 import Services from "./Services"
@@ -11,7 +11,7 @@ import Footer from "./Footer"
 const Heart = () => {
   return (
         <>
-            <Navbar />
+           <ScrollAlert/>
             <Hero/>
             <Introduction/>
             <Services/>
