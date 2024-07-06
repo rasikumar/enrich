@@ -26,7 +26,7 @@ import behavioral from './services/behavioral.png'
 import compliance from './services/compliance.png'
 import corporate from './services/corporate.png'
 import onetraining from './services/onetraining.png'
-
+ 
 import aboutimage from './about.png'
 import intro from './intro.jpg'
 import logo from './logo.png'
