@@ -35,7 +35,7 @@ const GetIn = () => {
       <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
 
       <div className="md:w-[40%] flex flex-col gap-5 mb-10 ">
-          <h2 className="heading text-red-600">Get in touch</h2>
+          <h2 className="heading primary-color">Get in touch</h2>
           <p className="primary-color text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
           <div className="primary-color xl:text-base sm:text-sm">
             <h3 className="highlight-color mb-3">Our Office Location</h3>
@@ -63,15 +63,22 @@ const GetIn = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">Mobile</label>
             <input
-              type="email"
-              name="email"
+              type="number"
+              name="number"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter a valid email address"
-              value={formData.email}
+              placeholder="Enter your Number"
+              value={formData.number}
               onChange={handleChange}
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Who Are You</label>
+            <select name="option" className="outline-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
+              <option value="">Individual</option>
+              <option value="">Business</option>
+            </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Message</label>
