@@ -7,6 +7,7 @@ import Testimonials from "./Testimonials"
 import Blog from "../components/blogpages/Blog"
 import GetIn from "./GetIn"
 import Footer from "./Footer"
+import ScrollAlert from "./ScrollMsg"
 
 const Heart = () => {
   return (
@@ -17,6 +18,7 @@ const Heart = () => {
             <Services/>
             <Program/>
             <Testimonials/>
+            <ScrollAlert/>
             <Blog/>
             <GetIn/>
             <Footer/>
