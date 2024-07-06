@@ -1,7 +1,7 @@
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import navLogo from '../assets/logo.png'
 import  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { logo } from '../assets';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ const Navbar = () => {
     <div className="sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000]">
       <nav className="xl:text-lg flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
         <div className="logo flex gap-1 cursor-pointer">
-          <img src={navLogo} width={100} alt="logo" />
+          <img src={logo} width={100} alt="logo" />
         </div>
         <div className="list-items hidden lg:flex ">
           <ul>

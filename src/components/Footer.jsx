@@ -1,16 +1,17 @@
-import Logo from '../assets/logo.png'
+
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { Link } from 'react-router-dom';
+import { logo } from "../assets";
 
 const Footer = () => {
   return (
     <div className="bg-slate-100 ">
       <div className="flex flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10">
         <div className="mb-4 lg:mb-0">
-          <img src={Logo} alt="logo" width={150} />
+          <img src={logo} alt="logo" width={150} />
         </div>
         <div className="mb-4 lg:mb-0">
           <ul className='flex flex-col lg:flex-row gap-3 text-sm text-center lg:text-left'>

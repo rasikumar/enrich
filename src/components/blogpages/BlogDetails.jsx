@@ -1,37 +1,33 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBackCircle } from "react-icons/io5";
+import { awarnessImagefull, listeningImagefull, retreatImagefull, valuableImagefull } from '../../assets';
 
-import retreatImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/retreatImage.jpg';
-import valuableImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/valuableImage.jpg';
-import listeningImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/listeningImage.jpg';
-import awarnessImage from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/blogs/Fullsize/awarnessImage.jpg'
 import AwarnessArticle from './AwarnessArticle'
 import RetreatArticle from './RetreatArticle'
 import ListeningArticle from './ListeningArticle'
 import ValuableArticle from './ValuableArticle'
 
-
 const articles = [
   { id: 1, 
     title: "Retreat", 
-    image: retreatImage ,
+    image: retreatImagefull ,
     component : <RetreatArticle/>
   },
 
   { id: 2, 
     title: "Valuable", 
     component : <ValuableArticle/>,
-    image: valuableImage },
+    image: valuableImagefull },
 
   { id: 3, 
     title: "Active listening", 
     component : <ListeningArticle/>,
-    image: listeningImage },
+    image: listeningImagefull },
  
   { id: 4, 
     title: "Self-Awareness", 
     component : <AwarnessArticle/>,
-    image: awarnessImage },
+    image: awarnessImagefull },
 ];
 
 const BlogDetail = () => {

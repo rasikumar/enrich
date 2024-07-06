@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Person from '../assets/hero.jpg';
 import { TiArrowRightThick } from "react-icons/ti";
 import { TiArrowLeftThick } from "react-icons/ti";
+import { testimg } from '../assets';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,28 +14,28 @@ const testimonialsData = [
     name: 'Sathya Priya',
     position: 'Emotional Intelligence',
     feedback: 'Attending the emotional intelligence session was life-changing. I now understand my emotions better and manage stress effectively.',
-    img: Person,
+    img: testimg,
   },
   {
     id: 2,
     name: 'Naga Nandhini',
     position: 'Communication skills',
     feedback: 'The communication skills workshop helped me express my ideas confidently in meetings. Now, I feel more valued and respected at work.',
-    img: Person,
+    img: testimg,
   },
   {
     id: 3,
     name: 'Nandha Kumar',
     position: 'Time Management',
     feedback: 'After attending the time management seminar, I{&apos}ve become more organized and productive. My efficiency has improved significantly.',
-    img: Person,
+    img: testimg,
   },
   {
     id: 4,
     name: 'Rasi Kumar',
     position: 'Presentation Skills',
     feedback: 'The presentation skills course boosted my confidence in public speaking. I recently delivered a successful pitch that impressed our clients.',
-    img: Person,
+    img: testimg,
   },
   // Add more testimonials as needed
 ];

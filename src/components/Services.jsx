@@ -1,10 +1,8 @@
-import corporate from '../assets/services/corporate.png';
-import behavioral from '../assets/services/behavioral.png';
-import onetraining from '../assets/services/onetraining.png';
-import compliance from '../assets/services/compliance.png';
+
 
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { behavioral, compliance, corporate, onetraining } from '../assets';
 
 // Arrow Icon Component
 // eslint-disable-next-line react/prop-types

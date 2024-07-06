@@ -1,6 +1,6 @@
 
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import heroImage from '../assets/hero/heroimg.jpg';
+import { heroimg } from '../assets';
 
 const Hero = () => {
     
@@ -14,7 +14,7 @@ const Hero = () => {
             </div>
             <div className="relative">
                 <img 
-                    src={heroImage} 
+                    src={heroimg} 
                     className='w-full md:w-80 h-auto md:h-80 object-cover rounded-lg drop-shadow-2xl hover:drop-shadow-none hover:scale-95 xl:w-[420px] xl:h-96 transition delay-75 -z-20 hero-image' 
                     alt="" 
                 />
