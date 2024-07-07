@@ -1,35 +1,34 @@
-import arrow from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/arrow.svg'
 
 
 // import image4 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/4.jpg';
 // import image5 from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/programs/5.jpg';
 // import logo from '/home/yuvapathi/Rasi/Enrich/Frontend/src/assets/logo.svg';
 import './Program.css'
-import { Communicationmastery, Emotionalintelligence, launchpad, personaleffective } from '../../assets';
+import { Communicationmastery, Emotionalintelligence, launchpad, personaleffective, } from '../../assets';
 
 const program = [
   {
     title: 'Personal Effectiveness Power Pack',
     content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-    icon: arrow,
+    // icon: arrow,
     bgImg: personaleffective,
   },
   {
     title: 'Communication Mastery Suite',
     content: "Designed for individuals aiming to improve their communication skills and cultivate meaningful connections in both personal and professional settings.",
-    icon: arrow,
+    // icon: arrow,
     bgImg: Communicationmastery,
   },
   {
     title: 'Emotional Intelligence Essentials',
     content: "Geared towards individuals looking to develop their emotional intelligence for greater self-awareness, resilience, and success in all areas of life.",
-    icon: arrow,
+    // icon: arrow,
     bgImg: Emotionalintelligence,
   },
   {
     title: 'Launchpad to Corporate Success',
     content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
-    icon: arrow,
+    // icon: arrow,
     bgImg: launchpad,
   },
   // {
