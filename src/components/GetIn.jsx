@@ -22,7 +22,7 @@ const GetIn = () => {
     console.log('Submitting form data:', formData);
   
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', formData);
+      const response = await axios.post('https://enrichbackend-baac6aec58db.herokuapp.com/api/contact', formData);
       console.log('Server response:', response);
       alert('Message sent successfully!');
     } catch (error) {
