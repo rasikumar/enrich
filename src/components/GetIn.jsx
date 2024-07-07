@@ -27,7 +27,7 @@ const GetIn = () => {
       alert('Message sent successfully!');
     } catch (error) {
       console.error('Error sending message:', error.response || error.message);
-      alert('Error sending message.');
+      alert('Error sending from frontend message.');
     }
   };
 
