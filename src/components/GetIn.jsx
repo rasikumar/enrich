@@ -49,7 +49,7 @@ const GetIn = () => {
         </div>
       </div>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4 xl:w-96" onSubmit={handleSubmit}>
         <div>
           <label className="block text-sm font-medium text-gray-700">Name</label>
           <input
