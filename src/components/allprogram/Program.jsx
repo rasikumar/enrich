@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import Programlist from "./Programlist"
-
+import { motion } from "framer-motion"
 // import gsap from "gsap";
 // import { SplitText } from "gsap/all";
 // import { ScrollTrigger } from "gsap/all";
@@ -22,7 +22,12 @@ import Programlist from "./Programlist"
 
 const Program = () => {
   return (
-    <div id="program" className="flex flex-col items-center p-3 bg-slate-50">
+    <motion.div
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        exit={{opacity:0}}
+         id="program" className="flex flex-col items-center p-3 bg-slate-50">
+
       <div className='flex flex-col gap-4 px-10'>
         <h2 className="text-black text-4xl font-semibold text-center ">Programs</h2>
         <h2 className='text-center xl:text-2xl text-xl w-full font-[600]'>Explore our programs</h2>
@@ -30,10 +35,10 @@ const Program = () => {
       </div>
       <Programlist/>
       <p className="p-4 text-gray-700 xl:text-base text-sm">Discover our full range of programs designed to meet your unique needs and goals.</p>
-      <Link to={'/AllProgram'}>
+      <Link to={'/ProgramDisplay'}>
         <button className="btn-primary">Know more</button>
       </Link>
-    </div> 
+    </motion.div> 
   )
 }
 

@@ -1,12 +1,13 @@
-import Heart from './components/Heart'
-import BlogDetails from './components/blogpages/BlogDetails';
-import ProgramsAll from './components/allprogram/ProgramsAll'
-import AboutUs from './components/AboutUs';
-
 import { useEffect,useState } from "react"
 import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
 import { Route, Routes } from 'react-router-dom';
+import {AnimatePresence} from 'framer-motion'
+
+import Heart from './components/Heart'
+import BlogDetails from './components/blogpages/BlogDetails';
+import ProgramDisplay from './components/allprogram/ProgramDisplay'
+import AboutUs from './components/AboutUs';
 import BlogDisplay from './components/blogpages/BlogDisplay';
 import Navbar from './components/Navbar';
 // import RetreatArticle from './components/blogpages/RetreatArticle';
@@ -46,16 +47,18 @@ const App = () => {
       />
       ):(
         <>
+        <AnimatePresence>
         <Navbar/>
         <Routes>
           <Route index path='/'  element={<Heart/>}/>
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
           <Route path='/Aboutus' element={<AboutUs/>}/>
-          <Route path='/AllProgram' element={<ProgramsAll/>}/>
+          <Route path='/ProgramDisplay' element={<ProgramDisplay/>}/>
           <Route path='/BlogDisplay' element={<BlogDisplay/>} />
           {/* blogarticles */}
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
         </Routes> 
+        </AnimatePresence>
         </>
       )
       }

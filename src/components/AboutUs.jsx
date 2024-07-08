@@ -1,9 +1,12 @@
+import { motion } from 'framer-motion';
 import { aboutimage } from '../assets/'; // Add an appropriate background image in the assets folder
-
 const AboutUs = () => {
   return (
     
-    <section 
+    <motion.section 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
       className="relative bg-cover bg-center py-20"
       id='about'
       style={{ backgroundImage : `url(${aboutimage})` }}
@@ -33,7 +36,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
