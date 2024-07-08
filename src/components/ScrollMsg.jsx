@@ -1,15 +1,22 @@
-import '../index.css'
-const ScrollMsg = () => {
-  
-  return (
-    <div className="bg-gray-200 p-2 flex items-center overflow-hidden">
-      <div className="marquee whitespace-nowrap w-full block animate-marquee">
-        Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
-        Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
-        Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600">Click me</a>
-      </div>
-    </div>
-  )
-}
+import '../index.css';
 
-export default ScrollMsg
+const ScrollMsg = () => {
+    return (
+        <div className="bg-gray-200 p-2 flex items-center overflow-hidden">
+            <div className="marquee whitespace-nowrap w-full block animate-marquee">
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
+                {/* Repeated content to create the continuous scroll effect */}
+            </div>
+        </div>
+    );
+};
+
+export default ScrollMsg;

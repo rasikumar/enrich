@@ -1,10 +1,11 @@
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { logo } from '../assets';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scroll, setScroll] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -26,18 +27,32 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000]">
-      <nav className="xl:text-lg flex items-center justify-between p-5 rounded-md bg-white/70 shadow-md border-[1px] border-yellow-600">
+    <div className={`sticky top-6 w-[80%] text-sm ml-auto mr-auto z-[1000] rounded-md ${scroll ? 'bg-white' : 'bg-white/50'}`}>
+      <nav className="xl:text-lg flex items-center justify-between p-5 rounded-md shadow-md border-[1px] border-yellow-600">
         <div className="logo flex gap-1 cursor-pointer">
-         <Link to={'/'}>
-         <img src={logo} width={100} alt="logo" />
-         </Link> 
+          <Link to={'/'}>
+            <img src={logo} width={100} alt="logo" />
+          </Link>
         </div>
-        <div className="list-items hidden lg:flex ">
+        <div className="list-items hidden lg:flex">
           <ul>
-            <li className="flex gap-6  text-black tracking-wide">
-              <Link to={'/'} className='hover:text-yellow-600 transition delay-75 xl:text-lg  md:text-sm' onClick={closeMenu}>Home</Link>
+            <li className="flex gap-6 text-black tracking-wide">
+              <Link to={'/'} className='hover:text-yellow-600 transition delay-75 xl:text-lg md:text-sm' onClick={closeMenu}>Home</Link>
               <Link to={'/Aboutus'} className='hover:text-yellow-600 transition delay-75 md:text-sm xl:text-lg' onClick={closeMenu}>About us</Link>
               <AnchorLink href='#service' className='hover:text-yellow-600 transition delay-75 md:text-sm xl:text-lg' onClick={closeMenu}>Services</AnchorLink>
               <Link to={'/ProgramDisplay'} className='hover:text-yellow-600 transition delay-75 md:text-sm xl:text-lg' onClick={closeMenu}>Program</Link>

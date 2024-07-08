@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TiArrowRightThick } from "react-icons/ti";
 import { TiArrowLeftThick } from "react-icons/ti";
 import { testimg } from '../assets';
 
 
-gsap.registerPlugin(ScrollTrigger);
 
 const testimonialsData = [
   {
@@ -74,23 +72,6 @@ const Testimonials = () => {
     });
   };
 
-  useEffect(() => {
-    const testimonialsElement = testimonialsRef.current;
-    gsap.fromTo(testimonialsElement, {
-      opacity: 0,
-      y: 50,
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: 'power1.out',
-      scrollTrigger: {
-        trigger: testimonialsElement,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      },
-    });
-  }, []);
 
   return (
     <div ref={testimonialsRef} id='testimonials' className="w-full bg-gradient-to-r to-yellow-50 via-yellow-100 from-yellow-200 flex flex-col lg:flex-row items-center justify-center  p-10">

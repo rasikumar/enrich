@@ -14,9 +14,13 @@ const AboutUs = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center bg-white bg-opacity-90 rounded-lg shadow-lg py-10">
         <div className="lg:w-1/2 w-full mb-8 lg:mb-0 p-6">
-          <h2 className="text-4xl font-bold text-black leading-tight mb-4">
+          <motion.h2 
+          initial = {{x:-50}}
+          animate={{x:0}}
+          transition={{duration:1, ease:'easeOut'}}
+          className="text-4xl font-bold text-black leading-tight mb-4">
             Welcome to Enrich
-          </h2>
+          </motion.h2>
           <p className="text-gray-600 text-sm mb-4 text-justify">
             A division of Evvi Solutions dedicated to delivering transformative training and skill development services. Our vision is to empower individuals and organizations by focusing on essential behavioral skills.
           </p>

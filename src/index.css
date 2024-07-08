@@ -23,6 +23,89 @@
     margin: 0%;
     padding: 0%;
 }
-.marquee:hover{
-    animation-play-state: paused;
-}
+@keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 15s linear infinite;
+  }
+  
+  .bg-gray-200 {
+    background-color: #edf2f7;
+  }
+  
+  .text-yellow-600 {
+    color: #d69e2e;
+  }
+  
+  .mr-96 {
+    margin-right: 24rem;
+  }
+  /* index.css or specific component styles */
+
+.bg-gray-100 {
+    background-color: #f7fafc;
+  }
+  
+  .bg-yellow-500 {
+    background-color: #fbbf24;
+  }
+  
+  .text-gray-800 {
+    color: #2d3748;
+  }
+  
+  .text-gray-700 {
+    color: #4a5568;
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .opacity-40 {
+    opacity: 0.4;
+  }
+  
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
+  
+  .transition-colors {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.3s;
+  }
+  
+  .max-w-7xl {
+    max-width: 80rem;
+  }
+  
+  

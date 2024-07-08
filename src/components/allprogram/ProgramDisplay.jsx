@@ -8,7 +8,8 @@ const ProgramDisplay = () => {
       title: 'Executive Leadership Mastery',
       content: 'Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.',
       img: Communicationmastery
-    },{
+    },
+    {
       id: 2,
       title: 'Executive Leadership Mastery',
       content: 'Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.',
@@ -55,7 +56,7 @@ const ProgramDisplay = () => {
       img: Communicationmastery
     },{
       id: 11,
-      title: 'Executive Leadership Mastery',
+      title: '11Executive Leadership Mastery',
       content: 'Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.',
       img: Communicationmastery
     },{
@@ -67,31 +68,35 @@ const ProgramDisplay = () => {
     // Repeat for other programs...
   ];
 
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gray-100"
+      
     >
-      <h1 className="bg-yellow-500 p-10 text-center font-semibold text-3xl text-gray-800 shadow-md">
-        Programs
+      <h1 className="bg-yellow-500 p-10 text-center font-semibold text-3xl">
+        Our Programs
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-20 py-10 gap-10">
+      <div className="px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {programs.map((program) => (
           <motion.div
             key={program.id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105"
-            whileHover={{ scale: 1.05 }}
+            className="relative overflow-hidden rounded-lg shadow-lg"
           >
-            <img src={program.img} alt={program.title} className="w-full h-64 object-cover" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{program.title}</h2>
-              <p className="text-gray-700 mb-4">{program.content}</p>
-              <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-yellow-600 transition-colors">
-                Learn More
-              </button>
-            </div>
+            <motion.img
+              src={program.img}
+              alt={program.title}
+              className="w-full h-64 object-cover rounded-t-lg"
+              whileHover={{ scale: 1.1 }}
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300"
+            >
+              <h2 className="text-2xl font-semibold mb-2">{program.title}</h2>
+              <p className="text-gray-300">{program.content}</p>
+            </motion.div>
           </motion.div>
         ))}
       </div>
