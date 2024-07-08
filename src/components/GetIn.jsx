@@ -33,7 +33,7 @@ const GetIn = () => {
 
   return (
     <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
-      <div className="md:w-[40%] flex flex-col gap-5 mb-10 ">
+      <div className="md:w-[30%] p-4  flex flex-col gap-5 mb-10 ">
         <h2 className="heading primary-color">Get in touch</h2>
         <p className="primary-color text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
         <div className="primary-color xl:text-base sm:text-sm">

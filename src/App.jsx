@@ -8,6 +8,8 @@ import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners"
 import { Route, Routes } from 'react-router-dom';
 import BlogDisplay from './components/blogpages/BlogDisplay';
+import Navbar from './components/Navbar';
+// import RetreatArticle from './components/blogpages/RetreatArticle';
 
 const App = () => {
 
@@ -44,12 +46,15 @@ const App = () => {
       />
       ):(
         <>
+        <Navbar/>
         <Routes>
-          <Route index element={<Heart/>}/>
+          <Route index path='/'  element={<Heart/>}/>
           <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
           <Route path='/Aboutus' element={<AboutUs/>}/>
           <Route path='/AllProgram' element={<ProgramsAll/>}/>
           <Route path='/BlogDisplay' element={<BlogDisplay/>} />
+          {/* blogarticles */}
+          <Route path='/BlogsList/:id' element={<BlogDetails/>}/>
         </Routes> 
         </>
       )

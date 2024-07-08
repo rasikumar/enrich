@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { behavioral, compliance, corporate, onetraining } from '../assets';
+import { behavioral, compliance, corporate, onetraining } from '../../assets';
 
 // Arrow Icon Component
 // eslint-disable-next-line react/prop-types

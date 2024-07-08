@@ -1,7 +1,7 @@
-import Navbar from "./Navbar"
+// import Navbar from "./Navbar"
 import Hero from "./Hero"
 import Introduction from './Introduction'
-import Services from "./Services"
+import Services from "./allservice/Services"
 import Program from "./allprogram/Program"
 import Testimonials from "./Testimonials"
 import Blog from "../components/blogpages/Blog"
@@ -12,7 +12,7 @@ import ScrollAlert from "./ScrollMsg"
 const Heart = () => {
   return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <Hero/>
             <Introduction/>
             <Services/>
