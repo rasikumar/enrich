@@ -2,8 +2,10 @@ import  { useState } from 'react';
 import { motion } from "framer-motion";
 import { IoArrowBackCircle } from "react-icons/io5";
 
-import { Communicationmastery, leadershipMastery, strategic } from "../../assets";
+import { brainOptimization, crisisManagement, empoweringHabit, facultyDevelopment, globalWisdom, goalSetting, leadershipMastery, posh, strategic, stress, timeManagement, womenEmpowerment } from "../../assets";
 import { useNavigate } from 'react-router-dom';
+
+
 
 const ProgramDisplay = () => {
   const [hovered, setHovered] = useState(null);
@@ -23,52 +25,52 @@ const ProgramDisplay = () => {
       id: 3,
       title: 'Faculty Development Program:',
       content: 'Equip educators with advanced teaching methods, counseling skills, and techniques for managing work-life balance to enhance their effectiveness and well-being.',
-      img: Communicationmastery
+      img: facultyDevelopment
     },{
       id: 4,
       title: 'Goal Setting and Planning:',
       content: 'Develop strategic goal-setting abilities and effective planning techniques for achieving personal and professional goals.',
-      img: Communicationmastery
+      img: goalSetting
     },{
       id: 5,
       title: 'POSH Awareness',
       content: 'Ensure workplace respect and compliance through knowledge and skills for preventing sexual harassment.',
-      img: Communicationmastery
+      img: posh
     },{
       id: 6,
       title: 'Time Management',
       content: 'Optimize productivity and work-life balance with practical strategies for task prioritization and goal achievement.',
-      img: Communicationmastery
+      img: timeManagement
     },{
       id: 7,
       title: 'Stress and Anxiety Management',
       content: 'Learn effective techniques to manage stress and anxiety for improved mental health and well-being.',
-      img: Communicationmastery
+      img: stress
     },{
       id: 8,
       title: 'Women Empowerment',
       content: 'Empower girl students with skills and strategies for personal growth, self-confidence, and career success.',
-      img: Communicationmastery
+      img: womenEmpowerment
     },{
       id: 9,
       title: 'Empowering Habit Formation',
       content: 'Cultivate positive habits to support personal growth and success with practical habit-building strategies.',
-      img: Communicationmastery
+      img: empoweringHabit
     },{
       id: 10,
       title: 'Global Wisdom for Self-Improvement',
       content: 'Explore diverse cultural insights, including Japanese techniques, for enhancing personal and workplace efficiency.',
-      img: Communicationmastery
+      img: globalWisdom
     },{
       id: 11,
       title: 'Mid-Life/Mid-Career Identity Crisis Management',
       content: 'Navigate and overcome mid-life or mid-career challenges with confidence. Gain insights and strategies to redefine your goals, embrace change, and achieve personal fulfillment.',
-      img: Communicationmastery
+      img: crisisManagement
     },{
       id: 12,
       title: 'Brain Optimization',
       content: 'Enhance cognitive function and mental performance. Learn techniques for improving memory, focus, and overall brain health to boost personal and professional productivity.',
-      img: Communicationmastery
+      img: brainOptimization
     },
     // Repeat for other programs...
   ];

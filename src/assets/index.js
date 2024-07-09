@@ -22,12 +22,23 @@ import Emotionalintelligence from './programs/emotionalintelligence.jpg'
 import launchpad from './programs/launchpad.jpg'
 import leadershipMastery from './programs/leadershipmastery.jpg'
 import strategic from './programs/strategic.jpg'
+import brainOptimization from './programs/brainOptimization.jpg'
+import crisisManagement from './programs/crisisManagement.jpg'
+import empoweringHabit from './programs/empoweringHabit.jpg'
+import facultyDevelopment from './programs/facultyDevelopment.jpg'
+import globalWisdom from './programs/globalWisdom.jpg'
+import goalSetting from './programs/goalSetting.jpg'
+import posh from './programs/posh.jpg'
+import stress from './programs/stress.jpg'
+import timeManagement from './programs/timeManagement.jpg'
+import womenEmpowerment from './programs/womenEmpowerment.jpg'
 
 // serviceimages
 import behavioral from './services/behavioral.png'
 import compliance from './services/compliance.png'
 import corporate from './services/corporate.png'
 import onetraining from './services/onetraining.png'
+
 // adjust image
 import aboutimage from './about.png'
 import intro from './intro.jpg'
@@ -59,6 +70,16 @@ export{
     launchpad,
     leadershipMastery,
     strategic,
+    brainOptimization,
+    crisisManagement,
+    empoweringHabit,
+    facultyDevelopment,
+    globalWisdom,
+    goalSetting,
+    posh,
+    stress,
+    timeManagement,
+    womenEmpowerment,
     
     // service images
     behavioral,
