@@ -53,11 +53,11 @@ const App = () => {
             <ScrollTop />
             <Routes location={location} key={location.pathname}>
               <Route index path='/' element={<Heart />} />
-              <Route path='/BlogsList/:id' element={<BlogDetails />} />
               <Route path='/Aboutus' element={<AboutUs />} />
               <Route path='/ProgramDisplay' element={<ProgramDisplay />} />
-              <Route path='/BlogDisplay' element={<BlogDisplay />} />
               {/* blogarticles */}
+              <Route path='/BlogsList/:id' element={<BlogDetails />} />
+              <Route path='/BlogDisplay' element={<BlogDisplay />} />
               <Route path='/BlogsList/:id' element={<BlogDetails />} />
               {/* service */}
               <Route path="/ServiceList/:id" element={<ServiceDetails/>}/>
