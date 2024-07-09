@@ -21,13 +21,13 @@ const AboutUs = () => {
           className="text-4xl font-bold text-black leading-tight mb-4">
             Welcome to Enrich
           </motion.h2>
-          <p className="text-gray-600 text-sm mb-4 text-justify">
+          <p className="text-gray-600 xl:text-lg text-sm mb-4 text-justify">
             A division of Evvi Solutions dedicated to delivering transformative training and skill development services. Our vision is to empower individuals and organizations by focusing on essential behavioral skills.
           </p>
-          <p className="text-gray-600 text-sm mb-4 text-justify">
+          <p className="text-gray-600 xl:text-lg text-sm mb-4 text-justify">
             At Enrich, we understand the profound impact of mastering behavioral skills on personal and professional growth. Our expert-led programs enhance communication, leadership, teamwork, emotional intelligence, and more, catering to businesses, professionals, students, and individuals seeking growth.
           </p>
-          <p className="text-gray-600 text-sm mb-4 text-justify">
+          <p className="text-gray-600 xl:text-lg text-sm mb-4 text-justify">
             Our commitment to this field drives us to provide comprehensive training solutions that make a positive difference. Explore more about Evvi Solutions and our team at 
             <a href="https://evvisolutions.com" className="text-blue-500 after:content-['_↗'] ... ml-1" target='_blank'>
               evvisolutions.com

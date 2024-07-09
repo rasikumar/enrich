@@ -13,7 +13,7 @@ const Introduction = () => {
           <h2 className="text-4xl font-bold text-gray-800 leading-tight">
             Welcome to Enrich 
           </h2>
-          <p className="mt-2 text-gray-600 text-sm flex flex-col gap-3 text-justify ">
+          <p className="mt-2 text-gray-600 xl:text-lg text-sm flex flex-col gap-3 text-justify ">
             <div>
             At Enrich, we specialize in corporate training, behavioral skills, and soft skills development. Our transformative programs elevate team performance, enhance individual capabilities, and ensure compliance.
             </div>

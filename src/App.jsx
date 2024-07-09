@@ -60,8 +60,8 @@ const App = () => {
               {/* blogarticles */}
               <Route path='/BlogsList/:id' element={<BlogDetails />} />
               {/* service */}
-              <Route path="./ServiceList/:id" element={<ServiceDetails/>}/>
-            </Routes>
+              <Route path="/ServiceList/:id" element={<ServiceDetails/>}/>
+            </Routes> 
           </AnimatePresence>
         </>
       )} 

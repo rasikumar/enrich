@@ -79,7 +79,7 @@ const Testimonials = () => {
         <div className="text-content flex flex-col gap-4">
           <h4 className="text-black text-4xl font-semibold">Testimonials</h4>
           <h1 className="xl:text-2xl md:text-lg sm:text-sm w-full font-[600]">Echoes of Success: Hear from Our Clients</h1>
-          <p className='xl:text-sm text-sm text-gray-500 max-w-2xl mx-auto'>Hear from those who have transformed their skills and lives with Enrich. Our client&apos;s success stories speak volumes about the impact of our training programs.</p>
+          <p className=' xl:text-lg text-sm text-gray-500 max-w-2xl mx-auto'>Hear from those who have transformed their skills and lives with Enrich. Our client&apos;s success stories speak volumes about the impact of our training programs.</p>
           <span className="bg-yellow-600 rounded-full w-6 h-6  mt-4 flex text-start"></span>
         </div>
         <div className="card flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-16">

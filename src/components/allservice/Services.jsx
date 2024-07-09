@@ -27,7 +27,7 @@ const ArrowIcon = ({ isOpen }) => (
 );
 
 // eslint-disable-next-line react/prop-types
-const Services = ({ question, image, answer, title, btn, index, currentIndex, setCurrentIndex }) => {
+const Services = ({ question, image, answer, title,link, btn, index, currentIndex, setCurrentIndex }) => {
   const answerRef = useRef(null);
   const itemRef = useRef(null);
   const isOpen = currentIndex === index;
@@ -73,10 +73,10 @@ const Services = ({ question, image, answer, title, btn, index, currentIndex, se
       </button>
       <div ref={answerRef} className={`overflow-hidden transition-all duration-300`}>
         {isOpen && (
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col gap-3 ">
             <img src={image} width={200} loading="lazy" alt={title} className="mb-4 mt-2 rounded-md m-auto" />
-            <p className="mt-2 text-sm text-gray-700">{answer}</p>
-            <Link to={`./ServiceList/${Services}`} className="text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3">{btn}</Link >
+            <p className="mt-2 text-sm xl:text-lg text-gray-700">{answer}</p>
+            <Link to={link} className="text-black xl:text-lg text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3">{btn}</Link >
           </div>
         )}
       </div>
@@ -124,7 +124,7 @@ const ServiceList = () => {
         <div className="flex flex-col gap-4 px-10">
           <h2 className="text-black text-4xl font-semibold text-center">Services</h2>
           <h3 className="text-center xl:text-2xl text-lg w-full font-[600]">Discover Your Journey: Tailored for You</h3>
-          <p className="text-sm text-gray-500 md:w-[80%] m-auto">We recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
+          <p className="text-sm xl:text-lg text-gray-500 md:w-[80%] m-auto">We recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
         </div>
 
         {list.map((item, index) => (
@@ -133,6 +133,7 @@ const ServiceList = () => {
             index={index}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
+            link={`/ServiceList/${item.id}`}
             {...item}
           />
         ))}
