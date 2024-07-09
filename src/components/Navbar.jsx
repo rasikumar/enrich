@@ -80,7 +80,7 @@ const Navbar = () => {
           <li><Link to={'/ProgramDisplay'} className='hover:text-yellow-600 transition delay-75' onClick={closeMenu}>Program</Link></li>
           <li><AnchorLink href='#testimonials'><Link to={'/'}  className='hover:text-yellow-600 transition delay-75 md:text-sm xl:text-lg' onClick={closeMenu}>Testimonials</Link></AnchorLink></li>
           <li><Link to={'/BlogDisplay'} className='hover:text-yellow-600 transition delay-75 border-[1px] py-[0.10rem] px-[1.5rem] rounded-sm border-yellow-700' onClick={closeMenu}>Blogs</Link></li>
-          <li><AnchorLink href='#getIn'><Link to={'/'} className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm xl:text-lg'>Get In Touch</Link></AnchorLink></li>
+          <li><AnchorLink href='#getIn' onClick={closeMenu} ><Link to={'/'} className='delay-75 px-4 py-1 rounded text-slate-100 bg-yellow-600 hover:bg-slate-100 hover:text-yellow-600 md:text-sm xl:text-lg'>Get In Touch</Link></AnchorLink></li>
         </ul>
       </div>
     </div>
