@@ -35,7 +35,7 @@ const articles = [
     title: "Self-Awareness",
     content: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.",
     image: awarnessImage,
-  },
+  }, 
 ];
 
 // eslint-disable-next-line react/prop-types

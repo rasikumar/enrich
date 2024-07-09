@@ -20,13 +20,15 @@ import personaleffective from './programs/personaleffective.jpg'
 import Communicationmastery from './programs/communicationmastery.jpg'
 import Emotionalintelligence from './programs/emotionalintelligence.jpg'
 import launchpad from './programs/launchpad.jpg'
+import leadershipMastery from './programs/leadershipmastery.jpg'
+import strategic from './programs/strategic.jpg'
 
 // serviceimages
 import behavioral from './services/behavioral.png'
 import compliance from './services/compliance.png'
 import corporate from './services/corporate.png'
 import onetraining from './services/onetraining.png'
- 
+// adjust image
 import aboutimage from './about.png'
 import intro from './intro.jpg'
 import logo from './logo.png'
@@ -35,6 +37,7 @@ import logo from './logo.png'
 import testimg from './hero.jpg'
 
 export{
+    // blog images
     awarnessImagefull,
     listeningImagefull,
     retreatImagefull,
@@ -44,18 +47,29 @@ export{
     retreatImage,
     valuableImage,
     blog,
+
+    // hero images
     heroBg,
     heroimg,
+
+    // program images
     personaleffective,
     Communicationmastery,
     Emotionalintelligence,
     launchpad,
+    leadershipMastery,
+    strategic,
+    
+    // service images
     behavioral,
     compliance,
     corporate,
     onetraining,
+
+    // adjust images
     aboutimage,
     intro,
     logo,
+
     testimg
 }

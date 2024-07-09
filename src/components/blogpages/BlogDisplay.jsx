@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { awarnessImagefull, listeningImagefull, retreatImagefull, valuableImagefull } from "../../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IoArrowBackCircle } from "react-icons/io5";
+
 
 const BlogDisplay = () => {
   const articles = [
@@ -34,14 +36,16 @@ const BlogDisplay = () => {
     },
     // Add more blog items as needed
   ];
-
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <h1 className="bg-yellow-500 p-10 text-center font-semibold text-3xl">Blogs</h1>
+      <h1 className="bg-yellow-500 relative p-10 text-center font-semibold text-3xl">
+      <IoArrowBackCircle className='text-3xl absolute bottom-11 left-0 ' onClick={() => navigate(-1)} />
+      Blogs</h1>
       <div className="lg:w-[70%] grid grid-cols-1 sm:grid-cols-2 gap-6 m-auto h-full px-4 py-8 ">
         {articles.map((article, index) => (
           <motion.div 

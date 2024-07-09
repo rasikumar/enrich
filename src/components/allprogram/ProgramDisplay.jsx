@@ -1,6 +1,9 @@
 import  { useState } from 'react';
 import { motion } from "framer-motion";
-import { Communicationmastery } from "../../assets";
+import { IoArrowBackCircle } from "react-icons/io5";
+
+import { Communicationmastery, leadershipMastery, strategic } from "../../assets";
+import { useNavigate } from 'react-router-dom';
 
 const ProgramDisplay = () => {
   const [hovered, setHovered] = useState(null);
@@ -9,13 +12,13 @@ const ProgramDisplay = () => {
       id: 1,
       title: 'Executive Leadership Mastery',
       content: 'Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.',
-      img: Communicationmastery
+      img: leadershipMastery
     },
     {
       id: 2,
       title: 'Strategic Thinking and Toolbox',
       content: 'Customized for decision makers and problem solvers eager to sharpen their strategic thinking abilities and drive organizational success.',
-      img: Communicationmastery
+      img: strategic
     },{
       id: 3,
       title: 'Faculty Development Program:',
@@ -71,20 +74,23 @@ const ProgramDisplay = () => {
   ];
 
   
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <h1 className="bg-yellow-500 p-10 text-center font-semibold text-3xl">
+
+      <h1 className="bg-yellow-500 relative p-10 text-center font-semibold text-3xl">
+      <IoArrowBackCircle className='text-3xl absolute bottom-11 left-0 ' onClick={() => navigate(-1)} />
         Our Programs
       </h1>
       <div className="px-4 py-8 grid w-[90%] md:w-[70%] m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {programs.map((program) => (
           <motion.div
             key={program.id}
-            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'scale-150 z-50' : 'blur-[2px]'}`}
+            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'md:scale-150 md:z-50' : 'blur-[2px]'}`}
             onMouseEnter={() => setHovered(program.id)}
             onMouseLeave={() => setHovered(null)}
           >
