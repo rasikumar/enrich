@@ -1,7 +1,9 @@
+import  { useState } from 'react';
 import { motion } from "framer-motion";
 import { Communicationmastery } from "../../assets";
 
 const ProgramDisplay = () => {
+  const [hovered, setHovered] = useState(null);
   const programs = [
     {
       id: 1,
@@ -74,16 +76,17 @@ const ProgramDisplay = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      
     >
       <h1 className="bg-yellow-500 p-10 text-center font-semibold text-3xl">
         Our Programs
       </h1>
-      <div className="px-4 py-8 grid w-[70%] m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="px-4 py-8 grid w-[90%] md:w-[70%] m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {programs.map((program) => (
           <motion.div
             key={program.id}
-            className="relative overflow-hidden rounded-lg shadow-lg"
+            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'scale-150 z-50' : 'blur-[2px]'}`}
+            onMouseEnter={() => setHovered(program.id)}
+            onMouseLeave={() => setHovered(null)}
           >
             <motion.img
               src={program.img}
@@ -94,8 +97,8 @@ const ProgramDisplay = () => {
             <motion.div
               className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300"
             >
-              <h2 className="text-2xl text-white mb-2 leading-[26px] font-bold">{program.title}</h2>
-              <p className="text-gray-300 leading-[20px] font-medium">{program.content}</p>
+              <h2 className="text-xl md:text-2xl text-white mb-2 leading-[26px] font-bold">{program.title}</h2>
+              <p className="text-gray-300 text-sm md:text-base leading-[20px] font-medium">{program.content}</p>
             </motion.div>
           </motion.div>
         ))}
