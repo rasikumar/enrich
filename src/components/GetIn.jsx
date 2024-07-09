@@ -33,19 +33,19 @@ const GetIn = () => {
 
   return (
     <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
-      <div className="md:w-[30%] p-4  flex flex-col gap-5 mb-10 ">
-        <h2 className="heading primary-color">Get in touch</h2>
-        <p className="primary-color text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
-        <div className="primary-color xl:text-base sm:text-sm">
+      <div className="md:w-[30%] p-4 flex flex-col gap-5 mb-10 ">
+        <h2 className="heading ">Get in touch</h2>
+        <p className="primary-color xl:text-lg text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
+        <div className="primary-color xl:text-lg sm:text-sm">
           <h3 className="highlight-color mb-3">Our Office Location</h3>
-          <p>Evvi Solutions Private Limited</p>
-          <p>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
-          <p>Thiagarajar College of Engineering Campus,</p>
-          <p>Thiruparankundram, Madurai -625015</p>
+          <p className='xl:text-lg'>Evvi Solutions Private Limited</p>
+          <p className='xl:text-lg'>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
+          <p className='xl:text-lg'>Thiagarajar College of Engineering Campus,</p>
+          <p className='xl:text-lg'>Thiruparankundram, Madurai -625015</p>
         </div>
         <div className="primary-color">
           <h3 className="highlight-color mb-3">Email</h3>
-          <p>info@evvisolutions.com</p>
+          <p className='xl:text-lg'>info@evvisolutions.com</p>
         </div>
       </div>
 

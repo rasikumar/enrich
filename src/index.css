@@ -8,14 +8,16 @@
         @apply py-2 px-5 bg-yellow-600 transition delay-75 text-white font-semibold rounded-md shadow-md hover:bg-white hover:text-yellow-600;
     }
     .primary-color{
-        @apply text-gray-700
+        @apply text-black 
     }
     .highlight-color{
         @apply text-black font-medium
     }
     .heading{
-        @apply text-4xl font-bold text-gray-800 leading-tight
+        @apply text-4xl font-bold text-black leading-tight
     }
+    /* service */
+    
 }
 
 * {

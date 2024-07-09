@@ -5,11 +5,11 @@ import Individuals from "./Individuals";
 
 const services = [
     {
-        id:1,
+        id:2,
         component:<Individuals/>
     },
     {
-        id:2,
+        id:1,
         component:<Corporates/>
     },
     {
