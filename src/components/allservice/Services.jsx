@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { behavioral, compliance, corporate, onetraining } from '../../assets';
+import { Link } from 'react-router-dom';
 
 // Arrow Icon Component
 // eslint-disable-next-line react/prop-types
@@ -75,7 +76,7 @@ const Services = ({ question, image, answer, title, btn, index, currentIndex, se
           <div className="mt-4">
             <img src={image} width={200} loading="lazy" alt={title} className="mb-4 mt-2 rounded-md m-auto" />
             <p className="mt-2 text-sm text-gray-700">{answer}</p>
-            <p className="text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3">{btn}</p>
+            <Link to={`./ServiceList/${Services}`} className="text-black text-sm font-bold transition delay-100 hover:text-yellow-700 hover:font-bold pt-3">{btn}</Link >
           </div>
         )}
       </div>
@@ -88,24 +89,28 @@ const ServiceList = () => {
 
   const list = [
     {
+      id:1,
       question: "Corporate Training",
       answer: "Customized programs designed to enhance essential soft skills for any work environment. We serve businesses of all sizes and industries, providing your team with tools for effective communication, leadership, teamwork, and more...",
       image: corporate,
       btn: 'Learn More'
     },
     {
+      id:2,
       question: "Behavioral Skills for Individuals",
       answer: "Empower yourself with specialized behavioral training. Ideal for professionals, fresh graduates, and anyone aiming for personal growth. Develop crucial skills like emotional intelligence, communication, and work-life balance.",
       image: behavioral,
       btn: 'Explore Programs'
     },
     {
+      id:3,
       question: "Compliance Trainings",
       answer: "Stay compliant and ensure a safe workplace with comprehensive compliance training. Offerings include Prevention of Sexual Harassment (POSH) training, employee sensitization, and more, ensuring your organization meets all standards.",
       image: compliance,
       btn: 'View Services'
     },
     {
+      id:4,
       question: "1:1 Coaching",
       answer: "Achieve excellence with personalized coaching sessions. Whether you're looking to transform behavior, optimize brain function, or focus on self-improvement, our expert coaches are here to guide you.",
       image: onetraining,
@@ -121,6 +126,7 @@ const ServiceList = () => {
           <h3 className="text-center xl:text-2xl text-lg w-full font-[600]">Discover Your Journey: Tailored for You</h3>
           <p className="text-sm text-gray-500 md:w-[80%] m-auto">We recognize that growth is personal, whether you&apos;re an individual seeking to refine your skills or a company looking to empower your workforce. Our Behavioral Skills Training programs and coaching services are thoughtfully categorized to cater to your unique needs.</p>
         </div>
+
         {list.map((item, index) => (
           <Services
             key={index}

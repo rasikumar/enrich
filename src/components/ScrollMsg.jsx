@@ -13,7 +13,6 @@ const ScrollMsg = () => {
                 Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
                 Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
                 Want to take our Psychometric Webinar! <a href="https://survey.evvisolutions.com/webinar/" className="text-yellow-600 mr-96">Click me</a>
-                {/* Repeated content to create the continuous scroll effect */}
             </div>
         </div>
     );

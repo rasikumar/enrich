@@ -29,7 +29,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 520) {
         setScroll(true);
       } else {
         setScroll(false);

@@ -11,6 +11,7 @@ import AboutUs from './components/AboutUs';
 import BlogDisplay from './components/blogpages/BlogDisplay';
 import Navbar from './components/Navbar';
 import ScrollTop from './components/ScrollTop';
+import ServiceDetails from "./components/allservice/ServiceDetails";
 
 const App = () => {
   const location = useLocation();
@@ -58,10 +59,12 @@ const App = () => {
               <Route path='/BlogDisplay' element={<BlogDisplay />} />
               {/* blogarticles */}
               <Route path='/BlogsList/:id' element={<BlogDetails />} />
+              {/* service */}
+              <Route path="./ServiceList/:id" element={<ServiceDetails/>}/>
             </Routes>
           </AnimatePresence>
         </>
-      )}
+      )} 
     </div>
   );
 };

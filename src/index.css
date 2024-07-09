@@ -49,6 +49,9 @@
   .mr-96 {
     margin-right: 24rem;
   }
+  .animate-marquee:hover{
+    animation-play-state: paused;
+  }
   /* index.css or specific component styles */
 
 .bg-gray-100 {
