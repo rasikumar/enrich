@@ -106,7 +106,7 @@ const ProgramDisplay = () => {
               className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300"
             >
               <h2 className="text-xl md:text-2xl text-white mb-2 leading-[26px] font-bold">{program.title}</h2>
-              <p className="text-gray-300 text-sm md:text-base leading-[20px] font-medium">{program.content}</p>
+              <div className="text-gray-300 text-sm md:text-base md:leading-tight font-medium">{program.content}</div>
             </motion.div>
           </motion.div>
         ))}
