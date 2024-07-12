@@ -1,96 +1,127 @@
-import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { IoIosArrowForward } from "react-icons/io";
-import { awarnessImage, blog, listeningImage, retreatImage, valuableImage } from '../../assets';
+// import { useEffect, useRef, useState } from 'react';
+// import {  useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { gsap } from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import { IoIosArrowForward } from "react-icons/io";
+import { awarnessImage,  listeningImage, retreatImage, valuableImage } from '../../assets';
+// import { awarnessImage,  listeningImage, retreatImage, valuableImage } from '../../assets';
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-const articles = [
+// const articles = [
+  // {
+  //   id: 1,
+  //   image: blog,
+  // },
+  // 
+  // {
+  //   title: "Elevate Your Cooking Game: Must-Have Kitchenware for Every Food Enthusiast",
+  //   description: "Unlock the secrets to finding the perfect symbol of everlasting love with our informative article where we guide you through our lens.",
+  //   author: "Jane Thompson",
+  //   date: "May 10, 2023",
+  //   category: "TIPS",
+  //   imageUrl: "https://linktoimage.com/image1.jpg"
+  // },
+  // {
+  //   title: "Kitchen Mastery Starts Here: Discover the Ultimate Kitchenware",
+  //   description: "Discover the essential maintenance and cleaning techniques to keep your kitchen sparkling.",
+  //   author: "Michael Davis",
+  //   date: "February 5, 2023",
+  //   category: "GUIDE",
+  //   imageUrl: "https://linktoimage.com/image2.jpg"
+  // },
+// ];
+
+
+import  { useState } from 'react';
+
+const updates = [
   {
-    id: 1,
-    image: blog,
-  },
-  {
-    id: 1,
-    title: "Retreat",
-    content: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.",
-    image: retreatImage,
-  },
-  {
-    id: 2,
-    title: "Valuable",
-    content: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.",
-    image: valuableImage,
-  },
-  {
-    id: 3,
-    title: "Active listening",
-    content: "Imagine this: you're in a pivotal team meeting. Your colleagues are sharing ideas, thoughts, and concerns. You're not just hearing their words; you're understanding their emotions, needs, and motivations.",
-    image: listeningImage,
-  },
-  {
-    id: 4,
-    title: "Self-Awareness",
-    content: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.",
-    image: awarnessImage,
-  }, 
+      id: 1,
+      title: "Retreat",
+      description: "A retreat is a process of temporary break from one's usual life or routine to seek comfort, reflect on oneself. It often involves secluded environments, away from distractions, that promote the development of new skills.",
+      imageUrl: retreatImage,
+      author:'Shanthi',
+      date: "February 5, 2023",
+    },
+    {
+      id: 2,
+      title: "Valuable",
+      description: "Valuable is the ultimate word which indicates that the Something that has worth is valuable. Often, valuable things are worth money, but a spy can provide valuable information that might save lives.",
+      imageUrl: valuableImage,
+      author:'Shanthi',
+      date: "February 5, 2023",
+    },
+    {
+      id: 3,
+      title: "Active listening",
+      description: "Imagine this: you're in a pivotal team meeting. Your colleagues are sharing ideas, thoughts, and concerns. You're not just hearing their words; you're understanding their emotions, needs, and motivations.",
+      imageUrl: listeningImage,
+      author:'Shanthi',
+      date: "February 5, 2023",
+    },
+    {
+      id: 4,
+      title: "Self-Awareness",
+      description: "Why Self-Awareness is Our Superpower: Imagine this: You're in a meeting, leading your team. The room buzzes with ideas, and emotions run high. In that moment, self-awareness is your compass.",
+      imageUrl: awarnessImage,
+      author:'Shanthi',
+      date: "February 5, 2023",
+    }, 
 ];
 
 // eslint-disable-next-line react/prop-types
-const Card = ({ imageSrc, title, description, large, link }) => {
+const Card = ({ title, description, author, date, category, imageUrl }) => {
   return (
-    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative  ${large ? 'md:col-span-2' : 'md:col-span-1'}`}>
-      <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'md:h-[20rem] lg:h-[25rem]' : ''}`} />
-      <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''} ${large ? '' : 'xl:h-[40%]'}`}>
-        <h3 className={`xl:text-xl text-base font-bold`}>{title}</h3>
-        <p className={`text-gray-600 xl:line-clamp-3 line-clamp-2 text-xs xl:text-base text-justify `}>{description}</p>
-        <Link to={link} className={`btn-primary xl:text-sm flex items-center justify-center mt-2 ${large ? 'hidden' : ''}`}>Read more <IoIosArrowForward/></Link>
+    <div className="max-w-4xl gap-2 w-full flex border-r-yellow-600 border rounded overflow-hidden m-2">
+      <img className="w-1/2 object-cover" src={imageUrl} alt={title} />
+      <div className="w-1/2 p-4">
+        <div className="text-xs text-red-600 font-bold mb-2">{category}</div>
+        <div className="font-bold text-xl mb-2">{title}</div>
+        <p className="text-gray-700 text-base mb-4">{description}</p>
+        <div className="text-gray-600 text-sm">
+          <span className="block">{author}</span>
+          <span className="block">{date}</span>
+        </div>
       </div>
     </div>
   );
 };
 
-const BlogsList = () => {
-  const articlesRef = useRef([]);
+const App = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    articlesRef.current.forEach((article) => {
-      gsap.fromTo(article, {
-        opacity: 0,
-        y: 50,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: article,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
-    });
-  }, []);
+  const next = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 2) % updates.length);
+  };
+
+  const prev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 2 + updates.length) % updates.length);
+  };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {articles.map((article, index) => (
-          <Card
-            key={index}
-            imageSrc={article.image}
-            title={article.title}
-            description={article.content}
-            link={`/BlogsList/${article.id}`}
-            large={index === 0} // First card is large
-            ref={el => articlesRef.current[index] = el}
-          />
-        ))}
+    <div className="container mx-auto py-8">
+      <div className="flex items-center">
+        {/* <div>
+        <button onClick={prev} className="bg-gray-300 p-2 rounded-full mr-4">
+          Prev
+        </button>
+        <button onClick={next} className="bg-gray-300 p-2 rounded-full ml-4">
+          Next
+        </button>
+        </div> */}
+        
+        <div className="flex overflow-hidden">
+          {updates.slice(currentIndex, currentIndex + 2).map((update, index) => (
+            <Card key={index} {...update} />
+          ))}
+        </div>
       </div>
+      
     </div>
   );
 };
 
-export default BlogsList;
+export default App;
+
