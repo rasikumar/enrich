@@ -2,10 +2,8 @@ import  { useState } from 'react';
 import { motion } from "framer-motion";
 import { IoArrowBackCircle } from "react-icons/io5";
 
-import { brainOptimization, crisisManagement, empoweringHabit, facultyDevelopment, globalWisdom, goalSetting, leadershipMastery, posh, strategic, stress, timeManagement, womenEmpowerment } from "../../assets";
+import { brainOptimization, Communicationmastery, crisisManagement, Emotionalintelligence, empoweringHabit, facultyDevelopment, globalWisdom, goalSetting, launchpad, leadershipMastery, personaleffective, posh, strategic, stress, timeManagement, womenEmpowerment } from "../../assets";
 import { useNavigate } from 'react-router-dom';
-
-
 
 const ProgramDisplay = () => {
   const [hovered, setHovered] = useState(null);
@@ -72,6 +70,33 @@ const ProgramDisplay = () => {
       content: 'Enhance cognitive function and mental performance. Learn techniques for improving memory, focus, and overall brain health to boost personal and professional productivity.',
       img: brainOptimization
     },
+    {
+      id: 13,
+      title: 'Personal Effectiveness Power Pack',
+      content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
+      img: personaleffective,
+    },
+    {
+      id:14,
+      title: 'Communication Mastery Suite',
+      content: "Designed for individuals aiming to improve their communication skills and cultivate meaningful connections in both personal and professional settings.",
+      // icon: arrow,
+      img: Communicationmastery,
+    },
+    {
+      id: 15,
+      title: 'Emotional Intelligence Essentials',
+      content: "Geared towards individuals looking to develop their emotional intelligence for greater self-awareness, resilience, and success in all areas of life.",
+      // icon: arrow,
+      img: Emotionalintelligence,
+    },
+    {
+      id: 16,
+      title: 'Launchpad to Corporate Success',
+      content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
+      // icon: arrow,
+      img: launchpad,
+    }
     // Repeat for other programs...
   ];
 
@@ -88,11 +113,11 @@ const ProgramDisplay = () => {
       <IoArrowBackCircle className='text-3xl absolute bottom-11 left-0 ' onClick={() => navigate(-1)} />
         Our Programs
       </h1>
-      <div className="px-4 py-8 grid w-[90%] md:w-[70%] m-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="px-4 py-8 grid w-[90%] m-auto grid-cols-1 md:grid-cols-4 gap-8">
         {programs.map((program) => (
           <motion.div
             key={program.id}
-            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'md:scale-150 md:z-50' : 'blur-[2px]'}`}
+            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'md:scale-125 md:z-50' : 'blur-[2px]'}`}
             onMouseEnter={() => setHovered(program.id)}
             onMouseLeave={() => setHovered(null)}
           >
@@ -105,8 +130,8 @@ const ProgramDisplay = () => {
             <motion.div
               className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300"
             >
-              <h2 className="text-xl md:text-2xl text-white mb-2 leading-[26px] font-bold">{program.title}</h2>
-              <div className="text-gray-300 text-sm md:text-base md:leading-tight font-medium">{program.content}</div>
+              <h2 className="text-xl md:text-base text-white mb-2 leading-[20px] font-bold">{program.title}</h2>
+              <div className="text-gray-300 md:text-xs  text-sm md:leading-tight font-medium">{program.content}</div>
             </motion.div>
           </motion.div>
         ))}

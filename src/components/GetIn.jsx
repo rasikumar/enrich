@@ -32,30 +32,30 @@ const GetIn = () => {
   };
 
   return (
-    <div id="getIn" className="bg-gray-200 justify-evenly p-10 md:flex rounded-lg shadow-md">
+    <div id="getIn" className="bg-gray-300 justify-center gap-60 xl:p-10 md:py-10 md:px-5 md:flex  shadow-md">
       <div className="md:w-[30%] p-4 flex flex-col gap-5 mb-10 ">
-        <h2 className="heading ">Get in touch</h2>
-        <p className="primary-color xl:text-lg text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
+        <h2 className="heading md:text-3xl">Get in touch</h2>
+        <p className=" md:text-base xl:text-lg text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
         <div className="primary-color xl:text-lg sm:text-sm">
-          <h3 className="highlight-color mb-3">Our Office Location</h3>
-          <p className='xl:text-lg'>Evvi Solutions Private Limited</p>
-          <p className='xl:text-lg'>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
-          <p className='xl:text-lg'>Thiagarajar College of Engineering Campus,</p>
-          <p className='xl:text-lg'>Thiruparankundram, Madurai -625015</p>
+          <h3 className="highlight-color text-lg mb-3">Our Office Location</h3>
+          <p className='xl:text-lg md:text-sm '>Evvi Solutions Private Limited</p>
+          <p className='xl:text-lg md:text-sm '>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
+          <p className='xl:text-lg md:text-sm '>Thiagarajar College of Engineering Campus,</p>
+          <p className='xl:text-lg md:text-sm '>Thiruparankundram, Madurai -625015</p>
         </div>
         <div className="primary-color">
-          <h3 className="highlight-color mb-3">Email</h3>
-          <p className='xl:text-lg'>info@evvisolutions.com</p>
+          <h3 className="highlight-color mb-3 text-lg">Email</h3>
+          <p className='xl:text-lg md:text-sm '>info@evvisolutions.com</p>
         </div>
       </div>
 
-      <form className="space-y-4 xl:w-[35%]" onSubmit={handleSubmit}>
+      <form className="space-y-4 md:w-[40%] xl:w-[35%]" onSubmit={handleSubmit}>
         <div>
           <label className="block xl:text-lg text-sm font-medium text-gray-700">Name</label>
           <input
             type="text"
             name="name"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 xl:text-lg sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
             placeholder="Enter your Name"
             value={formData.name}
             onChange={handleChange}
@@ -66,7 +66,7 @@ const GetIn = () => {
           <input
             type="email"
             name="email"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 xl:text-lg sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
             placeholder="Enter your Email"
             value={formData.email}
             onChange={handleChange}
@@ -77,7 +77,7 @@ const GetIn = () => {
           <input
             type="number"
             name="number"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 xl:text-lg sm:text-sm"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
             placeholder="Enter your Number"
             value={formData.number}
             onChange={handleChange}
@@ -87,7 +87,7 @@ const GetIn = () => {
           <label className="block xl:text-lg text-sm font-medium text-gray-700">Who Are You</label>
           <select
             name="option"
-            className="outline-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 xl:text-lg sm:text-sm"
+            className="outline-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
             value={formData.option}
             onChange={handleChange}
           >
@@ -100,7 +100,7 @@ const GetIn = () => {
           <label className="block xl:text-lg text-sm font-medium text-gray-700">Message</label>
           <textarea
             name="message"
-            className="mt-1 block resize-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-50 xl:text-lg sm:text-sm"
+            className="mt-1 block resize-none w-full h-32 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-50 xl:text-lg sm:text-sm"
             placeholder="Enter your message"
             value={formData.message}
             onChange={handleChange}

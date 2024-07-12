@@ -41,7 +41,7 @@ const articles = [
 // eslint-disable-next-line react/prop-types
 const Card = ({ imageSrc, title, description, large, link }) => {
   return (
-    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative ${large ? 'md:col-span-2' : 'md:col-span-1'}`}>
+    <div className={`bg-white shadow-md rounded-lg overflow-hidden relative  ${large ? 'md:col-span-2' : 'md:col-span-1'}`}>
       <img src={imageSrc} alt={title} className={`w-full object-cover ${large ? 'md:h-[20rem] lg:h-[25rem]' : ''}`} />
       <div className={`absolute bottom-0 left-0 right-0 text-sm bg-white bg-opacity-90 p-4 ${large ? 'hidden md:block' : ''} ${large ? '' : 'xl:h-[40%]'}`}>
         <h3 className={`xl:text-xl text-base font-bold`}>{title}</h3>
