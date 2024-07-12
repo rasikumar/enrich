@@ -1,37 +1,6 @@
-// import { useEffect, useRef, useState } from 'react';
-// import {  useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { gsap } from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import { IoIosArrowForward } from "react-icons/io";
+import { GrFormNext , GrFormPrevious } from "react-icons/gr";
+
 import { awarnessImage,  listeningImage, retreatImage, valuableImage } from '../../assets';
-// import { awarnessImage,  listeningImage, retreatImage, valuableImage } from '../../assets';
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// const articles = [
-  // {
-  //   id: 1,
-  //   image: blog,
-  // },
-  // 
-  // {
-  //   title: "Elevate Your Cooking Game: Must-Have Kitchenware for Every Food Enthusiast",
-  //   description: "Unlock the secrets to finding the perfect symbol of everlasting love with our informative article where we guide you through our lens.",
-  //   author: "Jane Thompson",
-  //   date: "May 10, 2023",
-  //   category: "TIPS",
-  //   imageUrl: "https://linktoimage.com/image1.jpg"
-  // },
-  // {
-  //   title: "Kitchen Mastery Starts Here: Discover the Ultimate Kitchenware",
-  //   description: "Discover the essential maintenance and cleaning techniques to keep your kitchen sparkling.",
-  //   author: "Michael Davis",
-  //   date: "February 5, 2023",
-  //   category: "GUIDE",
-  //   imageUrl: "https://linktoimage.com/image2.jpg"
-  // },
-// ];
 
 
 import  { useState } from 'react';
@@ -79,7 +48,7 @@ const Card = ({ title, description, author, date, category, imageUrl }) => {
       <div className="w-1/2 p-4">
         <div className="text-xs text-red-600 font-bold mb-2">{category}</div>
         <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base mb-4">{description}</p>
+        <p className="text-gray-700 text-base mb-4 line-clamp-5">{description}</p>
         <div className="text-gray-600 text-sm">
           <span className="block">{author}</span>
           <span className="block">{date}</span>
@@ -101,24 +70,18 @@ const App = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto ">
       <div className="flex items-center">
-        {/* <div>
-        <button onClick={prev} className="bg-gray-300 p-2 rounded-full mr-4">
-          Prev
-        </button>
-        <button onClick={next} className="bg-gray-300 p-2 rounded-full ml-4">
-          Next
-        </button>
-        </div> */}
-        
         <div className="flex overflow-hidden">
           {updates.slice(currentIndex, currentIndex + 2).map((update, index) => (
             <Card key={index} {...update} />
           ))}
         </div>
       </div>
-      
+      <div className="flex items-center justify-center gap-16">
+        <GrFormPrevious onClick={prev}/>
+        <GrFormNext onClick={next}/>
+      </div>
     </div>
   );
 };
