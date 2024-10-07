@@ -1,106 +1,10 @@
-import  { useState } from 'react';
 import { motion } from "framer-motion";
 import { IoArrowBackCircle } from "react-icons/io5";
-
-import { brainOptimization, Communicationmastery, crisisManagement, Emotionalintelligence, empoweringHabit, facultyDevelopment, globalWisdom, goalSetting, launchpad, leadershipMastery, personaleffective, posh, strategic, stress, timeManagement, womenEmpowerment } from "../../assets";
-import { useNavigate } from 'react-router-dom';
+import "./Program.css";
+import { useNavigate } from "react-router-dom";
+import { programDisplays } from "../../constant";
 
 const ProgramDisplay = () => {
-  const [hovered, setHovered] = useState(null);
-  const programs = [
-    {
-      id: 1,
-      title: 'Executive Leadership Mastery',
-      content: 'Ideal for aspiring and seasoned leaders committed to honing their leadership skills, executive presence, and impact.',
-      img: leadershipMastery
-    },
-    {
-      id: 2,
-      title: 'Strategic Thinking and Toolbox',
-      content: 'Customized for decision makers and problem solvers eager to sharpen their strategic thinking abilities and drive organizational success.',
-      img: strategic
-    },{
-      id: 3,
-      title: 'Faculty Development Program:',
-      content: 'Equip educators with advanced teaching methods, counseling skills, and techniques for managing work-life balance to enhance their effectiveness and well-being.',
-      img: facultyDevelopment
-    },{
-      id: 4,
-      title: 'Goal Setting and Planning:',
-      content: 'Develop strategic goal-setting abilities and effective planning techniques for achieving personal and professional goals.',
-      img: goalSetting
-    },{
-      id: 5,
-      title: 'POSH Awareness',
-      content: 'Ensure workplace respect and compliance through knowledge and skills for preventing sexual harassment.',
-      img: posh
-    },{
-      id: 6,
-      title: 'Time Management',
-      content: 'Optimize productivity and work-life balance with practical strategies for task prioritization and goal achievement.',
-      img: timeManagement
-    },{
-      id: 7,
-      title: 'Stress and Anxiety Management',
-      content: 'Learn effective techniques to manage stress and anxiety for improved mental health and well-being.',
-      img: stress
-    },{
-      id: 8,
-      title: 'Women Empowerment',
-      content: 'Empower girl students with skills and strategies for personal growth, self-confidence, and career success.',
-      img: womenEmpowerment
-    },{
-      id: 9,
-      title: 'Empowering Habit Formation',
-      content: 'Cultivate positive habits to support personal growth and success with practical habit-building strategies.',
-      img: empoweringHabit
-    },{
-      id: 10,
-      title: 'Global Wisdom for Self-Improvement',
-      content: 'Explore diverse cultural insights, including Japanese techniques, for enhancing personal and workplace efficiency.',
-      img: globalWisdom
-    },{
-      id: 11,
-      title: 'Mid-Life/Mid-Career Identity Crisis Management',
-      content: 'Navigate and overcome mid-life or mid-career challenges with confidence. Gain insights and strategies to redefine your goals, embrace change, and achieve personal fulfillment.',
-      img: crisisManagement
-    },{
-      id: 12,
-      title: 'Brain Optimization',
-      content: 'Enhance cognitive function and mental performance. Learn techniques for improving memory, focus, and overall brain health to boost personal and professional productivity.',
-      img: brainOptimization
-    },
-    {
-      id: 13,
-      title: 'Personal Effectiveness Power Pack',
-      content: "Tailored for professionals seeking to enhance their personal and professional effectiveness and make a lasting impact",
-      img: personaleffective,
-    },
-    {
-      id:14,
-      title: 'Communication Mastery Suite',
-      content: "Designed for individuals aiming to improve their communication skills and cultivate meaningful connections in both personal and professional settings.",
-      // icon: arrow,
-      img: Communicationmastery,
-    },
-    {
-      id: 15,
-      title: 'Emotional Intelligence Essentials',
-      content: "Geared towards individuals looking to develop their emotional intelligence for greater self-awareness, resilience, and success in all areas of life.",
-      // icon: arrow,
-      img: Emotionalintelligence,
-    },
-    {
-      id: 16,
-      title: 'Launchpad to Corporate Success',
-      content: "Exclusive program to transform academic knowledge into professional skills, ensuring graduates are ready for the campus-to-corporate transition.",
-      // icon: arrow,
-      img: launchpad,
-    }
-    // Repeat for other programs...
-  ];
-
-  
   const navigate = useNavigate();
   return (
     <motion.div
@@ -108,36 +12,46 @@ const ProgramDisplay = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-
       <h1 className="bg-yellow-500 relative p-10 text-center font-semibold text-3xl">
-      <IoArrowBackCircle className='text-3xl absolute bottom-11 left-0 ' onClick={() => navigate(-1)} />
+        <IoArrowBackCircle
+          className="text-3xl absolute bottom-11 left-0"
+          onClick={() => navigate(-1)}
+        />
         Our Programs
       </h1>
-      <div className="px-4 py-8 grid w-[90%] m-auto grid-cols-1 md:grid-cols-4 gap-8">
-        {programs.map((program) => (
-          <motion.div
-            key={program.id}
-            className={`relative card transition-all duration-500 ease-in-out transform ${hovered === program.id ? 'md:scale-125 md:z-50' : 'blur-[2px]'}`}
-            onMouseEnter={() => setHovered(program.id)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <motion.img
-              src={program.img}
-              alt={program.title}
-              className="w-full h-64 object-cover rounded-t-lg"
-              whileHover={{ scale: 1.1 }}
-            />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 text-white p-6 opacity-0 hover:opacity-100 transition-opacity duration-300"
+      <div className="m-auto w-[90%] ">
+        <section className="grid md:grid-cols-4 md:grid-rows-2 w-full m-auto md:w-[1100px]">
+          {programDisplays.map((programDisplay, index) => (
+            <div
+              key={index}
+              className="card group relative w-[250px] h-[250px] m-5 perspective"
             >
-              <h2 className="text-xl md:text-base text-white mb-2 leading-[20px] font-bold">{program.title}</h2>
-              <div className="text-gray-300 md:text-xs  text-sm md:leading-tight font-medium">{program.content}</div>
-            </motion.div>
-          </motion.div>
-        ))}
+              {/* The box that rotates on hover */}
+              <div className="box relative w-full h-full transition-transform duration-1000 ease-in-out transform-style preserve-3d group-hover:rotate-y-180">
+                {/* Front Side */}
+                <div className="imgBx absolute w-full h-full backface-hidden">
+                  <img
+                    src={programDisplay.img} // Placeholder image for demonstration
+                    alt={programDisplay.content}
+                    className="absolute top-0 left-0 w-full h-full object-cover"
+                  />
+                  {/* <h2 className="text-lg mb-2 z-20 p-2 absolute text-white w-full">{programDisplay.title}</h2> */}
+                </div>
+
+                {/* Back Side */}
+                <div className="contentBx absolute w-full h-full bg-gray-800 text-white flex justify-center items-center backface-hidden transform rotate-y-180">
+                  <div className="p-5 bg-gradient-to-br from-pink-500/50 to-transparent transform translate-z-[100px]">
+                    <h2 className="text-lg mb-2">{programDisplay.title}</h2>
+                    <p className="text-xs">{programDisplay.content}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
       </div>
     </motion.div>
   );
-}
+};
 
 export default ProgramDisplay;

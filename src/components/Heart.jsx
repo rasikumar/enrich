@@ -6,7 +6,6 @@ import Program from "./allprogram/Program"
 import Testimonials from "./Testimonials"
 import Blog from "../components/blogpages/Blog"
 import GetIn from "./GetIn"
-import Footer from "./Footer"
 import ScrollAlert from "./ScrollMsg"
 
 const Heart = () => {
@@ -21,7 +20,6 @@ const Heart = () => {
             <ScrollAlert/>
             <Blog/>
             <GetIn/>
-            <Footer/>
         </>
       )
     }

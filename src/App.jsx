@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 // import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners";
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
-import Heart from './components/Heart';
-import BlogDetails from './components/blogpages/BlogDetails';
-import ProgramDisplay from './components/allprogram/ProgramDisplay';
-import AboutUs from './components/AboutUs';
-import BlogDisplay from './components/blogpages/BlogDisplay';
-import Navbar from './components/Navbar';
-import ScrollTop from './components/ScrollTop';
-import ServiceDetails from "./components/allservice/ServiceDetails";
+import Heart from "./components/Heart";
+import BlogDetails from "./components/blogpages/BlogDetails";
+import ProgramDisplay from "./components/allprogram/ProgramDisplay";
+import AboutUs from "./components/AboutUs";
+import BlogDisplay from "./components/blogpages/BlogDisplay";
+import Navbar from "./components/Navbar";
+import ScrollTop from "./components/ScrollTop";
+import Individuals from "./components/allservice/individuals/Individuals";
+import Footer from "./components/Footer";
 
 const App = () => {
   const location = useLocation();
@@ -34,14 +35,14 @@ const App = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 10);
   }, []);
 
   return (
     <div className="scroll-smooth">
       {loading ? (
         <SquareLoader
-          color={'yellow'}
+          color={"yellow"}
           loading={loading}
           size={50}
           className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-full h-full z-[1000]"
@@ -52,19 +53,20 @@ const App = () => {
             <Navbar />
             <ScrollTop />
             <Routes location={location} key={location.pathname}>
-              <Route index path='/' element={<Heart />} />
-              <Route path='/Aboutus' element={<AboutUs />} />
-              <Route path='/ProgramDisplay' element={<ProgramDisplay />} />
+              <Route index path="/" element={<Heart />} />
+              <Route path="/Aboutus" element={<AboutUs />} />
+              <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
               {/* blogarticles */}
-              <Route path='/BlogsList/:id' element={<BlogDetails />} />
-              <Route path='/BlogDisplay' element={<BlogDisplay />} />
-              <Route path='/BlogsList/:id' element={<BlogDetails />} />
+              <Route path="/BlogsList/:id" element={<BlogDetails />} />
+              <Route path="/BlogDisplay" element={<BlogDisplay />} />
+              <Route path="/BlogsList/:id" element={<BlogDetails />} />
               {/* service */}
-              <Route path="/ServiceList/:id" element={<ServiceDetails/>}/>
-            </Routes> 
+              <Route path="/individuals" element={<Individuals />} />
+            </Routes>
+            <Footer />
           </AnimatePresence>
         </>
-      )} 
+      )}
     </div>
   );
 };

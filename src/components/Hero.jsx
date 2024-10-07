@@ -10,7 +10,7 @@ const Hero = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       id="hero"
-      className="bg-Hero bg-no-repeat -mt-[5.4rem] bg-cover bg-center p-4 md:p-10 py-26 flex flex-col-reverse md:flex-row justify-evenly items-center min-h-64 z-0 md:h-[520px] xl:h-[620px]"
+      className="bg-Hero bg-no-repeat -mt-[5.4rem] bg-cover bg-center p-4 md:p-10 py-26 flex flex-col-reverse md:flex-row justify-evenly items-center min-h-64 z-0 md:h-[520px] xl:h-[620px] "
     >
       <motion.div
         initial={{ x: -50 }}
@@ -23,8 +23,8 @@ const Hero = () => {
           <br />
           Be Your Best Self
         </h1>
-        <p className="xl:text-2xl md:text-sm text-gray-600 text-justify mb-3">
-          Comprehensive Training in Behavioral and People Skills
+        <p className="xl:text-2xl md:text-sm secondary-color text-justify mb-3">
+          Enhance Your Skills, Nurture Your Talent, and Be Your Best Self
         </p>
         <AnchorLink
           href="#getIn"

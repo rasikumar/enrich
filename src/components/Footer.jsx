@@ -19,13 +19,13 @@ const Footer = () => {
           <img src={logo} alt="logo" width={150} />
         </div>
         <div className="mb-4 lg:mb-0">
-          <ul className='flex flex-col lg:flex-row gap-3 xl:text-lg text-sm text-center lg:text-left'>
-            <AnchorLink href='#hero' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Home</AnchorLink>
-            <Link to={'/Aboutus'} className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>About Us</Link>
-            <AnchorLink href='#service' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Services</AnchorLink>
-            <AnchorLink href='#program' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Program</AnchorLink>
-            <AnchorLink href='#testimonials' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Testimonials</AnchorLink>
-            <AnchorLink href='#blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer'>Blogs</AnchorLink>
+          <ul className='flex flex-col lg:flex-row gap-3 xl:text-lg text-sm text-center lg:text-left '>
+            <AnchorLink href='#hero' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer border-r-2 border-primary pr-2 h-5 items-center flex'>Home</AnchorLink>
+            <Link to={'/Aboutus'} className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer border-r-2 border-primary pr-2 h-5 items-center flex'>About Us</Link>
+            <AnchorLink href='#service' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer border-r-2 border-primary pr-2 h-5 items-center flex'>Services</AnchorLink>
+            <AnchorLink href='#program' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer border-r-2 border-primary pr-2 h-5 items-center flex'>Program</AnchorLink>
+            <AnchorLink href='#testimonials' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer border-r-2 border-primary pr-2 h-5 items-center flex'>Testimonials</AnchorLink>
+            <AnchorLink href='#blog' className='text-black hover:text-yellow-700 transition delay-100 cursor-pointer h-5 items-center flex'>Blogs</AnchorLink>
           </ul>
         </div>
         <div>

@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 const GetIn = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    number: '',
-    option: '',
+    name: "",
+    email: "",
+    message: "",
+    number: "",
+    option: "",
   });
 
   const handleChange = (e) => {
@@ -19,39 +19,60 @@ const GetIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting form data:', formData);
-  
+    console.log("Submitting form data:", formData);
+
     try {
-      const response = await axios.post('https://enrichbackend-baac6aec58db.herokuapp.com/api/contact', formData);
-      console.log('Server response:', response);
-      alert('Message sent successfully!');
+      const response = await axios.post(
+        "https://enrichbackend-baac6aec58db.herokuapp.com/api/contact",
+        formData
+      );
+      console.log("Server response:", response);
+      alert("Message sent successfully!");
     } catch (error) {
-      console.error('Error sending message:', error.response || error.message);
-      alert('Error sending f message.');
+      console.error("Error sending message:", error.response || error.message);
+      alert("Error sending f message.");
     }
   };
 
   return (
-    <div id="getIn" className="bg-gray-300 justify-center gap-60 xl:p-10 md:py-10 md:px-5 md:flex  shadow-md">
+    <div
+      id="getIn"
+      className="bg-gray-300 justify-center gap-60 xl:p-10 md:py-10 md:px-5 md:flex  shadow-md"
+    >
       <div className="md:w-[30%] p-4 flex flex-col gap-5 mb-10 ">
         <h2 className="heading md:text-3xl">Get in touch</h2>
-        <p className=" md:text-base xl:text-lg text-justify">Use our contact form for all information requests or contact us directly using the contact information below.</p>
-        <div className="primary-color xl:text-lg sm:text-sm">
-          <h3 className="highlight-color text-lg mb-3">Our Office Location</h3>
-          <p className='xl:text-lg md:text-sm '>Evvi Solutions Private Limited</p>
-          <p className='xl:text-lg md:text-sm '>TCE - TBI,Thiagarajar Advanced Research Centre,</p>
-          <p className='xl:text-lg md:text-sm '>Thiagarajar College of Engineering Campus,</p>
-          <p className='xl:text-lg md:text-sm '>Thiruparankundram, Madurai -625015</p>
+        <p className=" md:text-base xl:text-lg text-justify">
+          Use our contact form for all information requests or contact us
+          directly using the contact information below.
+        </p>
+        <div className="xl:text-lg sm:text-sm">
+          <h3 className="highlight-color text-lg mb-3 primary-color font-medium">
+            Our Office Location
+          </h3>
+          <p className="xl:text-lg md:text-sm ">Enrich Minds</p>
+          <p className="xl:text-lg md:text-sm ">
+            No 2/74-5, 1st Cross, Hosur Main Road
+          </p>
+          <p className="xl:text-lg md:text-sm ">
+            Madiwala, Bengaluru - 560068,
+          </p>
+          <p className="xl:text-lg md:text-sm ">Karnataka.</p>
         </div>
-        <div className="primary-color">
-          <h3 className="highlight-color mb-3 text-lg">Email</h3>
-          <p className='xl:text-lg md:text-sm '>info@evvisolutions.com</p>
+        <div>
+          <h3 className="primary-color font-medium mb-3 text-lg">Email</h3>
+          <p className="xl:text-lg md:text-sm ">info@enrichminds.co.in</p>
+        </div>
+        <div>
+          <h3 className="mb-3 text-lg primary-color font-medium">Mobile</h3>
+          <p className="xl:text-lg md:text-sm ">+91 99009 76464</p>
         </div>
       </div>
 
       <form className="space-y-4 md:w-[40%] xl:w-[35%]" onSubmit={handleSubmit}>
         <div>
-          <label className="block xl:text-lg text-sm font-medium text-gray-700">Name</label>
+          <label className="block xl:text-lg text-sm font-medium text-gray-700">
+            Name
+          </label>
           <input
             type="text"
             name="name"
@@ -62,7 +83,9 @@ const GetIn = () => {
           />
         </div>
         <div>
-          <label className="block xl:text-lg text-sm font-medium text-gray-700">Email</label>
+          <label className="block xl:text-lg text-sm font-medium text-gray-700">
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -73,7 +96,9 @@ const GetIn = () => {
           />
         </div>
         <div>
-          <label className="block xl:text-lg text-sm font-medium text-gray-700">Mobile</label>
+          <label className="block xl:text-lg text-sm font-medium text-gray-700">
+            Mobile
+          </label>
           <input
             type="number"
             name="number"
@@ -84,7 +109,9 @@ const GetIn = () => {
           />
         </div>
         <div>
-          <label className="block xl:text-lg text-sm font-medium text-gray-700">Who Are You</label>
+          <label className="block xl:text-lg text-sm font-medium text-gray-700">
+            Who Are You
+          </label>
           <select
             name="option"
             className="outline-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
@@ -97,7 +124,9 @@ const GetIn = () => {
           </select>
         </div>
         <div>
-          <label className="block xl:text-lg text-sm font-medium text-gray-700">Message</label>
+          <label className="block xl:text-lg text-sm font-medium text-gray-700">
+            Message
+          </label>
           <textarea
             name="message"
             className="mt-1 block resize-none w-full h-32 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-50 xl:text-lg sm:text-sm"
@@ -107,10 +136,7 @@ const GetIn = () => {
           />
         </div>
         <div>
-          <button
-            type="submit"
-            className="w-full btn-primary"
-          >
+          <button type="submit" className="w-full btn-primary">
             Submit your request
           </button>
         </div>
