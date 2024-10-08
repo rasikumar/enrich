@@ -72,7 +72,7 @@ export const serviceList = [
     subBtnFirst: "/individuals",
     subContentSecond:
       "Comprehensive programs designed to enhance team dynamics, leadership capabilities, and organizational success.",
-    subBtnSecond: "/business",
+    subBtnSecond: "/corporates",
     // btn: "Explore Programs",
   },
   {

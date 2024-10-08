@@ -6,7 +6,7 @@
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-5 bg-yellow-600 transition delay-75 text-white font-semibold rounded-md shadow-md hover:bg-white hover:text-yellow-600 transform duration-300 hover:scale-105;
+    @apply py-2 px-5 max-md:text-xs bg-yellow-600 transition delay-75 text-white font-semibold rounded-md shadow-md hover:bg-white hover:text-yellow-600 transform duration-300 hover:scale-105;
   }
 
   .primary-color {

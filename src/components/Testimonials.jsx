@@ -83,15 +83,15 @@ const Testimonials = () => {
     <div
       ref={testimonialsRef}
       id="testimonials"
-      className="w-full bg-gradient-to-r to-yellow-50 via-yellow-100 from-yellow-200 flex flex-col lg:flex-row items-center justify-center p-10"
+      className="w-full bg-gradient-to-r from-primary to-primary/90 flex flex-col lg:flex-row items-center justify-center md:p-10 px-4 py-8"
     >
       <div className="content items-center flex flex-col lg:flex-row gap-4">
         <div className="text-content flex flex-col gap-4">
-          <h4 className="text-black text-4xl font-semibold">Testimonials</h4>
-          <h1 className="xl:text-2xl md:text-lg sm:text-sm w-full font-[600]">
+          <h4 className="text-white md:text-4xl text-2xl font-semibold text-center">Testimonials</h4>
+          <h1 className="xl:text-2xl md:text-lg sm:text-sm w-full font-[600] text-white">
             Echoes of Success: Hear from Our Clients
           </h1>
-          <p className=" xl:text-lg text-sm text-gray-500 max-w-2xl mx-auto">
+          <p className=" xl:text-lg text-sm text-white max-w-2xl mx-auto">
             Hear from those who have transformed their skills and lives with
             Enrich. Our client&apos;s success stories speak volumes about the
             impact of our training programs.

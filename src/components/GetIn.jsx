@@ -39,8 +39,10 @@ const GetIn = () => {
       id="getIn"
       className="bg-gray-300 justify-center gap-60 xl:p-10 md:py-10 md:px-5 md:flex  shadow-md"
     >
-      <div className="md:w-[30%] p-4 flex flex-col gap-5 mb-10 ">
-        <h2 className="heading md:text-3xl">Get in touch</h2>
+      <div className="md:w-[30%] p-4 flex flex-col gap-5 md:mb-10 ">
+        <h2 className="text-black md:text-4xl text-2xl font-semibold ">
+          Get in touch
+        </h2>
         <p className=" md:text-base xl:text-lg text-justify">
           Use our contact form for all information requests or contact us
           directly using the contact information below.
@@ -68,7 +70,7 @@ const GetIn = () => {
         </div>
       </div>
 
-      <form className="space-y-4 md:w-[40%] xl:w-[35%]" onSubmit={handleSubmit}>
+      <form className="space-y-4 md:w-[40%] xl:w-[35%] max-md:px-4 max-md:py-4" onSubmit={handleSubmit}>
         <div>
           <label className="block xl:text-lg text-sm font-medium text-gray-700">
             Name

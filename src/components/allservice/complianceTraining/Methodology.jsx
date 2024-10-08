@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { Individuals_Content } from "../index";
+import { Compliance_Content } from "../index";
 import { Card } from "./components/Card";
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
 
 const Methodology = () => {
-  const { heading, content, list } = Individuals_Content[2];
+  const { heading, content, list } = Compliance_Content[2];
   const cardContainerRef = useRef(null);
 
   const scrollLeft = () => {

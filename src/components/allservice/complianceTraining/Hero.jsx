@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Individuals_Content } from "../index";
+import { Compliance_Content } from "../index";
 
 const Hero = () => {
-  const { title, content } = Individuals_Content[0];
+  const { title, content } = Compliance_Content[0];
   return (
     <motion.div
       initial={{ opacity: 0 }}

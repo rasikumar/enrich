@@ -215,15 +215,15 @@ const Services = () => {
       {" "}
       <div className="mx-auto p-4">
         {" "}
-        <div className="flex flex-col gap-4 px-10">
+        <div className="flex flex-col gap-4 md:px-10">
           {" "}
-          <h2 className="text-black text-4xl font-semibold text-center">
+          <h2 className="text-black md:text-4xl text-2xl font-semibold text-center">
             Services{" "}
           </h2>{" "}
           <h3 className="text-center xl:text-2xl text-lg w-full font-[600]">
             Discover Your Journey: Tailored for You{" "}
           </h3>{" "}
-          <p className="text-sm xl:text-lg text-gray-500 md:w-[80%] m-auto">
+          <p className="text-sm xl:text-lg text-gray-500 md:w-[80%] m-auto text-justify">
             We recognize that growth is personal. we are committed to empowering
             individuals and organizations through targeted training and
             assessments. Our evidence-based programs foster personal growth and
@@ -232,13 +232,15 @@ const Services = () => {
           {serviceList.map((service, index) => (
             <div
               key={service.id}
-              className="border p-4 flex flex-col w-[50%] bg-gray-200 m-auto"
+              className="border p-4 flex flex-col md:w-[50%] w-full bg-gray-200 m-auto"
             >
               <div
-                className=" cursor-pointer text-lg md:text-xl font-semibold flex justify-between text-center items-center"
+                className=" cursor-pointer text-lg md:text-xl font-semibold flex justify-between md:text-center items-center"
                 onClick={() => toggleFAQ(index)}
               >
-                <h3 className="text-gray-800">{service.question}</h3>
+                <h3 className="text-gray-800 max-md:text-base">
+                  {service.question}
+                </h3>
                 <span className="text-gray-600">
                   {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
                 </span>
@@ -252,15 +254,19 @@ const Services = () => {
                   transition={{ duration: 0.3, ease: [0.4, 0.0, 0.6, 1] }}
                   className="faq-answer mt-4 text-justify"
                 >
-                  <p className="text-gray-600 mb-2">{service.answer}</p>
+                  <p className="text-gray-600 mb-2 max-md:text-xs">
+                    {service.answer}
+                  </p>
 
                   {/* Sub-sections if available */}
                   {service.subTitleFirst && (
                     <div className="sub-section mb-4">
-                      <h4 className="text-md font-medium">
+                      <h4 className="text-base font-medium ">
                         {service.subTitleFirst}
                       </h4>
-                      <p className="text-gray-500">{service.subContentFirst}</p>
+                      <p className="text-gray-500  max-md:text-xs">
+                        {service.subContentFirst}
+                      </p>
                       {/* <img
                         src={service.image}
                         alt={service.subContentFirst}
@@ -270,7 +276,7 @@ const Services = () => {
                       /> */}
                       {service.subBtnFirst && (
                         <Link to={service.subBtnFirst}>
-                          <button className="mt-2 bg-primary text-white px-4 py-2 rounded-md">
+                          <button className="mt-2 bg-primary text-white px-4 py-2 rounded-md  max-md:text-xs font-medium">
                             {service.subTitleFirst}
                           </button>
                         </Link>
@@ -280,15 +286,15 @@ const Services = () => {
 
                   {service.subTitleSecond && (
                     <div className="sub-section mb-4">
-                      <h4 className="text-md font-medium">
+                      <h4 className="text-base font-medium">
                         {service.subTitleSecond}
                       </h4>
-                      <p className="text-gray-500">
+                      <p className="text-gray-500  max-md:text-xs">
                         {service.subContentSecond}
                       </p>
                       {service.subBtnSecond && (
                         <Link to={service.subBtnSecond}>
-                          <button className="mt-2 bg-primary text-white px-4 py-2 rounded-md">
+                          <button className="mt-2 bg-primary text-white px-4 py-2 rounded-md  max-md:text-xs font-medium">
                             {service.subTitleSecond}
                           </button>
                         </Link>

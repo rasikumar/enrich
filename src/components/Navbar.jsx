@@ -20,7 +20,7 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="logo flex gap-1 cursor-pointer">
           <Link to="/">
-            <img src={logo} className="w-20 md:w-24" alt="logo" />
+            <img src={logo} width={140} height="auto" alt="logo" />
           </Link>
         </div>
 

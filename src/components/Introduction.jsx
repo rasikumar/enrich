@@ -5,7 +5,7 @@ import { intro } from "../assets";
 const Introduction = () => {
   return (
     <section className="bg-slate-50 py-12">
-      <div className="container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-center">
+      <div className="container mx-auto px-4 lg:px-20 flex flex-col lg:flex-row items-center max-md:gap-5">
         <div className="lg:w-[400px] w-full lg:mr-10">
           <img
             src={intro}
@@ -14,7 +14,7 @@ const Introduction = () => {
           />
         </div>
         <div className="lg:w-[50vw] w-full flex flex-col gap-5">
-          <h2 className="text-4xl font-bold text-gray-800 leading-tight">
+          <h2 className="md:text-4xl text-2xl font-bold text-gray-800 leading-tight">
             Welcome to EnrichMinds!
           </h2>
           <p className="mt-2 text-gray-600 xl:text-lg text-sm flex flex-col gap-3 text-justify ">

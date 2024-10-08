@@ -31,6 +31,7 @@ export default {
         "custom-white": "rgba(255, 255, 255, 1)",
         "custom-border": "rgba(255, 255, 255, 0.3)",
         primary: "#203B93",
+        secondary: "#DCA74B",
       },
       backgroundImage: {
         Hero: "url('/src/assets/hero/heroBg.png')",

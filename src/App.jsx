@@ -12,6 +12,8 @@ import BlogDisplay from "./components/blogpages/BlogDisplay";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
 import Individuals from "./components/allservice/individuals/Individuals";
+import Corporates from "./components/allservice/businesses/Businesses";
+import Compliance from "./components/allservice/complianceTraining/Compliance";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -62,6 +64,8 @@ const App = () => {
               <Route path="/BlogsList/:id" element={<BlogDetails />} />
               {/* service */}
               <Route path="/individuals" element={<Individuals />} />
+              <Route path="/corporates" element={<Corporates />} />
+              <Route path="/compliance-training" element={<Compliance />} />
             </Routes>
             <Footer />
           </AnimatePresence>

@@ -1,7 +1,7 @@
-import { Individuals_Content } from "../index";
+import { Compliance_Content } from "../index";
 
 const Training = () => {
-  const { heading, content } = Individuals_Content[1];
+  const { heading, content } = Compliance_Content[1];
   return (
     <div className="md:flex flex-row-reverse items-center xl:justify-between justify-center gap-24 xl:px-52 lg:px-20 px-4 md:mb-32 mb-8">
       <div className="md:w-[28rem] flex flex-col md:gap-6 gap-2 max-md:mb-4">

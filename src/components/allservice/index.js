@@ -54,19 +54,25 @@ export const Individuals_Content = [
     id: 4,
     heading: "Discover Our Programs",
     content:
-      "Ready to transform your life? Visit Our Programs to choose the program that best fits your needs and start your journey to success today.",
+      "Ready to transform your life? Visit Our Programs to choose the program that best fits your needs and start your journey to success today.", 
   },
 ];
 
 export const Corporates_Content = [
   {
     id: 0,
+    title: "Personal Growth",
+    content:
+      "Empower yourself with the skills and knowledge you need to achieve your goals and stay motivated.",
+  },
+  {
+    id: 1, 
     heading: "Enhance Your Business with Corporate Soft Skills Training",
     content:
       "In today’s competitive business environment, soft skills are crucial for success. Enrich offers customized training programs designed to enhance the soft skills essential for any working environment. We cater to businesses of all sizes and industries, providing your team with the tools they need to excel.",
   },
   {
-    id: 1,
+    id: 2,
     heading: "Our Methodology",
     content:
       "At Enrich, we adopt a result-oriented and impactful approach to corporate training. Our methodology includes:",
@@ -104,13 +110,13 @@ export const Corporates_Content = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     heading: "The Importance of Soft Skills in Business",
     content:
       "Soft skills, including communication, leadership, and teamwork, are vital for creating a productive and harmonious workplace. These skills improve employee interactions, foster a collaborative culture, and drive overall business performance. Investing in soft skills training can lead to increased employee engagement, better customer relations, and enhanced leadership capabilities.",
   },
   {
-    id: 3,
+    id: 4,
     heading: "Discover Our Programs",
     content:
       "Invest in your team’s success today. Visit Our Programs to find the perfect training solution for your business needs.",
@@ -120,12 +126,18 @@ export const Corporates_Content = [
 export const Compliance_Content = [
   {
     id: 0,
+    title: "Personal Growth",
+    content:
+      "Empower yourself with the skills and knowledge you need to achieve your goals and stay motivated.",
+  },
+  {
+    id: 1,
     heading: "Ensure a Safe Workplace with POSH Compliance Training",
     content:
       "Creating a safe and respectful workplace is essential for any organization. Enrich offers comprehensive POSH (Prevention of Sexual Harassment) compliance training programs designed to help businesses meet legal and ethical standards. Our training programs educate employees, managers, and leadership on recognizing, preventing, and addressing sexual harassment in the workplace.",
   },
   {
-    id: 1,
+    id: 2,
     heading: "Our POSH Training Methodology",
     content:
       "At Enrich, our POSH training programs are designed to be engaging, informative, and impactful. Our methodology includes",
@@ -163,7 +175,7 @@ export const Compliance_Content = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     heading: "Why POSH Compliance Matters",
     content:
       "POSH compliance is not only a legal requirement but also a crucial aspect of maintaining a positive work environment. Effective POSH training helps to",
@@ -195,7 +207,7 @@ export const Compliance_Content = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     heading: "Discover Our Programs",
     content:
       "Protect your organization and promote a respectful workplace. Connect with us to deliver our POSH compliance training and other compliance programs tailored to your needs.",
