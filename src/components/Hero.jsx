@@ -16,14 +16,14 @@ const Hero = () => {
         initial={{ x: -50 }}
         animate={{ x: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="w-full md:w-[480px] flex flex-col gap-10 hero-content mt-10"
+        className="w-full md:w-[480px] flex flex-col gap-2 hero-content mt-5"
       >
-        <h1 className="text-2xl font-reggae md:text-4xl xl:text-4xl">
-          Enrich Your Life,
-          <br />
-          Be Your Best Self
+        <h1 className="text-2xl md:text-4xl xl:text-4xl text-center font-semibold text-secondary">
+          Enrich Your Life
+          {/* <br /> */}
+          {/* Be Your Best Self */}
         </h1>
-        <p className="xl:text-2xl md:text-sm secondary-color text-justify mb-3">
+        <p className="xl:text-2xl md:text-sm text-white mb-3 text-center">
           Enhance Your Skills, Nurture Your Talent, and Be Your Best Self
         </p>
         <AnchorLink

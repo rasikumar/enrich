@@ -27,7 +27,7 @@ const Navbar = () => {
         {/* Hamburger Menu for Mobile */}
         <button
           onClick={handleToggle}
-          className="md:hidden text-3xl text-gray-700 focus:outline-none flex justify-end w-full"
+          className="md:hidden md:text-3xl text-gray-700 focus:outline-none flex justify-end w-full"
         >
           {isOpen ? <IoMdClose /> : <GiHamburgerMenu />}
         </button>
@@ -41,10 +41,10 @@ const Navbar = () => {
           {Navigation.map((nav) => {
             return (
               <ul key={nav.id} className="md:flex">
-                <li className="bg-gradient-to-r  from-purple-500 to-purple-500 bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1">
+                <li className="bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1">
                   <Link
                     to={nav.path}
-                    className="primary-color hover:text-purple-500 font-medium hidden md:flex"
+                    className="primary-color hover:text-purple-500 font-medium hidden md:flex xl:text-base text-sm"
                   >
                     {nav.title}
                   </Link>

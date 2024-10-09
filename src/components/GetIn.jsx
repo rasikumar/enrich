@@ -7,7 +7,7 @@ const GetIn = () => {
     email: "",
     message: "",
     number: "",
-    option: "",
+    type: "",
   });
 
   const handleChange = (e) => {
@@ -23,7 +23,7 @@ const GetIn = () => {
 
     try {
       const response = await axios.post(
-        "https://enrichbackend-baac6aec58db.herokuapp.com/api/contact",
+        "http://192.168.20.5:5000/api/createmessages",
         formData
       );
       console.log("Server response:", response);
@@ -61,16 +61,16 @@ const GetIn = () => {
           <p className="xl:text-lg md:text-sm ">Karnataka.</p>
         </div>
         <div>
-          <h3 className="primary-color font-medium mb-3 text-lg">Email</h3>
-          <p className="xl:text-lg md:text-sm ">info@enrichminds.co.in</p>
-        </div>
-        <div>
-          <h3 className="mb-3 text-lg primary-color font-medium">Mobile</h3>
+          <h3 className="primary-color font-medium mb-3 text-lg">Support</h3>
           <p className="xl:text-lg md:text-sm ">+91 99009 76464</p>
+          <p className="xl:text-lg md:text-sm ">info@enrichminds.co.in</p>
         </div>
       </div>
 
-      <form className="space-y-4 md:w-[40%] xl:w-[35%] max-md:px-4 max-md:py-4" onSubmit={handleSubmit}>
+      <form
+        className="space-y-4 md:w-[40%] xl:w-[35%] max-md:px-4 max-md:py-4"
+        onSubmit={handleSubmit}
+      >
         <div>
           <label className="block xl:text-lg text-sm font-medium text-gray-700">
             Name
@@ -115,9 +115,9 @@ const GetIn = () => {
             Who Are You
           </label>
           <select
-            name="option"
+            name="type"
             className="outline-none mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm"
-            value={formData.option}
+            value={formData.type}
             onChange={handleChange}
           >
             <option value="">Select an option</option>

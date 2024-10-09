@@ -20,7 +20,7 @@ const ProgramDisplay = () => {
         Our Programs
       </h1>
       <div className="m-auto w-[90%] ">
-        <section className="grid md:grid-cols-4 md:grid-rows-2 w-full m-auto md:w-[1100px]">
+        <section className="grid md:grid-cols-4 md:grid-rows-2 w-full m-auto">
           {programDisplays.map((programDisplay, index) => (
             <div
               key={index}

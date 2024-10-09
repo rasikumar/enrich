@@ -29,12 +29,12 @@ export const Navigation = [
   {
     id: 1,
     title: "About Us",
-    path: "/about-us",
+    path: "/aboutus",
   },
   {
     id: 2,
     title: "Services",
-    path: "/services",
+    path: "#services",
   },
   {
     id: 3,
@@ -61,7 +61,7 @@ export const Navigation = [
 export const serviceList = [
   {
     id: 1,
-    question: "Behavioral Skills for Individuals",
+    question: "Behavioral Skills for Training",
     answer:
       "We offer tailor-made training programs to empower individuals and teams through targeted skill enhancement and practical strategies.",
     image: behavioral,
@@ -210,4 +210,70 @@ export const programDisplays = [
   //   // icon: arrow,
   //   img: launchpad,
   // },
+];
+
+export const About_Us = [
+  {
+    id: 0,
+    title: "Believe to Become",
+    content: "Your Best Self",
+  },
+  {
+    id: 1,
+    title: "Transformation Within Reach",
+    content:
+      "At EnrichMinds, we focus on enhancing lives through a unique combination of behavioral skills training and brain optimization techniques. Our expertise in behavioral science and psychology equips individuals and organizations with the tools they need to achieve personal and professional growth.",
+  },
+  {
+    id: 2,
+    title: "Who We Are",
+    content:
+      "We are a team of dedicated professionals who believe that every individual has the potential for meaningful change. By integrating psychology with practical skill-building, we provide tailored training and counseling services that foster both personal effectiveness and emotional well-being. Our mission is to empower you with the skills to navigate life's challenges with resilience and confidence.",
+  },
+  {
+    id: 3,
+    title: "Our Vision",
+    content:
+      "We envision a world where individuals can utilize the full capacity of their minds to achieve continuous growth. Our approach is centered on merging psychology with behavioral training and psychometric assessments, offering a holistic path to self-improvement. Through our services, we aim to help you enhance your cognitive and emotional strengths, creating lasting personal and professional success.",
+  },
+  {
+    id: 4,
+    title: "Our Motto",
+    content: "Be Your Best Self.",
+    content2:
+      "This embodies our core philosophy. We believe that with the right support, anyone can cultivate the mindset and skills necessary to become their best version. Our services are designed to guide you in strengthening key behavioral traits and optimizing your potential for a fulfilling, successful life.",
+    content3:
+      "With a psychology-based approach, we offer comprehensive training, psychometric assessments, and counseling that address various personal and professional needs. Whether you’re looking to improve interpersonal skills, build emotional intelligence, or seek guidance through personal challenges, EnrichMinds is here to support your journey of growth.",
+  },
+  {
+    id: 5,
+    title: "Core Values",
+    content: "Here it is !",
+    lists: [
+      {
+        id: "0",
+        title: "Resourcefulness",
+        content:
+          "We embrace adaptability and ingenuity, empowering our clients with practical solutions tailored to their unique challenges.",
+      },
+      {
+        id: "1",
+        title: "Integrity",
+        content:
+          "We uphold honesty and transparency in all our interactions, fostering trust and accountability in our relationships.",
+      },
+      {
+        id: "2",
+        title: "Creativity",
+        content:
+          "We encourage innovative thinking and fresh perspectives, inspiring new ideas that drive growth and transformation.",
+      },
+      {
+        id: "3",
+        title: "Holistic",
+        content:
+          "We take a comprehensive view of personal and professional development, nurturing the mind, body, and spirit for overall well-being.",
+      },
+    ],
+  },
 ];

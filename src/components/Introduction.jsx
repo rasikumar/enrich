@@ -14,7 +14,7 @@ const Introduction = () => {
           />
         </div>
         <div className="lg:w-[50vw] w-full flex flex-col gap-5">
-          <h2 className="md:text-4xl text-2xl font-bold text-gray-800 leading-tight">
+          <h2 className="text-black md:text-4xl text-2xl font-semibold ">
             Welcome to EnrichMinds!
           </h2>
           <p className="mt-2 text-gray-600 xl:text-lg text-sm flex flex-col gap-3 text-justify ">

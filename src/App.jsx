@@ -7,7 +7,8 @@ import { AnimatePresence } from "framer-motion";
 import Heart from "./components/Heart";
 import BlogDetails from "./components/blogpages/BlogDetails";
 import ProgramDisplay from "./components/allprogram/ProgramDisplay";
-import AboutUs from "./components/AboutUs";
+// import AboutUs from "./components/AboutUs";
+import Aboutus from "./components/aboutus/Aboutus";
 import BlogDisplay from "./components/blogpages/BlogDisplay";
 import Navbar from "./components/Navbar";
 import ScrollTop from "./components/ScrollTop";
@@ -56,7 +57,7 @@ const App = () => {
             <ScrollTop />
             <Routes location={location} key={location.pathname}>
               <Route index path="/" element={<Heart />} />
-              <Route path="/Aboutus" element={<AboutUs />} />
+              <Route path="/aboutus" element={<Aboutus />} />
               <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
               {/* blogarticles */}
               <Route path="/BlogsList/:id" element={<BlogDetails />} />

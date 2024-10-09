@@ -17,14 +17,14 @@ export const Card = ({ image, title, content }) => {
           alt={title}
           width={100}
           height={100}
-          className={`rounded-full transition-all md:${
-            hover ? "w-[200px]" : ""
+          className={`rounded-full transition-all ${
+            hover ? "md:w-[200px]" : ""
           }`}
         />
       </div>
       <div
-        className={`md:${
-          hover ? "opacity-0" : "opacity-100"
+        className={`${
+          hover ? "md:opacity-0" : "opacity-100"
         } flex flex-col gap-4`}
       >
         <h1 className="text-center font-medium text text-secondary">{title}</h1>
