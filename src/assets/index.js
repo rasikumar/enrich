@@ -49,6 +49,14 @@ import Aboutus from "./about/Aboutus.png";
 import transformation from "./about/transformation.jpeg";
 import whoweare from "./about/Whoweare.jpeg";
 import Butterfly from "./about/Butterfly.jpeg";
+import Brainimage from "./about/Brain-Image.jpeg";
+import Creativity from "./about/Creativity.png";
+import Holistic from "./about/Holistic.png";
+import Integrity from "./about/Integrity.png";
+import Resourcefulness from "./about/Resourcefulness.png";
+import Vision from "./about/Vision.jpeg";
+import Moto1 from "./about/Moto1.jpeg";
+import Moto2 from "./about/Moto2.jpeg";
 
 export {
   // blog images
@@ -97,4 +105,12 @@ export {
   transformation,
   whoweare,
   Butterfly,
+  Brainimage,
+  Creativity,
+  Holistic,
+  Integrity,
+  Resourcefulness,
+  Vision,
+  Moto1,
+  Moto2,
 };

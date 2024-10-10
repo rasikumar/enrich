@@ -1,4 +1,4 @@
-import { Butterfly, transformation } from "../../assets";
+import { Brainimage, Butterfly, transformation } from "../../assets";
 import { About_Us } from "../../constant";
 
 const Details = () => {
@@ -7,8 +7,10 @@ const Details = () => {
     <div className="flex md:h-[50rem] p-4 justify-center md:gap-32">
       <div className="relative md:w-[30%] h-full">
         <img
-          src="https://dummyimage.com/200x220"
-          alt="#"
+          src={Brainimage}
+          alt="Brainimage"
+          width=""
+          height=""
           className="absolute right-0 top-0 rounded-2xl"
         />
         <img
@@ -27,7 +29,9 @@ const Details = () => {
         <p className="text-justify">{content}</p>
         <img
           src={transformation}
-          alt="#"
+          alt="transformation image"
+          width=""
+          height= ""
           className="md:absolute max-md:h-56 bottom-10 rounded-2xl"
         />
       </div>

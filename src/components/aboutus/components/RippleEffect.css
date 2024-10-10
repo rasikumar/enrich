@@ -1,0 +1,35 @@
+.ripple-effect {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.ripple-effect img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+.ripple {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(249, 245, 245, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: scale(0);
+    animation: ripple-animation 1s ease-out;
+}
+
+@keyframes ripple-animation {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}

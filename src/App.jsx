@@ -16,6 +16,10 @@ import Individuals from "./components/allservice/individuals/Individuals";
 import Corporates from "./components/allservice/businesses/Businesses";
 import Compliance from "./components/allservice/complianceTraining/Compliance";
 import Footer from "./components/Footer";
+import Services from "./components/allservice/Services";
+import GetIn from "./components/GetIn";
+import Psychometric from "./components/allservice/psychometric/Psychometric";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   const location = useLocation();
@@ -58,6 +62,10 @@ const App = () => {
             <Routes location={location} key={location.pathname}>
               <Route index path="/" element={<Heart />} />
               <Route path="/aboutus" element={<Aboutus />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/ourprogram" element={<ProgramDisplay />} />
+              <Route path="/contactus" element={<GetIn />} />
+
               <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
               {/* blogarticles */}
               <Route path="/BlogsList/:id" element={<BlogDetails />} />
@@ -67,6 +75,8 @@ const App = () => {
               <Route path="/individuals" element={<Individuals />} />
               <Route path="/corporates" element={<Corporates />} />
               <Route path="/compliance-training" element={<Compliance />} />
+              <Route path="/psychometric" element={<Psychometric />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
           </AnimatePresence>

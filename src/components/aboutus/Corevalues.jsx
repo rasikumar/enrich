@@ -1,3 +1,4 @@
+import { Creativity, Holistic, Integrity, Resourcefulness } from "../../assets";
 import { About_Us } from "../../constant";
 import Cards from "./components/Cards";
 
@@ -11,20 +12,29 @@ const Corevalues = () => {
           <p className="text-slate-400 max-md:mb-4">{content}</p>
         </div>
         <div className="gap-4 flex">
-          <Cards image="https://dummyimage.com/50" title="Resourcefulnes" />
-          <Cards image="https://dummyimage.com/50" title="Integrity" />
+          <Cards
+            image={Resourcefulness}
+            alt="Resourcefulness"
+            title="Resourcefulnes"
+          />
+          <Cards image={Integrity} title="Integrity" alt="Integrity" />
         </div>
       </div>
       <div className="md:flex flex-row-reverse gap-24 items-start justify-center">
         <div className="flex gap-4 max-md:ml-3">
-          <Cards image="https://dummyimage.com/50" title="Creativity" />
-          <Cards image="https://dummyimage.com/50" title="Holistic" />
+          <Cards image={Creativity} title="Creativity" alt="Creativity" />
+          <Cards image={Holistic} title="Holistic" alt="Holistic" />
         </div>
         <div className="md:-mt-16 mt-10">
           {lists.map((list) => {
             return (
-              <div key={list.id} className="flex flex-col md:w-80 max-md:px-4 mt-2 m-auto ">
-                <h1 className="text-sm font-medium text-secondary">{list.title}</h1>
+              <div
+                key={list.id}
+                className="flex flex-col md:w-80 max-md:px-4 mt-2 m-auto "
+              >
+                <h1 className="text-sm font-medium text-secondary">
+                  {list.title}
+                </h1>
                 <p className="text-sm text-justify">{list.content}</p>
               </div>
             );

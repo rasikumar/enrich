@@ -1,3 +1,4 @@
+import { Vision } from "../../assets";
 import { About_Us } from "../../constant";
 
 const Mission = () => {
@@ -6,8 +7,8 @@ const Mission = () => {
     <div className="lg:mx-32 my-12 max-md:px-4 xl:mx-40 flex flex-col gap-10">
       <div>
         <img
-          src="https://dummyimage.com/1200x350"
-          alt="#"
+          src={Vision}
+          alt="Vision"
           className="rounded-3xl m-auto max-md:h-60"
         />
       </div>

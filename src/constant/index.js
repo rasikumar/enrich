@@ -34,12 +34,12 @@ export const Navigation = [
   {
     id: 2,
     title: "Services",
-    path: "#services",
+    path: "/services",
   },
   {
     id: 3,
     title: "Our Program",
-    path: "/our-program",
+    path: "/ourprogram",
   },
   //   {
   //     id: 4,
@@ -49,7 +49,7 @@ export const Navigation = [
   {
     id: 5,
     title: "Contact Us",
-    path: "/contact-us",
+    path: "/contactus",
   },
   //   {
   //     id: 6,
@@ -61,7 +61,7 @@ export const Navigation = [
 export const serviceList = [
   {
     id: 1,
-    question: "Behavioral Skills for Training",
+    question: "Behavioral Skills Training",
     answer:
       "We offer tailor-made training programs to empower individuals and teams through targeted skill enhancement and practical strategies.",
     image: behavioral,
@@ -91,6 +91,7 @@ export const serviceList = [
       "We provide comprehensive psychometric assessments to gain insights into personality traits and cognitive abilities. Our psychological counseling services, informed by evidence-based practices, support individuals in their journey toward self-discovery and personal growth.",
     image: corporate,
     btn: "Book a Session",
+    path: "/psychometric",
   },
 ];
 
@@ -216,7 +217,7 @@ export const About_Us = [
   {
     id: 0,
     title: "Believe to Become",
-    content: "Your Best Self",
+    content: "Be Your Bestself",
   },
   {
     id: 1,
@@ -254,25 +255,22 @@ export const About_Us = [
         id: "0",
         title: "Resourcefulness",
         content:
-          "We embrace adaptability and ingenuity, empowering our clients with practical solutions tailored to their unique challenges.",
+          "Innovatively leveraging available resources to solve challenges.",
       },
       {
         id: "1",
         title: "Integrity",
-        content:
-          "We uphold honesty and transparency in all our interactions, fostering trust and accountability in our relationships.",
+        content: "Upholding honesty and transparency in all interactions.",
       },
       {
         id: "2",
         title: "Creativity",
-        content:
-          "We encourage innovative thinking and fresh perspectives, inspiring new ideas that drive growth and transformation.",
+        content: "Encouraging fresh perspectives to drive transformation.",
       },
       {
         id: "3",
         title: "Holistic",
-        content:
-          "We take a comprehensive view of personal and professional development, nurturing the mind, body, and spirit for overall well-being.",
+        content: "Nurturing mind, body, and spirit for total well-being.",
       },
     ],
   },
