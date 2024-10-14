@@ -87,7 +87,7 @@ const Testimonials = () => {
     >
       <div className="content items-center flex flex-col lg:flex-row gap-4">
         <div className="text-content flex flex-col gap-4">
-          <h4 className="text-white md:text-4xl text-2xl font-semibold text-center">Testimonials</h4>
+          <h4 className="text-white md:text-4xl text-2xl font-semibold ">Testimonials</h4>
           <h1 className="xl:text-2xl md:text-lg sm:text-sm w-full font-[600] text-white">
             Echoes of Success: Hear from Our Clients
           </h1>

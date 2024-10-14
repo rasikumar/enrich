@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const GetIn = () => {
   const [formData, setFormData] = useState({
@@ -27,10 +29,18 @@ const GetIn = () => {
         formData
       );
       console.log("Server response:", response);
-      alert("Message sent successfully!");
+      toast.success("Message sent successfully!");
     } catch (error) {
-      console.error("Error sending message:", error.response || error.message);
-      alert("Error sending f message.");
+      console.error("Error sending message:", error);
+
+      // If the error has a response, use it; otherwise, fallback to a general message
+      const errorMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        "Error sending message.";
+
+      toast.error(errorMessage);
     }
   };
 
@@ -143,6 +153,7 @@ const GetIn = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

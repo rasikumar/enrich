@@ -8,7 +8,7 @@ import Moto from "./Moto";
 const Aboutus = () => {
   return (
     <div className="relative">
-      <h1 className="text-6xl font-bold rotate-0 max-md:flex hidden sticky top-28 -z-10 text-slate-100 uppercase">
+      <h1 className="text-6xl font-bold rotate-0 max-md:flex hidden sticky top-28 text-slate-100 uppercase -z-20">
         Be Your Bestself
       </h1>
       <Hero />

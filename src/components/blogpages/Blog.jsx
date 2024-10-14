@@ -6,7 +6,7 @@ const App = () => {
     <div id="blog" className="md:m-8 px-4 py-6 App xl:h-full">
       <header className="md:p-4 flex flex-col gap-4 text-center ">
         <h1 className="text-black md:text-4xl text-2xl font-semibold text-center">Blogs</h1>
-        <h2 className="xl:text-xl md:text-lg w-full font-[600] text-justify">
+        <h2 className="xl:text-xl md:text-lg w-full  font-[600] text-center">
           In our pursuit of growth, giving back becomes our compass, guiding us
           to empower and elevate others along the way.
         </h2>

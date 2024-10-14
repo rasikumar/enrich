@@ -4,17 +4,38 @@ import { Navigation } from "../constant";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState(""); // State for the selected nav item
+  const [activeNav, setActiveNav] = useState("");
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const handleNavClick = (title) => {
-    setActiveNav(title); // Set the active nav item
+    setActiveNav(title);
+    setIsOpen(false);
+  };
+
+  const listVariants = {
+    open: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+    closed: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    open: { opacity: 1, y: 0, transition: { opacity: 0.3 } },
+    closed: { opacity: 0, y: -20, transition: { opacity: 0.3 } },
   };
 
   return (
@@ -25,7 +46,13 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="logo flex gap-1 cursor-pointer">
           <Link to="/">
-            <img src={logo} width={140} height="auto" alt="logo" loading="lazy"/>
+            <img
+              src={logo}
+              width={140}
+              height="auto"
+              alt="logo"
+              loading="lazy"
+            />
           </Link>
         </div>
 
@@ -47,17 +74,17 @@ const Navbar = () => {
             return (
               <ul key={nav.id} className="md:flex">
                 <li
-                  className={`bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1 ${
+                  className={`bg-gradient-to-r from-primary to-primary bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1 ${
                     activeNav === nav.title
-                      ? "bg-[length:100%_2px] text-purple-500"
+                      ? "bg-[length:100%_2px] text-primary"
                       : ""
                   }`}
                 >
                   <Link
                     to={nav.path}
                     onClick={() => handleNavClick(nav.title)} // Update active nav
-                    className={`primary-color hover:text-purple-500 font-medium hidden md:flex xl:text-base text-sm ${
-                      activeNav === nav.title ? "text-purple-500" : ""
+                    className={`primary-color hover:text-primary font-medium hidden md:flex xl:text-base text-sm ${
+                      activeNav === nav.title ? "text-primary" : ""
                     }`}
                   >
                     {nav.title}
@@ -69,28 +96,31 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div className="md:hidden h-screen w-screen rounded-md p-4 mt-2 transition duration-300 relative ">
-          {Navigation.map((nav) => {
-            return (
-              <ul key={nav.id}>
-                <li className="py-2">
-                  <Link
-                    to={nav.path}
-                    onClick={() => handleNavClick(nav.title)}
-                    className={`block text-gray-700 hover:text-purple-500 font-medium ${
-                      activeNav === nav.title ? "text-purple-500 underline" : ""
-                    }`}
-                  >
-                    {nav.title}
-                  </Link>
-                </li>
-              </ul>
-            );
-          })}
-        </div>
-      )}
+      {/* Mobile Dropdown Menu with Framer Motion */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }} // Initially hidden
+        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? "100vh" : 0 }} // Animate visibility
+        transition={{ duration: 0.01, ease: "easeInOut" }} // Smooth transition
+        className="md:hidden w-screen rounded-md transition-all duration-500 overflow-hidden"
+      >
+        {Navigation.map((nav) => {
+          return (
+            <motion.ul variants={{ listVariants }} key={nav.id}>
+              <motion.li variants={{ itemVariants }} className="py-2">
+                <Link
+                  to={nav.path}
+                  onClick={() => handleNavClick(nav.title)}
+                  className={`block text-gray-700 hover:text-primary font-medium ${
+                    activeNav === nav.title ? "text-primary underline" : ""
+                  }`}
+                >
+                  {nav.title}
+                </Link>
+              </motion.li>
+            </motion.ul>
+          );
+        })}
+      </motion.div>
     </div>
   );
 };

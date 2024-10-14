@@ -57,6 +57,7 @@ import Resourcefulness from "./about/Resourcefulness.png";
 import Vision from "./about/Vision.jpeg";
 import Moto1 from "./about/Moto1.jpeg";
 import Moto2 from "./about/Moto2.jpeg";
+import scroll from "./scroll.mp4";
 
 export {
   // blog images
@@ -113,4 +114,5 @@ export {
   Vision,
   Moto1,
   Moto2,
+  scroll,
 };
