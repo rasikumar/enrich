@@ -11,6 +11,7 @@ const Card = ({ imageSrc, title, description, large }) => {
       <img
         src={imageSrc}
         alt={title}
+        loading="lazy"
         className={`w-full ${large ? "h-full" : "h-72"} object-cover`}
       />
       {!large && (

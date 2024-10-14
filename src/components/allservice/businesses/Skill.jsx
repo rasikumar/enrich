@@ -14,6 +14,7 @@ const Skill = () => {
         <img
           src="https://dummyimage.com/500x400"
           alt={content}
+          loading="lazy"
           className="rounded-xl border border-primary shadow-drop mb-4 xl:w-[500px] xl:h-[400px] h-[300px] "
         />
       </div>

@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
       <div className="flex bg-gray-300 flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10 lg:py-6">
         <div className="mb-4 lg:mb-0">
-          <img src={logo} alt="logo" width={150} />
+          <img src={logo} alt="logo" width={150} loading="lazy" />
         </div>
         <div className="mb-4 lg:mb-0">
           <ul className='flex md:gap-3 xl:text-lg md:text-sm text-xs text-center lg:text-left '>

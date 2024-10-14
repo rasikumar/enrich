@@ -9,6 +9,7 @@ const Mission = () => {
         <img
           src={Vision}
           alt="Vision"
+          loading="lazy"
           className="rounded-3xl m-auto max-md:h-60"
         />
       </div>

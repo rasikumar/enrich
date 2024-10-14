@@ -11,6 +11,7 @@ const Details = () => {
           alt="Brainimage"
           width=""
           height=""
+          loading="lazy"
           className="absolute right-0 top-0 rounded-2xl"
         />
         <img
@@ -18,6 +19,7 @@ const Details = () => {
           alt="Butterfly-image"
           width=""
           height=""
+          loading="lazy"
           className="absolute right-10 top-64 rounded-2xl"
         />
         <h1 className="md:flex hidden absolute bottom-0 text-6xl font-thin text-slate-300 left-10 -z-20">
@@ -32,6 +34,7 @@ const Details = () => {
           alt="transformation image"
           width=""
           height= ""
+          loading="lazy"
           className="md:absolute max-md:h-56 bottom-10 rounded-2xl"
         />
       </div>

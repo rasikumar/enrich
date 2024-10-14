@@ -12,8 +12,8 @@ import retreatImage from "./blogs/retreatImage.jpeg";
 import valuableImage from "./blogs/valuableImage.jpeg";
 import blog from "./blogs/blog.jpg";
 // heroimage
-import heroBg from "./hero/heroBg.webp";
-import heroimg from "./hero/heroimg.webp";
+import heroBg from "./hero/heroBg.png";
+import heroimg from "./hero/heroimg.jpg";
 
 // programimages
 import personaleffective from "./programs/personaleffective.png";

@@ -10,6 +10,7 @@ const Introduction = () => {
           <img
             src={intro}
             alt="Corporate Training"
+            loading="lazy"
             className="rounded-lg transition delay-100 hover:shadow-2xl"
           />
         </div>

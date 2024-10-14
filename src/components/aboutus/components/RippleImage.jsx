@@ -23,7 +23,7 @@ const RippleImage = ({ src, alt }) => {
 
   return (
     <div className="ripple-effect" onMouseMove={handleMouseMove}>
-      <img src={src} alt={alt} className="rounded-2xl" />
+      <img src={src} alt={alt} width="" height="" loading="lazy" className="rounded-2xl" />
       {ripples.map((ripple) => (
         <span
           key={ripple.id}

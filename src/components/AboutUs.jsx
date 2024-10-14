@@ -53,6 +53,7 @@ const AboutUs = () => {
             <img
               src={aboutimage}
               alt="About Us"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>

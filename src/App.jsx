@@ -1,27 +1,41 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, lazy } from "react";
 // import Lenis from 'lenis';
 import { SquareLoader } from "react-spinners";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { lazy } from "react";
+
+const Loader = () => {
+  <div>
+    <Loader />
+  </div>;
+};
 
 const Heart = lazy(() => import("./components/Heart"));
-import BlogDetails from "./components/blogpages/BlogDetails";
-import ProgramDisplay from "./components/allprogram/ProgramDisplay";
+const BlogDetails = lazy(() => import("./components/blogpages/BlogDetails"));
+const ProgramDisplay = lazy(() =>
+  import("./components/allprogram/ProgramDisplay")
+);
 // import AboutUs from "./components/AboutUs";
-import Aboutus from "./components/aboutus/Aboutus";
-import BlogDisplay from "./components/blogpages/BlogDisplay";
-import Navbar from "./components/Navbar";
-import ScrollTop from "./components/ScrollTop";
-import Individuals from "./components/allservice/individuals/Individuals";
-import Corporates from "./components/allservice/businesses/Businesses";
-import Compliance from "./components/allservice/complianceTraining/Compliance";
-import Footer from "./components/Footer";
-import Services from "./components/allservice/Services";
-import GetIn from "./components/GetIn";
-import Psychometric from "./components/allservice/psychometric/Psychometric";
-import NotFound from "./components/NotFound";
-
+const Aboutus = lazy(() => import("./components/aboutus/Aboutus"));
+const BlogDisplay = lazy(() => import("./components/blogpages/BlogDisplay"));
+const Navbar = lazy(() => import("./components/Navbar"));
+const ScrollTop = lazy(() => import("./components/ScrollTop"));
+const Individuals = lazy(() =>
+  import("./components/allservice/individuals/Individuals")
+);
+const Corporates = lazy(() =>
+  import("./components/allservice/businesses/Businesses")
+);
+const Compliance = lazy(() =>
+  import("./components/allservice/complianceTraining/Compliance")
+);
+const Footer = lazy(() => import("./components/Footer"));
+const Services = lazy(() => import("./components/allservice/Services"));
+const GetIn = lazy(() => import("./components/GetIn"));
+const Psychometric = lazy(() =>
+  import("./components/allservice/psychometric/Psychometric")
+);
+const NotFound = lazy(() => import("./components/NotFound"));
 const App = () => {
   const location = useLocation();
 
@@ -57,29 +71,31 @@ const App = () => {
         />
       ) : (
         <>
-          <AnimatePresence>
-            <Navbar />
-            <ScrollTop />
-            <Routes location={location} key={location.pathname}>
-              <Route index path="/" element={<Heart />} />
-              <Route path="/aboutus" element={<Aboutus />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/ourprogram" element={<ProgramDisplay />} />
-              <Route path="/contactus" element={<GetIn />} />
+          <AnimatePresence mode="wait">
+            <Suspense fallback={<Loader />}>
+              <Navbar />
+              <ScrollTop />
+              <Routes location={location} key={location.pathname}>
+                <Route index path="/" element={<Heart />} />
+                <Route path="/aboutus" element={<Aboutus />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/ourprogram" element={<ProgramDisplay />} />
+                <Route path="/contactus" element={<GetIn />} />
 
-              <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
-              {/* blogarticles */}
-              <Route path="/BlogsList/:id" element={<BlogDetails />} />
-              <Route path="/BlogDisplay" element={<BlogDisplay />} />
-              <Route path="/BlogsList/:id" element={<BlogDetails />} />
-              {/* service */}
-              <Route path="/individuals" element={<Individuals />} />
-              <Route path="/corporates" element={<Corporates />} />
-              <Route path="/compliance-training" element={<Compliance />} />
-              <Route path="/psychometric" element={<Psychometric />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
+                <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
+                {/* blogarticles */}
+                <Route path="/BlogsList/:id" element={<BlogDetails />} />
+                <Route path="/BlogDisplay" element={<BlogDisplay />} />
+                <Route path="/BlogsList/:id" element={<BlogDetails />} />
+                {/* service */}
+                <Route path="/individuals" element={<Individuals />} />
+                <Route path="/corporates" element={<Corporates />} />
+                <Route path="/compliance-training" element={<Compliance />} />
+                <Route path="/psychometric" element={<Psychometric />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </Suspense>
           </AnimatePresence>
         </>
       )}

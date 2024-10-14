@@ -8,6 +8,7 @@ const Programs = () => {
         <img
           src={heroimg}
           alt="bg-Image"
+          loading="lazy"
           className="object-cover w-full h-full opacity-20 rounded-tr-md rounded-br-md"
         />
       </div>

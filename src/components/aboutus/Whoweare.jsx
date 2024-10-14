@@ -12,7 +12,7 @@ const Whoweare = () => {
         <p className="text-justify">{content}</p>
       </div>
       <div>
-        <img src={whoweare} alt={title} width="" height="" className="rounded-3xl m-auto max-md:h-60" />
+        <img src={whoweare} alt={title} width="" height="" loading="lazy" className="rounded-3xl m-auto max-md:h-60" />
       </div>
     </div>
   );

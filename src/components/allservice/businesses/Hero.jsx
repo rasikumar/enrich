@@ -18,6 +18,7 @@ const Hero = () => {
         <img
           src="https://dummyimage.com/600x400"
           alt="#"
+          loading="lazy"
           className="rounded-xl border border-primary shadow-drop"
         />
       </div>

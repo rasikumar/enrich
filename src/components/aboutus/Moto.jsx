@@ -9,11 +9,13 @@ const Moto = () => {
         <img
           src={Moto1}
           alt="Moto1"
+          loading="lazy"
           className="absolute right-0 top-0 rounded-2xl"
         />
         <img
           src={Moto2}
           alt="Moto2"
+          loading="lazy"
           className="absolute right-10 top-64 rounded-2xl"
         />
       </div>
