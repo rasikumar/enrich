@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { SquareLoader } from "react-spinners";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { lazy } from "react";
 
-import Heart from "./components/Heart";
+const Heart = lazy(() => import("./components/Heart"));
 import BlogDetails from "./components/blogpages/BlogDetails";
 import ProgramDisplay from "./components/allprogram/ProgramDisplay";
 // import AboutUs from "./components/AboutUs";

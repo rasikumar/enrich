@@ -7,9 +7,14 @@ import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState(""); // State for the selected nav item
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleNavClick = (title) => {
+    setActiveNav(title); // Set the active nav item
   };
 
   return (
@@ -41,10 +46,19 @@ const Navbar = () => {
           {Navigation.map((nav) => {
             return (
               <ul key={nav.id} className="md:flex">
-                <li className="bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1">
+                <li
+                  className={`bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0px_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out py-1 ${
+                    activeNav === nav.title
+                      ? "bg-[length:100%_2px] text-purple-500"
+                      : ""
+                  }`}
+                >
                   <Link
                     to={nav.path}
-                    className="primary-color hover:text-purple-500 font-medium hidden md:flex xl:text-base text-sm"
+                    onClick={() => handleNavClick(nav.title)} // Update active nav
+                    className={`primary-color hover:text-purple-500 font-medium hidden md:flex xl:text-base text-sm ${
+                      activeNav === nav.title ? "text-purple-500" : ""
+                    }`}
                   >
                     {nav.title}
                   </Link>
@@ -64,7 +78,10 @@ const Navbar = () => {
                 <li className="py-2">
                   <Link
                     to={nav.path}
-                    className="block text-gray-700 hover:text-purple-500 font-medium"
+                    onClick={() => handleNavClick(nav.title)}
+                    className={`block text-gray-700 hover:text-purple-500 font-medium ${
+                      activeNav === nav.title ? "text-purple-500 underline" : ""
+                    }`}
                   >
                     {nav.title}
                   </Link>
