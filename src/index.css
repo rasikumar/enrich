@@ -72,12 +72,13 @@
 .bg-yellow-500 {
   background-color: #fbbf24;
 }
+
+
 .cursor {
-  /* background-image: url("assets/cursor_logo.png"); */
-  background: #d69e2e;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
+  background-image: url("assets/nicon.png");
+  height: 40px;
+  width: 40px;
+  /* border-radius: 50%;  */
   position: fixed;
   top: 0;
   left: 0;

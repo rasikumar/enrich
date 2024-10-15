@@ -69,6 +69,9 @@ import interactive from "./services/individuals/interactive.png";
 import personalized from "./services/individuals/personalized.png";
 import realworld from "./services/individuals/realworld.png";
 
+//newsLetter
+import newsletter from "./newsletter.jpg";
+
 export {
   // blog images
   awarnessImagefull,
@@ -135,4 +138,7 @@ export {
   interactive,
   personalized,
   realworld,
+
+  //newsletter
+  newsletter,
 };

@@ -38,7 +38,7 @@ export const Navigation = [
   },
   {
     id: 3,
-    title: "Our Program",
+    title: "Our Programs",
     path: "/ourprogram",
   },
   //   {
@@ -217,7 +217,7 @@ export const About_Us = [
   {
     id: 0,
     title: "Believe to Become",
-    content: "Be Your Bestself",
+    content: "Your Bestself",
   },
   {
     id: 1,
@@ -273,5 +273,18 @@ export const About_Us = [
         content: "Nurturing mind, body, and spirit for total well-being.",
       },
     ],
+  },
+];
+
+export const News_letter = [
+  {
+    id: 0,
+    title: "Newsletter",
+    content: "ChangeABit: Transforming Minds, One Step At a Time",
+    para1:
+      "Discover the keys to achieving success through behavioral transformation and brain optimization with my weekly newsletter, Changeabit. Driven by my passion for behavioral skills and personal growth, Changeabit offers insights and practical tips to help you make meaningful changes that lead to lasting success.",
+    para2:
+      "Join our community and stay ahead with expert advice on mastering behaviors that can transform your personal and professional life.",
+    btn: "Subscribe to Our News letter",
   },
 ];

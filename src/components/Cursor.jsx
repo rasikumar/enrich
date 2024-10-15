@@ -6,7 +6,7 @@ const Cursor = () => {
     x: 0,
     y: 0,
   });
-//   console.log(mousePosition);
+  //   console.log(mousePosition);
 
   useEffect(() => {
     const mouseMove = (e) => {
@@ -25,11 +25,18 @@ const Cursor = () => {
     default: {
       x: mousePosition.x - 16,
       y: mousePosition.y - 16,
+      transition: {
+        type: "spring", 
+        damping: 20, 
+        stiffness: 150, 
+        delay: 0.2,
+        ease: "easeInOut",
+      },
     },
   };
 
   return (
-    <motion.div className="cursor" variants={variants} animate="default" />
+    <motion.div className="cursor z-[9999]" variants={variants} animate="default" />
   );
 };
 
