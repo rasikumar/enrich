@@ -47,7 +47,7 @@ const Methodology = () => {
         {list.map((listItem, index) => (
           <div key={index} className="relative" onClick={() => scrollToCard(index)}>
             <Card
-              image="https://dummyimage.com/100x100"
+              image={listItem.img}
               title={listItem.title}
               content={listItem.content}
             />

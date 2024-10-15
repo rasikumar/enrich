@@ -59,6 +59,16 @@ import Moto1 from "./about/Moto1.jpeg";
 import Moto2 from "./about/Moto2.jpeg";
 import scroll from "./scroll.mp4";
 
+// individuals service
+import individualbehavioral from "./services/individuals/behavioral.png";
+import countinuous from "./services/individuals/countinuous.png";
+import empower from "./services/individuals/empower.png";
+import Explore from "./services/individuals/Explore.png";
+import IndividualHero from "./services/individuals/Hero.png";
+import interactive from "./services/individuals/interactive.png";
+import personalized from "./services/individuals/personalized.png";
+import realworld from "./services/individuals/realworld.png";
+
 export {
   // blog images
   awarnessImagefull,
@@ -115,4 +125,14 @@ export {
   Moto1,
   Moto2,
   scroll,
+
+  // individuals service
+  individualbehavioral,
+  countinuous,
+  empower,
+  Explore,
+  IndividualHero,
+  interactive,
+  personalized,
+  realworld,
 };

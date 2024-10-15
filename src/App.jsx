@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState, lazy } from "react";
 import { SquareLoader } from "react-spinners";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import Cursor from "./components/Cursor";
 
 const Loader = () => {
   <div>
@@ -73,6 +74,7 @@ const App = () => {
         <>
           <AnimatePresence mode="wait">
             <Suspense fallback={<Loader />}>
+              <Cursor />
               <Navbar />
               <ScrollTop />
               <Routes location={location} key={location.pathname}>

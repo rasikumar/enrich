@@ -1,10 +1,17 @@
+import {
+  countinuous,
+  interactive,
+  personalized,
+  realworld,
+} from "../../assets";
+
 // Programs for Individuals
 export const Individuals_Content = [
   {
     id: 0,
-    title: "Personal Growth",
+    title: "Better Behaviour, Better YOU",
     content:
-      "Empower yourself with the skills and knowledge you need to achieve your goals and stay motivated.",
+      "How you’re perceived by the world often starts with your behavior. The way you interact, respond, and carry yourself shapes your opportunities and influences your success. Developing strong behavioral skills builds the confidence to make a lasting, positive impact.",
   },
   {
     id: 1,
@@ -16,31 +23,35 @@ export const Individuals_Content = [
     id: 2,
     heading: "Our Methodology",
     content:
-      "At Enrich, we believe in a holistic and practical approach to training. Our methodology includes",
+      "At Enrich, we believe in a holistic and practical approach to training.",
     list: [
       {
         id: 1,
         title: "Interactive Learning",
         content:
           "Engaging workshops and activities that promote active participation and hands-on experience.",
+        img: interactive,
       },
       {
         id: 2,
         title: "Real-World Applications",
         content:
           "Practical strategies and tools that you can immediately apply in your daily life.",
+        img: realworld,
       },
       {
         id: 3,
         title: "Personalized Guidance",
         content:
           "Tailored coaching and feedback to address your specific challenges and goals.",
+        img: personalized,
       },
       {
         id: 4,
         title: "Continuous Support",
         content:
           "Ongoing resources and support to ensure lasting impact and continuous improvement.",
+        img: countinuous,
       },
     ],
   },
@@ -52,9 +63,9 @@ export const Individuals_Content = [
   },
   {
     id: 4,
-    heading: "Discover Our Programs",
+    heading: "Explore Our Programs",
     content:
-      "Ready to transform your life? Visit Our Programs to choose the program that best fits your needs and start your journey to success today.", 
+      "Ready to transform your life? Visit Our Programs to choose the program that best fits your needs and start your journey to success today.",
   },
 ];
 
@@ -66,7 +77,7 @@ export const Corporates_Content = [
       "Empower yourself with the skills and knowledge you need to achieve your goals and stay motivated.",
   },
   {
-    id: 1, 
+    id: 1,
     heading: "Enhance Your Business with Corporate Soft Skills Training",
     content:
       "In today’s competitive business environment, soft skills are crucial for success. Enrich offers customized training programs designed to enhance the soft skills essential for any working environment. We cater to businesses of all sizes and industries, providing your team with the tools they need to excel.",

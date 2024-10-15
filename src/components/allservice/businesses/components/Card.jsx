@@ -7,7 +7,7 @@ export const Card = ({ image, title, content }) => {
 
   return (
     <div
-      className="flex flex-col w-[16rem] h-72 m-auto p-5 bg-gradient-to-b from-primary to-black gap-4 md:mr-10 mr-2 rounded-sm mt-10 mb-28 border"
+      className="flex flex-col w-[16rem] h-72 m-auto p-5 bg-gradient-to-b from-primary to-black gap-4 md:mr-10 mr-2 rounded-sm mt-10 md:mb-28 mb-10 border"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
