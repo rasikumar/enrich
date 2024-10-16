@@ -10,8 +10,10 @@ const Hero = () => {
         <h1 className="md:text-6xl text-9xl font-bold rotate-90 md:flex hidden fixed left-22 -z-20 text-slate-100 uppercase">
           Be Your Bestself
         </h1>
-        <h1 className="text-3xl tracking- font-bold text-primary">{title}</h1>
-        <p className="text-secondary text-6xl font-semibold text-end">{content}</p>
+        <h1 className="text-3xl font-bold text-primary">{title}</h1>
+        <p className="text-secondary md:text-6xl text-5xl max-md:mb-2 font-semibold md:text-end">
+          {content}
+        </p>
       </div>
       <div>
         <RippleImage

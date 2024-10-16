@@ -7,7 +7,7 @@ export const Card = ({ image, title, content }) => {
 
   return (
     <div
-      className="flex flex-col w-[16rem] h-72 m-auto p-5 bg-gradient-to-b from-primary to-black gap-4 md:mr-10 mr-2 rounded-sm mt-10 md:mb-28 mb-10 border"
+      className="flex flex-col xl:w-[16rem] lg:w-[14rem] w-[16rem] h-72 m-auto p-5 bg-gradient-to-b from-primary to-black gap-4 md:mr-10 mr-2 rounded-sm mt-10 md:mb-28 mb-10 border"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -15,8 +15,8 @@ export const Card = ({ image, title, content }) => {
         <img
           src={image}
           alt={title}
-          width={100}
-          height={100}
+          width={80}
+          height={80}
           className={`rounded-full transition-all ${
             hover ? "md:w-[200px]" : ""
           }`}

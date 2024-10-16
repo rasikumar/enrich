@@ -5,7 +5,7 @@
 
 @layer components {
   .btn-primary {
-    @apply py-2 px-5 max-md:text-xs bg-yellow-600 transition delay-75 text-white font-semibold rounded-md shadow-md hover:bg-white hover:text-yellow-600 transform duration-300 hover:scale-105;
+    @apply py-2 px-5 max-md:text-xs bg-yellow-600 transition delay-75 text-white font-semibold rounded-md shadow-md hover:bg-white hover:text-yellow-600 transform duration-300 hover:scale-105 cursor-none;
   }
 
   .primary-color {
@@ -28,7 +28,7 @@
   font-family: "Open Sans", sans-serif;
   margin: 0%;
   padding: 0%;
-  /* cursor: none; */
+  cursor: none;
 }
 
 @keyframes marquee {
@@ -74,13 +74,24 @@
 }
 
 
-.cursor {
-  background-image: url("assets/nicon.png");
+/* .cursor {
   height: 40px;
   width: 40px;
-  /* border-radius: 50%;  */
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
+  } */
+  .cursor{
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+    background-image: url("assets/nicon.png");
+  /* background-color: black; */
+  border-radius: 50%;
+  pointer-events: none;
+  rotate: -230deg;
+
 }

@@ -21,11 +21,11 @@ const Skill = () => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       transition={{ staggerChildren: 0.3, duration: 0.6, ease: "easeInOut" }}
-      className="md:flex flex-row-reverse items-center xl:justify-between lg:justify-center gap-32 xl:px-52 md:px-10 px-4 mb-20"
+      className="md:flex flex-row-reverse items-center justify-between gap-11 lg:px-24 px-4 md:mb-32 mb-8"
     >
       <motion.div
         variants={fadeIn}
-        className="md:w-[28rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
+        className="md:w-[30rem] xl:w-[32rem] lg:w-[30rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
       >
         <motion.h1
           variants={fadeIn}

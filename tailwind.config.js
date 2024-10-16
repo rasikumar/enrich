@@ -13,13 +13,11 @@ export default {
       16: "4rem",
     },
     extend: {
-      dropShadow: {
-        "4xl": "7px 6px 28px #b3b3b3",
-      },
       boxShadow: {
-        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
         custom: "4px 4px 30px rgba(0, 0, 0, 0.1)",
-        drop: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        drop: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;",
+        empose:
+          "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
       },
       backdropBlur: {
         custom: "2px",

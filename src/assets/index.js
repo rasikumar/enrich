@@ -69,6 +69,27 @@ import interactive from "./services/individuals/interactive.png";
 import personalized from "./services/individuals/personalized.png";
 import realworld from "./services/individuals/realworld.png";
 
+// corparetes service
+import corparates_hero from "./services/corparates/corparates_hero.png";
+import Customized_Programs from "./services/corparates/Customized_Programs.png";
+import Engaging_Workshops from "./services/corparates/Engaging_Workshops.png";
+import Expert_Trainers from "./services/corparates/Expert_Trainers.png";
+import Measurable_Outcomes from "./services/corparates/Measurable_Outcomes.png";
+import Ongoing_Support from "./services/corparates/Ongoing_Support.png";
+import Workplace from "./services/corparates/Workplace.png";
+import Enhance from "./services/corparates/Enhance.png";
+import Corparate_footer from "./services/corparates/Corparate_footer.jpg";
+
+// Compliance Service
+import Interactive_Sessions from "./services/compliance/Interactive_Sessions.png";
+import Expert_Trainer from "./services/compliance/Expert_Trainers.png";
+import Comprehensive_Materials from "./services/compliance/Comprehensive_Materials.png";
+import Customizable_Programs from "./services/compliance/Customizable_Programs.png";
+import Ongoing_Supports from "./services/compliance/Ongoing_Support.png";
+import Compliance_hero from "./services/compliance/Compliance_hero.jpg";
+import Stop from "./services/compliance/Stop.jpg";
+import Together from "./services/compliance/Together.jpg";
+
 //newsLetter
 import newsletter from "./newsletter.jpg";
 
@@ -138,6 +159,27 @@ export {
   interactive,
   personalized,
   realworld,
+
+  // corparates service
+  corparates_hero,
+  Customized_Programs,
+  Engaging_Workshops,
+  Expert_Trainers,
+  Measurable_Outcomes,
+  Ongoing_Support,
+  Workplace,
+  Enhance,
+  Corparate_footer,
+
+  // Compliance Service
+  Interactive_Sessions,
+  Expert_Trainer,
+  Comprehensive_Materials,
+  Customizable_Programs,
+  Ongoing_Supports,
+  Compliance_hero,
+  Stop,
+  Together,
 
   //newsletter
   newsletter,

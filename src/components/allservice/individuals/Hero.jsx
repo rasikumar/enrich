@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Individuals_Content } from "../index";
-import { IndividualHero } from "../../../assets";
+import { corparates_hero } from "../../../assets";
 
 const Hero = () => {
   const { title, content } = Individuals_Content[0];
@@ -20,18 +20,18 @@ const Hero = () => {
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className="md:flex md:px-24 py-10 px-4 items-center justify-center gap-2 "
+      className="md:flex lg:px-24 px-4 items-center xl:justify-between lg:justify-center gap-2 h-screen -my-10 mb-5 "
       transition={{ staggerChildren: 0.3 }} // Staggering child animations
     >
       <motion.div
-        className="md:w-[28rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
+        className="md:w-[28rem] xl:w-[40rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
         initial="hidden"
         animate="visible"
         exit="hidden"
         transition={{ duration: 0.6, ease: "easeInOut" }}
       >
         <motion.h1
-          className="xl:text-5xl lg:text-4xl text-4xl text-primary font-bold"
+          className="xl:text-5xl lg:text-3xl text-2xl text-primary font-bold"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -52,8 +52,8 @@ const Hero = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <img
-          src={IndividualHero}
-          alt="#IndividualHero"
+          src={corparates_hero}
+          alt="#corparate_image"
           width=""
           height=""
           className="rounded-xl "

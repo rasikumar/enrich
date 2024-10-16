@@ -8,17 +8,17 @@ import { logo } from "../assets";
 const Footer = () => {
   return (
     <div className="bg-slate-100 ">
-      <div className="py-6 px-2 m-auto xl:w-96 md:w-96 gap-3 flex flex-col">
+      <div className="py-6 px-2 m-auto w-[35rem] gap-3 flex flex-col">
         <h1 className="text-center xl:text-lg md:text-sm  ">
           Subscribe for Insights, Updates, and More!
         </h1>
-        <div className="flex ">
+        <div className="flex border border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2">
           <input
             type="text"
             placeholder="Enter Your Mail"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 xl:text-lg sm:text-sm "
+            className="mt-1 block bg-none w-full px-3 py-2 rounded-md focus:outline-none  xl:text-lg sm:text-sm "
           />
-          <button className="btn-primary">
+          <button className="py-2 px-5 max-md:text-xs bg-yellow-600 transition delay-75 text-white font-semibold rounded-md hover:shadow-md hover:bg-white hover:text-yellow-600 cursor-none">
             Subscribe
           </button>
         </div>

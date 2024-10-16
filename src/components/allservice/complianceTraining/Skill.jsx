@@ -1,23 +1,52 @@
+import { useRef } from "react";
+import { Stop } from "../../../assets";
 import { Compliance_Content } from "../index";
+import { motion, useInView } from "framer-motion";
 
 const Skill = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 30 },
+    transition: { duration: 0.6, ease: "easeInOut" },
+  };
+
   const { heading, content } = Compliance_Content[3];
   return (
-    <div className="md:flex flex-row-reverse items-center xl:justify-between lg:justify-center gap-32 xl:px-52 md:px-10 px-4 mb-20">
-      <div className="md:w-[28rem] flex flex-col md:gap-6 gap-2 max-md:mb-4">
-        <h1 className="xl:text-3xl lg:text-2xl text-lg text-primary font-medium">
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      transition={{ staggerChildren: 0.3, duration: 0.6, ease: "easeInOut" }}
+      className="md:flex flex-row-reverse items-center justify-between gap-11 lg:px-24 px-4 md:mb-32 mb-8"
+    >
+      <motion.div
+        variants={fadeIn}
+        className="md:w-[30rem] xl:w-[32rem] lg:w-[30rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
+      >
+        <motion.h1
+          variants={fadeIn}
+          className="xl:text-3xl lg:text-2xl text-lg text-primary font-medium"
+        >
           {heading}
-        </h1>
-        <p className="text-justify xl:text-lg text-sm">{content}</p>
-      </div>
-      <div className="">
+        </motion.h1>
+        <motion.p variants={fadeIn} className="text-justify xl:text-lg text-sm">
+          {content}
+        </motion.p>
+      </motion.div>
+      <motion.div variants={fadeIn} className="">
         <img
-          src="https://dummyimage.com/500x400"
-          alt={content}
+          src={Stop}
+          alt={Stop}
+          width=""
+          height=""
           className="rounded-xl border border-primary shadow-drop mb-4 xl:w-[500px] xl:h-[400px] h-[300px] "
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

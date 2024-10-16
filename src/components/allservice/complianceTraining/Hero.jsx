@@ -1,26 +1,64 @@
 import { motion } from "framer-motion";
 import { Compliance_Content } from "../index";
+import { Compliance_hero } from "../../../assets";
 
 const Hero = () => {
   const { title, content } = Compliance_Content[0];
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const fadeScale = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="md:flex md:px-24 py-10 px-4 items-center justify-center gap-36"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      className="md:flex lg:px-24 px-4 items-center xl:justify-between lg:justify-center gap-2 h-screen -my-10 mb-5 "
+      transition={{ staggerChildren: 0.3 }} // Staggering child animations
     >
-      <div className="md:w-[28rem] flex flex-col md:gap-6 gap-2 max-md:mb-4">
-        <h1 className="xl:text-5xl lg:text-4xl text-4xl  text-primary font-bold">{title}</h1>
-        <p className="xl:text-lg text-sm">{content}</p>
-      </div>
-      <div>
+      <motion.div
+        className="md:w-[28rem] xl:w-[40rem] flex flex-col md:gap-6 gap-2 max-md:mb-4"
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        <motion.h1
+          className="xl:text-5xl lg:text-3xl text-2xl text-primary font-bold"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {title}
+        </motion.h1>
+
+        <motion.p
+          className="xl:text-lg text-sm text-justify"
+          variants={fadeUp}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }} // Slight delay after title
+        >
+          {content}
+        </motion.p>
+      </motion.div>
+
+      <motion.div
+        variants={fadeScale}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <img
-          src="https://dummyimage.com/600x400"
-          alt="#"
-          className="rounded-xl border border-primary shadow-drop"
+          src={Compliance_hero}
+          alt="Compliance_hero"
+          width=""
+          height=""
+          className="rounded-xl "
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

@@ -3,7 +3,7 @@ import { Explore } from "../../../assets";
 const Programs = () => {
   const { heading, content } = Individuals_Content[4];
   return (
-    <div className="relative xl:h-[14rem] h-[12rem] items-center flex xl:px-44 md:px-32 px-4">
+    <div className="relative xl:h-[14rem] h-[12rem] items-center flex xl:px-24 lg:px-20 md:px-32 px-4">
       <div className="absolute inset-0 md:w-[90%] -z-10 bg-gradient-to-r from-primary to-primary/80 rounded-tr-md rounded-br-md">
         <img
           src={Explore}

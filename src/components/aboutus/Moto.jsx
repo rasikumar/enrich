@@ -4,7 +4,7 @@ import { About_Us } from "../../constant";
 const Moto = () => {
   const { title, content, content2, content3 } = About_Us[4];
   return (
-    <div className="flex md:h-[50rem] p-4 justify-center md:gap-32">
+    <div className="flex md:h-[40rem] p-4 justify-center md:gap-32">
       <div className="relative md:w-[30%] h-full">
         <img
           src={Moto1}

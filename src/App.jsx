@@ -72,6 +72,7 @@ const App = () => {
         />
       ) : (
         <>
+          
           <AnimatePresence mode="wait">
             <Suspense fallback={<Loader />}>
               <Cursor />

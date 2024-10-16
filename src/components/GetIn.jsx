@@ -47,9 +47,9 @@ const GetIn = () => {
   return (
     <div
       id="getIn"
-      className="bg-gray-300 justify-center gap-60 xl:p-10 md:py-10 md:px-5 md:flex  shadow-md"
+      className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between "
     >
-      <div className="md:w-[30%] p-4 flex flex-col gap-5 md:mb-10 ">
+      <div className="md:w-[40%] p-4 flex flex-col gap-5 md:mb-10 ">
         <h2 className="text-black md:text-4xl text-2xl font-semibold ">
           Get in touch
         </h2>
