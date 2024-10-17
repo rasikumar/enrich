@@ -1,14 +1,46 @@
+import { Helmet } from "react-helmet";
+import Hero from "./Hero";
+import Methodology from "./Methodology";
+import Programs from "./Programs";
+import Skill from "./Skill";
+import Training from "./Training";
+import { motion } from "framer-motion";
+
+const pageVariants = {
+  initial: { opacity: 0, y: 0 },
+  in: { opacity: 1, y: 0 },
+  out: { opacity: 0, y: "-100vw" },
+};
+const pageTransition = {
+  type: "linear",
+  ease: [0.25, 0.1, 0.25, 1],
+  duration: 0.4,
+};
 const Psychometric = () => {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center bg-white p-10 rounded-lg shadow-lg">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Psychometric</h1>
-          <p className="text-lg text-gray-600 mb-2">We are working hard to bring this feature to you.</p>
-          <p className="text-xl font-semibold text-gray-700">Coming Soon...</p>
-        </div>
-      </div>
-    );
-  };
-  
-  export default Psychometric;
-  
+  return (
+    <>
+      <Helmet>
+        <title>Psychometric | Enrich Minds</title>
+        <meta
+          name="keywords"
+          content="Behavioral skills training,Personal growth,Essential behavioral skills,Communication skills,Emotional intelligence,Professional settings,Personal development,Upskill,Corporate success,"
+        />
+      </Helmet>
+      <motion.div
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        <Hero />
+        <Training />
+        <Methodology />
+        <Skill />
+        <Programs />
+      </motion.div>
+    </>
+  );
+};
+
+export default Psychometric;

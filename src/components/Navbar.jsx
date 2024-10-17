@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-6 w-[90%] md:w-[86%] text-sm ml-auto mr-auto z-[1000] rounded-md transition duration-500 shadow-drop bg-white`}
+      className={`sticky top-6 w-[90%] md:w-[86%] text-sm ml-auto mr-auto z-[49] rounded-md transition duration-500 shadow-drop bg-white`}
     >
       <nav className="flex items-center justify-between p-4 rounded-md border-[1px] border-yellow-600">
         {/* Logo Section */}

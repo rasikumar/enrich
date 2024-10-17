@@ -16,7 +16,7 @@ const pageTransition = {
   ease: [0.25, 0.1, 0.25, 1],
   duration: 0.4,
 };
-const Businesses = () => {
+const Individuals = () => {
   return (
     <>
       <Helmet>
@@ -43,4 +43,4 @@ const Businesses = () => {
   );
 };
 
-export default Businesses;
+export default Individuals;

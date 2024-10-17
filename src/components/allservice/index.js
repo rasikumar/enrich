@@ -1,16 +1,22 @@
 import {
+  Actionable_Plans,
   Comprehensive_Materials,
+  Confidentiality_Support,
   countinuous,
+  Customizable_Program,
   Customized_Programs,
   Engaging_Workshops,
+  Expert_Analysis,
   Expert_Trainer,
   Expert_Trainers,
+  GoalOriented_Counseling,
   interactive,
   Interactive_Sessions,
   Measurable_Outcomes,
   Ongoing_Support,
   Ongoing_Supports,
   personalized,
+  Personalized_Insights,
   realworld,
 } from "../../assets";
 
@@ -193,7 +199,7 @@ export const Compliance_Content = [
         title: "Customizable Programs",
         content:
           "Tailored training solutions that address the specific needs and culture of your organization.",
-        img: Customized_Programs,
+        img: Customizable_Program,
       },
       {
         id: 4,
@@ -216,5 +222,78 @@ export const Compliance_Content = [
     content:
       "Protect your organization and promote a respectful workplace. Connect with us to deliver our POSH compliance training and other compliance programs tailored to your needs.",
     btn: "Contact Now",
+  },
+];
+
+export const Psychometric_Content = [
+  {
+    id: 0,
+    title: "Discover Yourself, Empower Your Journey",
+    content:
+      "Understanding yourself is the essential first step toward personal and professional growth. At EnrichMinds, we believe that self-awareness is the key to transformation. Our comprehensive psychometric assessments and expert counseling services are designed to provide valuable insights into your strengths, weaknesses, and behavioral patterns. By gaining a deeper understanding of your personality and emotional intelligence, you can make informed decisions that lead to a more fulfilling and successful life. Embrace self-discovery today to unlock your potential and enhance your overall well-being.",
+  },
+  {
+    id: 1,
+    heading: "Comprehensive Psychometric Assessments and Counseling",
+    content:
+      "At EnrichMinds, we offer a diverse range of psychometric assessments tailored to explore critical facets of your personality, including intelligence, interests, emotional intelligence, and job preferences. Our assessments are meticulously designed to provide valuable insights into your unique strengths and weaknesses, enabling you to understand your behavioral patterns and preferences in both personal and professional contexts. By evaluating essential factors such as cognitive abilities, motivational drivers, and work style, you can effectively tailor your personal growth journey for optimal success.",
+    content2:
+      "For organizations, our psychometric evaluations play a crucial role in identifying the right talent, enhancing team dynamics, and promoting effective communication. Combined with our professional counseling services, these assessments empower you to address challenges, set achievable goals, and navigate your path toward success. Experience a transformative journey toward self-awareness and growth that not only enhances individual capabilities but also boosts overall organizational performance.",
+  },
+  {
+    id: 2,
+    heading: "Our Approach",
+    content:
+      "At EnrichMinds, we take a holistic approach to psychometric assessments and counseling, providing actionable insights that empower your personal and professional growth",
+    list: [
+      {
+        id: 0,
+        title: "Personalized Insights",
+        content:
+          "Each assessment is customized to meet your specific needs, ensuring that the feedback is both relevant and practical.",
+        img: Personalized_Insights,
+      },
+      {
+        id: 1,
+        title: "Expert Analysis",
+        content:
+          "Our qualified professionals thoroughly analyze your results and provide clear, concise feedback that you can easily understand.",
+        img: Expert_Analysis,
+      },
+      {
+        id: 2,
+        title: "Goal-Oriented Counseling",
+        content:
+          "Our counseling sessions are designed to help you apply assessment results to achieve your personal and professional goals.",
+        img: GoalOriented_Counseling,
+      },
+      {
+        id: 3,
+        title: "Confidentiality & Support",
+        content:
+          "We prioritize your privacy and offer ongoing support throughout the entire assessment and counseling process.",
+        img: Confidentiality_Support,
+      },
+      {
+        id: 4,
+        title: "Actionable Plans",
+        content:
+          "After each assessment, we provide you with a tailored action plan to help you grow and succeed in every aspect of life.",
+        img: Actionable_Plans,
+      },
+    ],
+  },
+  {
+    id: 3,
+    heading: "Why Psychometric Assessments Matter",
+    content:
+      "Psychometric assessments are crucial for understanding the intricate aspects of personality, motivation, and cognitive abilities. They provide objective data that helps in making informed decisions about career paths, team compositions, and personal development strategies. By leveraging these insights, individuals can enhance their skill sets and organizations can cultivate a more engaged and productive workforce. Investing in psychometric assessments is investing in a brighter future for yourself or your business.",
+  },
+  {
+    id: 4,
+    heading: "Discover Your Path Forward",
+    content:
+      "Ready to take the next step in your personal or organizational journey? Connect with us to schedule your psychometric assessment and book a counseling session tailored to your needs. Empower yourself with the insights and guidance necessary for lasting success.",
+    btn: "Book Your Assessment Now",
   },
 ];

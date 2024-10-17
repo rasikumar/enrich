@@ -4,6 +4,7 @@ import { SquareLoader } from "react-spinners";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Cursor from "./components/Cursor";
+import BookSession from "./components/BookSession";
 
 const Loader = () => {
   <div>
@@ -72,10 +73,10 @@ const App = () => {
         />
       ) : (
         <>
-          
           <AnimatePresence mode="wait">
             <Suspense fallback={<Loader />}>
               <Cursor />
+              <BookSession />
               <Navbar />
               <ScrollTop />
               <Routes location={location} key={location.pathname}>
