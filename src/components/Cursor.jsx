@@ -16,8 +16,8 @@ const Cursor = () => {
 
   const manageMouseMove = (e) => {
     const { clientX, clientY } = e;
-    mouse.x.set(clientX - cursorsize / 2);
-    mouse.y.set(clientY - cursorsize / 2);
+    mouse.x.set(clientX - cursorsize / 1);
+    mouse.y.set(clientY - cursorsize / 4);
   };
 
   useEffect(() => {

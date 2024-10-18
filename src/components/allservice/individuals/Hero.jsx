@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Individuals_Content } from "../index";
-import { corparates_hero } from "../../../assets";
+import { IndividualHero } from "../../../assets";
 
 const Hero = () => {
   const { title, content } = Individuals_Content[0];
@@ -52,8 +52,8 @@ const Hero = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <img
-          src={corparates_hero}
-          alt="#corparate_image"
+          src={IndividualHero}
+          alt="#IndividualHero"
           width=""
           height=""
           className="rounded-xl "

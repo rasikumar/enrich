@@ -14,10 +14,11 @@ const BookSession = () => {
 
   return (
     <div className="fixed z-50 bottom-10 right-10 bg-secondary py-2 px-3 rounded-xl">
-      <motion.button 
-      
-      whileTap={{ scale: 0.95 }}
-      onClick={toggleModal} className="flex items-center space-x-2">
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={toggleModal}
+        className="flex items-center space-x-2"
+      >
         <FaBook />
         <span>Book a Session</span>
       </motion.button>

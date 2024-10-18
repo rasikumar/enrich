@@ -105,6 +105,9 @@ import Actionable_Plans from "./services/psychometric/Actionable_Plans.svg";
 //newsLetter
 import newsletter from "./newsletter.jpg";
 
+//ffor form sendinn
+import Sending from "./Sending.webm";
+
 export {
   // blog images
   awarnessImagefull,
@@ -207,4 +210,7 @@ export {
 
   //newsletter
   newsletter,
+
+  // form sending
+  Sending,
 };

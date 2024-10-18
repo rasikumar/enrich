@@ -11,14 +11,15 @@ const FormModel = ({ message, onClose, children }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[50rem] h-[30rem] relative">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-[60rem] h-[35rem] relative">
         <div>{message}</div>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.3 }}
           onClick={onClose}
-          className="absolute top-2 right-2 text-2xl font-bold text-gray-700 cursor-none"
+          className="absolute top-2 right-4 text-4xl font-bold text-gray-700 cursor-none"
         >
           &times;
-        </button>
+        </motion.button>
         {children}
       </div>
     </motion.div>

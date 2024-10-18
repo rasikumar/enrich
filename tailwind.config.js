@@ -33,6 +33,7 @@ export default {
       },
       backgroundImage: {
         Hero: "url('/src/assets/hero/heroBg.png')",
+        formback: "url('/src/assets/formBack.png')",
       },
       fontFamily: {
         reggae: ["Reggae One", "system-ui"],
