@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Sending } from "../../../../assets";
+import { QR, Sending } from "../../../../assets";
 // import { FaClock, FaVideo } from "react-icons/fa";
 
 const PsychometricForm = () => {
@@ -326,7 +326,7 @@ const PsychometricForm = () => {
               </motion.p>
               <motion.div
                 className="mb-4"
-                initial={{ opacity: 0, x: 80 }}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
@@ -349,7 +349,12 @@ const PsychometricForm = () => {
                   </p>
                 )}
               </motion.div>
-              <motion.div className="mb-4" initial="hidden" animate="visible">
+              <motion.div
+                className="mb-4"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, x: 10 }}
+              >
                 <label className="block text-gray-700 mb-2">Select Date</label>
                 <input
                   type="datetime-local"
@@ -412,9 +417,8 @@ const PsychometricForm = () => {
                     className="w-full p-2 border rounded"
                     required
                   >
-                    <option value="">Select Payment Method</option>
                     <option value="Gpay">Gpay</option>
-                    <option value="credit_card">Credit Card</option>
+                    <option value="CreditCard">CreditCard</option>
                   </select>
                   {errors.paymentMethod && (
                     <p className="text-red-500 text-sm">
@@ -445,6 +449,8 @@ const PsychometricForm = () => {
                     </p>
                   )}
                 </motion.div>
+                <img src={QR} width={150} height={150} alt="QR" />
+                <span>Amout : ₹ 499</span>
               </div>
 
               <button
@@ -506,11 +512,11 @@ const PsychometricForm = () => {
                 <p>
                   <strong>Payment Details:</strong> {formData.paymentDetails}
                 </p>
-                {formData.uploadedImage && ( // Add this condition to check if there's an uploaded image
+                {formData.paymentDetails && (
                   <div className="mt-2">
                     <strong>Uploaded Image:</strong>
                     <img
-                      src={formData.uploadedImage}
+                      src={formData.paymentDetails}
                       alt="Uploaded"
                       className="mt-2 w-32 h-32 object-cover rounded"
                     />

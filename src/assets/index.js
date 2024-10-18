@@ -108,6 +108,9 @@ import newsletter from "./newsletter.jpg";
 //ffor form sendinn
 import Sending from "./Sending.webm";
 
+// payment Picture
+import QR from "./QR.jpg";
+
 export {
   // blog images
   awarnessImagefull,
@@ -213,4 +216,7 @@ export {
 
   // form sending
   Sending,
+
+  // payment Picture
+  QR,
 };
