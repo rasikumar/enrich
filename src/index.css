@@ -95,3 +95,8 @@
   rotate: -230deg;
 
 }
+.parallax {
+  transform: translateY(0);
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}

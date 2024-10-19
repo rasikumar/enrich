@@ -23,7 +23,7 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6; // Number of blogs per page
   const pageLimit = 10; // Number of pages before showing dots
- 
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -106,7 +106,7 @@ const Blog = () => {
     if (startPage > 1) {
       pagesToShow.push(1);
       if (startPage > 2) {
-        pagesToShow.push('...');
+        pagesToShow.push("...");
       }
     }
 
@@ -116,7 +116,7 @@ const Blog = () => {
 
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
-        pagesToShow.push('...');
+        pagesToShow.push("...");
       }
       pagesToShow.push(totalPages);
     }
@@ -132,7 +132,7 @@ const Blog = () => {
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
-            disabled={page === '...'}
+            disabled={page === "..."}
           >
             {page}
           </button>
@@ -160,7 +160,7 @@ const Blog = () => {
             {/* Image Section */}
             <div className="relative w-full overflow-hidden">
               <img
-                src={`http://192.168.20.7:3000/blog_images/${blog.blog_image}`}
+                src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
                 alt={blog.blog_title}
                 className="transition-transform duration-500 ease-in-out group-hover:scale-110 w-full h-60 object-cover"
               />

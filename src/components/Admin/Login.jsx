@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import Instance from "./Instance"; // Import your axios instance
-import Evvi_new from "../../assets/Evvi_new.png";
+import Evvi_new from "../../assets/logo.png";
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();

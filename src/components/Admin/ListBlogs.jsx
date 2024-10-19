@@ -161,7 +161,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_image && (
                 <img
-                  src={`http://192.168.20.7:3000/blog_images/${blog.blog_image}`}
+                  src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{ maxWidth: "10%", height: "auto" }}

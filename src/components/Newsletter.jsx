@@ -4,14 +4,14 @@ import { News_letter } from "../constant";
 const Newsletter = () => {
   const { title, content, para1, para2, btn } = News_letter[0];
   return (
-    <div className="mx-auto p-4 lg:px-20 flex flex-col lg:flex-row items-center max-md:gap-5 shadow-empose w-[90%] mt-10">
+    <div className="mx-auto p-10 lg:px-20 flex flex-col lg:flex-row items-center max-md:gap-5 shadow-empose w-[90%] mt-10">
       <div className="md:w-[50%]">
         <img
           src={newsletter}
           alt="newsLetter"
           width={400}
           height={400}
-          className="rounded-lg"
+          className="rounded-lg hover:scale-105 transition-all"
         />
       </div>
       <div className="md:w-[50%]">

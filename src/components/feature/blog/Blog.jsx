@@ -70,7 +70,7 @@ const Blog = () => {
                 >
                   <div>
                     <img
-                      src={`http://192.168.20.7:3000/blog_images/${item.blog_image}`}
+                      src={`http://192.168.20.7:5000/blog_images/${item.blog_image}`}
                       alt={item.title}
                       className="rounded-lg w-16 h-20 object-center"
                     />
@@ -112,7 +112,7 @@ const Blog = () => {
                 >
                   <div>
                     <img
-                      src={`http://192.168.20.7:3000/blog_images/${item.blog_image}`}
+                      src={`http://192.168.20.7:5000/blog_images/${item.blog_image}`}
                       alt={item.title}
                       width={800}
                       className="h-[380px] max-mobile:h-[200px] rounded-lg object-cover"
