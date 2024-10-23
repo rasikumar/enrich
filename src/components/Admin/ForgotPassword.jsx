@@ -1,26 +1,40 @@
 import { useState } from "react";
 import Instance from "./Instance";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [error, setError] = useState("");
+  const validateEmail = (email) => {
+    // Email validation regex: checks for valid email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (email.length < 3 || email.length > 254) {
+      toast.error("Email must be between 3 and 254 characters long.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      toast.error("Invalid email format.");
+      return;
+    }
+
     try {
       const response = await Instance.post("/auth/requestPasswordReset", {
         email,
       });
       if (response.status === 200) {
         toast.success(response.data.message);
-        setMessage(response.data.message);
       } else {
-        setError("Failed to send password reset link.");
+        toast.error(response.data.message);
       }
     } catch (err) {
-      setError("Error sending password reset link.");
+      toast.error("email is not registered");
     }
   };
 
@@ -28,8 +42,8 @@ const ForgotPassword = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
         <h2 className="text-xl font-semibold text-center">Forgot Password</h2>
-        {message && <div className="text-green-500 text-center">{message}</div>}
-        {error && <div className="text-red-500 text-center">{error}</div>}
+        {/* {message && <div className="text-green-500 text-center">{message}</div>} */}
+        {/* {error && <div className="text-red-500 text-center">{error}</div>} */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
             <div>
@@ -58,6 +72,7 @@ const ForgotPassword = () => {
             </p>
           </div>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

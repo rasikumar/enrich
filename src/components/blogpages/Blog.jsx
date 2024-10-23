@@ -19,7 +19,7 @@ const App = () => {
       <main>
         <BlogsList />
       </main>
-      <Link to={"/BlogDisplay"}>
+      <Link to={"/blog"}>
         <button className="mt-10 btn-primary flex m-auto">More Blogs</button>
       </Link>
     </div>

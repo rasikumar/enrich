@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { QR, Sending } from "../../../../assets";
 // import { FaClock, FaVideo } from "react-icons/fa";
@@ -7,15 +7,45 @@ const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
   const [successMessage, setSuccessMessage] = useState(false);
+  const [isOpenTime, setIsOpenTime] = useState(false);
+  const [isOpenAssesment, setIsOpenAssesment] = useState(false);
+
+  const timeOptions = [
+    { value: "6.00pm - 7.00pm", label: "6.00pm - 7.00pm" },
+    { value: "7.00pm - 8.00pm", label: "7.00pm - 8.00pm" },
+    { value: "8.00pm - 9.00pm", label: "8.00pm - 9.00pm" },
+  ];
+
+  const assesmentOptions = [
+    { value: "Personality Test", label: "Personality Test" },
+    { value: "Cognitive Test", label: "Cognitive Test" },
+    { value: "Emotional Intelligence", label: "Emotional Intelligence" },
+  ];
+
+  const assesmentDropDown = () => setIsOpenAssesment(!isOpenAssesment);
+
+  const handleAssesmentSelect = (value) => {
+    setFormData({ ...formData, selectedAssessment: value });
+    setIsOpenAssesment(false);
+  };
+
+  const timeDropDown = () => setIsOpenTime(!isOpenTime);
+
+  const handleTimeSelect = (value) => {
+    setFormData({ ...formData, slots: value });
+    setIsOpenTime(false);
+  };
+
+  const today = new Date().toISOString().split("T")[0];
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     number: "",
     age: "",
-    assessmentType: "",
+    selectedAssessment: "",
     selectDate: "",
-    selectTime: "",
-    paymentMethod: "",
+    slots: "",
     paymentDetails: "",
   });
 
@@ -63,10 +93,12 @@ const PsychometricForm = () => {
   const validateStepTwo = () => {
     const newErrors = {};
 
-    if (!formData.assessmentType) {
-      newErrors.assessmentType = "Assessment type is required";
+    if (!formData.selectedAssessment) {
+      newErrors.selectedAssessment = "Assessment type is required";
     }
-
+    if (!formData.slots) {
+      newErrors.slots = "Slots type is required";
+    }
     if (!selectedDate) {
       newErrors.selectDate = "Date is required";
     }
@@ -77,10 +109,6 @@ const PsychometricForm = () => {
 
   const validateStepThree = () => {
     const newErrors = {};
-
-    if (!formData.paymentMethod) {
-      newErrors.paymentMethod = "Payment method is required";
-    }
 
     if (!formData.paymentDetails) {
       newErrors.paymentDetails = "Payment details are required";
@@ -98,9 +126,9 @@ const PsychometricForm = () => {
   };
 
   const handleNext = () => {
-    if (currentStep === 1 && validateStepOne()) {
+    if (currentStep === 1 || validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 2 && validateStepTwo()) {
+    } else if (currentStep === 2 || validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else if (currentStep === 3 && validateStepThree()) {
       setCurrentStep((prevStep) => prevStep + 1);
@@ -325,27 +353,54 @@ const PsychometricForm = () => {
                 Choose your Assesment type and Schedule
               </motion.p>
               <motion.div
-                className="mb-4"
+                className="relative w-full mb-4"
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
                 <label className="block text-gray-700">Assessment Type</label>
-                <select
-                  name="assessmentType"
-                  value={formData.assessmentType}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded"
-                  required
+                <div
+                  className="p-2 border rounded cursor-pointer"
+                  onClick={assesmentDropDown}
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded={isOpenAssesment}
                 >
-                  <option value="">Select Type</option>
-                  <option value="personality">Personality Test</option>
-                  <option value="cognitive">Cognitive Test</option>
-                  <option value="emotional">Emotional Intelligence</option>
-                </select>
-                {errors.assessmentType && (
+                  {formData.selectedAssessment
+                    ? assesmentOptions.find(
+                        (opt) => opt.value === formData.selectedAssessment
+                      ).label
+                    : "Select Assessment"}
+                </div>
+
+                <AnimatePresence>
+                  {isOpenAssesment && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      role="menu"
+                      className="absolute w-full bg-white border rounded mt-2 shadow-md"
+                    >
+                      {assesmentOptions.map((option) => (
+                        <motion.li
+                          className="p-2 hover:bg-gray-200 cursor-pointer"
+                          key={option.value}
+                          whileHover={{ scale: 1.05 }}
+                          onClick={() => handleAssesmentSelect(option.value)}
+                          role="menuitem"
+                        >
+                          {option.value}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+
+                {errors.selectedAssessment && (
                   <p className="text-red-500 text-sm">
-                    {errors.assessmentType}
+                    {errors.selectedAssessment}
                   </p>
                 )}
               </motion.div>
@@ -357,14 +412,58 @@ const PsychometricForm = () => {
               >
                 <label className="block text-gray-700 mb-2">Select Date</label>
                 <input
-                  type="datetime-local"
+                  type="date"
                   name="selectDate"
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
+                  min={today}
                   className="w-full p-2 border rounded"
                 />
                 {errors.selectDate && (
                   <p className="text-red-500 text-sm">{errors.selectDate}</p>
+                )}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, x: 10 }}
+                className="relative w-full"
+              >
+                <label className="block text-gray-700 mb-2">Slots</label>
+                <div
+                  className="p-2 border rounded cursor-pointer"
+                  onClick={timeDropDown}
+                >
+                  {formData.slots
+                    ? timeOptions.find((opt) => opt.value === formData.slots)
+                        .label
+                    : "Select Type"}
+                </div>
+                <AnimatePresence>
+                  {isOpenTime && (
+                    <motion.ul
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute w-full bg-white border rounded mt-2 shadow-md"
+                    >
+                      {timeOptions.map((option) => (
+                        <motion.li
+                          key={option.value}
+                          className="p-2 hover:bg-gray-200 cursor-pointer"
+                          whileHover={{ scale: 1.05 }}
+                          onClick={() => handleTimeSelect(option.value)}
+                        >
+                          {option.label}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+                {errors.slots && (
+                  <p className="text-red-500 text-sm">{errors.slots}</p>
                 )}
               </motion.div>
 
@@ -392,7 +491,7 @@ const PsychometricForm = () => {
                 transition={{ duration: 0.5, x: 10 }}
                 className="text-2xl font-semibold"
               >
-                Pesronal info
+                Payment
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, x: 20 }}
@@ -400,33 +499,10 @@ const PsychometricForm = () => {
                 transition={{ duration: 0.5, x: 10 }}
                 className="text-slate-400 text-sm"
               >
-                Kindly Provide your pesronal Information
+                Complete your booking by providing payment details and scanning
+                the QR code.
               </motion.p>
               <div className="mb-4">
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, x: 10 }}
-                  className="mb-4"
-                >
-                  <label className="block text-gray-700">Payment Method</label>
-                  <select
-                    name="paymentMethod"
-                    value={formData.paymentMethod}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded"
-                    required
-                  >
-                    <option value="Gpay">Gpay</option>
-                    <option value="CreditCard">CreditCard</option>
-                  </select>
-                  {errors.paymentMethod && (
-                    <p className="text-red-500 text-sm">
-                      {errors.paymentMethod}
-                    </p>
-                  )}
-                </motion.div>
-
                 <motion.div
                   className="mb-4"
                   initial={{ opacity: 0, x: 40 }}
@@ -501,13 +577,11 @@ const PsychometricForm = () => {
                   <strong>Age:</strong> {formData.age}
                 </p>
                 <p>
-                  <strong>Assessment Type:</strong> {formData.assessmentType}
+                  <strong>Assessment Type:</strong>{" "}
+                  {formData.selectedAssessment}
                 </p>
                 <p>
-                  <strong>Date and Time</strong> {selectedDate}
-                </p>
-                <p>
-                  <strong>Payment Method:</strong> {formData.paymentMethod}
+                  <strong>Date and Time</strong> {selectedDate} {formData.slots}
                 </p>
                 <p>
                   <strong>Payment Details:</strong> {formData.paymentDetails}

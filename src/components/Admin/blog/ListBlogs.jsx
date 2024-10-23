@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Instance from "./Instance";
+import Instance from "../Instance";
 import DOMPurify from "dompurify";
 import EditBlog from "./EditBlog";
 import DeleteBlog from "./DeleteBlog";
@@ -45,8 +45,10 @@ const ListBlog = () => {
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );
         setBlogs(sortedBlogList);
+        // console.log(response);
       } catch (err) {
         setError("Failed to fetch blogs");
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -122,7 +124,7 @@ const ListBlog = () => {
           {currentBlogs.map((blog) => (
             <li
               key={blog.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 max-h-32 sm:max-h-36"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 max-h-32 sm:max-h-36 min-w-full"
             >
               <div className="w-full ">
                 <div className="flex text-sm">
@@ -149,10 +151,10 @@ const ListBlog = () => {
                     __html: DOMPurify.sanitize(blog.blog_body),
                   }}
                 />
-                <div className="inline-flex gap-4">
+                <div className="inline-flex gap-4 mt-3">
                   <button
                     onClick={() => handleEditClick(blog)}
-                    className="mt-2 h-6 text-center flex justify-center items-center text-blue-500"
+                    className="h-2 text-center flex justify-center items-center bg-blue-500 p-5 rounded-md"
                   >
                     Edit
                   </button>
@@ -161,7 +163,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_image && (
                 <img
-                  src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{ maxWidth: "10%", height: "auto" }}

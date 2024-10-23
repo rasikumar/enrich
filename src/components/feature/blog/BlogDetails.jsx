@@ -54,17 +54,17 @@ const BlogDetail = () => {
         setLoading(false);
       } catch (err) {
         setError("Failed to load blog details");
+        console.log(err);
         setLoading(false);
       }
     };
-
     fetchBlogDetail();
   }, [id]);
 
   useEffect(() => {
     const fetchSuggestedBlogs = async () => {
       try {
-        const response = await Instance.post("/getAllBlogs");
+        const response = await Instance.get("/getAllBlogs");
         const sortedBlogs = response.data.blogs.sort(() => 0.5 - Math.random());
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
         setSuggestedLoading(false);
@@ -199,6 +199,7 @@ const BlogDetail = () => {
                 <h2 className="text-4xl font-semibold">{blog.blog_title}</h2>
                 <div className="flex gap-5 items-center">
                   <p className="text-gray-600">{blog.blog_author}</p>
+                  <p className="text-gray-600">{blog.blog_visitors_count}</p>
                   <p className="text-gray-600">
                     Posted on{" "}
                     {new Date(blog.blog_date).toLocaleDateString("en-US", {
@@ -209,7 +210,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="min-w-full h-96 rounded-xl"
                 />
@@ -428,7 +429,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.blog_author}</p>
                       <img
-                        src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                        src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                         alt={blog.blog_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

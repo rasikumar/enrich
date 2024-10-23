@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button } from "flowbite-react";
-import Instance from "./Instance";
+import Instance from "../Instance";
 import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
@@ -52,10 +52,7 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
 
   return (
     <div>
-      <Button
-        onClick={showConfirmDialog}
-        className="mt-2 focus:outline-none text-white hover:bg-black h-6 text-center flex justify-center items-center"
-      >
+      <Button color="failure" onClick={showConfirmDialog}>
         Delete
       </Button>
       {error && <div className="text-red-500">{error}</div>}

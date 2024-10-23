@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Instance from "./Instance";
+import Instance from "../Instance";
 import imageCompressor from "quill-image-compress";
 Quill.register("modules/imageCompressor", imageCompressor);
 

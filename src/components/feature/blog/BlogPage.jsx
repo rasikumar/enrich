@@ -27,7 +27,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await Instance.post("/getAllBlogs");
+        const response = await Instance.get("/getAllBlogs");
         const sortedBlogs = response.data.blogs.sort(
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );

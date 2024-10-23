@@ -16,13 +16,13 @@ const Loader = () => {
 };
 
 const Heart = lazy(() => import("./components/Heart"));
-const BlogDetails = lazy(() => import("./components/blogpages/BlogDetails"));
+// const BlogDetails = lazy(() => import("./components/blogpages/BlogDetails"));
 const ProgramDisplay = lazy(() =>
   import("./components/allprogram/ProgramDisplay")
 );
 // import AboutUs from "./components/AboutUs";
 const Aboutus = lazy(() => import("./components/aboutus/Aboutus"));
-const BlogDisplay = lazy(() => import("./components/blogpages/BlogDisplay"));
+// const BlogDisplay = lazy(() => import("./components/blogpages/BlogDisplay"));
 const Navbar = lazy(() => import("./components/Navbar"));
 const ScrollTop = lazy(() => import("./components/ScrollTop"));
 const Individuals = lazy(() =>
@@ -47,6 +47,10 @@ const Login = lazy(() => import("./components/Admin/Login"));
 const Admindashboard = lazy(() => import("./components/Admin/Admindashboard"));
 const ForgotPassword = lazy(() => import("./components/Admin/ForgotPassword"));
 const ResetPassword = lazy(() => import("./components/Admin/resetPassword"));
+
+// blogPages
+const BlogPage = lazy(() => import("./components/feature/blog/BlogPage"));
+const BlogDetail = lazy(() => import("./components/feature/blog/BlogDetails"));
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/admin" />;
@@ -141,9 +145,11 @@ const App = () => {
                 <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
                 {/* blogarticles */}
-                <Route path="/BlogsList/:id" element={<BlogDetails />} />
+                {/* <Route path="/BlogsList/:id" element={<BlogDetails />} />
                 <Route path="/BlogDisplay" element={<BlogDisplay />} />
-                <Route path="/BlogsList/:id" element={<BlogDetails />} />
+                <Route path="/BlogsList/:id" element={<BlogDetails />} /> */}
+                <Route path="/Blog" element={<BlogPage />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
 
                 {/* service */}
                 <Route path="/individuals" element={<Individuals />} />
