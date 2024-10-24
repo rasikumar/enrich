@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Instance from "../Instance";
 import DOMPurify from "dompurify";
-import EditBlog from "./EditBlog";
-import DeleteBlog from "./DeleteBlog";
+import EditBlog from "./EditNewsLetter";
+import DeleteBlog from "./DeleteNewsLetter";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { ThreeCircles } from "react-loader-spinner";

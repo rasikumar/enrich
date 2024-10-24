@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateBlog from "./blog/CreateBlog";
 import ListBlogs from "./blog/ListBlogs";
+import CreateNewsLetter from "./newsletter/CreateNewsLetter";
+import ListNewsLetter from "./newsletter/ListNewsLetter";
 import Logout from "./Logout";
 import ContactList from "./contactList";
-import CommentList from "./CommentList";
+import CommentList from "./blog/CommentList";
 import Dashboard from "../Admin/dashboard/dashboard";
+import Members from "./newsletter/Members";
+import { motion } from "framer-motion";
 
 const Admindashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [isBlogDropdownOpen, setBlogDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // Track the active dropdown
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +22,7 @@ const Admindashboard = () => {
     if (!token || isTokenExpired(token)) {
       navigate("/admin");
       localStorage.removeItem("jwtToken");
+      window.location.reload();
     }
   }, [navigate]);
 
@@ -27,12 +32,15 @@ const Admindashboard = () => {
     return Date.now() > expiry;
   };
 
+  const handleDropdownToggle = (dropdownName) => {
+    setActiveDropdown((prevDropdown) =>
+      prevDropdown === dropdownName ? null : dropdownName
+    );
+  };
+
   const handleBlogOptionClick = (tab) => {
     setActiveTab(tab);
-    // Do not toggle the dropdown when selecting an active tab
-    if (activeTab !== tab) {
-      setBlogDropdownOpen(false); // Close dropdown only if a different tab is clicked
-    }
+    // setActiveDropdown(null);
   };
 
   const renderContent = () => {
@@ -43,6 +51,12 @@ const Admindashboard = () => {
         return <CreateBlog />;
       case "listBlog":
         return <ListBlogs />;
+      case "createNewsLetter":
+        return <CreateNewsLetter />;
+      case "listNewsLetter":
+        return <ListNewsLetter />;
+      case "members":
+        return <Members />;
       case "contactList":
         return <ContactList />;
       case "commentList":
@@ -50,6 +64,11 @@ const Admindashboard = () => {
       default:
         return <div>Select an option from the sidebar</div>;
     }
+  };
+
+  const dropdownVariants = {
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: "auto" },
   };
 
   return (
@@ -80,17 +99,23 @@ const Admindashboard = () => {
               <li className="w-full">
                 <button
                   className={`w-full text-left px-4 py-2 rounded-lg ${
-                    isBlogDropdownOpen
+                    activeDropdown === "blogs"
                       ? "bg-indigo-600 text-white"
                       : "bg-gray-200"
                   }`}
-                  onClick={() => setBlogDropdownOpen(!isBlogDropdownOpen)} // Toggle dropdown
+                  onClick={() => handleDropdownToggle("blogs")} // Toggle dropdown
                 >
                   Blogs
                 </button>
                 {/* Dropdown Menu */}
-                {isBlogDropdownOpen && (
-                  <ul className="pl-4 mt-2 space-y-2">
+                {activeDropdown === "blogs" && (
+                  <motion.ul
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={dropdownVariants}
+                    className="pl-4 mt-2 space-y-2"
+                  >
                     <li className="w-full">
                       <button
                         className={`w-full text-left px-4 py-2 rounded-lg ${
@@ -115,7 +140,82 @@ const Admindashboard = () => {
                         Create Blog
                       </button>
                     </li>
-                  </ul>
+                    <li className="w-full">
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded-lg ${
+                          activeTab === "commentList"
+                            ? "bg-indigo-600 text-white"
+                            : "bg-gray-200"
+                        }`}
+                        onClick={() => setActiveTab("commentList")}
+                      >
+                        Comment List
+                      </button>
+                    </li>
+                  </motion.ul>
+                )}
+              </li>
+
+              {/* Dropdown for Newsletter options */}
+              <li className="w-full">
+                <button
+                  className={`w-full text-left px-4 py-2 rounded-lg ${
+                    activeDropdown === "newsletters"
+                      ? "bg-indigo-600 text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => handleDropdownToggle("newsletters")} // Toggle dropdown
+                >
+                  Newsletter
+                </button>
+                {/* Dropdown Menu */}
+                {activeDropdown === "newsletters" && (
+                  <motion.ul
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={dropdownVariants}
+                    className="pl-4 mt-2 space-y-2"
+                  >
+                    <li className="w-full">
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded-lg ${
+                          activeTab === "listNewsLetter"
+                            ? "bg-indigo-600 text-white"
+                            : "bg-gray-200"
+                        }`}
+                        onClick={() => handleBlogOptionClick("listNewsLetter")}
+                      >
+                        Newsletter List
+                      </button>
+                    </li>
+                    <li className="w-full">
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded-lg ${
+                          activeTab === "createNewsLetter"
+                            ? "bg-indigo-600 text-white"
+                            : "bg-gray-200"
+                        }`}
+                        onClick={() =>
+                          handleBlogOptionClick("createNewsLetter")
+                        }
+                      >
+                        Create Newsletter
+                      </button>
+                    </li>
+                    <li className="w-full">
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded-lg ${
+                          activeTab === "members"
+                            ? "bg-indigo-600 text-white"
+                            : "bg-gray-200"
+                        }`}
+                        onClick={() => handleBlogOptionClick("members")}
+                      >
+                        Subscribers
+                      </button>
+                    </li>
+                  </motion.ul>
                 )}
               </li>
 
@@ -129,18 +229,6 @@ const Admindashboard = () => {
                   onClick={() => setActiveTab("contactList")}
                 >
                   Leads
-                </button>
-              </li>
-              <li className="w-full">
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeTab === "commentList"
-                      ? "bg-indigo-600 text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => setActiveTab("commentList")}
-                >
-                  Comment List
                 </button>
               </li>
             </ul>

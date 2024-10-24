@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { QR, Sending } from "../../../../assets";
+import axios from "axios";
 // import { FaClock, FaVideo } from "react-icons/fa";
 
 const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedDate, setSelectedDate] = useState("");
   const [successMessage, setSuccessMessage] = useState(false);
   const [isOpenTime, setIsOpenTime] = useState(false);
   const [isOpenAssesment, setIsOpenAssesment] = useState(false);
@@ -46,7 +46,7 @@ const PsychometricForm = () => {
     selectedAssessment: "",
     selectDate: "",
     slots: "",
-    paymentDetails: "",
+    paymentDetails: null,
   });
 
   const [errors, setErrors] = useState({
@@ -54,10 +54,9 @@ const PsychometricForm = () => {
     email: "",
     number: "",
     age: "",
-    assessmentType: "",
+    selectedAssessment: "",
     selectDate: "",
-    selectTime: "",
-    paymentMethod: "",
+    slots: "",
     paymentDetails: "",
   });
 
@@ -78,6 +77,8 @@ const PsychometricForm = () => {
       newErrors.number = "Number is required";
     } else if (formData.number.length < 10) {
       newErrors.number = "Number must be at least 10 digits";
+    } else if (formData.number.length > 13) {
+      newErrors.number = "Number must not exceed 13 digits";
     }
 
     if (!formData.age.trim()) {
@@ -99,7 +100,7 @@ const PsychometricForm = () => {
     if (!formData.slots) {
       newErrors.slots = "Slots type is required";
     }
-    if (!selectedDate) {
+    if (!formData.selectDate) {
       newErrors.selectDate = "Date is required";
     }
 
@@ -119,16 +120,34 @@ const PsychometricForm = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, files } = e.target;
+
+    // Check if the input type is file
+    if (name === "paymentDetails" && files) {
+      setFormData({
+        ...formData,
+        paymentDetails: files[0], // Set the file object
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
+  const handleDateChange = (e) => {
+    const { value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      selectDate: value,
+    }));
   };
 
   const handleNext = () => {
-    if (currentStep === 1 || validateStepOne()) {
+    if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 2 || validateStepTwo()) {
+    } else if (currentStep === 2 && validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else if (currentStep === 3 && validateStepThree()) {
       setCurrentStep((prevStep) => prevStep + 1);
@@ -139,26 +158,44 @@ const PsychometricForm = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
 
-    // Show the success message
-    setSuccessMessage(true);
-    console.log("Final Form Data Submitted:", formData);
+    const formSubmissionData = new FormData();
+    formSubmissionData.append("name", formData.name);
+    formSubmissionData.append("email", formData.email);
+    formSubmissionData.append("number", formData.number);
+    formSubmissionData.append("age", formData.age);
+    formSubmissionData.append(
+      "selectedAssessment",
+      formData.selectedAssessment
+    );
+    formSubmissionData.append("selectDate", formData.selectDate);
+    formSubmissionData.append("slots", formData.slots);
+    formSubmissionData.append("paymentDetails", formData.paymentDetails);
 
-    // Delay the page reload
-    setTimeout(() => {
-      // Optional: If you want to perform additional actions or reset the form
-      // Reset the form data if needed, e.g., setFormData(initialState);
-
-      // Reload the page
-      window.location.reload();
-    }, 3000); // Adjust the timeout duration as needed (3000ms = 3 seconds)
+    try {
+      const response = await axios.post(
+        "http://192.168.20.19:5000/appoint_api/appointments",
+        formSubmissionData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file upload
+          },
+        }
+      );
+      setSuccessMessage(true);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    setTimeout(() => {}, 3000);
   };
 
   return (
     <div className="flex my-auto mx-auto mt-4 rounded-lg min-h-[26.5rem]">
-      <div className="w-60 h-[30rem] rounded-xl items-start flex flex-col px-3 bg-primary">
+      <div className="w-60 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-3 bg-primary ">
         {/* Step 1 */}
         <div className={`flex items-center gap-3 justify-center mt-5 `}>
           <span
@@ -220,7 +257,7 @@ const PsychometricForm = () => {
         </div>
       </div>
 
-      <div className="w-full bg-formback bg-center bg-contain bg-no-repeat px-16 py-2 relative">
+      <div className="w-full bg-formback bg-center bg-contain bg-no-repeat md:px-16 py-2 relative">
         <form onSubmit={handleSubmit}>
           {currentStep === 1 && (
             <>
@@ -414,8 +451,8 @@ const PsychometricForm = () => {
                 <input
                   type="date"
                   name="selectDate"
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
+                  value={formData.selectDate}
+                  onChange={handleDateChange}
                   min={today}
                   className="w-full p-2 border rounded"
                 />
@@ -513,7 +550,7 @@ const PsychometricForm = () => {
                   <input
                     type="file"
                     name="paymentDetails"
-                    value={formData.paymentDetails}
+                    // value={handleChange}
                     onChange={handleChange}
                     className="w-full p-2 border rounded"
                     placeholder="Enter payment details"
@@ -581,10 +618,11 @@ const PsychometricForm = () => {
                   {formData.selectedAssessment}
                 </p>
                 <p>
-                  <strong>Date and Time</strong> {selectedDate} {formData.slots}
+                  <strong>Date and Time</strong> {formData.selectDate}{" "}
+                  {formData.slots}
                 </p>
                 <p>
-                  <strong>Payment Details:</strong> {formData.paymentDetails}
+                  <strong>Payment Details:</strong> ₹ 499
                 </p>
                 {formData.paymentDetails && (
                   <div className="mt-2">
