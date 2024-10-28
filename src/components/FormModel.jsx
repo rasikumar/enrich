@@ -11,7 +11,7 @@ const FormModel = ({ message, onClose, children }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="bg-white md:p-6 p-10 rounded-lg shadow-lg md:w-[60rem] md:h-[35rem] relative">
+      <div className="bg-white md:p-6 p-10 rounded-lg shadow-lg md:w-[60rem] md:h-[35rem] relative border-2 border-primary ">
         <div>{message}</div>
         <motion.button
           whileHover={{ scale: 1.3 }}

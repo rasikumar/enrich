@@ -25,7 +25,7 @@ const Hero = () => {
     <div className="md:flex items-center md:p-10 p-4 max-md:py-0 justify-evenly">
       <div className="flex flex-col gap-3 relative">
         <h1 className="md:text-6xl text-9xl font-bold rotate-90 md:flex hidden fixed left-22 -z-20 text-slate-100 uppercase">
-          Be Your Bestself
+          YOUR BEST SELF{" "}
         </h1>
         <h1
           className="text-3xl font-bold text-primary"

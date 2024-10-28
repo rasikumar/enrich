@@ -171,7 +171,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "http://192.168.20.5:5000/blog_images/" + imagePreview
+                  ? "http://192.168.20.7:5000/blog_images/" + imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}

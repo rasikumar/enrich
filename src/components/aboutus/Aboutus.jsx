@@ -12,11 +12,14 @@ const Aboutus = () => {
     <div className="relative">
       <Helmet>
         <title>About Us | Enrich Minds</title>
-        <meta name="description" content="Learn more about Enrich mission and our mission." />
+        <meta
+          name="description"
+          content="Learn more about Enrich mission and our mission."
+        />
       </Helmet>
       {/* <SquiggleScroll /> */}
       <h1 className="text-6xl font-bold rotate-0 max-md:flex hidden sticky top-28 text-slate-100 uppercase -z-20">
-        Be Your Bestself
+        YOUR BEST SELF{" "}
       </h1>
       <Hero />
       <Details />

@@ -2,9 +2,10 @@
 // import { FaBook } from "react-icons/fa";
 import FormModel from "./FormModel";
 import { useState } from "react";
-import PsychometricForm from "./allservice/psychometric/components/PsychometricForm";
+// import PsychometricForm from "./allservice/psychometric/components/PsychometricForm";
 import { motion } from "framer-motion";
 import { GrSchedule } from "react-icons/gr";
+import FormList from "./FormList";
 
 const BookSession = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const BookSession = () => {
           <span>o</span>
           <span>k</span>
         </div> */}
-          {/* <span>a</span> */}
+        {/* <span>a</span> */}
         <div className="flex leading-5">
           <span>C</span>
           <span>o</span>
@@ -38,9 +39,7 @@ const BookSession = () => {
           <span>t</span>
         </div>
       </motion.button>
-      {isOpen && (
-        <FormModel onClose={toggleModal}>{<PsychometricForm />}</FormModel>
-      )}
+      {isOpen && <FormModel onClose={toggleModal}>{<FormList />}</FormModel>}
     </div>
   );
 };

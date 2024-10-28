@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { QR, Sending } from "../../../../assets";
-import axios from "axios";
+import { Sending } from "../../assets";
+import Instance from "../Admin/Instance";
 // import { FaClock, FaVideo } from "react-icons/fa";
 
-const PsychometricForm = () => {
+const Discovery = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [successMessage, setSuccessMessage] = useState(false);
   const [isOpenTime, setIsOpenTime] = useState(false);
   const [isOpenAssesment, setIsOpenAssesment] = useState(false);
+  // const [previewUrl, setPreviewUrl] = useState(null);
 
   const timeOptions = [
     { value: "6.00pm - 7.00pm", label: "6.00pm - 7.00pm" },
@@ -38,17 +39,6 @@ const PsychometricForm = () => {
 
   const today = new Date().toISOString().split("T")[0];
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    number: "",
-    age: "",
-    selectedAssessment: "",
-    selectDate: "",
-    slots: "",
-    paymentDetails: null,
-  });
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -64,17 +54,17 @@ const PsychometricForm = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = "Name is ";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Email is ";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
 
     if (!formData.number.trim()) {
-      newErrors.number = "Number is required";
+      newErrors.number = "Number is ";
     } else if (formData.number.length < 10) {
       newErrors.number = "Number must be at least 10 digits";
     } else if (formData.number.length > 13) {
@@ -82,7 +72,7 @@ const PsychometricForm = () => {
     }
 
     if (!formData.age.trim()) {
-      newErrors.age = "Age is required";
+      newErrors.age = "Age is ";
     } else if (isNaN(formData.age) || formData.age <= 0) {
       newErrors.age = "Age must be a valid number";
     }
@@ -95,45 +85,70 @@ const PsychometricForm = () => {
     const newErrors = {};
 
     if (!formData.selectedAssessment) {
-      newErrors.selectedAssessment = "Assessment type is required";
+      newErrors.selectedAssessment = "Assessment type is ";
     }
     if (!formData.slots) {
-      newErrors.slots = "Slots type is required";
+      newErrors.slots = "Slots type is ";
     }
     if (!formData.selectDate) {
-      newErrors.selectDate = "Date is required";
+      newErrors.selectDate = "Date is ";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const validateStepThree = () => {
-    const newErrors = {};
+  // const validateStepThree = () => {
+  //   const newErrors = {};
 
-    if (!formData.paymentDetails) {
-      newErrors.paymentDetails = "Payment details are required";
-    }
+  //   if (!formData.paymentDetails) {
+  //     newErrors.paymentDetails = "Payment details are ";
+  //   }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+  const handleNext = () => {
+    if (currentStep === 1 && validateStepOne()) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    } else if (currentStep === 2 && validateStepTwo()) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    } 
   };
 
+  const handlePrev = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    age: "",
+    selectedAssessment: "",
+    selectDate: "",
+    slots: "",
+    paymentDetails: "",
+  });
+
+  // Handle image change
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       paymentDetails: file, // Store the file object
+  //     }));
+  //     setPreviewUrl(URL.createObjectURL(file));
+  //   }
+  // };
+  // Handle text and other input changes
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-
-    // Check if the input type is file
-    if (name === "paymentDetails" && files) {
-      setFormData({
-        ...formData,
-        paymentDetails: files[0], // Set the file object
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleDateChange = (e) => {
@@ -143,59 +158,49 @@ const PsychometricForm = () => {
       selectDate: value,
     }));
   };
-
-  const handleNext = () => {
-    if (currentStep === 1 && validateStepOne()) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 2 && validateStepTwo()) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 3 && validateStepThree()) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     const formSubmissionData = new FormData();
-    formSubmissionData.append("name", formData.name);
-    formSubmissionData.append("email", formData.email);
-    formSubmissionData.append("number", formData.number);
-    formSubmissionData.append("age", formData.age);
-    formSubmissionData.append(
+    const fields = [
+      "name",
+      "email",
+      "number",
+      "age",
       "selectedAssessment",
-      formData.selectedAssessment
+      "selectDate",
+      "slots",
+    ];
+
+    fields.forEach((field) => {
+      const value = formData[field] || "";
+      formSubmissionData.append(field, value);
+    });
+
+    // Include paymentDetails if it exists
+    if (formData.paymentDetails) {
+      formSubmissionData.append("paymentDetails", formData.paymentDetails);
+    }
+
+    console.log(
+      "Form Submission Data:",
+      Array.from(formSubmissionData.entries())
     );
-    formSubmissionData.append("selectDate", formData.selectDate);
-    formSubmissionData.append("slots", formData.slots);
-    formSubmissionData.append("paymentDetails", formData.paymentDetails);
 
     try {
-      const response = await axios.post(
-        "http://192.168.20.19:5000/appoint_api/appointments",
-        formSubmissionData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data", // Important for file upload
-          },
-        }
+      const response = await Instance.post("/appointments", formSubmissionData);
+      setSuccessMessage(
+        response.data.message || "Appointment created successfully"
       );
-      setSuccessMessage(true);
-      console.log(response);
+      console.log("Response:", response.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-    setTimeout(() => {}, 3000);
   };
 
   return (
-    <div className="flex my-auto mx-auto mt-4 rounded-lg min-h-[26.5rem]">
-      <div className="w-60 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-3 bg-primary ">
+    <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
+      <div className="w-72 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-4 bg-primary ">
         {/* Step 1 */}
         <div className={`flex items-center gap-3 justify-center mt-5 `}>
           <span
@@ -227,7 +232,7 @@ const PsychometricForm = () => {
         </div>
 
         {/* Step 3 */}
-        <div className={`flex items-center gap-3 justify-center mt-5`}>
+        {/* <div className={`flex items-center gap-3 justify-center mt-5`}>
           <span
             className={`${
               currentStep === 3
@@ -239,19 +244,19 @@ const PsychometricForm = () => {
             3
           </span>
           <p className="text-white text-sm">PAYMENT</p>
-        </div>
+        </div> */}
 
         {/* Step 4 */}
         <div className={`flex items-center gap-3 justify-center mt-5`}>
           <span
             className={`${
-              currentStep === 4
+              currentStep === 3
                 ? "bg-secondary text-white"
                 : "border text-white"
             } w-[30px] text-center`}
             style={{ lineHeight: "30px", borderRadius: "50%" }}
           >
-            4
+            3
           </span>
           <p className="text-white text-sm">VERIFY</p>
         </div>
@@ -292,7 +297,6 @@ const PsychometricForm = () => {
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                   placeholder="Enter your name"
-                  required
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm">{errors.name}</p>
@@ -313,7 +317,6 @@ const PsychometricForm = () => {
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                   placeholder="Enter your email"
-                  required
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email}</p>
@@ -334,7 +337,6 @@ const PsychometricForm = () => {
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                   placeholder="Enter your number"
-                  required
                 />
                 {errors.number && (
                   <p className="text-red-500 text-sm">{errors.number}</p>
@@ -355,7 +357,6 @@ const PsychometricForm = () => {
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                   placeholder="Enter your age"
-                  required
                 />
                 {errors.age && (
                   <p className="text-red-500 text-sm">{errors.age}</p>
@@ -365,7 +366,7 @@ const PsychometricForm = () => {
               <button
                 type="button"
                 onClick={handleNext}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-4"
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 bottom-0"
               >
                 Next
               </button>
@@ -507,20 +508,20 @@ const PsychometricForm = () => {
               <button
                 type="button"
                 onClick={handlePrev}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-4"
+                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-0"
               >
                 Previous
               </button>
               <button
                 type="button"
                 onClick={handleNext}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-4"
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-0"
               >
                 Next
               </button>
             </>
           )}
-          {currentStep === 3 && (
+          {/* {currentStep === 3 && (
             <>
               <motion.h1
                 initial={{ opacity: 0, x: 20 }}
@@ -550,11 +551,9 @@ const PsychometricForm = () => {
                   <input
                     type="file"
                     name="paymentDetails"
-                    // value={handleChange}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded"
+                    className="relative w-full mb-4"
                     placeholder="Enter payment details"
-                    required
+                    onChange={handleImageChange}
                   />
                   {errors.paymentDetails && (
                     <p className="text-red-500 text-sm">
@@ -562,27 +561,33 @@ const PsychometricForm = () => {
                     </p>
                   )}
                 </motion.div>
-                <img src={QR} width={150} height={150} alt="QR" />
+                <img
+                  src={QR}
+                  width={150}
+                  height={150}
+                  alt="QR"
+                  className="m-auto"
+                />
                 <span>Amout : ₹ 499</span>
               </div>
 
               <button
                 type="button"
                 onClick={handlePrev}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-4"
+                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-0"
               >
                 Previous
               </button>
               <button
                 type="button"
                 onClick={handleNext}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-4"
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-0"
               >
                 Next
               </button>
             </>
-          )}
-          {currentStep === 4 && (
+          )} */}
+          {currentStep === 3 && (
             <>
               <motion.h1
                 initial={{ opacity: 0, x: 20 }}
@@ -621,31 +626,31 @@ const PsychometricForm = () => {
                   <strong>Date and Time</strong> {formData.selectDate}{" "}
                   {formData.slots}
                 </p>
-                <p>
+                {/* <p>
                   <strong>Payment Details:</strong> ₹ 499
-                </p>
-                {formData.paymentDetails && (
+                </p> */}
+                {/* {previewUrl && (
                   <div className="mt-2">
                     <strong>Uploaded Image:</strong>
                     <img
-                      src={formData.paymentDetails}
-                      alt="Uploaded"
-                      className="mt-2 w-32 h-32 object-cover rounded"
+                      src={previewUrl}
+                      alt="Uploaded Preview"
+                      className="mt-2 w-32 object-fit rounded"
                     />
                   </div>
-                )}
+                )} */}
               </div>
 
               <button
                 type="button"
                 onClick={handlePrev}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-4"
+                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-0"
               >
                 Previous
               </button>
               <button
                 type="submit"
-                className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 absolute right-0 -bottom-4"
+                className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 absolute right-0 -bottom-0"
               >
                 Book
               </button>
@@ -668,4 +673,4 @@ const PsychometricForm = () => {
   );
 };
 
-export default PsychometricForm;
+export default Discovery;

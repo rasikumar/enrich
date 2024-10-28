@@ -216,8 +216,8 @@ export const programDisplays = [
 export const About_Us = [
   {
     id: 0,
-    title: "Believe to Become",
-    content: "Your Bestself",
+    title: "Believe In Become",
+    content: "YOUR BEST SELF",
   },
   {
     id: 1,
