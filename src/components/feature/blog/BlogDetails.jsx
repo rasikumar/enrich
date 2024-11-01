@@ -210,7 +210,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -429,7 +429,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.blog_author}</p>
                       <img
-                        src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                        src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                         alt={blog.blog_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

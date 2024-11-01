@@ -28,8 +28,8 @@ const Blog = () => {
     const fetchBlogs = async () => {
       try {
         const response = await Instance.get("/getAllBlogs");
-        console.log(response);
-        
+        // console.log(response); 
+
         const sortedBlogs = response.data.blogs.sort(
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );
@@ -162,7 +162,7 @@ const Blog = () => {
             {/* Image Section */}
             <div className="relative w-full overflow-hidden">
               <img
-                src={`http://192.168.20.7:5000/blog_images/${blog.blog_image}`}
+                src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
                 alt={blog.blog_title}
                 className="transition-transform duration-500 ease-in-out group-hover:scale-110 w-full h-60 object-cover"
               />

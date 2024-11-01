@@ -2,14 +2,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Sending } from "../../assets";
 import Instance from "../Admin/Instance";
-// import { FaClock, FaVideo } from "react-icons/fa";
 
 const Discovery = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [successMessage, setSuccessMessage] = useState(false);
   const [isOpenTime, setIsOpenTime] = useState(false);
   const [isOpenAssesment, setIsOpenAssesment] = useState(false);
-  // const [previewUrl, setPreviewUrl] = useState(null);
 
   const timeOptions = [
     { value: "6.00pm - 7.00pm", label: "6.00pm - 7.00pm" },
@@ -47,24 +45,23 @@ const Discovery = () => {
     selectedAssessment: "",
     selectDate: "",
     slots: "",
-    paymentDetails: "",
   });
 
   const validateStepOne = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is ";
+      newErrors.name = "Name is Required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is ";
+      newErrors.email = "Email is Required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
 
     if (!formData.number.trim()) {
-      newErrors.number = "Number is ";
+      newErrors.number = "Number is Required";
     } else if (formData.number.length < 10) {
       newErrors.number = "Number must be at least 10 digits";
     } else if (formData.number.length > 13) {
@@ -72,7 +69,7 @@ const Discovery = () => {
     }
 
     if (!formData.age.trim()) {
-      newErrors.age = "Age is ";
+      newErrors.age = "Age is Required";
     } else if (isNaN(formData.age) || formData.age <= 0) {
       newErrors.age = "Age must be a valid number";
     }
@@ -85,35 +82,25 @@ const Discovery = () => {
     const newErrors = {};
 
     if (!formData.selectedAssessment) {
-      newErrors.selectedAssessment = "Assessment type is ";
+      newErrors.selectedAssessment = "Assessment type is Required";
     }
     if (!formData.slots) {
-      newErrors.slots = "Slots type is ";
+      newErrors.slots = "Slots type is Required";
     }
     if (!formData.selectDate) {
-      newErrors.selectDate = "Date is ";
+      newErrors.selectDate = "Date is Required";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // const validateStepThree = () => {
-  //   const newErrors = {};
-
-  //   if (!formData.paymentDetails) {
-  //     newErrors.paymentDetails = "Payment details are ";
-  //   }
-
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
   const handleNext = () => {
     if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else if (currentStep === 2 && validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } 
+    }
   };
 
   const handlePrev = () => {
@@ -128,21 +115,8 @@ const Discovery = () => {
     selectedAssessment: "",
     selectDate: "",
     slots: "",
-    paymentDetails: "",
   });
 
-  // Handle image change
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       paymentDetails: file, // Store the file object
-  //     }));
-  //     setPreviewUrl(URL.createObjectURL(file));
-  //   }
-  // };
-  // Handle text and other input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -177,22 +151,34 @@ const Discovery = () => {
       formSubmissionData.append(field, value);
     });
 
-    // Include paymentDetails if it exists
-    if (formData.paymentDetails) {
-      formSubmissionData.append("paymentDetails", formData.paymentDetails);
-    }
-
     console.log(
       "Form Submission Data:",
       Array.from(formSubmissionData.entries())
     );
 
     try {
-      const response = await Instance.post("/appointments", formSubmissionData);
-      setSuccessMessage(
-        response.data.message || "Appointment created successfully"
+      const response = await Instance.post(
+        "/registerDiscovery",
+        formSubmissionData
       );
-      console.log("Response:", response.data);
+
+      setTimeout(() => {
+        setSuccessMessage(
+          response.data.message || "Appointment created successfully"
+        );
+      
+        setErrors({}); // Clear any validation errors
+      
+        // Hide the success message after 3 seconds
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 3000);
+      }, 2000); // 2-second delay before displaying success message
+      
+      // Reload the page after 4 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 4000);
     } catch (error) {
       console.error(error);
     }
@@ -521,72 +507,6 @@ const Discovery = () => {
               </button>
             </>
           )}
-          {/* {currentStep === 3 && (
-            <>
-              <motion.h1
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, x: 10 }}
-                className="text-2xl font-semibold"
-              >
-                Payment
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, x: 10 }}
-                className="text-slate-400 text-sm"
-              >
-                Complete your booking by providing payment details and scanning
-                the QR code.
-              </motion.p>
-              <div className="mb-4">
-                <motion.div
-                  className="mb-4"
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, x: 15 }}
-                >
-                  <label className="block text-gray-700">Payment Details</label>
-                  <input
-                    type="file"
-                    name="paymentDetails"
-                    className="relative w-full mb-4"
-                    placeholder="Enter payment details"
-                    onChange={handleImageChange}
-                  />
-                  {errors.paymentDetails && (
-                    <p className="text-red-500 text-sm">
-                      {errors.paymentDetails}
-                    </p>
-                  )}
-                </motion.div>
-                <img
-                  src={QR}
-                  width={150}
-                  height={150}
-                  alt="QR"
-                  className="m-auto"
-                />
-                <span>Amout : ₹ 499</span>
-              </div>
-
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 -bottom-0"
-              >
-                Previous
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 absolute right-0 -bottom-0"
-              >
-                Next
-              </button>
-            </>
-          )} */}
           {currentStep === 3 && (
             <>
               <motion.h1
@@ -626,19 +546,6 @@ const Discovery = () => {
                   <strong>Date and Time</strong> {formData.selectDate}{" "}
                   {formData.slots}
                 </p>
-                {/* <p>
-                  <strong>Payment Details:</strong> ₹ 499
-                </p> */}
-                {/* {previewUrl && (
-                  <div className="mt-2">
-                    <strong>Uploaded Image:</strong>
-                    <img
-                      src={previewUrl}
-                      alt="Uploaded Preview"
-                      className="mt-2 w-32 object-fit rounded"
-                    />
-                  </div>
-                )} */}
               </div>
 
               <button

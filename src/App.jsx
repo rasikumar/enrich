@@ -52,6 +52,9 @@ const ResetPassword = lazy(() => import("./components/Admin/resetPassword"));
 const BlogPage = lazy(() => import("./components/feature/blog/BlogPage"));
 const BlogDetail = lazy(() => import("./components/feature/blog/BlogDetails"));
 
+// testing
+import Apps from "./components/Apps";
+
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/admin" />;
 };
@@ -145,9 +148,6 @@ const App = () => {
                 <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
                 {/* blogarticles */}
-                {/* <Route path="/BlogsList/:id" element={<BlogDetails />} />
-                <Route path="/BlogDisplay" element={<BlogDisplay />} />
-                <Route path="/BlogsList/:id" element={<BlogDetails />} /> */}
                 <Route path="/Blog" element={<BlogPage />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
 
@@ -156,7 +156,7 @@ const App = () => {
                 <Route path="/corporates" element={<Corporates />} />
                 <Route path="/compliance-training" element={<Compliance />} />
                 <Route path="/psychometric" element={<Psychometric />} />
-
+                <Route path="/Apps" element={<Apps />} />
                 <Route
                   path="/admin"
                   element={

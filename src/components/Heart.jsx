@@ -5,9 +5,9 @@ import Services from "./allservice/Services";
 import Program from "./allprogram/Program";
 import Testimonials from "./Testimonials";
 import Newsletter from "./Newsletter";
-import Blog from "../components/blogpages/Blog";
+import Blog from "../components/feature/blog/Blog";
 import GetIn from "./GetIn";
-import ScrollAlert from "./ScrollMsg";
+// import ScrollAlert from "./ScrollMsg";
 
 const Heart = () => {
   return (
@@ -18,7 +18,7 @@ const Heart = () => {
       <Services />
       <Program />
       <Testimonials />
-      <ScrollAlert />
+      {/* <ScrollAlert /> */}
       <Newsletter />
       <Blog />
       <GetIn />

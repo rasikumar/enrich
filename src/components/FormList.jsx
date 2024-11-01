@@ -27,14 +27,14 @@ const FormList = () => {
 
       {selectedForm === "discoveryCall" && (
         <div className="w-full flex justify-center">
-          <h1 className="hidden sm:flex">Psychometric Form</h1>
+          {/* <h1 className="hidden sm:flex">Psychometric Form</h1> */}
           <PsychometricForm />
         </div>
       )}
 
       {selectedForm === "assessment" && (
         <div className="w-full flex justify-center">
-          <h1 className="hidden sm:flex">Discovery Form</h1>
+          {/* <h1 className="hidden sm:flex">Discovery Form</h1> */}
           <Discovery />
         </div>
       )}

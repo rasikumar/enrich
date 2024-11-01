@@ -19,10 +19,10 @@ const CreateBlog = () => {
   };
 
   // Handle image upload
-    const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      setImage(file); // Set image to state
-    };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file); // Set image to state
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +40,8 @@ const CreateBlog = () => {
       });
       if (response.data.status === true) {
         // Update blog state without refreshing the entire page
+        console.log(response);
+
         setBlog({
           head,
           author,

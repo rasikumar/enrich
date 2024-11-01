@@ -47,7 +47,7 @@ const PsychometricForm = () => {
     selectedAssessment: "",
     selectDate: "",
     slots: "",
-    paymentDetails: "",
+    file: "",
   });
 
   const validateStepOne = () => {
@@ -101,13 +101,14 @@ const PsychometricForm = () => {
   const validateStepThree = () => {
     const newErrors = {};
 
-    if (!formData.paymentDetails) {
-      newErrors.paymentDetails = "Payment details are ";
+    if (!formData.file) {
+      newErrors.file = "Payment details are Empty";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const handleNext = () => {
     if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
@@ -130,7 +131,7 @@ const PsychometricForm = () => {
     selectedAssessment: "",
     selectDate: "",
     slots: "",
-    paymentDetails: "",
+    file: "",
   });
 
   // Handle image change
@@ -139,7 +140,7 @@ const PsychometricForm = () => {
     if (file) {
       setFormData((prevData) => ({
         ...prevData,
-        paymentDetails: file, // Store the file object
+        file: file, // Store the file object
       }));
       setPreviewUrl(URL.createObjectURL(file));
     }
@@ -179,9 +180,9 @@ const PsychometricForm = () => {
       formSubmissionData.append(field, value);
     });
 
-    // Include paymentDetails if it exists
-    if (formData.paymentDetails) {
-      formSubmissionData.append("paymentDetails", formData.paymentDetails);
+    // Include file if it exists
+    if (formData.file) {
+      formSubmissionData.append("file", formData.file);
     }
 
     console.log(
@@ -190,7 +191,15 @@ const PsychometricForm = () => {
     );
 
     try {
-      const response = await Instance.post("/appointments", formSubmissionData);
+      const response = await Instance.post(
+        "/appointments",
+        formSubmissionData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setSuccessMessage(
         response.data.message || "Appointment created successfully"
       );
@@ -552,14 +561,14 @@ const PsychometricForm = () => {
                   <label className="block text-gray-700">Payment Details</label>
                   <input
                     type="file"
-                    name="paymentDetails"
+                    name="file"
                     className="relative w-full mb-4"
                     placeholder="Enter payment details"
                     onChange={handleImageChange}
                   />
-                  {errors.paymentDetails && (
+                  {errors.file && (
                     <p className="text-red-500 text-sm">
-                      {errors.paymentDetails}
+                      {errors.file}
                     </p>
                   )}
                 </motion.div>
