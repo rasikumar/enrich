@@ -166,19 +166,19 @@ const Discovery = () => {
         setSuccessMessage(
           response.data.message || "Appointment created successfully"
         );
-      
+
         setErrors({}); // Clear any validation errors
-      
+
         // Hide the success message after 3 seconds
         setTimeout(() => {
           setSuccessMessage(false);
         }, 3000);
       }, 2000); // 2-second delay before displaying success message
-      
+
       // Reload the page after 4 seconds
       setTimeout(() => {
         window.location.reload();
-      }, 4000);
+      }, 6000);
     } catch (error) {
       console.error(error);
     }

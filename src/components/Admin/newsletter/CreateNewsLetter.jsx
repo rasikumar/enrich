@@ -10,7 +10,7 @@ const CreateBlog = () => {
   const [head, setHead] = useState("");
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState(null); // State to handle image upload
-  const [blog, setBlog] = useState(null); // State to track the latest blog
+  const [newsLetter, setNewsLetter] = useState(null); // State to track the latest newsLetter
   const quillRef = useRef(null); // Ref to access Quill editor instance
 
   // Handle content change
@@ -33,14 +33,18 @@ const CreateBlog = () => {
     formData.append("content", content);
 
     try {
-      const response = await Instance.post("/admin/createBlog", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await Instance.post(
+        "/admin/createNewsletter",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (response.data.status === true) {
-        // Update blog state without refreshing the entire page
-        setBlog({
+        // Update newsLetter state without refreshing the entire page
+        setNewsLetter({
           head,
           author,
           content,
@@ -55,9 +59,9 @@ const CreateBlog = () => {
       } else {
         alert(response.data.message);
       }
-      console.log("Blog submitted successfully:", response.data);
+      console.log("newsLetter submitted successfully:", response.data);
     } catch (error) {
-      console.error("Error submitting blog:", error);
+      console.error("Error submitting newsLetter:", error);
     }
   };
 
@@ -102,14 +106,14 @@ const CreateBlog = () => {
   return (
     <div className="flex max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className="w-1/2 pr-4">
-        <h2 className="text-2xl font-bold mb-6">Create a New Blog</h2>
+        <h2 className="text-2xl font-bold mb-6">Create a New newsLetter</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="title"
               className="block text-sm font-medium text-gray-700"
             >
-              Blog Title
+              newsLetter Title
             </label>
             <input
               id="title"
@@ -119,7 +123,7 @@ const CreateBlog = () => {
               value={head}
               onChange={(e) => setHead(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter blog title"
+              placeholder="Enter newsLetter title"
             />
           </div>
 
@@ -147,7 +151,7 @@ const CreateBlog = () => {
               htmlFor="image"
               className="block text-sm font-medium text-gray-700"
             >
-              Blog Image
+              newsLetter Image
             </label>
             <input
               id="image"
@@ -164,7 +168,7 @@ const CreateBlog = () => {
               htmlFor="content"
               className="block text-sm font-medium text-gray-700 w-full"
             >
-              Blog Content{" "}
+              newsLetter Content{" "}
               <span className="text-slate-500 ml-24">
                 Maximum Image Value is 50Kb
               </span>
@@ -173,7 +177,7 @@ const CreateBlog = () => {
               ref={quillRef}
               value={content}
               onChange={handleContentChange}
-              placeholder="Write your blog content here..."
+              placeholder="Write your newsLetter content here..."
               modules={modules}
               formats={Formats}
               className="mt-1 block w-full h-96 overflow-y-scroll border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -185,7 +189,7 @@ const CreateBlog = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Publish Blog
+              Publish newsLetter
             </button>
           </div>
         </form>
@@ -195,12 +199,14 @@ const CreateBlog = () => {
         <h2 className="text-2xl font-bold mb-2">Preview</h2>
         <hr />
         <div className="flex flex-col gap-4 mb-4 mt-2">
-          <h3 className="text-2xl">{blog?.head || head}</h3>
-          <p className="text-slate-600 text-sm">{blog?.author || author}</p>
+          <h3 className="text-2xl">{newsLetter?.head || head}</h3>
+          <p className="text-slate-600 text-sm">
+            {newsLetter?.author || author}
+          </p>
         </div>
         <div
           className="quill-content ql-editor"
-          dangerouslySetInnerHTML={{ __html: blog?.content || content }}
+          dangerouslySetInnerHTML={{ __html: newsLetter?.content || content }}
         />
       </div>
     </div>

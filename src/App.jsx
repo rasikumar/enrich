@@ -54,6 +54,7 @@ const BlogDetail = lazy(() => import("./components/feature/blog/BlogDetails"));
 
 // testing
 import Apps from "./components/Apps";
+import Termsandcondtions from "./components/forms/Terms-and-condtions";
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/admin" />;
@@ -157,6 +158,11 @@ const App = () => {
                 <Route path="/compliance-training" element={<Compliance />} />
                 <Route path="/psychometric" element={<Psychometric />} />
                 <Route path="/Apps" element={<Apps />} />
+                {/* terms and conditions */}
+                <Route
+                  path="/terms-and-conditions"
+                  element={<Termsandcondtions />}
+                />
                 <Route
                   path="/admin"
                   element={

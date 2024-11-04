@@ -5,7 +5,7 @@ import { useState } from "react";
 // import PsychometricForm from "./allservice/psychometric/components/PsychometricForm";
 import { motion } from "framer-motion";
 import { GrSchedule } from "react-icons/gr";
-import Discovery from "./forms/Discovery";
+import Psychometric from "./forms/PsychometricForm";
 
 const BookSession = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +39,9 @@ const BookSession = () => {
           <span>t</span>
         </div>
       </motion.button>
-      {isOpen && <FormModel onClose={toggleModal}>{<Discovery />}</FormModel>}
+      {isOpen && (
+        <FormModel onClose={toggleModal}>{<Psychometric />}</FormModel>
+      )}
     </div>
   );
 };

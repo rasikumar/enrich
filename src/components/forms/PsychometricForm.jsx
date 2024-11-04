@@ -7,9 +7,13 @@ import Instance from "../Admin/Instance";
 const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const [isOpenTime, setIsOpenTime] = useState(false);
   const [isOpenAssesment, setIsOpenAssesment] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [isBoxopen, setIsBoxopen] = useState(true);
+
+  const handleClick = () => setIsBoxopen((prev) => !prev);
 
   const timeOptions = [
     { value: "6.00pm - 7.00pm", label: "6.00pm - 7.00pm" },
@@ -18,18 +22,38 @@ const PsychometricForm = () => {
   ];
 
   const assesmentOptions = [
-    { value: "Personality Test", label: "Personality Test" },
-    { value: "Cognitive Test", label: "Cognitive Test" },
-    { value: "Emotional Intelligence", label: "Emotional Intelligence" },
+    {
+      value: "Consult on which assessment to take",
+      label: "Consult on which assessment to take",
+    },
+    {
+      value: "Understand more about emotional intelligence assessment",
+      label: "Understand more about emotional intelligence assessment",
+    },
+    {
+      value:
+        "Discuss specific areas of interest (e.g., career, personal development)",
+      label:
+        "Discuss specific areas of interest (e.g., career, personal development)",
+    },
+    { value: "Other", label: "Other" },
   ];
 
-  const assesmentDropDown = () => setIsOpenAssesment(!isOpenAssesment);
-
   const handleAssesmentSelect = (value) => {
-    setFormData({ ...formData, selectedAssessment: value });
-    setIsOpenAssesment(false);
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedAssessment: value,
+      otherAssessment: value === "Other" ? "" : null, // Reset or clear custom input if "Other" is selected
+    }));
+    setIsOpenAssesment(false); // Close dropdown after selection
   };
 
+  const handleOtherInputChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      otherAssessment: e.target.value,
+    }));
+  };
   const timeDropDown = () => setIsOpenTime(!isOpenTime);
 
   const handleTimeSelect = (value) => {
@@ -43,8 +67,9 @@ const PsychometricForm = () => {
     name: "",
     email: "",
     number: "",
-    age: "",
+    location: "",
     selectedAssessment: "",
+    otherAssessment: "",
     selectDate: "",
     slots: "",
     file: "",
@@ -54,27 +79,25 @@ const PsychometricForm = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is ";
+      newErrors.name = "Name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is ";
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
 
     if (!formData.number.trim()) {
-      newErrors.number = "Number is ";
+      newErrors.number = "Number is required";
     } else if (formData.number.length < 10) {
       newErrors.number = "Number must be at least 10 digits";
     } else if (formData.number.length > 13) {
       newErrors.number = "Number must not exceed 13 digits";
     }
 
-    if (!formData.age.trim()) {
-      newErrors.age = "Age is ";
-    } else if (isNaN(formData.age) || formData.age <= 0) {
-      newErrors.age = "Age must be a valid number";
+    if (!formData.location.trim()) {
+      newErrors.location = "Location is required";
     }
 
     setErrors(newErrors);
@@ -85,13 +108,18 @@ const PsychometricForm = () => {
     const newErrors = {};
 
     if (!formData.selectedAssessment) {
-      newErrors.selectedAssessment = "Assessment type is ";
+      newErrors.selectedAssessment = "Assessment type is required";
+    } else if (
+      formData.selectedAssessment === "Other" &&
+      !formData.otherAssessment
+    ) {
+      newErrors.otherAssessment = "Please specify the assessment type";
     }
     if (!formData.slots) {
-      newErrors.slots = "Slots type is ";
+      newErrors.slots = "Slots type is required";
     }
     if (!formData.selectDate) {
-      newErrors.selectDate = "Date is ";
+      newErrors.selectDate = "Date is required";
     }
 
     setErrors(newErrors);
@@ -102,7 +130,11 @@ const PsychometricForm = () => {
     const newErrors = {};
 
     if (!formData.file) {
-      newErrors.file = "Payment details are Empty";
+      newErrors.file = "Payment is required";
+    }
+    if (!formData.isConsentChecked || !formData.isTermsChecked) {
+      alert("You must agree to the consent and terms and conditions.");
+      return;
     }
 
     setErrors(newErrors);
@@ -110,11 +142,11 @@ const PsychometricForm = () => {
   };
 
   const handleNext = () => {
-    if (currentStep === 1 && validateStepOne()) {
+    if (currentStep === 1 || validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 2 && validateStepTwo()) {
+    } else if (currentStep === 2 || validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 3 && validateStepThree()) {
+    } else if (currentStep === 3 || validateStepThree()) {
       setCurrentStep((prevStep) => prevStep + 1);
     }
   };
@@ -127,14 +159,16 @@ const PsychometricForm = () => {
     name: "",
     email: "",
     number: "",
-    age: "",
+    location: "",
     selectedAssessment: "",
+    otherAssessment: "",
     selectDate: "",
     slots: "",
     file: "",
+    isConsentChecked: false, // New field for consent checkbox
+    isTermsChecked: false, // New field for terms checkbox
   });
 
-  // Handle image change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -145,7 +179,7 @@ const PsychometricForm = () => {
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
-  // Handle text and other input changes
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -161,6 +195,7 @@ const PsychometricForm = () => {
       selectDate: value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -169,10 +204,12 @@ const PsychometricForm = () => {
       "name",
       "email",
       "number",
-      "age",
+      "location",
       "selectedAssessment",
       "selectDate",
       "slots",
+      "isConsentChecked", // Include consent checkbox value
+      "isTermsChecked", // Include terms checkbox value
     ];
 
     fields.forEach((field) => {
@@ -180,6 +217,9 @@ const PsychometricForm = () => {
       formSubmissionData.append(field, value);
     });
 
+    if (formData.selectedAssessment === "Other") {
+      formSubmissionData.append("otherAssessment", formData.otherAssessment);
+    }
     // Include file if it exists
     if (formData.file) {
       formSubmissionData.append("file", formData.file);
@@ -200,17 +240,49 @@ const PsychometricForm = () => {
           },
         }
       );
-      setSuccessMessage(
-        response.data.message || "Appointment created successfully"
-      );
       console.log("Response:", response.data);
+
+      setTimeout(() => {
+        setSuccessMessage(
+          response.data.message || "Appointment created successfully"
+        );
+      }, 3000);
     } catch (error) {
       console.error(error);
+      setErrorMessage(error.data.message || "Failed to create appointment");
     }
   };
 
   return (
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
+      {isBoxopen ? (
+        <>
+          <div className="inset-0 z-50 absolute bg-white flex flex-col justify-center items-center rounded-xl">
+            <div className="w-[40rem] m-auto flex flex-col gap-4 border-2 p-4 border-primary rounded-xl">
+              <h1 className="text-xl font-medium">
+                Why Psychometric Assessment?
+              </h1>
+              <p className="text-sm">
+                Psychometric assessments provide valuable insights into areas
+                such as personality, emotional intelligence, job preferences,
+                and areas of growth. These assessments can help you understand
+                yourself better, aligning your personal and professional
+                development goals.
+              </p>
+              <p className="text-sm">
+                If you’re unsure of which assessment is requiredright for you or
+                want to discuss how psychometric insights can benefit you,
+                schedule a consultation with one of our experts.
+              </p>
+              <button className="btn-primary" onClick={handleClick}>
+                Book an Appointment
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <div className="w-72 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-4 bg-primary ">
         {/* Step 1 */}
         <div className={`flex items-center gap-3 justify-center mt-5 `}>
@@ -300,7 +372,7 @@ const PsychometricForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700">Name</label>
+                <label className="block text-gray-700">Full Name</label>
                 <input
                   type="text"
                   name="name"
@@ -320,7 +392,7 @@ const PsychometricForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700">Email</label>
+                <label className="block text-gray-700">Email Address</label>
                 <input
                   type="email"
                   name="email"
@@ -340,7 +412,7 @@ const PsychometricForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700">Number</label>
+                <label className="block text-gray-700">Contact Number</label>
                 <input
                   type="number"
                   name="number"
@@ -360,17 +432,17 @@ const PsychometricForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700">Age</label>
+                <label className="block text-gray-700">Location</label>
                 <input
-                  type="number"
-                  name="age"
-                  value={formData.age}
+                  type="text"
+                  name="location"
+                  value={formData.location}
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
-                  placeholder="Enter your age"
+                  placeholder="Enter your location"
                 />
-                {errors.age && (
-                  <p className="text-red-500 text-sm">{errors.age}</p>
+                {errors.location && (
+                  <p className="text-red-500 text-sm">{errors.location}</p>
                 )}
               </motion.div>
 
@@ -407,18 +479,23 @@ const PsychometricForm = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700">Assessment Type</label>
+                <label className="block text-gray-700">
+                  Purpose of Appointment
+                </label>
                 <div
                   className="p-2 border rounded cursor-pointer"
-                  onClick={assesmentDropDown}
+                  onClick={() => setIsOpenAssesment(!isOpenAssesment)}
                   role="button"
                   aria-haspopup="true"
                   aria-expanded={isOpenAssesment}
                 >
-                  {formData.selectedAssessment
+                  {formData.selectedAssessment &&
+                  formData.selectedAssessment !== "Other"
                     ? assesmentOptions.find(
                         (opt) => opt.value === formData.selectedAssessment
                       ).label
+                    : formData.selectedAssessment === "Other"
+                    ? "Other"
                     : "Select Assessment"}
                 </div>
 
@@ -430,7 +507,7 @@ const PsychometricForm = () => {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                       role="menu"
-                      className="absolute w-full bg-white border rounded mt-2 shadow-md"
+                      className="absolute w-full bg-white border rounded mt-2 shadow-md z-50"
                     >
                       {assesmentOptions.map((option) => (
                         <motion.li
@@ -440,26 +517,44 @@ const PsychometricForm = () => {
                           onClick={() => handleAssesmentSelect(option.value)}
                           role="menuitem"
                         >
-                          {option.value}
+                          {option.label}
                         </motion.li>
                       ))}
                     </motion.ul>
                   )}
                 </AnimatePresence>
 
+                {formData.selectedAssessment === "Other" && (
+                  <input
+                    type="text"
+                    placeholder="Please specify"
+                    value={formData.otherAssessment || ""}
+                    onChange={handleOtherInputChange}
+                    className="w-full p-2 mt-2 border rounded"
+                  />
+                )}
+
                 {errors.selectedAssessment && (
                   <p className="text-red-500 text-sm">
                     {errors.selectedAssessment}
                   </p>
                 )}
+
+                {errors.otherAssessment && (
+                  <p className="text-red-500 text-sm">
+                    {errors.otherAssessment}
+                  </p>
+                )}
               </motion.div>
               <motion.div
                 className="mb-4"
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
               >
-                <label className="block text-gray-700 mb-2">Select Date</label>
+                <label className="block text-gray-700 mb-2">
+                  Preferred Appointment Date
+                </label>
                 <input
                   type="date"
                   name="selectDate"
@@ -467,6 +562,7 @@ const PsychometricForm = () => {
                   onChange={handleDateChange}
                   min={today}
                   className="w-full p-2 border rounded"
+                  onKeyDown={(e) => e.preventDefault()}
                 />
                 {errors.selectDate && (
                   <p className="text-red-500 text-sm">{errors.selectDate}</p>
@@ -474,12 +570,14 @@ const PsychometricForm = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 80 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, x: 10 }}
                 className="relative w-full"
               >
-                <label className="block text-gray-700 mb-2">Slots</label>
+                <label className="block text-gray-700 mb-2">
+                  Preferred Appointment Time
+                </label>
                 <div
                   className="p-2 border rounded cursor-pointer"
                   onClick={timeDropDown}
@@ -496,7 +594,7 @@ const PsychometricForm = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute w-full bg-white border rounded mt-2 shadow-md"
+                      className="absolute w-full bg-white border rounded mt-2 shadow-md z-50"
                     >
                       {timeOptions.map((option) => (
                         <motion.li
@@ -567,9 +665,7 @@ const PsychometricForm = () => {
                     onChange={handleImageChange}
                   />
                   {errors.file && (
-                    <p className="text-red-500 text-sm">
-                      {errors.file}
-                    </p>
+                    <p className="text-red-500 text-sm">{errors.file}</p>
                   )}
                 </motion.div>
                 <img
@@ -580,6 +676,51 @@ const PsychometricForm = () => {
                   className="m-auto"
                 />
                 <span>Amout : ₹ 499</span>
+              </div>
+
+              <div className="flex items-center mb-4">
+                <input
+                  type="checkbox"
+                  id="consentCheckbox"
+                  checked={formData.isConsentChecked}
+                  onChange={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      isConsentChecked: !prevData.isConsentChecked, // Toggle consent checkbox
+                    }))
+                  }
+                  required
+                />
+                <label htmlFor="consentCheckbox" className="ml-2 text-xs">
+                  I understand that the consultation is a paid session. I
+                  consent to provide necessary information for a personalized
+                  consultation and agree to the terms and conditions.
+                </label>
+              </div>
+
+              <div className="flex items-center mb-4">
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  checked={formData.isTermsChecked}
+                  onChange={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      isTermsChecked: !prevData.isTermsChecked, // Toggle terms checkbox
+                    }))
+                  }
+                  required
+                />
+                <label htmlFor="termsCheckbox" className="ml-2 text-xs">
+                  I agree to the{" "}
+                  <a
+                    href="/terms-and-conditions"
+                    className="text-blue-600 underline"
+                  >
+                    terms and conditions
+                  </a>
+                  .
+                </label>
               </div>
 
               <button
@@ -627,12 +768,15 @@ const PsychometricForm = () => {
                   <strong>Phone Number:</strong> {formData.number}
                 </p>
                 <p>
-                  <strong>Age:</strong> {formData.age}
+                  <strong>Location:</strong> {formData.location}
                 </p>
                 <p>
                   <strong>Assessment Type:</strong>{" "}
-                  {formData.selectedAssessment}
+                  {formData.selectedAssessment === "Other"
+                    ? formData.otherAssessment || "none" // Show the custom input value or "none" if it's empty
+                    : formData.selectedAssessment || "none"}{" "}
                 </p>
+
                 <p>
                   <strong>Date and Time</strong> {formData.selectDate}{" "}
                   {formData.slots}
@@ -651,7 +795,12 @@ const PsychometricForm = () => {
                   </div>
                 )}
               </div>
-
+              <p className="text-xs text-gray-400">
+                <span className="text-red-600">*</span>Note: If you decide to
+                proceed with a psychometric assessment after the consultation, a
+                discount will be applied to the assessment cost, considering the
+                consultation payment.
+              </p>
               <button
                 type="button"
                 onClick={handlePrev}
@@ -677,6 +826,9 @@ const PsychometricForm = () => {
                 <video src={Sending} autoPlay loop={true}></video>
               </div>
             </div>
+          )}
+          {errorMessage && (
+            <div className="absolute inset-0 flex items-center justify-center"></div>
           )}
         </form>
       </div>

@@ -112,13 +112,13 @@ const App = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="flex items-center justify-center md:justify-start">
-        <div className="flex flex-wrap md:flex-nowrap overflow-hidden">
+        <div className="flex flex-wrap md:flex-nowrap overflow-hidden gap-2">
           {blog.slice(currentIndex, currentIndex + 2).map((update, index) => (
             <Card key={index} {...update} />
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-between md:justify-center gap-4 mt-4">
+      <div className="flex items-center justify-between md:justify-center gap-4 md:ml-4 mt-4">
         <GrFormPrevious className="cursor-pointer" onClick={prev} size={24} />
         <GrFormNext className="cursor-pointer" onClick={next} size={24} />
       </div>
