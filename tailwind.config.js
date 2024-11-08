@@ -30,6 +30,10 @@ export default {
         "custom-border": "rgba(255, 255, 255, 0.3)",
         primary: "#203B93",
         secondary: "#DCA74B",
+        "neon-green": "#39FF14",
+        "neon-yellow": "#FFD700",
+        "neon-pink": "#FF1493",
+        
       },
       backgroundImage: {
         Hero: "url('/src/assets/hero/heroBg.png')",

@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CreateBlog from "./blog/CreateBlog";
-import ListBlogs from "./blog/ListBlogs";
+// import CreateBlog from "./insight/blog/CreateBlog";
 import CreateNewsLetter from "./newsletter/CreateNewsLetter";
 import ListNewsLetter from "./newsletter/ListNewsLetter";
 import Logout from "./Logout";
 import ContactList from "./contactList";
-import CommentList from "./blog/CommentList";
+// import CommentList from "./insight/blog/CommentList";
 import Dashboard from "../Admin/dashboard/dashboard";
 import Members from "./newsletter/Members";
 import { motion } from "framer-motion";
+import List from "./insight/List";
+import Create from "./insight/Create";
+import Comment from "./insight/Comment";
 
 const Admindashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -47,10 +49,10 @@ const Admindashboard = () => {
     switch (activeTab) {
       case "dashboard":
         return <Dashboard />;
-      case "createBlog":
-        return <CreateBlog />;
-      case "listBlog":
-        return <ListBlogs />;
+      case "createInsights":
+        return <Create />;
+      case "listInsighs":
+        return <List />;
       case "createNewsLetter":
         return <CreateNewsLetter />;
       case "listNewsLetter":
@@ -59,8 +61,8 @@ const Admindashboard = () => {
         return <Members />;
       case "contactList":
         return <ContactList />;
-      case "commentList":
-        return <CommentList />;
+      case "Comment":
+        return <Comment />;
       default:
         return <div>Select an option from the sidebar</div>;
     }
@@ -95,20 +97,20 @@ const Admindashboard = () => {
                 </button>
               </li>
 
-              {/* Dropdown for Blog options */}
+              {/* Dropdown for Insights options */}
               <li className="w-full">
                 <button
                   className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeDropdown === "blogs"
+                    activeDropdown === "insights"
                       ? "bg-indigo-600 text-white"
                       : "bg-gray-200"
                   }`}
-                  onClick={() => handleDropdownToggle("blogs")} // Toggle dropdown
+                  onClick={() => handleDropdownToggle("insights")} // Toggle dropdown
                 >
-                  Blogs
+                  Insights
                 </button>
                 {/* Dropdown Menu */}
-                {activeDropdown === "blogs" && (
+                {activeDropdown === "insights" && (
                   <motion.ul
                     initial="hidden"
                     animate="visible"
@@ -119,35 +121,35 @@ const Admindashboard = () => {
                     <li className="w-full">
                       <button
                         className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "listBlog"
+                          activeTab === "listInsighs"
                             ? "bg-indigo-600 text-white"
                             : "bg-gray-200"
                         }`}
-                        onClick={() => handleBlogOptionClick("listBlog")}
+                        onClick={() => handleBlogOptionClick("listInsighs")}
                       >
-                        Blog List
+                        Insights List
                       </button>
                     </li>
                     <li className="w-full">
                       <button
                         className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "createBlog"
+                          activeTab === "createInsights"
                             ? "bg-indigo-600 text-white"
                             : "bg-gray-200"
                         }`}
-                        onClick={() => handleBlogOptionClick("createBlog")}
+                        onClick={() => handleBlogOptionClick("createInsights")}
                       >
-                        Create Blog
+                        Create Insights
                       </button>
                     </li>
                     <li className="w-full">
                       <button
                         className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "commentList"
+                          activeTab === "Comment"
                             ? "bg-indigo-600 text-white"
                             : "bg-gray-200"
                         }`}
-                        onClick={() => setActiveTab("commentList")}
+                        onClick={() => setActiveTab("Comment")}
                       >
                         Comment List
                       </button>

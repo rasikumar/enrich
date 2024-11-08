@@ -142,11 +142,11 @@ const PsychometricForm = () => {
   };
 
   const handleNext = () => {
-    if (currentStep === 1 || validateStepOne()) {
+    if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 2 || validateStepTwo()) {
+    } else if (currentStep === 2 && validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 3 || validateStepThree()) {
+    } else if (currentStep === 3 && validateStepThree()) {
       setCurrentStep((prevStep) => prevStep + 1);
     }
   };
@@ -246,7 +246,10 @@ const PsychometricForm = () => {
         setSuccessMessage(
           response.data.message || "Appointment created successfully"
         );
-      }, 3000);
+        setTimeout(() => {
+          setSuccessMessage(null); // Clear the success message
+        }, 3000); // Clear the message after 3 seconds
+      }, 3000); // Delay the success message by 3 seconds
     } catch (error) {
       console.error(error);
       setErrorMessage(error.data.message || "Failed to create appointment");
@@ -257,19 +260,19 @@ const PsychometricForm = () => {
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
       {isBoxopen ? (
         <>
-          <div className="inset-0 z-50 absolute bg-white flex flex-col justify-center items-center rounded-xl">
-            <div className="w-[40rem] m-auto flex flex-col gap-4 border-2 p-4 border-primary rounded-xl">
+          <div className="inset-0 z-50 absolute bg-white flex flex-col justify-center items-center rounded-xl p-2">
+            <div className="md:w-[40rem] m-auto flex flex-col gap-4 border-2 p-4 border-primary rounded-xl">
               <h1 className="text-xl font-medium">
                 Why Psychometric Assessment?
               </h1>
-              <p className="text-sm">
+              <p className="text-xs">
                 Psychometric assessments provide valuable insights into areas
                 such as personality, emotional intelligence, job preferences,
                 and areas of growth. These assessments can help you understand
                 yourself better, aligning your personal and professional
                 development goals.
               </p>
-              <p className="text-sm">
+              <p className="text-xs">
                 If you’re unsure of which assessment is requiredright for you or
                 want to discuss how psychometric insights can benefit you,
                 schedule a consultation with one of our experts.
@@ -822,7 +825,7 @@ const PsychometricForm = () => {
                 <h2 className="text-green-500 font-semibold text-lg">
                   Success!
                 </h2>
-                <p>Your booking was successful!</p>
+                <p>{successMessage}</p>
                 <video src={Sending} autoPlay loop={true}></video>
               </div>
             </div>

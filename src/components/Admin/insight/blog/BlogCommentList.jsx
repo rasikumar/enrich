@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import Instance from "../Instance";
-import CommentItem from "../comment/CommentItem";
-import Pagination from "../comment/Pagination";
-import ConfirmModal from "../comment/ConfirmModal"; // Import the ConfirmModal
-import Loader from "../comment/Loader";
+import Instance from "../../Instance";
+import CommentItem from "../../comment/CommentItem";
+import Pagination from "../../comment/Pagination";
+import ConfirmModal from "../../comment/ConfirmModal"; // Import the ConfirmModal
+import Loader from "../../comment/Loader";
 
 // CommentList Component
 const CommentList = () => {

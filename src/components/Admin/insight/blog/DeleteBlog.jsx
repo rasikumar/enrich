@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button } from "flowbite-react";
-import Instance from "../Instance";
+import Instance from "../../Instance";
 import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css

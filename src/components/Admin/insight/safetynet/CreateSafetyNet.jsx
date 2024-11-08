@@ -1,16 +1,21 @@
 import { useState, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Instance from "../Instance";
+import Instance from "../../Instance";
 import imageCompressor from "quill-image-compress";
 Quill.register("modules/imageCompressor", imageCompressor);
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
-const CreateBlog = () => {
+const CreateSafetyNet = () => {
   const [content, setContent] = useState("");
   const [head, setHead] = useState("");
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState(null); // State to handle image upload
-  const [blog, setBlog] = useState(null); // State to track the latest blog
+  const [thumbnail, setThumbnail] = useState(null); // State for thumbnail image
+  const [metaDescription, setMetaDescription] = useState(""); // State for meta description
+  const [metaKeywords, setMetaKeywords] = useState(""); // State for meta keywords
+  const [safetyNet, setSafetyNet] = useState(null); // State to track the latest blog
   const quillRef = useRef(null); // Ref to access Quill editor instance
 
   // Handle content change
@@ -24,16 +29,36 @@ const CreateBlog = () => {
     setImage(file); // Set image to state
   };
 
+  const handleThumbnailChange = (e) => {
+    const file = e.target.files[0];
+    setThumbnail(file); // Set thumbnail to state
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !head.trim() ||
+      !author.trim() ||
+      !image ||
+      !thumbnail ||
+      !metaDescription.trim() ||
+      !metaKeywords.trim() ||
+      !content.trim()
+    ) {
+      toast.error("all fields are required");
+      return;
+    }
     const formData = new FormData();
     formData.append("title", head);
     formData.append("author", author);
     formData.append("image", image);
+    formData.append("thumbnail", thumbnail); // Add thumbnail to form data
+    formData.append("metaDescription", metaDescription); // Add meta description
+    formData.append("metaKeywords", metaKeywords); // Add meta keywords
     formData.append("content", content);
 
     try {
-      const response = await Instance.post("/admin/createBlog", formData, {
+      const response = await Instance.post("/admin/createSafety", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -42,7 +67,7 @@ const CreateBlog = () => {
         // Update blog state without refreshing the entire page
         console.log(response);
 
-        setBlog({
+        setSafetyNet({
           head,
           author,
           content,
@@ -53,11 +78,14 @@ const CreateBlog = () => {
         setAuthor("");
         setContent("");
         setImage(null);
+        setThumbnail(null); // Clear thumbnail
+        setMetaDescription(""); // Clear meta description
+        setMetaKeywords(""); // Clear meta keywords
         window.location.reload();
       } else {
         alert(response.data.message);
       }
-      console.log("Blog submitted successfully:", response.data);
+      console.log("SafetyNet submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting blog:", error);
     }
@@ -104,14 +132,14 @@ const CreateBlog = () => {
   return (
     <div className="flex max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className="w-1/2 pr-4">
-        <h2 className="text-2xl font-bold mb-6">Create a New Blog</h2>
+        <h2 className="text-2xl font-bold mb-6">Create Safety Net</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="title"
               className="block text-sm font-medium text-gray-700"
             >
-              Blog Title
+              SafetyNet Title
             </label>
             <input
               id="title"
@@ -121,7 +149,7 @@ const CreateBlog = () => {
               value={head}
               onChange={(e) => setHead(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter blog title"
+              placeholder="Enter SafetyNet title"
             />
           </div>
 
@@ -149,7 +177,7 @@ const CreateBlog = () => {
               htmlFor="image"
               className="block text-sm font-medium text-gray-700"
             >
-              Blog Image
+              SafetyNet Image
             </label>
             <input
               id="image"
@@ -163,10 +191,63 @@ const CreateBlog = () => {
 
           <div>
             <label
+              htmlFor="thumbnail"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Thumbnail Image
+            </label>
+            <input
+              id="thumbnail"
+              name="thumbnail"
+              type="file"
+              accept="image/*"
+              onChange={handleThumbnailChange}
+              className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:border-gray-300 file:text-sm file:font-semibold file:bg-gray-50 hover:file:bg-gray-100"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="metaDescription"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Meta Description
+            </label>
+            <textarea
+              id="metaDescription"
+              name="metaDescription"
+              rows="3"
+              value={metaDescription}
+              onChange={(e) => setMetaDescription(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Enter meta description"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="metaKeywords"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Meta Keywords
+            </label>
+            <input
+              id="metaKeywords"
+              name="metaKeywords"
+              type="text"
+              value={metaKeywords}
+              onChange={(e) => setMetaKeywords(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Enter meta keywords"
+            />
+          </div>
+
+          <div>
+            <label
               htmlFor="content"
               className="block text-sm font-medium text-gray-700 w-full"
             >
-              Blog Content{" "}
+              SafetyNet Content{" "}
               <span className="text-slate-500 ml-24">
                 Maximum Image Value is 50Kb
               </span>
@@ -187,7 +268,7 @@ const CreateBlog = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Publish Blog
+              Publish SafetyNet
             </button>
           </div>
         </form>
@@ -197,16 +278,19 @@ const CreateBlog = () => {
         <h2 className="text-2xl font-bold mb-2">Preview</h2>
         <hr />
         <div className="flex flex-col gap-4 mb-4 mt-2">
-          <h3 className="text-2xl">{blog?.head || head}</h3>
-          <p className="text-slate-600 text-sm">{blog?.author || author}</p>
+          <h3 className="text-2xl">{safetyNet?.head || head}</h3>
+          <p className="text-slate-600 text-sm">
+            {safetyNet?.author || author}
+          </p>
         </div>
         <div
           className="quill-content ql-editor"
-          dangerouslySetInnerHTML={{ __html: blog?.content || content }}
+          dangerouslySetInnerHTML={{ __html: safetyNet?.content || content }}
         />
       </div>
+      <ToastContainer position="top-right" />
     </div>
   );
 };
 
-export default CreateBlog;
+export default CreateSafetyNet;

@@ -38,6 +38,9 @@ const Footer = () => {
       //       "Oops! We encountered an issue. Please retry in a bit."
       //   );
       // }
+      setFormData({
+        email: "",
+      })
     } catch (error) {
       console.log(error.response.data);
       toast.error(
@@ -72,77 +75,86 @@ const Footer = () => {
           </button>
         </form>
       </div>
-      <div className="flex bg-gray-300 flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10 lg:py-6">
-        <div className="mb-4 lg:mb-0">
-          <img src={logo} alt="logo" width={150} loading="lazy" />
+      <div className="flex flex-col bg-slate-300">
+        <div className="flex flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10 lg:py-6">
+          <div className="mb-4 lg:mb-0">
+            <img src={logo} alt="logo" width={150} loading="lazy" />
+          </div>
+          <div className="mb-4 lg:mb-0">
+            <ul className="flex md:gap-3 xl:text-lg md:text-sm text-xs text-center lg:text-left ">
+              <AnchorLink
+                href="#hero"
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                Home
+              </AnchorLink>
+              <Link
+                to={"/Aboutus"}
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                About Us
+              </Link>
+              <AnchorLink
+                href="#service"
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                Services
+              </AnchorLink>
+              <AnchorLink
+                href="#program"
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                Program
+              </AnchorLink>
+              <AnchorLink
+                href="#testimonials"
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                Testimonials
+              </AnchorLink>
+              <AnchorLink
+                href="#blog"
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer h-5 items-center flex"
+              >
+                Blogs
+              </AnchorLink>
+            </ul>
+          </div>
+          <div>
+            <ul className="flex justify-center lg:justify-end gap-4 text-3xl">
+              <li>
+                <a
+                  href=""
+                  className="text-black-700 hover:text-yellow-600 transition delay-100"
+                >
+                  <FaInstagram />
+                </a>
+              </li>
+              <li>
+                <a
+                  href=""
+                  className="text-black-700 hover:text-yellow-600 transition delay-100"
+                >
+                  <FaWhatsapp />
+                </a>
+              </li>
+              <li>
+                <a
+                  href=""
+                  className="text-black-700 hover:text-yellow-600 transition delay-100"
+                >
+                  <CiLinkedin />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="mb-4 lg:mb-0">
-          <ul className="flex md:gap-3 xl:text-lg md:text-sm text-xs text-center lg:text-left ">
-            <AnchorLink
-              href="#hero"
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
-            >
-              Home
-            </AnchorLink>
-            <Link
-              to={"/Aboutus"}
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
-            >
-              About Us
-            </Link>
-            <AnchorLink
-              href="#service"
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
-            >
-              Services
-            </AnchorLink>
-            <AnchorLink
-              href="#program"
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
-            >
-              Program
-            </AnchorLink>
-            <AnchorLink
-              href="#testimonials"
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
-            >
-              Testimonials
-            </AnchorLink>
-            <AnchorLink
-              href="#blog"
-              className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer h-5 items-center flex"
-            >
-              Blogs
-            </AnchorLink>
-          </ul>
-        </div>
+
         <div>
-          <ul className="flex justify-center lg:justify-end gap-4 text-3xl">
-            <li>
-              <a
-                href=""
-                className="text-black-700 hover:text-yellow-600 transition delay-100"
-              >
-                <FaInstagram />
-              </a>
-            </li>
-            <li>
-              <a
-                href=""
-                className="text-black-700 hover:text-yellow-600 transition delay-100"
-              >
-                <FaWhatsapp />
-              </a>
-            </li>
-            <li>
-              <a
-                href=""
-                className="text-black-700 hover:text-yellow-600 transition delay-100"
-              >
-                <CiLinkedin />
-              </a>
-            </li>
-          </ul>
+          <h1 className="text-center p-4 text-sm">
+            Copyright © 2024 HCL Technologies Limited{" "}
+            <Link to={"/privacy-policy"}>Privacy & Policy</Link>
+          </h1>
         </div>
       </div>
       <ToastContainer />

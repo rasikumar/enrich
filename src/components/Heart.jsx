@@ -5,7 +5,7 @@ import Services from "./allservice/Services";
 import Program from "./allprogram/Program";
 import Testimonials from "./Testimonials";
 import Newsletter from "./Newsletter";
-import Blog from "../components/feature/blog/Blog";
+import Insights from "../components/feature/Insights";
 import GetIn from "./GetIn";
 // import ScrollAlert from "./ScrollMsg";
 
@@ -20,7 +20,7 @@ const Heart = () => {
       <Testimonials />
       {/* <ScrollAlert /> */}
       <Newsletter />
-      <Blog />
+      <Insights />
       <GetIn />
     </>
   );

@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
 
 const Card = ({ title, totalCount, error }) => {
-    return (
-      <div className="bg-white shadow-md rounded-lg p-4  w-full">
-        <h2 className="text-xl font-bold">{title}</h2>
-        {error ? (
-          <p>Failed to Load - {error}</p>
-        ) : (
-          totalCount && (
-            <div className="mt-2">
-              <p>
-                Total {title}: {totalCount}
-              </p>
-            </div>
-          )
-        )}
-      </div>
-    );
-  };
-  
-  export default Card;
+  return (
+    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg rounded-lg p-5 w-full transform transition-all duration-300 hover:shadow-2xl hover:translate-y-[-5px]">
+      <h2 className="text-2xl font-semibold mb-3">{title}</h2>
+      {error ? (
+        <p className="text-red-300 mt-2 font-medium">Failed to Load - {error}</p>
+      ) : (
+        totalCount !== undefined && (
+          <div className="mt-3">
+            <p className="text-lg">
+              Total {title}: <span className="font-bold text-yellow-300">{totalCount}</span>
+            </p>
+          </div>
+        )
+      )}
+    </div>
+  );
+};
+
+export default Card;

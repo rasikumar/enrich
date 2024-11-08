@@ -1,8 +1,8 @@
 const CookiePolicy = () => {
   return (
     <>
-      <section className="from-t-primary to-slate-400 bg-gradient-to-r p-10 w-full text-white text-5xl">
-        Evvi Solutions Cookies Policy
+      <section className="from-t-primary to-slate-400 bg-gradient-to-r p-10 w-full text-primary text-5xl">
+        Enrich Minds Consulting Cookies Policy
       </section>
       <div className="p-24 pt-1 bg-white border mx-auto">
         <section className="m-auto mt-5">

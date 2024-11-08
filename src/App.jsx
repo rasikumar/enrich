@@ -49,12 +49,15 @@ const ForgotPassword = lazy(() => import("./components/Admin/ForgotPassword"));
 const ResetPassword = lazy(() => import("./components/Admin/resetPassword"));
 
 // blogPages
-const BlogPage = lazy(() => import("./components/feature/blog/BlogPage"));
+const InsightPage = lazy(() => import("./components/feature/InsightPage"));
 const BlogDetail = lazy(() => import("./components/feature/blog/BlogDetails"));
+const BlogDetails = lazy(() => import("./components/feature/safetynet/BlogDetails"));
+const BlogDetailss = lazy(() => import("./components/feature/changeabit/BlogDetails"));
 
 // testing
 import Apps from "./components/Apps";
 import Termsandcondtions from "./components/forms/Terms-and-condtions";
+import PrivacyPolicy from "./components/Policy";
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/admin" />;
@@ -148,9 +151,12 @@ const App = () => {
                 <Route path="/contactus" element={<GetIn />} />
                 <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 {/* blogarticles */}
-                <Route path="/Blog" element={<BlogPage />} />
+                <Route path="/insightpage" element={<InsightPage />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/changeBit/:id" element={<BlogDetailss />} />
+                <Route path="/safetyNet/:id" element={<BlogDetails />} />
 
                 {/* service */}
                 <Route path="/individuals" element={<Individuals />} />

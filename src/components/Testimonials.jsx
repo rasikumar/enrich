@@ -1,41 +1,56 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { TiArrowRightThick } from "react-icons/ti";
 import { TiArrowLeftThick } from "react-icons/ti";
-import { testimg } from "../assets";
 
 const testimonialsData = [
   {
     id: 1,
-    name: "Sathya Priya",
+    name: "Shrikant Hegde",
     position: "Emotional Intelligence",
     feedback:
-      "Attending the emotional intelligence session was life-changing. I now understand my emotions better and manage stress effectively.",
-    img: testimg,
+      "I had the privilege of attending various webinars conducted by Ms. Shanthi Subramani. All those webinars were very informative and educative, and were true testimonies of her thorough knowledge, rich experience and authentic professional expertise. ",
+    img: "https://media.licdn.com/dms/image/v2/C5603AQEGiiCdDBbVxg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1517838505212?e=1736380800&v=beta&t=mZFVoLiw9ufiFgBZ704UV4Ivo3ng4HQxlYmh-cmPZr8",
   },
   {
     id: 2,
-    name: "Naga Nandhini",
-    position: "Communication skills",
+    name: "Shiva Kumar .B",
+    position: "Master Trainer, Leadership Coach,",
     feedback:
-      "The communication skills workshop helped me express my ideas confidently in meetings. Now, I feel more valued and respected at work.",
-    img: testimg,
+      "A transformative workshop that significantly enhanced our CRM team's behavioral skills for customer service. The tailored approach empowered participants, refreshing their mindset and effectiveness in their roles. Highly recommended for organizations aiming to elevate team performance and individual growth.",
+    img: "https://media.licdn.com/dms/image/v2/D5603AQGq1qRvF95vmA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1707374259990?e=1736380800&v=beta&t=jjoOLzQC3JRyD0Lir5GMShxBccW1ZasW-8fvxfIQCgY",
   },
   {
     id: 3,
-    name: "Nandha Kumar",
-    position: "Time Management",
+    name: "Zahira Pereira",
+    // position: "Time Management",
     feedback:
-      "After attending the time management seminar, I{&apos}ve become more organized and productive. My efficiency has improved significantly.",
-    img: testimg,
+      "I must compliment Shanthi Subramani for such an amazing representation of my Psychometric report.  She took me through every phase of it very articulately, I now understand myself much better.  The psychometric results are very accurate , and served as an exact mirror to what my actual personality is.",
+    img: "https://lh3.googleusercontent.com/a-/ALV-UjXqHGfZ5g8Y0fsAVw6ddN-gysfO8mb15LOyqYBeBTosvXJTZJsXRQ=w90-h90-p-rp-mo-br100",
   },
   {
     id: 4,
-    name: "Rasi Kumar",
-    position: "Presentation Skills",
+    name: "Ashwini Murthy",
+    // position: "Presentation Skills",
     feedback:
-      "The presentation skills course boosted my confidence in public speaking. I recently delivered a successful pitch that impressed our clients.",
-    img: testimg,
+      "Had a great experience with ma'am.She motivated us in positive way. After attending this workshop my self confidence increased and l started to love myself, which is the great tool to improve my career.",
+    img: "https://lh3.googleusercontent.com/a-/ALV-UjVuX6KIRwaVRPn1mNVlTtzaVJiLDihZb8Tv7dHzCg59BUZal1qF=w90-h90-p-rp-mo-br100",
+  },
+  {
+    id: 5,
+    name: "Archana V Kurli",
+    // position: "Presentation Skills",
+    feedback:
+      "Session was really worth to learn balancing life.... dear mam.We got to know Loving one self is not being selfish but self respect . Thank you 🙏🏻",
+    img: "https://lh3.googleusercontent.com/a-/ALV-UjVEBlcWObYVv1HD2BcxXyTL6LvLshkN82TsE9VOz1fq1_2cxgsX=w90-h90-p-rp-mo-br100",
+  },
+  {
+    id: 6,
+    name: "Sai Sharan",
+    // position: "Presentation Skills",
+    feedback:
+      "Personal development session was very nice and helpful. Session has improved me a lot in planning and up skilling in my daily activity of work and learning.",
+    img: "https://lh3.googleusercontent.com/a/ACg8ocLmRwsLkolXXjb-1wSPHlk6q70PnKa8R-cxHZuQ34a8b2bhqg0=w90-h90-p-rp-mo-br100",
   },
   // Add more testimonials as needed
 ];
@@ -78,6 +93,15 @@ const Testimonials = () => {
       },
     });
   };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const newIndex = (currentIndex + 1) % testimonialsData.length;
+      animateCards(newIndex);
+    }, 3000); // Change every 3 seconds
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
 
   return (
     <div
@@ -87,7 +111,9 @@ const Testimonials = () => {
     >
       <div className="content items-center flex flex-col lg:flex-row gap-4">
         <div className="text-content flex flex-col gap-4">
-          <h4 className="text-white md:text-4xl text-2xl font-semibold ">Testimonials</h4>
+          <h4 className="text-white md:text-4xl text-2xl font-semibold ">
+            Testimonials
+          </h4>
           <h1 className="xl:text-2xl md:text-lg sm:text-sm w-full font-[600] text-white">
             Echoes of Success: Hear from Our Clients
           </h1>
@@ -139,7 +165,7 @@ const Testimonials = () => {
                     ].position
                   }
                 </p>
-                <p className="w-full leading-5 text-sm text-gray-700 text-center">
+                <p className="w-full leading-5 text-sm text-gray-700 text-justify">
                   {
                     testimonialsData[
                       (currentIndex + i) % testimonialsData.length
