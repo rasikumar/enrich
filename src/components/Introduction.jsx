@@ -16,14 +16,14 @@ const Introduction = () => {
         </div>
         <div className="lg:w-[50vw] w-full flex flex-col gap-5">
           <h2 className="text-black md:text-4xl text-2xl font-semibold ">
-            Welcome to EnrichMinds!
+            Welcome to EnrichMinds Consulting!
           </h2>
           <p className="mt-2 text-gray-600 xl:text-lg text-sm flex flex-col gap-3 text-justify ">
             <div>
-              At EnrichMinds, we specialize in behavioral skills training,
-              psychometric assessments, and counseling for both corporate
-              businesses and individuals. Our transformative programs are
-              designed to elevate team performance, enhance individual
+              At EnrichMinds Consulting, we specialize in behavioral skills
+              training, psychometric assessments, and counseling for both
+              corporate businesses and individuals. Our transformative programs
+              are designed to elevate team performance, enhance individual
               capabilities, and promote compliance in a dynamic work
               environment.
             </div>
@@ -31,9 +31,9 @@ const Introduction = () => {
               Whether you&apos;re a business looking to strengthen communication
               and leadership or an individual seeking to upskill for career
               advancement, our expert-led sessions and assessments are
-              customized to meet your unique needs. Join EnrichMinds to empower
-              yourself with essential skills for lasting success and personal
-              growth.
+              customized to meet your unique needs. Join EnrichMinds Consulting
+              to empower yourself with essential skills for lasting success and
+              personal growth.
             </div>
           </p>
           <Link to={"/Aboutus"}>

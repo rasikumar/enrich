@@ -3,6 +3,7 @@ import Instance from "../Instance";
 import { Modal } from "./Modal";
 import BlogForm from "../newsletter/FormLists/BlogForm";
 import ChangeABit from "../newsletter/FormLists/ChangeABitForm";
+import SafetyNet from "./FormLists/SafetyNetForm";
 import { logo } from "../../../assets/index";
 
 const NewsletterSection = () => {
@@ -10,6 +11,7 @@ const NewsletterSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [changeABits, setchangeABits] = useState([]);
+  const [safetyNets, setSafetyNets] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,8 +27,13 @@ const NewsletterSection = () => {
       subtitle: "Loading changeABit...",
       content: "", // You can update this with actual changeABit data
     },
+    safetyNets: {
+      title: "✨ Spotlight: ChangeABit",
+      subtitle: "Loading changeABit...",
+      content: "", // You can update this with actual changeABit data
+    },
     upcomingEvents: {
-      title: "📅 What’s New at EnrichMinds",
+      title: "📅 What’s New at EnrichMinds Consulting",
       subtitle:
         "Stay updated on what’s happening in our community and mark your calendar for some exciting events!",
       content: "", // You can update this with actual event data
@@ -81,7 +88,7 @@ const NewsletterSection = () => {
       try {
         const response = await Instance.post("/admin/getallChangeAbitList");
 
-        console.log(response.data);
+        // console.log(response.data);
         const sortedChangeAbitList = response.data.changeAbits.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
@@ -107,12 +114,42 @@ const NewsletterSection = () => {
       }
     };
     fetchChangeABit();
-  });
+  }, []);
+
+  useEffect(() => {
+    const fetchSafetyNet = async () => {
+      try {
+        const response = await Instance.post("/admin/getAllSafetyList");
+        // console.log(response.data);
+        const sortedSafetyNetList = response.data.safetyRecords.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setSafetyNets(sortedSafetyNetList);
+
+        if (sortedSafetyNetList.length > 0) {
+          const latestSafetyNet = sortedSafetyNetList[0];
+          setSectionData((prevSectionData) => ({
+            ...prevSectionData,
+            safetyNets: {
+              title: "✨ Spotlight: ChangeABit",
+              subtitle: `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestSafetyNet.safety_title} to help you make small, meaningful changes that add up to big growth.`,
+              image: `http://192.168.20.5:5000/safety_images/${latestSafetyNet.safety_image}`,
+              content: latestSafetyNet.safety_body,
+            },
+          }));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchSafetyNet();
+  }, []);
 
   const [sectionContent, setSectionContent] = useState({
     featuredInsight: sectionData.featuredInsight.content,
     changeABit: sectionData.changeABit.content,
     upcomingEvents: sectionData.upcomingEvents.content, // Add new section content
+    safetyNets: sectionData.safetyNets.content,
     tipsToThrive: sectionData.tipsToThrive.content, // Add new section content
     wordsToGrowBy: sectionData.wordsToGrowBy.content, // Add new section content
   });
@@ -184,6 +221,14 @@ const NewsletterSection = () => {
                 featuredImage={sectionData.changeABit.image} // Pass the image URL
                 featuredContent={sectionData.changeABit.content}
               />
+            ) : key === "safetyNets" ? (
+              <SafetyNet
+                featuredArticleTitle={
+                  safetyNets.length > 0 ? safetyNets[0].title : ""
+                }
+                featuredImage={sectionData.safetyNets.image} // Pass the image URL
+                featuredContent={sectionData.safetyNets.content}
+              />
             ) : (
               <textarea
                 value={sectionContent[key]}
@@ -225,11 +270,11 @@ const NewsletterSection = () => {
               </h3>
               <p className="text-sm w-full mb-4 leading-5">
                 This month, we’re excited to share all the latest from
-                EnrichMinds! Dive into Insights Hub for exclusive content,
-                actionable tips, inspiring stories, and everything happening
-                across our company, including our publication ChangeABit, new
-                blog posts, events, and more. Let’s keep moving forward together
-                on your journey toward Becoming Your Best Self!
+                EnrichMinds Consulting! Dive into Insights Hub for exclusive
+                content, actionable tips, inspiring stories, and everything
+                happening across our company, including our publication
+                ChangeABit, new blog posts, events, and more. Let’s keep moving
+                forward together on your journey toward Becoming Your Best Self!
               </p>
 
               {Object.keys(sectionData).map((key) =>

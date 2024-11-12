@@ -79,11 +79,11 @@ const Termsandcondtions = () => {
         <section>
           <h2 className="text-xl font-semibold">7. Intellectual Property</h2>
           <p>
-            All materials provided by EnrichMinds Consulting, including
-            assessment tools and consultation resources, are protected by
-            intellectual property laws. Clients may not reproduce, distribute,
-            or use these materials for any purposes other than personal
-            reference.
+            All materials provided by EnrichMinds Consulting Consulting,
+            including assessment tools and consultation resources, are protected
+            by intellectual property laws. Clients may not reproduce,
+            distribute, or use these materials for any purposes other than
+            personal reference.
           </p>
         </section>
 

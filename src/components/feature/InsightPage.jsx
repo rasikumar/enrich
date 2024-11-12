@@ -205,8 +205,10 @@ const InsightPage = () => {
   return (
     <div className="w-[90%] m-auto py-12">
       <DynamicBreadcrumb />
-      <div className="flex flex-col gap-3 w-full mb-10 text-center mt-5">
-        <h2 className="text-4xl tablet:text-5xl font-semibold">Insight Hub</h2>
+      <div className="flex flex-col gap-3 w-full mb-4 text-center mt-5">
+        <h2 className="text-4xl tablet:text-5xl font-semibold mt-8">
+          Insight Hub
+        </h2>
         <p className="text-gray-600">
           In our pursuit of growth, giving back serves as our compass, guiding
           us to empower and elevate others. Explore expert tips, industry
@@ -242,34 +244,35 @@ const InsightPage = () => {
                   <h3 className="text-xl font-semibold mr-2 line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-red-600 font-bold mb-2 border-2 border-red-900 p-[4px] rounded-md w-fit">
+                  <Link to={`/insights/${item.linkPrefix}`} className="text-xs text-red-600 font-bold mb-2 border-2 border-red-600 rounded-xl p-1">
                     {item.category}
-                  </p>
+                  </Link>
                 </div>
-                <p className="text-gray-500 text-sm mb-2 inline-flex items-center gap-2">
-                  <FaPen />
-                  {item.author}
-                </p>
-                <p className="text-gray-500 text-sm mb-2">
-                  {new Date(item.date).toLocaleDateString()}
-                </p>
                 <div
-                  className="line-clamp-3 text-gray-700 mt-2 mb-4"
                   dangerouslySetInnerHTML={{ __html: item.body }}
+                  className="text-gray-500 text-sm mb-4 line-clamp-3"
                 />
-                <Link
-                  to={`/${item.linkPrefix}/${item.id}`}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  Read more
-                </Link>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-400">
+                    {new Date(item.date).toLocaleDateString()}
+                  </span>
+                  <Link
+                    to={`/insights/${item.linkPrefix}/${item.id}`}
+                    className="flex items-center text-blue-500 hover:underline"
+                  >
+                    <span className="mr-2">Read More</span>
+                    <FaPen />
+                  </Link>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="flex justify-center mt-10">{renderPagination()}</div>
+      <div className="flex justify-center mt-8">
+        <div className="flex gap-2">{renderPagination()}</div>
+      </div>
     </div>
   );
 };

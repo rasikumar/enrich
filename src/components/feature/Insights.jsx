@@ -21,7 +21,7 @@ const App = () => {
       <main>
         <InsightList />
       </main>
-      <Link to={"/insightpage"}>
+      <Link to={"/insights"}>
         <button className="mt-10 btn-primary flex m-auto">More Insights</button>
       </Link>
     </div>

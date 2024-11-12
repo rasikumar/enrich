@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Instance from "../../Admin/Instance";
 import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
+import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 
 const SkeletonLoader = () => {
   return (
@@ -191,7 +192,8 @@ const BlogDetail = () => {
         className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
         style={{ scaleX: scrollYProgress, transform: origin }}
       />
-      <div className="w-[90%] m-auto py-12 flex justify-between mb-10">
+      <DynamicBreadcrumb />
+      <div className="w-[90%] m-auto py-12 flex justify-between mt-10">
         <div className="sm:w-[80%] m-auto">
           {blog &&
             blog.map((blog) => (
@@ -423,7 +425,7 @@ const BlogDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {suggestedBlogs.map((blog) => (
                   <div key={blog.id} className="p-4 bg-white rounded shadow-md">
-                    <Link to={`/blog/${blog.id}`}>
+                    <Link to={`/insights/blog/${blog.id}`}>
                       <h4 className="font-semibold text-lg">
                         {blog.blog_title}
                       </h4>

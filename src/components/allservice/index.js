@@ -32,13 +32,13 @@ export const Individuals_Content = [
     id: 1,
     heading: "Empower Yourself with Behavioral Skills Training",
     content:
-      "At EnrichMinds, we believe that personal growth and success start with mastering essential behavioral skills. Our behavioral skills training programs equip you with the tools needed to thrive in both personal and professional settings. Whether you're a professional seeking to upskill, a fresher graduate preparing for corporate success, or someone focused on personal development, our customized training programs are designed to meet your unique needs. Contact us today to explore how we can help you enhance your interpersonal skills and foster a positive workplace environment.",
+      "At EnrichMinds Consulting, we believe that personal growth and success start with mastering essential behavioral skills. Our behavioral skills training programs equip you with the tools needed to thrive in both personal and professional settings. Whether you're a professional seeking to upskill, a fresher graduate preparing for corporate success, or someone focused on personal development, our customized training programs are designed to meet your unique needs. Contact us today to explore how we can help you enhance your interpersonal skills and foster a positive workplace environment.",
   },
   {
     id: 2,
     heading: "Our Methodology",
     content:
-      "At EnrichMinds, we believe in a holistic and practical approach to training.",
+      "At EnrichMinds Consulting, we believe in a holistic and practical approach to training.",
     list: [
       {
         id: 1,
@@ -95,13 +95,13 @@ export const Corporates_Content = [
     id: 1,
     heading: "Enhance Your Business with Corporate Soft Skills Training",
     content:
-      "In today’s competitive landscape, corporate soft skills are essential for business success. EnrichMinds provides customized soft skills training programs designed to meet the unique needs of your business, regardless of size or industry. Our comprehensive training focuses on enhancing skills such as communication, leadership, and teamwork, providing your workforce with the tools to excel in any professional setting. By strengthening these critical skills, businesses can improve both their internal operations and external client relationships.",
+      "In today’s competitive landscape, corporate soft skills are essential for business success. EnrichMinds Consulting provides customized soft skills training programs designed to meet the unique needs of your business, regardless of size or industry. Our comprehensive training focuses on enhancing skills such as communication, leadership, and teamwork, providing your workforce with the tools to excel in any professional setting. By strengthening these critical skills, businesses can improve both their internal operations and external client relationships.",
   },
   {
     id: 2,
     heading: "Our Methodology",
     content:
-      "At EnrichMinds, we adopt a result-oriented and impactful approach to corporate training. Our methodology includes:",
+      "At EnrichMinds Consulting, we adopt a result-oriented and impactful approach to corporate training. Our methodology includes:",
     list: [
       {
         id: 0,
@@ -165,13 +165,13 @@ export const Compliance_Content = [
     id: 1,
     heading: "Ensure a Safe Workplace with POSH Compliance Training",
     content:
-      "Creating a safe and respectful workplace is vital for any organization aiming for long-term success. EnrichMinds provides comprehensive POSH (Prevention of Sexual Harassment) compliance training programs tailored to meet legal and ethical standards. Our specialized training equips employees, managers, and leadership teams with the knowledge and skills needed to recognize, prevent, and effectively address sexual harassment in the workplace. By fostering a culture of safety and respect, we empower organizations to enhance employee well-being, improve workplace morale, and drive compliance with regulations. Prioritize your workplace safety and culture today with our effective POSH compliance training solutions.",
+      "Creating a safe and respectful workplace is vital for any organization aiming for long-term success. EnrichMinds Consulting provides comprehensive POSH (Prevention of Sexual Harassment) compliance training programs tailored to meet legal and ethical standards. Our specialized training equips employees, managers, and leadership teams with the knowledge and skills needed to recognize, prevent, and effectively address sexual harassment in the workplace. By fostering a culture of safety and respect, we empower organizations to enhance employee well-being, improve workplace morale, and drive compliance with regulations. Prioritize your workplace safety and culture today with our effective POSH compliance training solutions.",
   },
   {
     id: 2,
     heading: "Our POSH Training Methodology",
     content:
-      "At EnrichMinds, our POSH training programs are designed to be engaging, informative, and impactful. Our methodology includes",
+      "At EnrichMinds Consulting, our POSH training programs are designed to be engaging, informative, and impactful. Our methodology includes",
     list: [
       {
         id: 0,
@@ -230,13 +230,13 @@ export const Psychometric_Content = [
     id: 0,
     title: "Discover Yourself, Empower Your Journey",
     content:
-      "Understanding yourself is the essential first step toward personal and professional growth. At EnrichMinds, we believe that self-awareness is the key to transformation. Our comprehensive psychometric assessments and expert counseling services are designed to provide valuable insights into your strengths, weaknesses, and behavioral patterns. By gaining a deeper understanding of your personality and emotional intelligence, you can make informed decisions that lead to a more fulfilling and successful life. Embrace self-discovery today to unlock your potential and enhance your overall well-being.",
+      "Understanding yourself is the essential first step toward personal and professional growth. At EnrichMinds Consulting, we believe that self-awareness is the key to transformation. Our comprehensive psychometric assessments and expert counseling services are designed to provide valuable insights into your strengths, weaknesses, and behavioral patterns. By gaining a deeper understanding of your personality and emotional intelligence, you can make informed decisions that lead to a more fulfilling and successful life. Embrace self-discovery today to unlock your potential and enhance your overall well-being.",
   },
   {
     id: 1,
     heading: "Comprehensive Psychometric Assessments and Counseling",
     content:
-      "At EnrichMinds, we offer a diverse range of psychometric assessments tailored to explore critical facets of your personality, including intelligence, interests, emotional intelligence, and job preferences. Our assessments are meticulously designed to provide valuable insights into your unique strengths and weaknesses, enabling you to understand your behavioral patterns and preferences in both personal and professional contexts. By evaluating essential factors such as cognitive abilities, motivational drivers, and work style, you can effectively tailor your personal growth journey for optimal success.",
+      "At EnrichMinds Consulting, we offer a diverse range of psychometric assessments tailored to explore critical facets of your personality, including intelligence, interests, emotional intelligence, and job preferences. Our assessments are meticulously designed to provide valuable insights into your unique strengths and weaknesses, enabling you to understand your behavioral patterns and preferences in both personal and professional contexts. By evaluating essential factors such as cognitive abilities, motivational drivers, and work style, you can effectively tailor your personal growth journey for optimal success.",
     content2:
       "For organizations, our psychometric evaluations play a crucial role in identifying the right talent, enhancing team dynamics, and promoting effective communication. Combined with our professional counseling services, these assessments empower you to address challenges, set achievable goals, and navigate your path toward success. Experience a transformative journey toward self-awareness and growth that not only enhances individual capabilities but also boosts overall organizational performance.",
   },
@@ -244,7 +244,7 @@ export const Psychometric_Content = [
     id: 2,
     heading: "Our Approach",
     content:
-      "At EnrichMinds, we take a holistic approach to psychometric assessments and counseling, providing actionable insights that empower your personal and professional growth",
+      "At EnrichMinds Consulting, we take a holistic approach to psychometric assessments and counseling, providing actionable insights that empower your personal and professional growth",
     list: [
       {
         id: 0,

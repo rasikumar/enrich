@@ -223,7 +223,7 @@ export const About_Us = [
     id: 1,
     title: "Transformation Within Reach",
     content:
-      "At EnrichMinds, we focus on enhancing lives through a unique combination of behavioral skills training and brain optimization techniques. Our expertise in behavioral science and psychology equips individuals and organizations with the tools they need to achieve personal and professional growth.",
+      "At EnrichMinds Consulting, we focus on enhancing lives through a unique combination of behavioral skills training and brain optimization techniques. Our expertise in behavioral science and psychology equips individuals and organizations with the tools they need to achieve personal and professional growth.",
   },
   {
     id: 2,
@@ -244,7 +244,7 @@ export const About_Us = [
     content2:
       "This embodies our core philosophy. We believe that with the right support, anyone can cultivate the mindset and skills necessary to become their best version. Our services are designed to guide you in strengthening key behavioral traits and optimizing your potential for a fulfilling, successful life.",
     content3:
-      "With a psychology-based approach, we offer comprehensive training, psychometric assessments, and counseling that address various personal and professional needs. Whether you’re looking to improve interpersonal skills, build emotional intelligence, or seek guidance through personal challenges, EnrichMinds is here to support your journey of growth.",
+      "With a psychology-based approach, we offer comprehensive training, psychometric assessments, and counseling that address various personal and professional needs. Whether you’re looking to improve interpersonal skills, build emotional intelligence, or seek guidance through personal challenges, EnrichMinds Consulting is here to support your journey of growth.",
   },
   {
     id: 5,

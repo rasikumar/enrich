@@ -3,8 +3,8 @@ import Instance from "../../Admin/Instance";
 import Card from "../component/Card"; // Make sure the path to Card is correct
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 
-const BlogPage = () => {
-  const [blogs, setBlogs] = useState([]);
+const ChangeABit = () => {
+  const [changeAbits, setChangeAbits] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const blogsPerPage = 6;
@@ -12,23 +12,25 @@ const BlogPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await Instance.get("/getAllBlogs");
-        const blogData = response.data.blogs.map((item) => ({
+        const response = await Instance.get("/getallChangeAbitList");
+        console.log(response.data);
+
+        const blogData = response.data.changeAbits.map((item) => ({
           id: item.id,
-          title: item.blog_title,
-          body: item.blog_body,
-          date: item.blog_date,
-          author: item.blog_author,
-          views: item.blog_visitors_count,
-          thumbnail: `http://192.168.20.5:5000/blog_images/${item.blog_thumbnail}`,
+          title: item.changeAbit_title,
+          body: item.changeAbit_content,
+          date: item.createdAt,
+          author: item.changeAbit_author,
+          views: item.changeAbit_visit_count,
+          thumbnail: `http://192.168.20.5:5000/changeAbit_images/${item.changeAbit_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
 
-        // Set the blogs and total pages
-        setBlogs(latestBlogs);
+        // Set the changeAbits and total pages
+        setChangeAbits(latestBlogs);
         setTotalPages(Math.ceil(latestBlogs.length / blogsPerPage));
       } catch (err) {
         console.log(err);
@@ -41,7 +43,7 @@ const BlogPage = () => {
   // Pagination logic
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);
+  const currentBlogs = changeAbits.slice(indexOfFirstBlog, indexOfLastBlog);
 
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -131,4 +133,4 @@ const BlogPage = () => {
   );
 };
 
-export default BlogPage;
+export default ChangeABit;

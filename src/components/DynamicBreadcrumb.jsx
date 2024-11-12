@@ -10,11 +10,11 @@ const DynamicBreadcrumb = () => {
       aria-label="breadcrumb"
       className="text-sm fixed w-full mx-auto flex items-center justify-center left-0 top-[5.6rem] py-2 z-50"
       style={{
-        backgroundColor: '#1F1B24', // Dark background
+        backgroundColor: '#fff', // Dark background
         color: '#ffffff',
         padding: '10px 20px',
-        borderRadius: '8px',
-        border: '1px solid #333',
+        // borderRadius: '8px',
+        // border: '1px solid #333',
       }}
     >
       <ol className="flex space-x-2">

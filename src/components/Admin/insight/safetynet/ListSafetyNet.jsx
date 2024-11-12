@@ -60,7 +60,7 @@ const ListSafetyNet = () => {
 
   const handleEditClick = (safety) => {
     setSelectedBlog(safety);
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -79,7 +79,10 @@ const ListSafetyNet = () => {
   // Pagination logic
   const indexOfLastSafetyNet = currentPage * blogsPerPage;
   const indexOfFirstsafetyNets = indexOfLastSafetyNet - blogsPerPage;
-  const currentsafetyNets = filteredBlogs.slice(indexOfFirstsafetyNets, indexOfLastSafetyNet);
+  const currentsafetyNets = filteredBlogs.slice(
+    indexOfFirstsafetyNets,
+    indexOfLastSafetyNet
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -129,7 +132,9 @@ const ListSafetyNet = () => {
             >
               <div className="w-full ">
                 <div className="flex text-sm">
-                  <h2 className="text-md font-semibold">{safetyNet.safety_title}</h2>
+                  <h2 className="text-md font-semibold">
+                    {safetyNet.safety_title}
+                  </h2>
                 </div>
                 <div className="flex gap-4">
                   <p className="text-gray-600 inline-flex items-center text-xs gap-2">
@@ -159,7 +164,10 @@ const ListSafetyNet = () => {
                   >
                     Edit
                   </button>
-                  <DeleteBlog blogId={safetyNet.id} setSafetyNets={setSafetyNets} />
+                  <DeleteBlog
+                    blogId={safetyNet.id}
+                    setSafetyNets={setSafetyNets}
+                  />
                 </div>
               </div>
               {safetyNet.safety_image && (

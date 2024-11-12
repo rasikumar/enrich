@@ -40,7 +40,7 @@ const Footer = () => {
       // }
       setFormData({
         email: "",
-      })
+      });
     } catch (error) {
       console.log(error.response.data);
       toast.error(

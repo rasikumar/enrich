@@ -15,7 +15,7 @@ const Members = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [newsletterContent, setNewsletterContent] = useState(""); // Newsletter content state
+  const [newsletterContent] = useState(""); // Newsletter content state
   const itemsPerPage = 10;
   const [blog, setBlog] = useState(0);
 

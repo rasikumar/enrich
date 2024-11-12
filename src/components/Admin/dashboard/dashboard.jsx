@@ -12,7 +12,9 @@ const Dashboard = () => {
   const [BlogError, setBlogError] = useState(null);
   const [LeadError, setLeadError] = useState(null);
   const [CommentError, setCommentError] = useState(null);
-  const [CurrentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+  const [CurrentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
   const [CurrentDate] = useState(new Date().toLocaleDateString()); // State for current date
 
   // Fetch data on component mount
@@ -24,14 +26,17 @@ const Dashboard = () => {
         const blogResponse = await Instance.get("/admin/getAllBlogs");
         setFullBlog(blogResponse.data.blogs);
 
-        const changeAbitResponse = await Instance.post("/admin/getallChangeAbitList");
+        const changeAbitResponse = await Instance.post(
+          "/admin/getallChangeAbitList"
+        );
         setChangeAbitList(changeAbitResponse.data.changeAbits);
 
         const leadResponse = await Instance.post("/admin/getleads");
         setFullLead(leadResponse.data);
 
-        const commentResponse = await Instance.post("/admin/getAllComments");
-        setFullComment(commentResponse.data.comments);
+        const commentResponse = await Instance.post("/admin/getAllSubscribers");
+        setFullComment(commentResponse.data.results);
+        console.log(commentResponse);
       } catch (error) {
         console.log(error);
         setBlogError("Failed to fetch data");
@@ -73,17 +78,37 @@ const Dashboard = () => {
         <p className="text-center">Loading...</p>
       ) : (
         <main className="flex flex-col gap-4">
-            <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-blue-100">
-              <h2>Total Insights: {calculateTotalData()}</h2>
-            </div>
+          <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-blue-100">
+            <h2>Total Insights: {calculateTotalData()}</h2>
+          </div>
           <div className="flex w-full gap-4">
-            <Card title="Blogs" totalCount={FullBlog.length} error={BlogError} />
-            <Card title="ChangeABits" totalCount={ChangeAbitList.length} error={BlogError} />
+            <Card
+              title="Blogs"
+              totalCount={FullBlog.length}
+              error={BlogError}
+            />
+            <Card
+              title="ChangeABits"
+              totalCount={ChangeAbitList.length}
+              error={BlogError}
+            />
           </div>
           <div className="flex gap-4">
-            <Card title="Leads" totalCount={FullLead.length} error={LeadError} />
-            <Card title="Comments" totalCount={FullComment.length} error={CommentError} />
-            <Card title="Subscribers" totalCount={FullComment.length} error={CommentError} />
+            <Card
+              title="Leads"
+              totalCount={FullLead.length}
+              error={LeadError}
+            />
+            <Card
+              title="Comments"
+              totalCount={FullComment.length}
+              error={CommentError}
+            />
+            <Card
+              title="Subscribers"
+              totalCount={FullComment.length}
+              error={CommentError}
+            />
           </div>
         </main>
       )}
