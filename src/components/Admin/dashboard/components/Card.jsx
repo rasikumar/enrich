@@ -2,7 +2,7 @@
 
 const Card = ({ title, totalCount, error }) => {
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg rounded-lg p-5 w-full transform transition-all duration-300 hover:shadow-2xl hover:translate-y-[-5px]">
+    <div className="bg-custom-gradient text-white shadow-lg rounded-lg p-5 w-full transform transition-all duration-300 hover:shadow-2xl hover:translate-y-[-5px]">
       <h2 className="text-2xl font-semibold mb-3">{title}</h2>
       {error ? (
         <p className="text-red-300 mt-2 font-medium">Failed to Load - {error}</p>

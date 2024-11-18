@@ -4,6 +4,7 @@ import Instance from "../../Admin/Instance";
 // import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
+import { Helmet } from "react-helmet";
 
 const SkeletonLoader = () => {
   return (
@@ -194,6 +195,28 @@ const BlogDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Enrich | {blog && blog[0].safety_title}</title>
+        <meta
+          name="description"
+          content={blog && blog[0].safety_meta_description}
+        />
+        <meta name="keywords" content={blog && blog[0].safety_meta_keywords} />
+        <meta property="og:title" content={blog && blog[0].safety_title} />
+        <meta
+          property="og:description"
+          content={blog && blog[0].safety_meta_description}
+        />
+        <meta
+          property="og:image"
+          content={`https://enrichminds.co.in/safety_images/${
+            blog && blog[0].safety_image
+          }`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`http://localhost:3000/blog/${id}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <motion.div
         className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
         style={{ scaleX: scrollYProgress, transform: origin }}
@@ -218,7 +241,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`http://192.168.20.5:5000/safety_images/${blog.safety_image}`}
+                  src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
                   alt={blog.safety_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -437,7 +460,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.safety_author}</p>
                       <img
-                        src={`http://192.168.20.5:5000/safety_images/${blog.safety_image}`}
+                        src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
                         alt={blog.safety_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

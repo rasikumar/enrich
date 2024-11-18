@@ -4,6 +4,7 @@ import Instance from "../../Admin/Instance";
 // import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
+import { Helmet } from "react-helmet";
 
 const SkeletonLoader = () => {
   return (
@@ -52,10 +53,10 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchSuggestedBlogs = async () => {
       try {
-        const response = await Instance.get("/getAllSafetyList");
-        // console.log(response.data);
+        const response = await Instance.get("/getallChangeAbitList");
+        console.log(response.data);
 
-        const sortedBlogs = response.data.safetyRecords.sort(
+        const sortedBlogs = response.data.changeAbits.sort(
           () => 0.5 - Math.random()
         );
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
@@ -86,6 +87,25 @@ const BlogDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{blogs[0]?.changeAbit_title}</title>
+        <meta name="description" content={blogs[0]?.changeAbit_summary} />
+        <meta property="og:title" content={blogs[0]?.changeAbit_title} />
+        <meta
+          property="og:description"
+          content={blogs[0]?.changeAbit_summary}
+        />
+        <meta
+          property="og:image"
+          content={`https://enrichminds.co.in/changeAbit_images/${blogs[0]?.changeAbit_image}`}
+        />
+        <meta
+          property="og:url"
+          content={`http://localhost:3000/blog/${blogs[0]?.id}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Enrich" />
+      </Helmet>
       <motion.div
         className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
         style={{ scaleX: scrollYProgress, transform: origin }}
@@ -112,7 +132,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`http://192.168.20.5:5000/changeAbit_images/${blog.changeAbit_image}`}
+                  src={`https://enrichminds.co.in/changeAbit_images/${blog.changeAbit_image}`}
                   alt={blog.changeAbit_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -134,14 +154,14 @@ const BlogDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {suggestedBlogs.map((blog) => (
                   <div key={blog.id} className="p-4 bg-white rounded shadow-md">
-                    <Link to={`/insights/safetyNet/${blog.id}`}>
+                    <Link to={`/insights/changeABit/${blog.id}`}>
                       <h4 className="font-semibold text-lg">
-                        {blog.safety_title}
+                        {blog.changeAbit_title}
                       </h4>
-                      <p className="text-gray-600">{blog.safety_author}</p>
+                      <p className="text-gray-600">{blog.changeAbit_author}</p>
                       <img
-                        src={`http://192.168.20.5:5000/safety_images/${blog.safety_image}`}
-                        alt={blog.safety_title}
+                        src={`https://enrichminds.co.in/changeAbit_images/${blog.changeAbit_thumbnail}`}
+                        alt={blog.changeAbit_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />
                     </Link>

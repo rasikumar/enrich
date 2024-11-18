@@ -34,7 +34,7 @@ const ListBlog = () => {
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [currentPage, setCurrentPage] = useState(1); // For pagination
-  const [blogsPerPage] = useState(5); // Limit blogs per page
+  const [blogsPerPage] = useState(5);
   const [searchQuery, setSearchQuery] = useState(""); // Search by author
 
   useEffect(() => {
@@ -163,7 +163,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_image && (
                 <img
-                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
+                  src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{

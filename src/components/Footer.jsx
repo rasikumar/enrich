@@ -4,77 +4,12 @@ import { CiLinkedin } from "react-icons/ci";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
-import { useState } from "react";
-import Instance from "./Admin/Instance";
-import { toast, ToastContainer } from "react-toastify";
+
 import "react-toastify/ReactToastify.css";
 
 const Footer = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // console.log("Submitting form data:", formData);
-
-    try {
-      const response = await Instance.post("/subscribe", formData);
-      // if (response.status === true) {
-      console.log(response);
-      toast.success("You're in! Welcome aboard!");
-      // } else {
-      //   console.log(response);
-      //   toast.error("Failed to subscribe");
-      //   toast.error(
-      //     response.error ||
-      //       "Oops! We encountered an issue. Please retry in a bit."
-      //   );
-      // }
-      setFormData({
-        email: "",
-      });
-    } catch (error) {
-      console.log(error.response.data);
-      toast.error(
-        error.error || "Oops! We encountered an issue. Please retry in a bit."
-      );
-    }
-  };
-
   return (
     <div className="bg-slate-100 ">
-      <div className="py-6 px-2 m-auto lg:w-[35rem] gap-3 flex flex-col">
-        <h1 className="text-center xl:text-lg md:text-sm  ">
-          Subscribe for Insights, Updates, and More!
-        </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="lg:flex border border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2 "
-        >
-          <input
-            type="email"
-            placeholder="Enter Your Mail"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 block bg-none w-full px-3 py-2 rounded-md focus:outline-none  xl:text-lg sm:text-sm max-md:mb-4"
-          />
-          <button
-            type="submit"
-            className="py-2 px-5 max-md:text-xs bg-yellow-600 transition max-md:w-full delay-75 text-white font-semibold rounded-md hover:shadow-md hover:bg-white hover:text-yellow-600 cursor-none"
-          >
-            Subscribe
-          </button>
-        </form>
-      </div>
       <div className="flex flex-col bg-slate-300">
         <div className="flex flex-col gap-4 lg:flex-row items-center justify-between p-6 lg:p-10 lg:py-6">
           <div className="mb-4 lg:mb-0">
@@ -94,37 +29,44 @@ const Footer = () => {
               >
                 About Us
               </Link>
-              <AnchorLink
-                href="#service"
+              <Link
+                to={"/services"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
               >
                 Services
-              </AnchorLink>
-              <AnchorLink
-                href="#program"
+              </Link>
+              <Link
+                to={"/ourprogram"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
               >
                 Program
-              </AnchorLink>
+              </Link>
               <AnchorLink
                 href="#testimonials"
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
               >
                 Testimonials
               </AnchorLink>
-              <AnchorLink
-                href="#blog"
+              <Link
+                to={"/insights"}
+                className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
+              >
+                Insights Hub
+              </Link>
+              <Link
+                to={"/privacy-policy"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer h-5 items-center flex"
               >
-                Blogs
-              </AnchorLink>
+                Terms&Conditions
+              </Link>
             </ul>
           </div>
           <div>
             <ul className="flex justify-center lg:justify-end gap-4 text-3xl">
               <li>
                 <a
-                  href=""
+                  href="https://www.instagram.com/enrichminds4u/"
+                  target="_blank"
                   className="text-black-700 hover:text-yellow-600 transition delay-100"
                 >
                   <FaInstagram />
@@ -132,7 +74,8 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href=""
+                  href="https://wa.me/++919900976464?text=Hello!%20I%20am%20interested%20in%20learning%20more%20about%20your%20company."
+                  target="_blank"
                   className="text-black-700 hover:text-yellow-600 transition delay-100"
                 >
                   <FaWhatsapp />
@@ -140,7 +83,8 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href=""
+                  href="https://www.linkedin.com/company/enrichminds-consulting/"
+                  target="_blank"
                   className="text-black-700 hover:text-yellow-600 transition delay-100"
                 >
                   <CiLinkedin />
@@ -152,12 +96,11 @@ const Footer = () => {
 
         <div>
           <h1 className="text-center p-4 text-sm">
-            Copyright © 2024 HCL Technologies Limited{" "}
+            Copyright © 2024 EnrichMinds Consulting{" "}
             <Link to={"/privacy-policy"}>Privacy & Policy</Link>
           </h1>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

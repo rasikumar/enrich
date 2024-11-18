@@ -33,11 +33,13 @@ export default {
         "neon-green": "#39FF14",
         "neon-yellow": "#FFD700",
         "neon-pink": "#FF1493",
-        
       },
       backgroundImage: {
         Hero: "url('/src/assets/hero/heroBg.png')",
         formback: "url('/src/assets/formBack.png')",
+        "custom-gradient":
+          // "linear-gradient(220deg, hsla(140, 67%, 58%, 1) 15%, hsla(200, 100%, 49%, 1) 20%)",
+          "linear-gradient(220deg, hsla(38, 67%, 58%, 1) 15%, hsl(225, 60%, 39%) 10%)",
       },
       fontFamily: {
         reggae: ["Reggae One", "system-ui"],

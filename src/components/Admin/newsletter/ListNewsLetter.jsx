@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Instance from "../Instance";
 import DOMPurify from "dompurify";
-import EditBlog from "./EditNewsLetter";
+// import EditBlog from "./EditNewsLetter";
 import DeleteBlog from "./DeleteNewsLetter";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
@@ -9,30 +9,30 @@ import { ThreeCircles } from "react-loader-spinner";
 
 // Custom Modal Component
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
+// const Modal = ({ isOpen, onClose, children }) => {
+//   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[50rem] relative max-h-[30rem] overflow-y-scroll">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-700"
-        >
-          &times;
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+//       <div className="bg-white p-6 rounded-lg shadow-lg w-[50rem] relative max-h-[30rem] overflow-y-scroll">
+//         <button
+//           onClick={onClose}
+//           className="absolute top-2 right-2 text-gray-700"
+//         >
+//           &times;
+//         </button>
+//         {children}
+//       </div>
+//     </div>
+//   );
+// };
 
 const ListBlog = () => {
   const [blogs, setBlogs] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedBlog, setSelectedBlog] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  // const [selectedBlog, setSelectedBlog] = useState(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [currentPage, setCurrentPage] = useState(1); // For pagination
   const [blogsPerPage] = useState(5); // Limit blogs per page
   const [searchQuery, setSearchQuery] = useState(""); // Search by author
@@ -57,14 +57,14 @@ const ListBlog = () => {
     fetchBlogs();
   }, []);
 
-  const handleEditClick = (blog) => {
-    setSelectedBlog(blog);
-    setIsModalOpen(true); // Open modal
-  };
+  // const handleEditClick = (blog) => {
+  //   setSelectedBlog(blog);
+  //   setIsModalOpen(true); // Open modal
+  // };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false); // Close modal
-  };
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false); // Close modal
+  // };
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -152,18 +152,18 @@ const ListBlog = () => {
                   }}
                 />
                 <div className="inline-flex gap-4 mt-3">
-                  <button
+                  {/* <button
                     onClick={() => handleEditClick(blog)}
                     className="h-2 text-center flex justify-center items-center bg-blue-500 p-5 rounded-md"
                   >
                     Edit
-                  </button>
+                  </button> */}
                   <DeleteBlog blogId={blog.id} setBlogs={setBlogs} />
                 </div>
               </div>
               {blog.blog_image && (
                 <img
-                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
+                  src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{ maxWidth: "10%", height: "auto" }}
@@ -194,7 +194,7 @@ const ListBlog = () => {
       </div>
 
       {/* Custom Modal for Edit Blog */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      {/* <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         {selectedBlog && (
           <EditBlog
             blog={selectedBlog}
@@ -203,7 +203,7 @@ const ListBlog = () => {
             closeModal={handleCloseModal} // Pass the function to close modal
           />
         )}
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

@@ -1,54 +1,45 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+// import axios from "axios";
 import Instance from "../Instance";
-import { Modal } from "./Modal";
-import BlogForm from "../newsletter/FormLists/BlogForm";
-import ChangeABit from "../newsletter/FormLists/ChangeABitForm";
-import SafetyNet from "./FormLists/SafetyNetForm";
-import { logo } from "../../../assets/index";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { logo } from "../../../assets";
 
-const NewsletterSection = () => {
-  const [selectedItems, setSelectedItems] = useState({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const CreateNewsLetter = () => {
   const [blogs, setBlogs] = useState([]);
   const [changeABits, setchangeABits] = useState([]);
   const [safetyNets, setSafetyNets] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // Sample section data with editable content
-  const [sectionData, setSectionData] = useState({
-    featuredInsight: {
-      title: "🧠 This Month’s Featured Insight",
-      subtitle: "Loading featured article...",
-      image: "", // Initialize the image as an empty string
-    },
-    changeABit: {
-      title: "✨ Spotlight: ChangeABit",
-      subtitle: "Loading changeABit...",
-      content: "", // You can update this with actual changeABit data
-    },
-    safetyNets: {
-      title: "✨ Spotlight: ChangeABit",
-      subtitle: "Loading changeABit...",
-      content: "", // You can update this with actual changeABit data
-    },
-    upcomingEvents: {
-      title: "📅 What’s New at EnrichMinds Consulting",
-      subtitle:
-        "Stay updated on what’s happening in our community and mark your calendar for some exciting events!",
-      content: "", // You can update this with actual event data
-    },
-    tipsToThrive: {
-      title: "💡 Tips to Thrive",
-      subtitle: "A few practical ideas to integrate into your week:",
-      content: "", // You can update this with actual tip data
-    },
-    wordsToGrowBy: {
-      title: "🌱 Words to Grow By",
-      subtitle: "",
-      content: "",
-    },
+  const [FirstContent, setContent] = useState(
+    "This month, we’re excited to share all the latest from EnrichMinds! Dive into Insights Hub for exclusive content, actionable tips, inspiring stories, and everything happening across our company, including our publication ChangeABit, new blog posts, events, and more. Let’s keep moving forward together on your journey toward Becoming Your Best Self!"
+  );
+  const [ContentBlog, setBlog] = useState("");
+  const [ContentChangeABit, setChangeABit] = useState("");
+  const [ContentSafetyNet, setSafetyNet] = useState("");
+  const [tip, setTip] = useState("");
+  const [word, setWord] = useState({
+    quote: "",
+    author: "",
+    answer: "",
   });
+  const [insights, setInsights] = useState(
+    `Our Insights Hub is brimming with resources designed for you to explore and grow. From deep dives into brain science and self-discovery to personal development and behavioral transformation, there’s something here for everyone looking to evolve.`
+  );
+  const quillRef = useRef(null); // Ref to access Quill editor instance
+
+  const [isPreview, setIsPreview] = useState(false);
+
+  useEffect(() => {
+    const savedWord = localStorage.getItem("wordData");
+    if (savedWord) {
+      setWord(JSON.parse(savedWord));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("wordData", JSON.stringify(word));
+  }, [word]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -57,21 +48,16 @@ const NewsletterSection = () => {
         const sortedBlogList = response.data.blogs.sort(
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );
-        setBlogs(sortedBlogList);
-
-        // Update sectionData with the latest blog title and image
         if (sortedBlogList.length > 0) {
           const latestBlog = sortedBlogList[0];
-          setSectionData((prevSectionData) => ({
-            ...prevSectionData,
-            featuredInsight: {
-              title: "🧠 This Month’s Featured Insight",
-              subtitle: `Get inspired by our latest piece on "${latestBlog.blog_title}". Explore strategies to elevate your personal and professional life, and gain insights to build resilience, confidence, and self-awareness.`,
-              image: `http://192.168.20.5:5000/blog_images/${latestBlog.blog_image}`,
-              content: latestBlog.blog_body,
-            },
-          }));
+          setBlogs(latestBlog);
+          setBlog(
+            `Get inspired by our latest piece on ${latestBlog.blog_title}. Explore strategies to elevate your personal and professional life, and gain insights to build resilience, confidence, and self-awareness.`
+          );
+          //   console.log(latestBlog);
         }
+        // setBlogs(sortedBlogList);
+        // Update sectionData with the latest blog title and image
       } catch (err) {
         setError("Failed to fetch blogs");
         console.log(err);
@@ -84,316 +70,619 @@ const NewsletterSection = () => {
   }, []);
 
   useEffect(() => {
-    const fetchChangeABit = async () => {
+    const fetchchangeAbit = async () => {
       try {
         const response = await Instance.post("/admin/getallChangeAbitList");
-
         // console.log(response.data);
-        const sortedChangeAbitList = response.data.changeAbits.sort(
+
+        const sortedBlogList = response.data.changeAbits.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
-        setchangeABits(sortedChangeAbitList);
+        if (sortedBlogList.length > 0) {
+          const latestChangeABit = sortedBlogList[0];
+          setchangeABits(latestChangeABit);
+          console.log(latestChangeABit);
 
-        if (sortedChangeAbitList.length > 0) {
-          const latestChangedAbit = sortedChangeAbitList[0];
-          setSectionData((prevSectionData) => ({
-            ...prevSectionData,
-            changeABit: {
-              title: "✨ Spotlight: ChangeABit",
-              subtitle: `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestChangedAbit.changeAbit_title} to help you make small, meaningful changes that add up to big growth.`,
-              image: `http://192.168.20.5:5000/changeAbit_images/${latestChangedAbit.changeAbit_image}`,
-              content: latestChangedAbit.changeAbit_content,
-            },
-          }));
+          setChangeABit(
+            `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestChangeABit.changeAbit_title} to help you make small, meaningful changes that add up to big growth.`
+          );
+          // console.log(latestBlog);
         }
+        // setBlogs(sortedBlogList);
+        // Update sectionData with the latest blog title and image
       } catch (err) {
-        setError("Failed to fetch changeABit");
+        setError("Failed to fetch blogs");
         console.log(err);
       } finally {
         setLoading(false);
       }
     };
-    fetchChangeABit();
+    fetchchangeAbit();
   }, []);
 
   useEffect(() => {
     const fetchSafetyNet = async () => {
       try {
         const response = await Instance.post("/admin/getAllSafetyList");
-        // console.log(response.data);
-        const sortedSafetyNetList = response.data.safetyRecords.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setSafetyNets(sortedSafetyNetList);
 
+        const sortedSafetyNetList = response.data.safetyRecords.sort(
+          (a, b) => new Date(b.safety_date) - new Date(a.safety_date)
+        );
+
+        // console.log(response.sortedSafetyNetList);
         if (sortedSafetyNetList.length > 0) {
           const latestSafetyNet = sortedSafetyNetList[0];
-          setSectionData((prevSectionData) => ({
-            ...prevSectionData,
-            safetyNets: {
-              title: "✨ Spotlight: ChangeABit",
-              subtitle: `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestSafetyNet.safety_title} to help you make small, meaningful changes that add up to big growth.`,
-              image: `http://192.168.20.5:5000/safety_images/${latestSafetyNet.safety_image}`,
-              content: latestSafetyNet.safety_body,
-            },
-          }));
+          setSafetyNets(latestSafetyNet);
+          console.log(latestSafetyNet);
+
+          setSafetyNet(
+            `Welcome to the SafetyNet Series, where we explore various aspects of psychological safety in the workplace. Each month, we’ll highlight a different topic to help you understand how to create a safer, more supportive environment for your team. This month, we’re focusing on ${latestSafetyNet.safety_title}, providing you with practical steps to foster trust, openness, and effective communication.`
+          );
         }
       } catch (err) {
+        setError("Failed to fetch blogs");
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSafetyNet();
   }, []);
 
-  const [sectionContent, setSectionContent] = useState({
-    featuredInsight: sectionData.featuredInsight.content,
-    changeABit: sectionData.changeABit.content,
-    upcomingEvents: sectionData.upcomingEvents.content, // Add new section content
-    safetyNets: sectionData.safetyNets.content,
-    tipsToThrive: sectionData.tipsToThrive.content, // Add new section content
-    wordsToGrowBy: sectionData.wordsToGrowBy.content, // Add new section content
-  });
+  // Handle the content update
+  const handleChange = (event, setter) => {
+    setter(event.target.value);
+  };
 
-  // Handle checkbox change
-  const handleCheckboxChange = (section) => {
-    setSelectedItems((prev) => ({
-      ...prev,
-      [section]: !prev[section],
+  const handleContentChange = (value) => {
+    setTip(value);
+  };
+  // Handle the Preview toggle
+  const handlePreviewToggle = () => {
+    setIsPreview(!isPreview);
+  };
+
+  const handleChangeContent = (e, setFunction) => {
+    const { name, value } = e.target;
+    setFunction((prevState) => ({
+      ...prevState,
+      [name]: value,
     }));
   };
 
-  // Handle content change in the text area
-  const handleContentChange = (e, section) => {
-    setSectionContent((prev) => ({
-      ...prev,
-      [section]: e.target.value,
-    }));
+  // Handle sending data to the backend using Axios
+  const handleSubmit = async () => {
+    const data = {
+      blogs,
+      changeABits,
+      safetyNets,
+      FirstContent,
+      ContentBlog,
+      ContentChangeABit,
+      ContentSafetyNet,
+      insights,
+      tip,
+      word,
+    };
+    console.log(data);
+
+    setLoading(true); // Set loading to true before the request
+    try {
+      const response = await Instance.post("admin/sendBulkMail", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 200) {
+        alert("Newsletter content saved successfully!");
+      } else {
+        alert("Failed to save the newsletter content.");
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("Error submitting data.");
+    } finally {
+      setLoading(false); // Set loading to false after the request
+    }
   };
 
-  // Toggle the modal for preview
-  const togglePreviewModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
+  const Formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "align",
+    "link",
+    "image",
+  ];
 
-  // Handle submission of selected sections
-  const handleSubmit = () => {
-    const submittedSections = Object.keys(selectedItems)
-      .filter((key) => selectedItems[key]) // Only selected sections
-      .map((key) => ({
-        title: sectionData[key].title,
-        content: sectionContent[key],
-      }));
-
-    console.log("Submitting sections:", submittedSections);
-    // Here you can send `submittedSections` to your API
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: "1" }, { header: "2" }, { font: [] }],
+        ["bold", "italic", "underline", "strike", "blockquote"],
+        ["link"], // Add image button to toolbar
+        [{ align: [] }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["clean"],
+      ],
+      imageCompress: {
+        quality: 0.7, // default
+        maxWidth: 1000, // default
+        maxHeight: 1000, // default
+        imageType: "image/jpeg", // default
+        debug: true, // default
+        suppressErrorLogging: false, // default
+        handleOnPaste: true, //default
+        insertIntoEditor: undefined, // default
+      },
+    },
   };
 
   return (
-    <div className="flex flex-col max-w-6xl mx-auto bg-white p-6 rounded-lg gap-4 shadow-md">
-      {error && <>Error</>}
-      {loading && <>Loading...</>}
-
-      {/* Render checkboxes and editable sections */}
-      {Object.keys(sectionData).map((key) => (
-        <div
-          key={key}
-          className="flex w-full mx-auto bg-white p-4 gap-4 rounded-lg shadow-md"
-        >
-          <input
-            type="checkbox"
-            onChange={() => handleCheckboxChange(key)}
-            checked={!!selectedItems[key]}
+    <div>
+      <div className="border border-blue-600 p-2 ">
+        <h2 className="text-2xl font-medium mb-10 text-center py-2 border-b border-blue-500">
+          Newsletter Content
+        </h2>
+        {error && error.message}
+        {loading && loading.message}
+        {/* Full-width textareas for content editing */}
+        <label htmlFor="Heading" className="mb-10 font-semibold text-2xl">
+          Content
+        </label>
+        <textarea
+          value={FirstContent}
+          onChange={(e) => handleChange(e, setContent)}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />
+        <label htmlFor="Heading" className="mb-10 font-semibold text-2xl">
+          📌 This Month’s Featured Insight
+        </label>
+        <h1 className="text-xl font-semibold">{blogs.blog_title}</h1>
+        <textarea
+          value={ContentBlog}
+          onChange={(e) => handleChange(e, setBlog)}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />
+        <div className="flex items-center justify-between px-20">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: blogs.blog_body,
+            }}
+            className="line-clamp-4"
           />
-          <div className="flex flex-col gap-4 text-sm w-full">
-            <h1 className="font-semibold">{sectionData[key].title}</h1>
-            <h2>{sectionData[key].subtitle}</h2>
-            {key === "featuredInsight" ? (
-              <BlogForm
-                featuredArticleTitle={blogs.length > 0 ? blogs[0].title : ""}
-                featuredImage={sectionData.featuredInsight.image} // Pass the image URL
-                featuredContent={sectionData.featuredInsight.content}
-              />
-            ) : key === "changeABit" ? (
-              <ChangeABit
-                featuredArticleTitle={
-                  changeABits.length > 0 ? changeABits[0].title : ""
-                }
-                featuredImage={sectionData.changeABit.image} // Pass the image URL
-                featuredContent={sectionData.changeABit.content}
-              />
-            ) : key === "safetyNets" ? (
-              <SafetyNet
-                featuredArticleTitle={
-                  safetyNets.length > 0 ? safetyNets[0].title : ""
-                }
-                featuredImage={sectionData.safetyNets.image} // Pass the image URL
-                featuredContent={sectionData.safetyNets.content}
-              />
-            ) : (
-              <textarea
-                value={sectionContent[key]}
-                onChange={(e) => handleContentChange(e, key)}
-                placeholder="Write your content here..."
-                className="mt-1 block w-full h-36 overflow-y-scroll border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm resize-none overflow-hidden scrollbar-hide"
-              />
-            )}
-          </div>
+          <img
+            src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
+            alt={blogs.blog_title}
+            width={200}
+          />
         </div>
-      ))}
+        <label htmlFor="Heading" className="mb-10 font-semibold text-2xl">
+          ✨ Spotlight: ChangeABit
+        </label>
+        <textarea
+          value={ContentChangeABit}
+          onChange={(e) => handleChange(e, setChangeABit)}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />
+        <div className="flex items-center justify-between px-20 mb-10">
+          <div
+            className="line-clamp-4"
+            dangerouslySetInnerHTML={{
+              __html: changeABits.changeAbit_content,
+            }}
+          />
+          <img
+            src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
+            alt={changeABits.changeAbit_title}
+            width={200}
+          />
+        </div>
+        <label htmlFor="Heading" className="mb-10 font-semibold text-2xl">
+          🎯 In Focus: SafetyNet Series
+        </label>
+        <textarea
+          value={ContentSafetyNet}
+          onChange={(e) => handleChange(e, setSafetyNet)}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />
+        <div className="flex items-center justify-between px-20 mb-10">
+          <div
+            className="line-clamp-4"
+            dangerouslySetInnerHTML={{
+              __html: safetyNets.safety_body,
+            }}
+          />
+          <img
+            src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
+            alt={safetyNets.safety_title}
+            width={200}
+          />
+        </div>
+        <label htmlFor="Heading">💡 Tips to Thrive</label>
+        <h1>A few practical ideas to integrate into your week</h1>
+        <ReactQuill
+          ref={quillRef}
+          modules={modules}
+          formats={Formats}
+          type="text"
+          name="Tips"
+          value={tip}
+          onChange={handleContentChange}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />{" "}
+        <br />
+        <div>
+          <h1 className="mb-2">🌱 Words to Grow By</h1>
+          <input
+            type="text"
+            name="quote"
+            placeholder="Write your Quote"
+            value={word.quote}
+            onChange={(e) => handleChangeContent(e, setWord)}
+            className="border border-gray-300 rounded-md text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+            style={{
+              width: "100%",
+              marginBottom: "15px",
+              fontFamily: "'Merriweather', serif",
+            }}
+          />
 
-      {/* Control Buttons */}
-      <div className="flex items-center justify-center gap-4 mt-6">
-        <button
-          onClick={handleSubmit}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
-        >
-          Save
-        </button>
-        <button
-          onClick={togglePreviewModal}
-          className="bg-green-500 text-white px-4 py-2 rounded-md"
-        >
-          Preview
-        </button>
+          <input
+            type="text"
+            name="author"
+            value={word.author}
+            onChange={(e) => handleChangeContent(e, setWord)}
+            placeholder="Author Name"
+            className="border border-gray-300 rounded-md text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400"
+            style={{
+              width: "100%",
+              marginBottom: "15px",
+              fontFamily: "'Merriweather', serif",
+            }}
+          />
+
+          <ReactQuill
+            ref={quillRef}
+            modules={modules}
+            formats={Formats}
+            type="text"
+            name="answer"
+            value={word.answer}
+            onChange={(value) =>
+              setWord((prev) => ({ ...prev, answer: value }))
+            }
+            className="border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 resize-none"
+            style={{
+              width: "100%",
+              marginBottom: "15px",
+              // minHeight: "200px",
+              fontFamily: "'Merriweather', serif",
+            }}
+            placeholder="Write your Answers"
+          />
+        </div>
+        <label htmlFor="Heading" className="mb-10 font-semibold text-2xl">
+          📚 Explore the Full Insights Hub
+        </label>
+        <textarea
+          value={insights}
+          onChange={(e) => handleChange(e, setInsights)}
+          rows="5"
+          className="resize-none"
+          style={{ width: "100%", marginBottom: "10px" }}
+          placeholder="Edit the content here"
+        />
+        {/* Preview Button */}
       </div>
+      <button
+        onClick={handlePreviewToggle}
+        style={{ marginTop: "10px", padding: "10px" }}
+      >
+        {isPreview ? "Edit" : "Preview"}
+      </button>
+      {isPreview && (
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)", // Overlay background
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: "1000",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              backgroundColor: "#fff",
+              padding: "20px",
+              borderRadius: "8px",
+              maxWidth: "800px",
+              width: "100%",
+              maxHeight: "80vh",
+              overflowY: "auto",
+            }}
+          >
+            <button
+              onClick={handlePreviewToggle}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                backgroundColor: "#ff6f61",
+                color: "white",
+                border: "none",
+                padding: "8px 12px",
+                cursor: "pointer",
+                borderRadius: "5px",
+              }}
+            >
+              Close Preview
+            </button>
 
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClose={togglePreviewModal}>
-          <div className="flex flex-col">
-            <img src={logo} alt="Logo" width={250} className="mb-4" />
-            <div className="flex flex-col gap-2 p-4">
-              <h1 className="font-bold text-3xl">
-                Welcome to Your Monthly Update from Insights Hub!
-              </h1>
-              <h3 className="text-lg font-semibold">
-                Hello [Subscriber’s First Name],
-              </h3>
-              <p className="text-sm w-full mb-4 leading-5">
-                This month, we’re excited to share all the latest from
-                EnrichMinds Consulting! Dive into Insights Hub for exclusive
-                content, actionable tips, inspiring stories, and everything
-                happening across our company, including our publication
-                ChangeABit, new blog posts, events, and more. Let’s keep moving
-                forward together on your journey toward Becoming Your Best Self!
-              </p>
+            <h3 style={{ marginBottom: "15px" }}>Preview</h3>
+            <div className="border border-blue-600 p-3">
+              <div>
+                <img
+                  src={logo}
+                  width={250}
+                  className="mb-[20px] block m-auto"
+                  alt="Logo Image"
+                />
+                <h1 className="font-bold text-[24px] text-center text-blue-500 mb-[20px]">
+                  Welcome to Monthly Update from Insights Hub!
+                </h1>
+                <h2 className="font-[700] text-center mb-[20px]">
+                  Hello Name Subscriber_name,
+                </h2>
+              </div>
+              <div>
+                {/* <h4 style={{ marginBottom: "10px" }}>Content</h4> */}
+                <p className="mb-[20px]">{FirstContent}</p>
+              </div>
 
-              {Object.keys(sectionData).map((key) =>
-                selectedItems[key] ? (
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
+                  📌 This Month’s Featured Insight
+                </h4>
+                <p className="mb-4">{ContentBlog}</p>
+                <div className="flex gap-2 items-center mb-4 justify-between">
                   <div
-                    key={key}
-                    className="flex flex-col gap-4 text-sm w-full mb-4"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <h1 className="text-lg font-semibold">
-                        {sectionData[key].title}
-                      </h1>
-                      <h2>{sectionData[key].subtitle}</h2>
-                    </div>
-                    <div className="flex gap-4">
-                      {key === "featuredInsight" && sectionData[key].image && (
-                        <img
-                          src={sectionData[key].image} // Display the blog image
-                          alt="Featured Insight"
-                          width={400}
-                          className="mb-2 rounded-md" // Add styling as needed
-                        />
-                      )}
-                      <div
-                        className="block w-full"
-                        style={{
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          maxHeight: "14.3em",
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            key === "featuredInsight"
-                              ? sectionData[key].content
-                              : sectionContent[key],
-                        }}
-                      />
-                    </div>
-                    <div className="flex gap-4">
-                      {key === "changeAbit" && sectionData[key].image && (
-                        <img
-                          src={sectionData[key].image} // Display the blog image
-                          alt="Featured Insight"
-                          width={400}
-                          className="mb-2 rounded-md" // Add styling as needed
-                        />
-                      )}
-                      <div
-                        className="block w-full"
-                        style={{
-                          display: "-webkit-box",
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                          maxHeight: "14.3em",
-                        }}
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            key === "changeAbit"
-                              ? sectionData[key].content
-                              : sectionContent[key],
-                        }}
-                      />
-                    </div>
-                  </div>
-                ) : null
-              )}
-              <div className="flex flex-col gap-2 ">
-                <h1 className="text-lg font-semibold">
+                    dangerouslySetInnerHTML={{ __html: blogs.blog_body }}
+                    className="line-clamp-4"
+                  />
+                  <img
+                    src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
+                    alt={blogs.blog_title}
+                    width={300}
+                  />
+                </div>
+                <a href="#" className="p-2 text-blue-600 underline">
+                  Learn More
+                </a>
+              </div>
+
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
+                  ✨ Spotlight: ChangeABit
+                </h4>
+                <p>{ContentChangeABit}</p>
+                <div className="flex flex-row-reverse gap-2 items-center mb-4 justify-between">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: changeABits.changeAbit_content,
+                    }}
+                    className="line-clamp-4"
+                  />
+                  <img
+                    src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
+                    alt={changeABits.changeAbit_title}
+                    width={300}
+                  />
+                </div>
+                <a href="#" className="p-2 text-blue-600 underline">
+                  Learn More
+                </a>
+              </div>
+
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
+                  🎯 In Focus: SafetyNet Series
+                </h4>
+                <p>{ContentSafetyNet}</p>
+                <div className="flex gap-2 items-center justify-between mb-4">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: safetyNets.safety_body }}
+                    className="line-clamp-4 quill-content ql-editor"
+                  />
+                  <img
+                    src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
+                    alt={safetyNets.safety_title}
+                    width={300}
+                  />
+                </div>
+                <a href="#" className="p-2 text-blue-600 underline">
+                  Learn More
+                </a>
+              </div>
+
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
+                  💡 Tips to Thrive
+                </h4>
+                {/* <p>{tip}</p> */}
+                <div
+                  dangerouslySetInnerHTML={{ __html: tip }}
+                  className="quill-content ql-editor"
+                />
+              </div>
+
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
+                  🌱 Words to Grow By
+                </h4>
+                <p>{word.quote}</p>
+                <p>{word.author}</p>
+                {/* <p>{word.answer}</p> */}
+                <div
+                  dangerouslySetInnerHTML={{ __html: word.answer }}
+                  className="quill-content ql-editor"
+                />
+              </div>
+
+              <div>
+                <h4
+                  style={{ marginBottom: "10px" }}
+                  className="text-lg font-bold mb-2"
+                >
                   📚 Explore the Full Insights Hub
-                </h1>
-                <p>
-                  Our Insights Hub is brimming with resources designed for you
-                  to explore and grow. From deep dives into brain science and
-                  self-discovery to personal development and behavioral
-                  transformation, there’s something here for everyone looking to
-                  evolve.
-                </p>
-                <p>
-                  <a href="#">Visit the Insights Hub</a> for articles, guides,
-                  and tools that inspire change.
-                </p>
+                </h4>
+                <p>{insights}</p>
+                <a href="#" className="text-blue-600 p-2 underline">
+                  Visit the Insights Hub for articles, guides, and tools that
+                  inspire change.
+                </a>
               </div>
-              <div className="flex flex-col gap-2 ">
-                <h1 className="text-lg font-semibold">
+              <div>
+                <h2 className="text-lg font-bold mb-2">
                   🌍 Join Our Community Online
-                </h1>
-                <p>
-                  Stay in touch and get inspired daily! Follow us on{" "}
-                  <a href="#">LinkedIn</a>, <a href="#">Instagram</a>, and{" "}
-                  <a href="#">Facebook</a> for updates, practical advice, and
-                  exclusive glimpses behind the scenes at Enrich Minds.
+                </h2>
+                <p className="mb-4">
+                  Stay in touch! Follow us on
+                  <a href="#" className="text-blue-600 no-underline">
+                    LinkedIn
+                  </a>
+                  ,
+                  <a href="#" className="text-blue-600 no-underline">
+                    Instagram
+                  </a>
+                  , and
+                  <a href="#" className="text-blue-600 no-underline">
+                    Facebook
+                  </a>
+                  .
                 </p>
-              </div>
-              <div className="flex flex-col gap-2 ">
-                <h1 className="text-lg font-semibold">🗣 We Value Your Voice</h1>
-                <p>
-                  Your insights help us make Insights Hub even better! If you
-                  have feedback, ideas for topics, or just want to say hello,
-                  reply to this email – we’d love to hear from you.
+
+                <h2 className="text-lg font-bold mb-2">
+                  🗣 We Value Your Voice
+                </h2>
+                <p className="mb-4">
+                  Have feedback or ideas? Reply to this email – we’d love to
+                  hear from you!
                 </p>
-              </div>
-              <div className="flex flex-col gap-2 ">
-                <h1 className="text-lg font-semibold">
+
+                <h2 className="text-lg font-bold mb-2">
                   🔍 Expert Guidance, Just a Click Away
-                </h1>
-                <p>
-                  Discover More Through Counseling Ready to explore how
-                  psychometric assessments can help you unlock your strengths?
-                  Book a counseling session with us!
+                </h2>
+                <p className="mb-4">
+                  Ready to explore more? Discover counseling options and
+                  psychometric assessments to help you unlock your full
+                  potential.
                 </p>
-                <a href="#">➡️ [Book Here]</a>
+
+                <div className="text-center mb-6">
+                  <h2 className="text-xl font-bold border-b border-blue-600 pb-2">
+                    Thank you for being part of the EnrichMinds community
+                  </h2>
+                  <p className="mt-4 mb-6">
+                    Together, we’re making each day a step closer to our best
+                    selves.
+                  </p>
+                  <div className="mt-4">
+                    <p className="font-bold mb-1">Warmly,</p>
+                    <p className="text-sm">
+                      Shanthi Subramani, EnrichMinds Consulting
+                    </p>
+                  </div>
+                </div>
+
+                {/* Footer Section */}
+                <footer className="text-xs text-gray-600 bg-gray-300 rounded p-2 text-center">
+                  <p className="text-blue-600 mb-2">
+                    You’re receiving this email because you subscribed to
+                    Insights Hub through our website.
+                  </p>
+                  <p>
+                    <a
+                      href="unsubscribe-link"
+                      className="text-gray-600 underline"
+                    >
+                      Unsubscribe
+                    </a>{" "}
+                    |
+                    <a
+                      href="https://enrichminds.co.in/privacy-policy"
+                      className="text-gray-600 underline"
+                    >
+                      Privacy Policy
+                    </a>
+                  </p>
+                </footer>
               </div>
             </div>
           </div>
-        </Modal>
+        </div>
       )}
+      {/* Submit Button */}
+      <button
+        onClick={handleSubmit}
+        style={{
+          marginTop: "20px",
+          padding: "10px",
+          backgroundColor: "#007BFF",
+          color: "white",
+          border: "none",
+          cursor: "pointer",
+          borderRadius: "5px",
+        }}
+      >
+        {loading ? "Loading...." : "Send Newsletter"}
+      </button>
     </div>
   );
 };
 
-export default NewsletterSection;
+export default CreateNewsLetter;

@@ -106,7 +106,8 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
       }
-      console.log("Form Submission Data:", Array.from(data.entries()));
+
+      // console.log("Form Submission Data:", Array.from(data.entries()));
 
       const response = await Instance.put(`/admin/updateChangeAbit`, data, {
         headers: {
@@ -121,6 +122,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
           )
         );
         toast.success(response.data.message);
+
         setTimeout(() => {
           setEditing(false);
         }, 1000);
@@ -232,7 +234,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "http://192.168.20.5:5000/changeAbit_images/" +
+                  ? "https://enrichminds.co.in/changeAbit_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -255,7 +257,8 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "http://192.168.20.5:5000/changeAbit_images/" + imagePreview
+                  ? "https://enrichminds.co.in/changeAbit_images/" +
+                    imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}

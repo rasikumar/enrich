@@ -9,7 +9,7 @@ const ContactList = () => {
     const fetchContacts = async () => {
       try {
         const response = await Instance.post("/admin/getleads");
-        // console.log(response);
+        console.log(response.data);
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -24,22 +24,22 @@ const ContactList = () => {
     const columnHeaders = [
       { header: "ID", key: "id" },
       { header: "Name", key: "name" },
-      { header: "Phone", key: "phone" },
+      { header: "Phone", key: "number" },
       { header: "Email", key: "email" },
-      { header: "Subject", key: "subject" },
-      { header: "Details", key: "details" },
-      { header: "Created At", key: "createdAt" },
+      { header: "Subject", key: "type" },
+      { header: "Details", key: "message" },
+      { header: "Created At", key: "date" },
     ];
 
     // Map contacts data to match headers
     const data = contacts.map((contact) => ({
       id: contact.id,
       name: contact.name,
-      phone: contact.phone,
+      number: contact.number,
       email: contact.email,
-      subject: contact.subject,
-      details: contact.details,
-      createdAt: new Date(contact.createdAt).toLocaleString("en-IN", {
+      type: contact.type,
+      message: contact.message,
+      date: new Date(contact.date).toLocaleString("en-IN", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -91,12 +91,12 @@ const ContactList = () => {
             <tr key={contact.id}>
               <td className="border border-gray-300 p-2">{contact.id}</td>
               <td className="border border-gray-300 p-2">{contact.name}</td>
-              <td className="border border-gray-300 p-2">{contact.phone}</td>
+              <td className="border border-gray-300 p-2">{contact.number}</td>
               <td className="border border-gray-300 p-2">{contact.email}</td>
-              <td className="border border-gray-300 p-2">{contact.subject}</td>
-              <td className="border border-gray-300 p-2">{contact.details}</td>
+              <td className="border border-gray-300 p-2">{contact.type}</td>
+              <td className="border border-gray-300 p-2">{contact.message}</td>
               <td className="border border-gray-300 p-2">
-                {new Date(contact.createdAt).toLocaleString()}
+                {new Date(contact.date).toLocaleString()}
               </td>
             </tr>
           ))}

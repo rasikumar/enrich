@@ -216,7 +216,7 @@ export const programDisplays = [
 export const About_Us = [
   {
     id: 0,
-    title: "Believe In Become",
+    title: "Believe In Becoming",
     content: "YOUR BEST SELF",
   },
   {
@@ -285,6 +285,6 @@ export const News_letter = [
       "Discover the keys to achieving success through behavioral transformation and brain optimization with my weekly newsletter, Changeabit. Driven by my passion for behavioral skills and personal growth, Changeabit offers insights and practical tips to help you make meaningful changes that lead to lasting success.",
     para2:
       "Join our community and stay ahead with expert advice on mastering behaviors that can transform your personal and professional life.",
-    btn: "Subscribe to Our News letter",
+    btn: "Subscribe to Our Newsletter",
   },
 ];

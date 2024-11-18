@@ -8,13 +8,12 @@ const Dashboard = () => {
   const [FullLead, setFullLead] = useState([]);
   const [FullComment, setFullComment] = useState([]);
   const [ChangeAbitList, setChangeAbitList] = useState([]);
+  const [SafetyNetList, setSafetyNetList] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [BlogError, setBlogError] = useState(null);
   const [LeadError, setLeadError] = useState(null);
   const [CommentError, setCommentError] = useState(null);
-  const [CurrentTime, setCurrentTime] = useState(
-    new Date().toLocaleTimeString()
-  );
+  const [CurrentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
   const [CurrentDate] = useState(new Date().toLocaleDateString()); // State for current date
 
   // Fetch data on component mount
@@ -26,22 +25,28 @@ const Dashboard = () => {
         const blogResponse = await Instance.get("/admin/getAllBlogs");
         setFullBlog(blogResponse.data.blogs);
 
-        const changeAbitResponse = await Instance.post(
-          "/admin/getallChangeAbitList"
-        );
+        const changeAbitResponse = await Instance.post("/admin/getallChangeAbitList");
         setChangeAbitList(changeAbitResponse.data.changeAbits);
+
+        const safetyNetResponse = await Instance.post("/admin/getAllSafetyList");
+        setSafetyNetList(safetyNetResponse.data.safetyRecords);
 
         const leadResponse = await Instance.post("/admin/getleads");
         setFullLead(leadResponse.data);
 
         const commentResponse = await Instance.post("/admin/getAllSubscribers");
         setFullComment(commentResponse.data.results);
-        console.log(commentResponse);
       } catch (error) {
-        console.log(error);
-        setBlogError("Failed to fetch data");
-        setLeadError("Failed to fetch leads");
-        setCommentError("Failed to fetch comments");
+        console.error(error);
+        if (error.response?.config?.url === "/admin/getAllBlogs") {
+          setBlogError("Failed to fetch blogs");
+        }
+        if (error.response?.config?.url === "/admin/getleads") {
+          setLeadError("Failed to fetch leads");
+        }
+        if (error.response?.config?.url === "/admin/getAllSubscribers") {
+          setCommentError("Failed to fetch comments");
+        }
       }
 
       setLoading(false);
@@ -63,7 +68,8 @@ const Dashboard = () => {
   const calculateTotalData = () => {
     const totalBlogs = FullBlog.length;
     const totalChangeAbit = ChangeAbitList.length;
-    return totalBlogs + totalChangeAbit;
+    const totalSafetyNets = SafetyNetList.length;
+    return totalBlogs + totalChangeAbit + totalSafetyNets;
   };
 
   return (
@@ -82,33 +88,14 @@ const Dashboard = () => {
             <h2>Total Insights: {calculateTotalData()}</h2>
           </div>
           <div className="flex w-full gap-4">
-            <Card
-              title="Blogs"
-              totalCount={FullBlog.length}
-              error={BlogError}
-            />
-            <Card
-              title="ChangeABits"
-              totalCount={ChangeAbitList.length}
-              error={BlogError}
-            />
+            <Card title="Blogs" totalCount={FullBlog.length} error={BlogError} />
+            <Card title="ChangeABits" totalCount={ChangeAbitList.length} error={null} />
+            <Card title="SafetyNets" totalCount={SafetyNetList.length} error={null} />
           </div>
           <div className="flex gap-4">
-            <Card
-              title="Leads"
-              totalCount={FullLead.length}
-              error={LeadError}
-            />
-            <Card
-              title="Comments"
-              totalCount={FullComment.length}
-              error={CommentError}
-            />
-            <Card
-              title="Subscribers"
-              totalCount={FullComment.length}
-              error={CommentError}
-            />
+            <Card title="Leads" totalCount={FullLead.length} error={LeadError} />
+            <Card title="Comments" totalCount={FullComment.length} error={CommentError} />
+            <Card title="Subscribers" totalCount={FullComment.length} error={CommentError} />
           </div>
         </main>
       )}

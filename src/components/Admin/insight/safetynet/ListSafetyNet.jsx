@@ -44,7 +44,7 @@ const ListSafetyNet = () => {
         console.log(response.data);
 
         const sortedBlogList = response.data.safetyRecords.sort(
-          (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+          (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
         );
         setSafetyNets(sortedBlogList);
       } catch (err) {
@@ -143,11 +143,14 @@ const ListSafetyNet = () => {
                   </p>
                   <p className="text-gray-500 inline-flex items-center text-xs gap-2">
                     <MdDateRange />
-                    {new Date(safetyNet.updatedAt).toLocaleDateString("en-IN", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
+                    {new Date(safetyNet.updated_at).toLocaleDateString(
+                      "en-IN",
+                      {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }
+                    )}
                   </p>
                 </div>
 
@@ -172,7 +175,7 @@ const ListSafetyNet = () => {
               </div>
               {safetyNet.safety_image && (
                 <img
-                  src={`http://192.168.20.5:5000/safety_images/${safetyNet.safety_image}`}
+                  src={`https://enrichminds.co.in/safety_images/${safetyNet.safety_image}`}
                   alt={safetyNet.safety_body}
                   className="rounded-lg"
                   style={{

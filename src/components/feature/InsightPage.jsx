@@ -60,8 +60,9 @@ const InsightPage = () => {
           visit: item.changeAbit_visit_count,
           category: item.changeAbit_category,
           thumbnail: item.changeAbit_thumbnail,
-          linkPrefix: "changeBit",
+          linkPrefix: "changeABit",
         }));
+        console.log(changeBitResponse);
 
         // Map and format safetyNet data
         const safetyNets = (safetyNetResponse.data?.safetyRecords || []).map(
@@ -70,13 +71,15 @@ const InsightPage = () => {
             title: item.safety_title,
             body: item.safety_body,
             author: item.safety_author,
-            date: item.createdAt,
+            date: item.updated_at,
             visit: item.safety_visitors_count,
             category: item.safety_category,
             thumbnail: item.safety_thumbnail,
             linkPrefix: "safetyNet",
           })
         );
+
+        // console.log(safetyNetResponse);
 
         // Combine and sort all content by date
         const combinedData = [...blogs, ...changeBits, ...safetyNets].sort(
@@ -103,7 +106,9 @@ const InsightPage = () => {
     return (
       <div className="w-[90%] m-auto py-12">
         <div className="flex flex-col gap-3 w-full mb-10 text-center">
-          <h2 className="text-4xl tablet:text-5xl font-semibold">Insights</h2>
+          <h2 className="text-4xl tablet:text-5xl font-semibold">
+            Insights Hub
+          </h2>
           <p className="text-gray-600">
             In our pursuit of growth, giving back serves as our compass, guiding
             us to empower and elevate others. Explore expert tips, industry
@@ -222,11 +227,11 @@ const InsightPage = () => {
         {currentBlogs.map((item) => {
           let imagePath = "";
           if (item.linkPrefix === "blog") {
-            imagePath = "http://192.168.20.5:5000/blog_images/";
-          } else if (item.linkPrefix === "changeBit") {
-            imagePath = "http://192.168.20.5:5000/changeAbit_images/";
+            imagePath = "https://enrichminds.co.in/blog_images/";
+          } else if (item.linkPrefix === "changeABit") {
+            imagePath = "https://enrichminds.co.in/changeAbit_images/";
           } else if (item.linkPrefix === "safetyNet") {
-            imagePath = "http://192.168.20.5:5000/safety_images/";
+            imagePath = "https://enrichminds.co.in/safety_images/";
           }
 
           return (
@@ -244,7 +249,10 @@ const InsightPage = () => {
                   <h3 className="text-xl font-semibold mr-2 line-clamp-2">
                     {item.title}
                   </h3>
-                  <Link to={`/insights/${item.linkPrefix}`} className="text-xs text-red-600 font-bold mb-2 border-2 border-red-600 rounded-xl p-1">
+                  <Link
+                    to={`/insights/${item.linkPrefix}`}
+                    className="text-xs text-red-600 font-bold mb-2 border-2 border-red-600 rounded-xl p-1"
+                  >
                     {item.category}
                   </Link>
                 </div>

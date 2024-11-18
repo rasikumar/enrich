@@ -39,7 +39,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
     id: safety.id,
     title: safety.safety_title,
     author: safety.safety_author,
-    body: safety.safety_body,
+    content: safety.safety_body,
     metaDescription: safety.safety_meta_description,
     metaKeywords: safety.safety_meta_keywords,
     image: safety.safety_image,
@@ -59,7 +59,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
   };
 
   const handleQuillChange = (content) => {
-    setFormData((prev) => ({ ...prev, body: content }));
+    setFormData((prev) => ({ ...prev, content: content }));
   };
 
   const handleImageChange = (e) => {
@@ -94,7 +94,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
       data.append("id", formData.id);
       data.append("title", formData.title);
       data.append("author", formData.author);
-      data.append("body", formData.body);
+      data.append("content", formData.content);
       data.append("metaDescription", formData.metaDescription);
       data.append("metaKeywords", formData.metaKeywords);
 
@@ -104,7 +104,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
       }
-      // console.log(formData.image);
+      // console.log(formData.data);
+      console.log("Form Submission Data:", Array.from(data.entries()));
 
       const response = await Instance.put(`/admin/updateSafety`, data, {
         headers: {
@@ -206,7 +207,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
         <div className="mb-4">
           <label className="block mb-1">Body:</label>
           <ReactQuill
-            value={formData.body}
+            value={formData.content}
             onChange={handleQuillChange}
             modules={quillModules}
             formats={quillFormats}
@@ -229,7 +230,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "http://192.168.20.5:5000/safety_images/" +
+                  ? "https://enrichminds.co.in/safety_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -253,7 +254,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "http://192.168.20.5:5000/safety_images/" + imagePreview
+                  ? "https://enrichminds.co.in/safety_images/" + imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}

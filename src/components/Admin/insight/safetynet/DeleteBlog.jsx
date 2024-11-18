@@ -1,19 +1,23 @@
 /* eslint-disable react/prop-types */
 import { Button } from "flowbite-react";
 import Instance from "../../Instance";
-import { useState } from "react";
+// import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const DeleteBlog = ({ blogId, setBlogs }) => {
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const handleDelete = async () => {
     try {
-      await Instance.delete(`/admin/deleteBlog/${blogId}`);
+      await Instance.delete(`/admin/deleteSafety/${blogId}`);
       setBlogs((prev) => prev.filter((blog) => blog.id !== blogId));
+      toast.success("SafetyNet deleted successfully!");
     } catch (err) {
-      setError("Failed to delete blog");
+      toast.error("Delete SafetyNet Error ");
+      // setError("Failed to delete blog");
       console.error("Delete blog error:", err);
     }
   };
@@ -55,7 +59,8 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
       <Button color="failure" onClick={showConfirmDialog}>
         Delete
       </Button>
-      {error && <div className="text-red-500">{error}</div>}
+      <ToastContainer position="top-right" />
+      {/* {error && <div className="text-red-500">{error}</div>} */}
     </div>
   );
 };

@@ -678,7 +678,7 @@ const PsychometricForm = () => {
                   alt="QR"
                   className="m-auto"
                 />
-                <span>Amout : ₹ 499</span>
+                <span>Amount : ₹ 499</span>
               </div>
 
               <div className="flex items-center mb-4">

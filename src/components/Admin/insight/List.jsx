@@ -5,7 +5,7 @@ import ListSafetyNet from "./safetynet/ListSafetyNet";
 
 const List = () => {
   // State to hold the selected component
-  const [selectedList, setSelectedList] = useState("ListSafetyNet");
+  const [selectedList, setSelectedList] = useState("ListBlog");
 
   // Function to handle changes in the select dropdown
   const handleSelectChange = (e) => {

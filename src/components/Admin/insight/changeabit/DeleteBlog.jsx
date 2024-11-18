@@ -1,19 +1,24 @@
 /* eslint-disable react/prop-types */
 import { Button } from "flowbite-react";
 import Instance from "../../Instance";
-import { useState } from "react";
+// import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const handleDelete = async () => {
     try {
       await Instance.delete(`/admin/deleteChangeAbit/${changeABitId}`);
-      setChangeAbits((prev) => prev.filter((changeABit) => changeABit.id !== changeABitId));
+      setChangeAbits((prev) =>
+        prev.filter((changeABit) => changeABit.id !== changeABitId)
+      );
+      toast.success("ChangeABit deleted successfully!");
     } catch (err) {
-      setError("Failed to delete changeABit");
+      // setError("Failed to delete changeABit");
+      toast.error("Delete ChangeABit Error ");
       console.error("Delete changeABit error:", err);
     }
   };
@@ -55,7 +60,8 @@ const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
       <Button color="failure" onClick={showConfirmDialog}>
         Delete
       </Button>
-      {error && <div className="text-red-500">{error}</div>}
+      <ToastContainer position="top-right" />
+      {/* {error && <div className="text-red-500">{error}</div>} */}
     </div>
   );
 };

@@ -26,12 +26,12 @@ const CreateChangeaBit = () => {
   // Handle image upload
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImage(file); // Set image to state
+    setImage(file);
   };
 
   const handleThumbnailChange = (e) => {
     const file = e.target.files[0];
-    setThumbnail(file); // Set thumbnail to state
+    setThumbnail(file);
   };
 
   const handleSubmit = async (e) => {
@@ -182,6 +182,15 @@ const CreateChangeaBit = () => {
               className="block text-sm font-medium text-gray-700"
             >
               ChangeABit Image
+              <button
+                type="button"
+                className="btn btn-secondary ml-4 border p-0 rounded-full w-6 h-6 inline-flex items-center justify-center bg-gray-300 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="The resolution is must 1928 * 896"
+              >
+                <span className="text-black font-bold text-sm">i</span>
+              </button>
             </label>
             <input
               id="image"
@@ -199,6 +208,15 @@ const CreateChangeaBit = () => {
               className="block text-sm font-medium text-gray-700"
             >
               Thumbnail Image
+              <button
+                type="button"
+                className="btn btn-secondary ml-4 border p-0 rounded-full w-6 h-6 inline-flex items-center justify-center bg-gray-300 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="The resolution is must 1080 * 1080"
+              >
+                <span className="text-black font-bold text-sm">i</span>
+              </button>
             </label>
             <input
               id="thumbnail"
@@ -216,6 +234,15 @@ const CreateChangeaBit = () => {
               className="block text-sm font-medium text-gray-700"
             >
               Meta Description
+              <button
+                type="button"
+                className="btn btn-secondary ml-4 border p-0 rounded-full w-6 h-6 inline-flex items-center justify-center bg-gray-300 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Meta Description is a brief summary of your webpage's content. It appears in search engine results and can influence the click-through rate by providing a snapshot of what the page is about. Keep it concise (around 150–160 characters) and ensure it clearly conveys the key information."
+              >
+                <span className="text-black font-bold text-sm">i</span>
+              </button>
             </label>
             <textarea
               id="metaDescription"
@@ -234,6 +261,15 @@ const CreateChangeaBit = () => {
               className="block text-sm font-medium text-gray-700"
             >
               Meta Keywords
+              <button
+                type="button"
+                className="btn btn-secondary ml-4 border p-0 rounded-full w-6 h-6 inline-flex items-center justify-center bg-gray-300 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Keywords are specific words or phrases that represent the main topics or ideas of your content. They help search engines understand what your page is about and can improve your search ranking. Use relevant and strategic keywords, but avoid overstuffing to maintain readability."
+              >
+                <span className="text-black font-bold text-sm">i</span>
+              </button>
             </label>
             <input
               id="metaKeywords"

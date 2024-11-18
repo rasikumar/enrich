@@ -16,11 +16,11 @@ const Card = ({
 }) => {
   let imagePath;
   if (linkPrefix === "blog") {
-    imagePath = "http://192.168.20.5:5000/blog_images/";
-  } else if (linkPrefix === "changeBit") {
-    imagePath = "http://192.168.20.5:5000/changeAbit_images/";
+    imagePath = "https://enrichminds.co.in/blog_images/";
+  } else if (linkPrefix === "changeABit") {
+    imagePath = "https://enrichminds.co.in/changeAbit_images/";
   } else if (linkPrefix === "safetyNet") {
-    imagePath = "http://192.168.20.5:5000/safety_images/";
+    imagePath = "https://enrichminds.co.in/safety_images/";
   }
 
   return (
@@ -99,7 +99,7 @@ const App = () => {
           date: item.createdAt,
           category: item.changeAbit_category,
           thumbnail: item.changeAbit_thumbnail,
-          linkPrefix: "changeBit",
+          linkPrefix: "changeABit",
         }));
 
         const safetyNets = safetyNetResponse.data.safetyRecords.map((item) => ({
@@ -175,11 +175,11 @@ const App = () => {
         </button>
         <button
           className={`px-4 py-2 rounded ${
-            selectedCategory === "changeBit"
+            selectedCategory === "changeABit"
               ? "bg-blue-600 text-white"
               : "bg-gray-200"
           }`}
-          onClick={() => filterContent("changeBit")}
+          onClick={() => filterContent("changeABit")}
         >
           ChangeAbit
         </button>

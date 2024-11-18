@@ -161,8 +161,8 @@ const App = () => {
                 <Route path="/insights/blog/:id" element={<BlogDetail />} />
                 <Route path="/insights/blog" element={<BlogPage />} />
 
-                <Route path="/insights/changeBit/:id" element={<BlogDetailss />} />
-                <Route path="/insights/changeBit" element={<ChangeABit />} />
+                <Route path="/insights/changeABit/:id" element={<BlogDetailss />} />
+                <Route path="/insights/changeABit" element={<ChangeABit />} />
 
                 <Route path="/insights/safetyNet/:id" element={<BlogDetails />} />
                 <Route path="/insights/safetyNet" element={<SafetyNetPage />} />

@@ -26,6 +26,7 @@ const GetIn = () => {
     try {
       const response = await axios.post(
         "https://enrichminds.co.in/api/createmessages",
+        // "https://enrichminds.co.in/api/createmessages",
         formData
       );
       console.log("Server response:", response);
@@ -61,7 +62,7 @@ const GetIn = () => {
           <h3 className="highlight-color text-lg mb-3 primary-color font-medium">
             Our Office Location
           </h3>
-          <p className="xl:text-lg md:text-sm ">Enrich Minds</p>
+          <p className="xl:text-lg md:text-sm ">EnrichMinds Consulting</p>
           <p className="xl:text-lg md:text-sm ">
             No 2/74-5, 1st Cross, Hosur Main Road
           </p>
