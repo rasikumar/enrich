@@ -71,9 +71,7 @@ const BlogDetail = () => {
         const response = await Instance.get("/getAllSafetyList");
         console.log(response.data);
 
-        const sortedBlogs = response.data.safetyRecords.sort(
-          () => 0.5 - Math.random()
-        );
+        const sortedBlogs = response.data.safetyRecords;
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
         setSuggestedLoading(false);
       } catch (error) {
@@ -209,7 +207,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:image"
-          content={`https://enrichminds.co.in/safety_images/${
+          content={`http://192.168.20.5:5000/safety_images/${
             blog && blog[0].safety_image
           }`}
         />
@@ -241,7 +239,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
+                  src={`http://192.168.20.5:5000/safety_images/${blog.safety_image}`}
                   alt={blog.safety_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -460,7 +458,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.safety_author}</p>
                       <img
-                        src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
+                        src={`http://192.168.20.5:5000/safety_images/${blog.safety_image}`}
                         alt={blog.safety_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

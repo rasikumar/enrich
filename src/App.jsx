@@ -61,6 +61,7 @@ import PrivacyPolicy from "./components/Policy";
 import BlogPage from "./components/feature/blog/BlogPage";
 import ChangeABit from "./components/feature/changeabit/ChangeABitPage";
 import SafetyNetPage from "./components/feature/safetynet/SafetyNetPage";
+import FlotingApps from "./components/FlotingApps";
 
 const ProtectedRoute = ({ isAuthenticated, children }) => {
   return isAuthenticated ? children : <Navigate to="/admin" />;
@@ -122,6 +123,7 @@ const App = () => {
                 <Suspense fallback={<Loader />}>
                   <Navbar onOpenPolicy={handleOpenPolicy} />
                   <BookSession />
+                  <FlotingApps/>
                 </Suspense>
               )}
               {!hideHeaderAndFooter && (

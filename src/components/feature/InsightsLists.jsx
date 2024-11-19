@@ -16,19 +16,19 @@ const Card = ({
 }) => {
   let imagePath;
   if (linkPrefix === "blog") {
-    imagePath = "https://enrichminds.co.in/blog_images/";
+    imagePath = "http://192.168.20.5:5000/blog_images/";
   } else if (linkPrefix === "changeABit") {
-    imagePath = "https://enrichminds.co.in/changeAbit_images/";
+    imagePath = "http://192.168.20.5:5000/changeAbit_images/";
   } else if (linkPrefix === "safetyNet") {
-    imagePath = "https://enrichminds.co.in/safety_images/";
+    imagePath = "http://192.168.20.5:5000/safety_images/";
   }
 
   return (
     <Link to={`/insights/${linkPrefix}/${id}`}>
-      <div className="max-w-xl gap-2 w-full flex flex-col md:flex-row border rounded overflow-hidden m-2 min-h-64 max-h-64">
+      <div className="max-w-xl gap-2 w-full flex flex-col md:flex-row border rounded overflow-hidden m-2">
         {thumbnail && (
           <img
-            className="w-full md:w-1/2 object-cover"
+            className="w-full md:w-1/2 h-64 object-cover" // Ensures image has consistent height on mobile
             src={imagePath + thumbnail}
             alt={title}
           />
@@ -42,7 +42,7 @@ const Card = ({
           <div className="font-bold text-xl mb-2 text-primary">{title}</div>
           {body && (
             <div
-              className="line-clamp-3 text-gray-700 mt-2 mb-4"
+              className="text-gray-700 mt-2 mb-4 line-clamp-3" // Adjust line-clamp if text is cut off
               dangerouslySetInnerHTML={{ __html: body }}
             />
           )}
@@ -152,21 +152,19 @@ const App = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="flex justify-center space-x-4 mb-4">
+      <div className="flex justify-center md:space-x-4 gap-2 mb-4">
         <button
-          className={`px-4 py-2 rounded ${
-            selectedCategory === "all"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200"
+          className={`px-4 py-2 rounded hover:scale-105 transition-all ${
+            selectedCategory === "all" ? "bg-primary text-white" : "bg-gray-200"
           }`}
           onClick={() => filterContent("all")}
         >
           All
         </button>
         <button
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded hover:scale-105 transition-all ${
             selectedCategory === "blog"
-              ? "bg-blue-600 text-white"
+              ? "bg-primary text-white"
               : "bg-gray-200"
           }`}
           onClick={() => filterContent("blog")}
@@ -174,9 +172,9 @@ const App = () => {
           Blogs
         </button>
         <button
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded hover:scale-105 transition-all ${
             selectedCategory === "changeABit"
-              ? "bg-blue-600 text-white"
+              ? "bg-primary text-white"
               : "bg-gray-200"
           }`}
           onClick={() => filterContent("changeABit")}
@@ -184,9 +182,9 @@ const App = () => {
           ChangeAbit
         </button>
         <button
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded hover:scale-105 transition-all ${
             selectedCategory === "safetyNet"
-              ? "bg-blue-600 text-white"
+              ? "bg-primary text-white"
               : "bg-gray-200"
           }`}
           onClick={() => filterContent("safetyNet")}

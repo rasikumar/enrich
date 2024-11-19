@@ -41,12 +41,12 @@ const Footer = () => {
               >
                 Program
               </Link>
-              <AnchorLink
+              {/* <AnchorLink
                 href="#testimonials"
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
               >
                 Testimonials
-              </AnchorLink>
+              </AnchorLink> */}
               <Link
                 to={"/insights"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex"
@@ -57,7 +57,7 @@ const Footer = () => {
                 to={"/privacy-policy"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer h-5 items-center flex"
               >
-                Terms&Conditions
+                Privacy & Policy
               </Link>
             </ul>
           </div>
@@ -74,7 +74,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://wa.me/++919900976464?text=Hello!%20I%20am%20interested%20in%20learning%20more%20about%20your%20company."
+                  href="https://wa.me/+919900976464?text=Hello!%20I%20am%20interested%20in%20learning%20more%20about%20your%20company."
                   target="_blank"
                   className="text-black-700 hover:text-yellow-600 transition delay-100"
                 >
@@ -94,10 +94,22 @@ const Footer = () => {
           </div>
         </div>
 
-        <div>
+        <div className="md:flex items-center justify-between mx-[30px]">
           <h1 className="text-center p-4 text-sm">
             Copyright © 2024 EnrichMinds Consulting{" "}
-            <Link to={"/privacy-policy"}>Privacy & Policy</Link>
+            {/* <Link to={"/privacy-policy"} className="text-primary">
+              Privacy & Policy
+            </Link> */}
+          </h1>
+          <h1 className="text-center p-4 text-sm">
+            Powered By{" "}
+            <a
+              href="https://evvisolutions.com/"
+              className="text-primary"
+              target="_blank"
+            >
+              Evvi Solutions
+            </a>
           </h1>
         </div>
       </div>

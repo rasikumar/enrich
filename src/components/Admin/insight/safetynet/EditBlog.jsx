@@ -230,7 +230,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "https://enrichminds.co.in/safety_images/" +
+                  ? "http://192.168.20.5:5000/safety_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -254,7 +254,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "https://enrichminds.co.in/safety_images/" + imagePreview
+                  ? "http://192.168.20.5:5000/safety_images/" + imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}

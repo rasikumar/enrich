@@ -56,9 +56,7 @@ const BlogDetail = () => {
         const response = await Instance.get("/getallChangeAbitList");
         console.log(response.data);
 
-        const sortedBlogs = response.data.changeAbits.sort(
-          () => 0.5 - Math.random()
-        );
+        const sortedBlogs = response.data.changeAbits;
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
         setSuggestedLoading(false);
       } catch (error) {
@@ -97,7 +95,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:image"
-          content={`https://enrichminds.co.in/changeAbit_images/${blogs[0]?.changeAbit_image}`}
+          content={`http://192.168.20.5:5000/changeAbit_images/${blogs[0]?.changeAbit_image}`}
         />
         <meta
           property="og:url"
@@ -132,7 +130,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://enrichminds.co.in/changeAbit_images/${blog.changeAbit_image}`}
+                  src={`http://192.168.20.5:5000/changeAbit_images/${blog.changeAbit_image}`}
                   alt={blog.changeAbit_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -160,7 +158,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.changeAbit_author}</p>
                       <img
-                        src={`https://enrichminds.co.in/changeAbit_images/${blog.changeAbit_thumbnail}`}
+                        src={`http://192.168.20.5:5000/changeAbit_images/${blog.changeAbit_thumbnail}`}
                         alt={blog.changeAbit_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

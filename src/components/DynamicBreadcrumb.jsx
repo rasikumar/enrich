@@ -22,7 +22,7 @@ const DynamicBreadcrumb = () => {
         <li className="flex items-center justify-center">
           <Link
             to="/"
-            className="text-neon-green hover:text-neon-yellow transition-colors duration-300 font-medium"
+            className="text-primary hover:text-neon-yellow transition-colors duration-300 font-medium"
           >
             Home
           </Link>
@@ -40,12 +40,12 @@ const DynamicBreadcrumb = () => {
               {!isLast ? (
                 <Link
                   to={routeTo}
-                  className="text-neon-green hover:text-neon-yellow transition-colors duration-300 font-medium capitalize"
+                  className="text-primary hover:text-neon-yellow transition-colors duration-300 font-medium capitalize"
                 >
                   {decodeURIComponent(value)}
                 </Link>
               ) : (
-                <span className="text-neon-pink font-semibold capitalize">
+                <span className="text-secondary font-semibold capitalize">
                   {decodeURIComponent(value)}
                 </span>
               )}

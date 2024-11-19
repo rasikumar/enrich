@@ -678,6 +678,12 @@ const PsychometricForm = () => {
                   alt="QR"
                   className="m-auto"
                 />
+                <p className="text-sm italic mb-2">
+                  <span className="text-primary">Note:</span> If you decide to proceed with a
+                  psychometric assessment after the consultation, a discount
+                  will be applied to the assessment cost, considering the
+                  consultation payment.
+                </p>
                 <span>Amount : ₹ 499</span>
               </div>
 

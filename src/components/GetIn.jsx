@@ -25,8 +25,8 @@ const GetIn = () => {
 
     try {
       const response = await axios.post(
-        "https://enrichminds.co.in/api/createmessages",
-        // "https://enrichminds.co.in/api/createmessages",
+        "http://192.168.20.5:5000/api/createmessages",
+        // "http://192.168.20.5:5000/api/createmessages",
         formData
       );
       console.log("Server response:", response);
