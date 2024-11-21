@@ -175,7 +175,7 @@ const ListSafetyNet = () => {
               </div>
               {safetyNet.safety_image && (
                 <img
-                  src={`http://192.168.20.5:5000/safety_images/${safetyNet.safety_image}`}
+                  src={`https://enrichminds.co.in/safety_images/${safetyNet.safety_image}`}
                   alt={safetyNet.safety_body}
                   className="rounded-lg"
                   style={{

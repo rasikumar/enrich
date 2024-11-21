@@ -16,11 +16,11 @@ const Card = ({
 }) => {
   let imagePath;
   if (linkPrefix === "blog") {
-    imagePath = "http://192.168.20.5:5000/blog_images/";
+    imagePath = "https://enrichminds.co.in/blog_images/";
   } else if (linkPrefix === "changeABit") {
-    imagePath = "http://192.168.20.5:5000/changeAbit_images/";
+    imagePath = "https://enrichminds.co.in/changeAbit_images/";
   } else if (linkPrefix === "safetyNet") {
-    imagePath = "http://192.168.20.5:5000/safety_images/";
+    imagePath = "https://enrichminds.co.in/safety_images/";
   }
 
   return (

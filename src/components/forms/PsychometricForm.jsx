@@ -12,14 +12,13 @@ const PsychometricForm = () => {
   const [isOpenAssesment, setIsOpenAssesment] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isBoxopen, setIsBoxopen] = useState(true);
+  const [availableSlot, setAvailableSlot] = useState([]);
 
   const handleClick = () => setIsBoxopen((prev) => !prev);
 
-  const timeOptions = [
-    { value: "6.00pm - 7.00pm", label: "6.00pm - 7.00pm" },
-    { value: "7.00pm - 8.00pm", label: "7.00pm - 8.00pm" },
-    { value: "8.00pm - 9.00pm", label: "8.00pm - 9.00pm" },
-  ];
+  // const timeOptions = [
+  //   {availableSlot }
+  // ];
 
   const assesmentOptions = [
     {
@@ -188,12 +187,36 @@ const PsychometricForm = () => {
     }));
   };
 
-  const handleDateChange = (e) => {
-    const { value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      selectDate: value,
-    }));
+  // const handleDateChange = (e) => {
+  //   const { value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     selectDate: value,
+  //   }));
+  // };
+
+  const handleDateChange = async (e) => {
+    const selectedDate = e.target.value;
+    setFormData((prev) => ({ ...prev, selectDate: selectedDate }));
+
+    try {
+      // Send the selected date to your API
+      const response = await Instance.post("/checkSlots", {
+        date: selectedDate,
+      });
+      if (response.data && response.data.availableSlots) {
+        const slots = response.data.availableSlots.map((slot) => ({
+          label: slot,
+          value: slot,
+        }));
+        setAvailableSlot(slots);
+      } else {
+        setAvailableSlot([]);
+      }
+      console.log("API Response:", response.data);
+    } catch (error) {
+      console.error("Error sending date to API:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -246,10 +269,13 @@ const PsychometricForm = () => {
         setSuccessMessage(
           response.data.message || "Appointment created successfully"
         );
+
+        // Clear the success message after 3 seconds
         setTimeout(() => {
           setSuccessMessage(null); // Clear the success message
-        }, 3000); // Clear the message after 3 seconds
-      }, 3000); // Delay the success message by 3 seconds
+          window.location.reload(); // Reload the page after clearing the message
+        }, 5000); // 3-second delay before clearing the message and reloading
+      }, 3000); // Initial 3-second delay for showing the success message
     } catch (error) {
       console.error(error);
       setErrorMessage(error.data.message || "Failed to create appointment");
@@ -586,7 +612,7 @@ const PsychometricForm = () => {
                   onClick={timeDropDown}
                 >
                   {formData.slots
-                    ? timeOptions.find((opt) => opt.value === formData.slots)
+                    ? availableSlot.find((opt) => opt.value === formData.slots)
                         .label
                     : "Select Type"}
                 </div>
@@ -599,7 +625,7 @@ const PsychometricForm = () => {
                       transition={{ duration: 0.3 }}
                       className="absolute w-full bg-white border rounded mt-2 shadow-md z-50"
                     >
-                      {timeOptions.map((option) => (
+                      {availableSlot.map((option) => (
                         <motion.li
                           key={option.value}
                           className="p-2 hover:bg-gray-200 cursor-pointer"
@@ -612,6 +638,11 @@ const PsychometricForm = () => {
                     </motion.ul>
                   )}
                 </AnimatePresence>
+                {availableSlot.length === 0 && (
+                  <p className="text-gray-500 text-sm mt-2">
+                    No slots available
+                  </p>
+                )}
                 {errors.slots && (
                   <p className="text-red-500 text-sm">{errors.slots}</p>
                 )}
@@ -679,10 +710,10 @@ const PsychometricForm = () => {
                   className="m-auto"
                 />
                 <p className="text-sm italic mb-2">
-                  <span className="text-primary">Note:</span> If you decide to proceed with a
-                  psychometric assessment after the consultation, a discount
-                  will be applied to the assessment cost, considering the
-                  consultation payment.
+                  <span className="text-primary">Note:</span> If you decide to
+                  proceed with a psychometric assessment after the consultation,
+                  a discount will be applied to the assessment cost, considering
+                  the consultation payment.
                 </p>
                 <span>Amount : ₹ 499</span>
               </div>

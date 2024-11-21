@@ -19,7 +19,7 @@ const BookSession = () => {
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={toggleModal}
-        className="flex items-center flex-col gap-2"
+        className="flex items-center flex-col gap-2  text-primary hover:text-white font-semibold transition-all"
       >
         <GrSchedule className="text-2xl" />
         {/* <div className="flex leading-4 items-center">

@@ -45,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <div className="md:m-8 px-4 py-6 App xl:h-full">
+    <div className="md:m-8 px-4 App xl:h-full">
       <header className="md:p-4 flex flex-col gap-4 text-center ">
         <h1 className="text-black md:text-4xl text-2xl font-semibold text-center">
           Insights Hub
@@ -64,15 +64,15 @@ const App = () => {
         <InsightList />
       </main>
       <Link to={"/insights"}>
-        <button className="mt-10 btn-primary flex m-auto">More Insights</button>
+        <button className="mt-10 mb-10 btn-primary flex m-auto">More Insights</button>
       </Link>
-      <div className="py-6 px-2 m-auto lg:w-[35rem] gap-3 flex flex-col">
+      <div className="py-6 px-4 m-auto w-full gap-3 flex flex-col bg-slate-300">
         <h1 className="text-center xl:text-lg md:text-sm  ">
           Subscribe for Insights, Updates, and More!
         </h1>
         <form
           onSubmit={handleSubmit}
-          className="lg:flex border border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2 "
+          className="lg:flex border lg:w-[38rem] justify-center m-auto border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2 "
         >
           <input
             type="email"

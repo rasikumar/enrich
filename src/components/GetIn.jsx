@@ -25,8 +25,8 @@ const GetIn = () => {
 
     try {
       const response = await axios.post(
-        "http://192.168.20.5:5000/api/createmessages",
-        // "http://192.168.20.5:5000/api/createmessages",
+        "https://enrichminds.co.in/api/createmessages",
+        // "https://enrichminds.co.in/api/createmessages",
         formData
       );
       console.log("Server response:", response);
@@ -48,7 +48,7 @@ const GetIn = () => {
   return (
     <div
       id="getIn"
-      className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between "
+      className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between mb-8"
     >
       <div className="md:w-[40%] p-4 flex flex-col gap-5 md:mb-10 ">
         <h2 className="text-black md:text-4xl text-2xl font-semibold ">

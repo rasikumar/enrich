@@ -20,7 +20,7 @@ const BlogPage = () => {
           date: item.blog_date,
           author: item.blog_author,
           views: item.blog_visitors_count,
-          thumbnail: `http://192.168.20.5:5000/blog_images/${item.blog_thumbnail}`,
+          thumbnail: `https://enrichminds.co.in/blog_images/${item.blog_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(

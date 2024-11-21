@@ -163,7 +163,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_image && (
                 <img
-                  src={`http://192.168.20.5:5000/blog_images/${blog.blog_image}`}
+                  src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{

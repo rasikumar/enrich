@@ -173,7 +173,7 @@ const ListChangeAbit = () => {
               </div>
               {changeABit.changeAbit_image && (
                 <img
-                  src={`http://192.168.20.5:5000/changeAbit_images/${changeABit.changeAbit_image}`}
+                  src={`https://enrichminds.co.in/changeAbit_images/${changeABit.changeAbit_image}`}
                   alt={changeABit.changeAbit_title}
                   className="rounded-lg"
                   style={{

@@ -6,7 +6,7 @@ import ConfirmModal from "../../comment/ConfirmModal"; // Import the ConfirmModa
 import Loader from "../../comment/Loader";
 
 // CommentList Component
-const CommentList = () => {
+const   CommentList = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

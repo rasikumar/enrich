@@ -267,7 +267,7 @@ const CreateNewsLetter = () => {
             className="line-clamp-4"
           />
           <img
-            src={`http://192.168.20.5:5000/blog_images/${blogs.blog_image}`}
+            src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
             alt={blogs.blog_title}
             width={200}
           />
@@ -291,7 +291,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`http://192.168.20.5:5000/changeAbit_images/${changeABits.changeAbit_image}`}
+            src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
             alt={changeABits.changeAbit_title}
             width={200}
           />
@@ -315,7 +315,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`http://192.168.20.5:5000/safety_images/${safetyNets.safety_image}`}
+            src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
             alt={safetyNets.safety_title}
             width={200}
           />
@@ -490,7 +490,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4"
                   />
                   <img
-                    src={`http://192.168.20.5:5000/blog_images/${blogs.blog_image}`}
+                    src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
                     alt={blogs.blog_title}
                     width={300}
                   />
@@ -517,7 +517,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4"
                   />
                   <img
-                    src={`http://192.168.20.5:5000/changeAbit_images/${changeABits.changeAbit_image}`}
+                    src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
                     alt={changeABits.changeAbit_title}
                     width={300}
                   />
@@ -542,7 +542,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4 "
                   />
                   <img
-                    src={`http://192.168.20.5:5000/safety_images/${safetyNets.safety_image}`}
+                    src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
                     alt={safetyNets.safety_title}
                     width={300}
                   />
@@ -672,7 +672,7 @@ const CreateNewsLetter = () => {
                     </a>{" "}
                     |
                     <a
-                      href="http://192.168.20.5:5000/privacy-policy"
+                      href="https://enrichminds.co.in/privacy-policy"
                       className="text-gray-600 underline"
                     >
                       Privacy Policy

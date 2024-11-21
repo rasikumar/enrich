@@ -30,7 +30,7 @@ const FeaturedInsight = ({
           />
         )}
       </div>
-      <a href="http://192.168.20.5:5000/">Read the Full Article</a>
+      <a href="https://enrichminds.co.in/">Read the Full Article</a>
     </div>
   );
 };

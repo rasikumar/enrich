@@ -11,6 +11,7 @@ import List from "./insight/List";
 import Create from "./insight/Create";
 import Comment from "./insight/Comment";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Appointment from "./appointment/Appointment";
 
 const Admindashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -61,6 +62,8 @@ const Admindashboard = () => {
         return <ContactList />;
       case "Comment":
         return <Comment />;
+      case "Appointment":
+        return <Appointment />;
       default:
         return <div>Select an option from the sidebar</div>;
     }
@@ -231,6 +234,19 @@ const Admindashboard = () => {
                   onClick={() => setActiveTab("contactList")}
                 >
                   Leads
+                </button>
+              </li>
+
+              <li>
+                <button
+                  className={`w-full text-left px-4 py-2 rounded-lg ${
+                    activeTab === "Appointment"
+                      ? "bg-[#28469f] text-white"
+                      : "bg-gray-200"
+                  }`}
+                  onClick={() => setActiveTab("Appointment")}
+                >
+                  Appointments
                 </button>
               </li>
             </ul>

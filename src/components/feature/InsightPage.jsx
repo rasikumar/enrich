@@ -227,11 +227,11 @@ const InsightPage = () => {
         {currentBlogs.map((item) => {
           let imagePath = "";
           if (item.linkPrefix === "blog") {
-            imagePath = "http://192.168.20.5:5000/blog_images/";
+            imagePath = "https://enrichminds.co.in/blog_images/";
           } else if (item.linkPrefix === "changeABit") {
-            imagePath = "http://192.168.20.5:5000/changeAbit_images/";
+            imagePath = "https://enrichminds.co.in/changeAbit_images/";
           } else if (item.linkPrefix === "safetyNet") {
-            imagePath = "http://192.168.20.5:5000/safety_images/";
+            imagePath = "https://enrichminds.co.in/safety_images/";
           }
 
           return (

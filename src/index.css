@@ -31,7 +31,7 @@
   cursor:  none !important;
 }
 body{
-  cursor: none !important;
+  cursor: none ;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

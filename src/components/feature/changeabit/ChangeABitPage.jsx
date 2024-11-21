@@ -61,7 +61,7 @@ const ChangeABit = () => {
           date: item.createdAt,
           author: item.changeAbit_author,
           views: item.changeAbit_visit_count,
-          thumbnail: `http://192.168.20.5:5000/changeAbit_images/${item.changeAbit_thumbnail}`,
+          thumbnail: `https://enrichminds.co.in/changeAbit_images/${item.changeAbit_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(

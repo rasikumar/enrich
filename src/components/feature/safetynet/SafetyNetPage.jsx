@@ -60,7 +60,7 @@ const SafetyNetPage = () => {
           date: item.createdAt,
           author: item.safety_author,
           views: item.safety_visitors_count,
-          thumbnail: `http://192.168.20.5:5000/safety_images/${item.safety_thumbnail}`,
+          thumbnail: `https://enrichminds.co.in/safety_images/${item.safety_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(

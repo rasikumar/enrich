@@ -230,7 +230,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "http://192.168.20.5:5000/blog_images/" +
+                  ? "https://enrichminds.co.in/blog_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -253,7 +253,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "http://192.168.20.5:5000/blog_images/" + imagePreview
+                  ? "https://enrichminds.co.in/blog_images/" + imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}
