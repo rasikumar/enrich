@@ -108,7 +108,7 @@ const ListSafetyNet = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">Safety Net</h1>
 
       {/* Search bar */}
@@ -128,7 +128,7 @@ const ListSafetyNet = () => {
           {currentsafetyNets.map((safetyNet) => (
             <li
               key={safetyNet.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 max-h-32 sm:max-h-36 min-w-full"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6  min-w-full"
             >
               <div className="w-full ">
                 <div className="flex text-sm">
@@ -173,16 +173,11 @@ const ListSafetyNet = () => {
                   />
                 </div>
               </div>
-              {safetyNet.safety_image && (
+              {safetyNet.safety_thumbnail && (
                 <img
-                  src={`https://enrichminds.co.in/safety_images/${safetyNet.safety_image}`}
-                  alt={safetyNet.safety_body}
-                  className="rounded-lg"
-                  style={{
-                    width: "20%",
-                    objectFit: "cover",
-                    height: "auto",
-                  }}
+                  src={`https://newcheck.evvisolutions.com/safety_images/${safetyNet.safety_thumbnail}`}
+                  alt={safetyNet.safety_title}
+                  className="rounded-lg w-24 object-cover"
                 />
               )}
             </li>

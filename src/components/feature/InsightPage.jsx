@@ -30,62 +30,71 @@ const InsightPage = () => {
     const fetchAllContent = async () => {
       try {
         // Fetch all data in parallel
-        const [blogsResponse, changeBitResponse, safetyNetResponse] =
-          await Promise.all([
-            Instance.get("/getAllBlogs"),
-            Instance.get("/getallChangeAbitList"),
-            Instance.get("/getAllSafetyList"),
-          ]);
+        const responses = await Promise.allSettled([
+          Instance.get("/getAllBlogs"),
+          Instance.get("/getallChangeAbitList"),
+          Instance.get("/getAllSafetyList"),
+        ]);
 
         // Map and format blogs data
-        const blogs = blogsResponse.data.blogs.map((item) => ({
-          id: item.id,
-          title: item.blog_title,
-          body: item.blog_body,
-          author: item.blog_author,
-          date: item.blog_date,
-          visit: item.blog_visitors_count,
-          category: item.blog_category,
-          thumbnail: item.blog_thumbnail,
-          linkPrefix: "blog",
-        }));
+        const blogs =
+          responses[0].status === "fulfilled" &&
+          responses[0].value.data.blogs?.length
+            ? responses[0].value.data.blogs.map((item) => ({
+                id: item.id,
+                title: item.blog_title,
+                body: item.blog_body,
+                author: item.blog_author,
+                date: item.blog_date,
+                visit: item.blog_visitors_count,
+                category: item.blog_category,
+                thumbnail: item.blog_thumbnail,
+                linkPrefix: "blog",
+              }))
+            : [];
 
         // Map and format changeAbit data
-        const changeBits = changeBitResponse.data.changeAbits.map((item) => ({
-          id: item.id,
-          title: item.changeAbit_title,
-          body: item.changeAbit_content,
-          author: item.changeAbit_author,
-          date: item.createdAt,
-          visit: item.changeAbit_visit_count,
-          category: item.changeAbit_category,
-          thumbnail: item.changeAbit_thumbnail,
-          linkPrefix: "changeABit",
-        }));
-        console.log(changeBitResponse);
+        const changeBits =
+          responses[1].status === "fulfilled" &&
+          responses[1].value.data.changeAbits?.length
+            ? responses[1].value.data.changeAbits.map((item) => ({
+                id: item.id,
+                title: item.changeAbit_title,
+                body: item.changeAbit_content,
+                author: item.changeAbit_author,
+                date: item.createdAt,
+                visit: item.changeAbit_visit_count,
+                category: item.changeAbit_category,
+                thumbnail: item.changeAbit_thumbnail,
+                linkPrefix: "changeABit",
+              }))
+            : [];
+        // console.log(changeBitResponse);
 
         // Map and format safetyNet data
-        const safetyNets = (safetyNetResponse.data?.safetyRecords || []).map(
-          (item) => ({
-            id: item.id,
-            title: item.safety_title,
-            body: item.safety_body,
-            author: item.safety_author,
-            date: item.updated_at,
-            visit: item.safety_visitors_count,
-            category: item.safety_category,
-            thumbnail: item.safety_thumbnail,
-            linkPrefix: "safetyNet",
-          })
-        );
+        const safetyNets =
+          responses[2].status === "fulfilled" &&
+          responses[2].value.data.safetyRecords?.length
+            ? responses[2].value.data.safetyRecords.map((item) => ({
+                id: item.id,
+                title: item.safety_title,
+                body: item.safety_body,
+                author: item.safety_author,
+                date: item.updated_at,
+                visit: item.safety_visitors_count,
+                category: item.safety_category,
+                thumbnail: item.safety_thumbnail,
+                linkPrefix: "safetyNet",
+              }))
+            : [];
 
         // console.log(safetyNetResponse);
 
         // Combine and sort all content by date
         const combinedData = [...blogs, ...changeBits, ...safetyNets].sort(
           (a, b) => {
-            const dateA = new Date(a.date);
-            const dateB = new Date(b.date);
+            const dateA = new Date(a.date || a.createdAt || 0);
+            const dateB = new Date(b.date || b.createdAt || 0);
             return dateB - dateA; // Sort in descending order
           }
         );
@@ -227,11 +236,11 @@ const InsightPage = () => {
         {currentBlogs.map((item) => {
           let imagePath = "";
           if (item.linkPrefix === "blog") {
-            imagePath = "https://enrichminds.co.in/blog_images/";
+            imagePath = "https://newcheck.evvisolutions.com/blog_images/";
           } else if (item.linkPrefix === "changeABit") {
-            imagePath = "https://enrichminds.co.in/changeAbit_images/";
+            imagePath = "https://newcheck.evvisolutions.com/changeAbit_images/";
           } else if (item.linkPrefix === "safetyNet") {
-            imagePath = "https://enrichminds.co.in/safety_images/";
+            imagePath = "https://newcheck.evvisolutions.com/safety_images/";
           }
 
           return (

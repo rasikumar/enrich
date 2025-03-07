@@ -3,17 +3,21 @@ import { useState } from "react";
 import Instance from "../../Instance";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
 const quillModules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ align: [] }],
-    ["link", "image"],
-    [{ indent: "-1" }, { indent: +1 }],
-    ["clean"],
+    [{ header: [1, 2, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["blockquote", "code-block"],
+    [{ size: ["small", false, "large", "huge"] }],
+    [{ color: [] }, { background: [] }],
+    [{ font: [] }],
+    [{ align: [] }], // Alignment options
+    ["image"], // Image button
+    ["clean"], // Remove formatting
   ],
 };
 
@@ -50,7 +54,6 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
   const [thumbnailImagePreview, setThumbnailImagePreview] = useState(
     blog.blog_thumbnail || null
   );
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // Loading state for the update process
 
   const handleChange = (e) => {
@@ -64,30 +67,82 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      if (file.type.startsWith("image/")) {
-        setFormData((prev) => ({ ...prev, image: file }));
-        setImagePreview(URL.createObjectURL(file));
-      } else {
-        setError("Please upload a valid image file.");
-      }
+
+    if (!file) return; // Exit if no file is selected
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image files are allowed.");
+      e.target.value = ""; // Clear input field
+      return;
     }
+
+    // If valid, update the state
+    setFormData((prev) => ({ ...prev, image: file }));
+    setImagePreview(URL.createObjectURL(file));
   };
+
   const handleThumbnailImageChange = (e) => {
-    const files = e.target.files[0];
-    if (files) {
-      if (files.type.startsWith("image/")) {
-        setFormData((prev) => ({ ...prev, thumbnail: files }));
-        setThumbnailImagePreview(URL.createObjectURL(files));
-      } else {
-        setError("Please upload a valid image file.");
-      }
+    const file = e.target.files[0];
+
+    if (!file) return; // Exit if no file is selected
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image files are allowed.");
+      e.target.value = ""; // Clear input field
+      return;
     }
+
+    // If valid, update the state
+    setFormData((prev) => ({ ...prev, thumbnail: file }));
+    setThumbnailImagePreview(URL.createObjectURL(file));
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validate required fields and show specific error messages
+    if (
+      formData.title.trim().length < 10 ||
+      formData.title.trim().length > 100
+    ) {
+      toast.error("Title must be between 10 and 100 characters.");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.author.trim()) {
+      toast.error("Author is required.");
+      setLoading(false);
+      return;
+    }
+
+    if (
+      formData.body.trim().length < 100 ||
+      formData.body.trim().length > 2500
+    ) {
+      toast.error("Content must be between 100 and 2500 characters.");
+      return;
+    }
+
+    if (
+      formData.metaDescription.trim().length < 10 ||
+      formData.metaDescription.trim().length > 200
+    ) {
+      toast.error("Meta description must be between 10 and 200 characters.");
+      return;
+    }
+
+    if (
+      formData.metaKeywords.trim().split(",").length < 2 ||
+      formData.metaKeywords.trim().split(",").length > 15
+    ) {
+      toast.error(
+        "Meta keywords must contain exactly 15 items, separated by commas."
+      );
+      return;
+    }
+
     try {
       const data = new FormData();
       data.append("id", formData.id);
@@ -100,7 +155,6 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
       if (formData.image) {
         data.append("image", formData.image);
       }
-      // console.log(formData.image);
 
       if (formData.thumbnail) {
         data.append("thumbnail", formData.thumbnail);
@@ -122,12 +176,12 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
         setTimeout(() => {
           setEditing(false);
         }, 1000);
+        window.location.reload();
       } else {
         throw new Error(response.data.message);
       }
     } catch (err) {
       console.error("Failed to update blog:", err);
-      setError("Failed to update blog");
       toast.error("Failed to update blog");
     } finally {
       setLoading(false); // Reset loading state after process is complete
@@ -136,11 +190,10 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
 
   return (
     <>
-      <form onSubmit={handleUpdate} className="mt-6 bg-gray-100 p-4 rounded-lg">
-        <h2 className="text-xl font-semibold">Edit Blog</h2>
-
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-
+      <form
+        onSubmit={handleUpdate}
+        className="mt-6 bg-gray-100 px-1 rounded-lg max-h-96 overflow-y-scroll"
+      >
         {/* Title */}
         <div className="mb-4">
           <label className="block mb-1">Title:</label>
@@ -211,7 +264,6 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             onChange={handleQuillChange}
             modules={quillModules}
             formats={quillFormats}
-            className="bg-white"
             required
           />
         </div>
@@ -230,7 +282,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "https://enrichminds.co.in/blog_images/" +
+                  ? "https://newcheck.evvisolutions.com/blog_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -253,7 +305,8 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "https://enrichminds.co.in/blog_images/" + imagePreview
+                  ? "https://newcheck.evvisolutions.com/blog_images/" +
+                    imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}
@@ -280,7 +333,6 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
           </button>
         </div>
       </form>
-      <ToastContainer position="top-right" />
     </>
   );
 };

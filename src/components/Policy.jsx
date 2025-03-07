@@ -1,19 +1,16 @@
 const PrivacyPolicy = () => {
   return (
     <>
-      <section className="from-t-primary to-slate-400 bg-gradient-to-r p-10 w-full text-primary text-5xl">
+      <section className="from-t-primary to-slate-400 bg-gradient-to-r md:p-10 p-4 mt-10 w-full text-primary md:text-5xl text-3xl">
         Enrich Minds Consulting Privacy Policy
       </section>
-      <div className="p-24 pt-1 bg-white border mx-auto">
-        <section className="m-auto mt-5">
+      <div className="md:py-8 py-0 md:px-8 px-4 pt-1 bg-white border mx-auto">
+        <section className="m-auto max-md:mt-10">
           {/* Privacy Policy Section */}
           <section className="p-5 rounded-xl border bg-slate-100">
             <h2 className="text-2xl font-bold mb-4 text-t-primary">
               Privacy Policy
             </h2>
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>Effective Date: [Insert Date]</strong>
-            </p>
             <p className="mb-4">
               At EnrichMinds Consulting, we respect and protect the privacy of
               our clients. This Privacy Policy outlines how we collect, use, and

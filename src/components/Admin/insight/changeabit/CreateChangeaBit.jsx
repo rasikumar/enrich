@@ -85,7 +85,6 @@ const CreateChangeaBit = () => {
         setThumbnail(null); // Clear thumbnail
         setMetaDescription(""); // Clear meta description
         setMetaKeywords(""); // Clear meta keywords
-        window.location.reload();
       } else {
         alert(response.data.message);
       }
@@ -134,7 +133,7 @@ const CreateChangeaBit = () => {
   };
 
   return (
-    <div className="flex max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="flex mx-auto bg-white p-6 rounded-lg shadow-md">
       <div className="w-1/2 pr-4">
         <h2 className="text-2xl font-bold mb-6">Create ChangeABit</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>

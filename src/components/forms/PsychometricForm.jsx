@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { QR, Sending } from "../../assets";
 import Instance from "../Admin/Instance";
+import { ChevronDown } from "lucide-react";
 // import { FaClock, FaVideo } from "react-icons/fa";
 
 const PsychometricForm = () => {
@@ -263,7 +264,7 @@ const PsychometricForm = () => {
           },
         }
       );
-      console.log("Response:", response.data);
+      // console.log("Response:", response.data);
 
       setTimeout(() => {
         setSuccessMessage(
@@ -295,7 +296,7 @@ const PsychometricForm = () => {
                 Psychometric assessments provide valuable insights into areas
                 such as personality, emotional intelligence, job preferences,
                 and areas of growth. These assessments can help you understand
-                yourself better, aligning your personal and professional
+                yourself better, aligning your Personal and professional
                 development goals.
               </p>
               <p className="text-xs">
@@ -312,13 +313,13 @@ const PsychometricForm = () => {
       ) : (
         <></>
       )}
-      <div className="w-72 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-4 bg-primary ">
+      <div className="w-72 h-[30rem] rounded-xl items-start md:flex hidden flex-col px-4 bg-[#203B93] ">
         {/* Step 1 */}
         <div className={`flex items-center gap-3 justify-center mt-5 `}>
           <span
             className={`${
               currentStep === 1
-                ? "bg-secondary text-white"
+                ? "bg-[#f3BE54] text-white"
                 : "border text-white"
             } w-[30px] text-center`}
             style={{ lineHeight: "30px", borderRadius: "50%" }}
@@ -333,7 +334,7 @@ const PsychometricForm = () => {
           <span
             className={`${
               currentStep === 2
-                ? "bg-secondary text-white"
+                ? "bg-[#f3BE54] text-white"
                 : "border text-white"
             } w-[30px] text-center`}
             style={{ lineHeight: "30px", borderRadius: "50%" }}
@@ -348,7 +349,7 @@ const PsychometricForm = () => {
           <span
             className={`${
               currentStep === 3
-                ? "bg-secondary text-white"
+                ? "bg-[#f3BE54] text-white"
                 : "border text-white"
             } w-[30px] text-center`}
             style={{ lineHeight: "30px", borderRadius: "50%" }}
@@ -363,7 +364,7 @@ const PsychometricForm = () => {
           <span
             className={`${
               currentStep === 4
-                ? "bg-secondary text-white"
+                ? "bg-[#f3BE54] text-white"
                 : "border text-white"
             } w-[30px] text-center`}
             style={{ lineHeight: "30px", borderRadius: "50%" }}
@@ -392,7 +393,7 @@ const PsychometricForm = () => {
                 exit={{ opacity: 0, x: 0 }}
                 className="text-slate-400 text-sm"
               >
-                Kindly Provide your personal Information
+                Kindly Provide your Personal Information
               </motion.p>
 
               <motion.div
@@ -512,7 +513,7 @@ const PsychometricForm = () => {
                   Purpose of Appointment
                 </label>
                 <div
-                  className="p-2 border rounded cursor-pointer"
+                  className="p-2 border rounded cursor-pointer flex justify-between"
                   onClick={() => setIsOpenAssesment(!isOpenAssesment)}
                   role="button"
                   aria-haspopup="true"
@@ -526,6 +527,7 @@ const PsychometricForm = () => {
                     : formData.selectedAssessment === "Other"
                     ? "Other"
                     : "Select Assessment"}
+                  <ChevronDown />
                 </div>
 
                 <AnimatePresence>
@@ -608,13 +610,14 @@ const PsychometricForm = () => {
                   Preferred Appointment Time
                 </label>
                 <div
-                  className="p-2 border rounded cursor-pointer"
+                  className="p-2 border rounded cursor-pointer flex justify-between"
                   onClick={timeDropDown}
                 >
                   {formData.slots
                     ? availableSlot.find((opt) => opt.value === formData.slots)
                         .label
                     : "Select Type"}
+                  <ChevronDown />
                 </div>
                 <AnimatePresence>
                   {isOpenTime && (
@@ -638,6 +641,7 @@ const PsychometricForm = () => {
                     </motion.ul>
                   )}
                 </AnimatePresence>
+
                 {availableSlot.length === 0 && (
                   <p className="text-gray-500 text-sm mt-2">
                     No slots available

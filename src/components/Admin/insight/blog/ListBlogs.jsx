@@ -6,26 +6,16 @@ import DeleteBlog from "./DeleteBlog";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { ThreeCircles } from "react-loader-spinner";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "../../../ui/dialog";
 
 // Custom Modal Component
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[50rem] relative max-h-[30rem] overflow-y-scroll scrollbar-hide">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-700"
-        >
-          &times;
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-};
 
 const ListBlog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -45,7 +35,7 @@ const ListBlog = () => {
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );
         setBlogs(sortedBlogList);
-        console.log(response);
+        // console.log(response);
       } catch (err) {
         setError("Failed to fetch blogs");
         console.log(err);
@@ -104,7 +94,7 @@ const ListBlog = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">Blog List</h1>
 
       {/* Search bar */}
@@ -124,7 +114,7 @@ const ListBlog = () => {
           {currentBlogs.map((blog) => (
             <li
               key={blog.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 max-h-32 sm:max-h-36 min-w-full"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full"
             >
               <div className="w-full ">
                 <div className="flex text-sm">
@@ -161,16 +151,11 @@ const ListBlog = () => {
                   <DeleteBlog blogId={blog.id} setBlogs={setBlogs} />
                 </div>
               </div>
-              {blog.blog_image && (
+              {blog.blog_thumbnail && (
                 <img
-                  src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
+                  src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_thumbnail}`}
                   alt={blog.blog_title}
-                  className="rounded-lg"
-                  style={{
-                    width: "20%",
-                    objectFit: "cover",
-                    height: "auto",
-                  }}
+                  className="rounded-lg w-24 object-cover"
                 />
               )}
             </li>
@@ -198,16 +183,25 @@ const ListBlog = () => {
       </div>
 
       {/* Custom Modal for Edit Blog */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedBlog && (
-          <EditBlog
-            blog={selectedBlog}
-            setEditing={setIsModalOpen}
-            setBlogs={setBlogs}
-            closeModal={handleCloseModal} // Pass the function to close modal
-          />
-        )}
-      </Modal>
+      <Dialog
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Blog</DialogTitle>
+            <DialogClose />
+          </DialogHeader>
+          {selectedBlog && (
+            <EditBlog
+              blog={selectedBlog}
+              setEditing={setIsModalOpen}
+              setBlogs={setBlogs}
+              closeModal={handleCloseModal}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

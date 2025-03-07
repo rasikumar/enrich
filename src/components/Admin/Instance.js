@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Instance = axios.create({
-  baseURL: "https://enrichminds.co.in", // Correct usage
+  baseURL: "https://newcheck.evvisolutions.com", // Correct usage
   headers: { "Content-Type": "application/json" },
 });
 

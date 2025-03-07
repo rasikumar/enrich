@@ -69,7 +69,12 @@ const ContactList = () => {
       {/* Export Button */}
       <button
         onClick={exportToExcel}
-        className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+        disabled={contacts.length === 0}
+        className={`mb-4 px-4 py-2 rounded-md ${
+          contacts.length === 0
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-green-500 hover:bg-green-600 text-white"
+        }`}
       >
         Export to Excel
       </button>

@@ -60,7 +60,7 @@ const SafetyNetPage = () => {
           date: item.createdAt,
           author: item.safety_author,
           views: item.safety_visitors_count,
-          thumbnail: `https://enrichminds.co.in/safety_images/${item.safety_thumbnail}`,
+          thumbnail: `https://newcheck.evvisolutions.com/safety_images/${item.safety_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(
@@ -142,7 +142,7 @@ const SafetyNetPage = () => {
     <>
       <DynamicBreadcrumb />
       <h1 className="text-4xl tablet:text-5xl font-semibold mt-20 text-center mb-3">
-        Latest Blogs
+        Latest SafetyNet
       </h1>
       <p className="text-center mb-4">
         Stay updated with the latest trends and insights in technology,

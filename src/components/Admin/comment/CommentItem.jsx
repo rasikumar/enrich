@@ -5,6 +5,7 @@ import { useState } from "react";
 import Instance from "../Instance";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import ConfirmModal from "./ConfirmModal";
+import { toast, ToastContainer } from "react-toastify";
 
 const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
   const [replyText, setReplyText] = useState("");
@@ -24,7 +25,10 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
   };
 
   const handleReply = async (comment_id) => {
-    if (!replyText.trim()) return;
+    if (replyText.trim().length < 3 || replyText.trim().length > 100) {
+      toast.error("Reply must be between 10 and 100 characters.");
+      return;
+    }
 
     try {
       await Instance.post(`/admin/replyToComment`, {
@@ -32,21 +36,21 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
         reply: replyText,
       });
 
-      const updatedComments = comments.map((comment) => {
-        if (comment.id === comment_id) {
-          return {
-            ...comment,
-            replies: [...(comment.replies || []), replyText],
-          };
-        }
-        return comment;
-      });
+      // Update comments state with the new reply
+      const updatedComments = comments.map((comment) =>
+        comment.id === comment_id
+          ? { ...comment, replies: [...(comment.replies || []), replyText] }
+          : comment
+      );
 
       setComments(updatedComments);
-      setReplyText(""); // Clear the reply input
-      setCommentToReply(null); // Reset comment to reply
+      setReplyText(""); // Clear input field
+      setCommentToReply(null); // Reset selected comment for reply
+
+      toast.success("Reply added successfully!");
     } catch (error) {
       console.error("Failed to reply to comment:", error);
+      toast.error("Failed to reply to comment. Please try again.");
     }
   };
 
@@ -124,7 +128,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
               minute: "numeric",
             })}
           </div>
-          <p className="text-sm text-gray-700">{comment.comment}</p>
+          <p className="text-sm text-gray-700 ">{comment.comment}</p>
         </div>
 
         <div className="flex justify-between items-center mt-4">
@@ -165,7 +169,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
               type="text"
               value={replyText}
               onChange={handleReplyChange}
-              placeholder="Type your reply..."
+              placeholder="Please enter a reply"
               className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-teal-300"
             />
             <button
@@ -189,13 +193,13 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
           )}
         </button>
         {showReplies && comment.replies && comment.replies.length > 0 && (
-          <ul className="mt-4 ml-6 space-y-2">
+          <ul className="mt-4 ml-6 space-y-2 text-wrap">
             {comment.replies.map((reply) => (
               <li
                 key={reply.reply_id}
-                className="text-sm bg-gray-100 rounded-md p-2 flex items-start justify-between"
+                className="text-sm bg-gray-100 rounded-md p-2 flex items-start justify-between "
               >
-                <div>
+                <div className="overflow-hidden">
                   <p className="text-sm text-gray-500">
                     {new Date(reply.reply_created_at).toLocaleString("en-US", {
                       year: "numeric",
@@ -208,7 +212,9 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
                   <p className="text-sm text-t-primary font-semibold">
                     {reply.reply_username}
                   </p>
-                  <p className="mt-1 text-sm text-green-600">{reply.reply}</p>
+                  <p className="mt-1 text-sm text-green-600 overflow-x-auto">
+                    {reply.reply}
+                  </p>
                 </div>
                 <div>
                   <button
@@ -233,6 +239,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
         btn1="Cancel"
         btn2={isReplyHidden ? "Hide" : "Unhide"}
       />
+      <ToastContainer />
     </>
   );
 };

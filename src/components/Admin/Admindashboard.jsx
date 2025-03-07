@@ -1,271 +1,231 @@
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CreateNewsLetter from "./newsletter/CreateNewsLetter";
-// import ListNewsLetter from "./newsletter/ListNewsLetter";
-import Logout from "./Logout";
-import ContactList from "./contactList";
-import Dashboard from "../Admin/dashboard/dashboard";
-import Members from "./newsletter/Members";
-import { motion } from "framer-motion";
-import List from "./insight/List";
-import Create from "./insight/Create";
-import Comment from "./insight/Comment";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Appointment from "./appointment/Appointment";
+import {
+  Menu,
+  Home,
+  BookOpen,
+  PlusCircle,
+  MessageSquare,
+  FileText,
+  Users,
+  Phone,
+  Calendar,
+  X,
+  LogOut,
+} from "lucide-react";
 
-const Admindashboard = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
-  const [activeDropdown, setActiveDropdown] = useState(null);
+const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const navigate = useNavigate();
+  const [insightsOpen, setInsightsOpen] = useState(false);
+  const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (!token || isTokenExpired(token)) {
-      navigate("/admin");
-      localStorage.removeItem("jwtToken");
-      window.location.reload();
+    if (window.innerWidth < 768) {
+      setIsSidebarOpen(false);
     }
-  }, [navigate]);
+  }, []);
 
-  const isTokenExpired = (token) => {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    const expiry = payload.exp * 1000;
-    return Date.now() > expiry;
-  };
-
-  const handleDropdownToggle = (dropdownName) => {
-    setActiveDropdown((prevDropdown) =>
-      prevDropdown === dropdownName ? null : dropdownName
-    );
-  };
-
-  const handleBlogOptionClick = (tab) => {
-    setActiveTab(tab);
-  };
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case "dashboard":
-        return <Dashboard />;
-      case "createInsights":
-        return <Create />;
-      case "listInsighs":
-        return <List />;
-      case "createNewsLetter":
-        return <CreateNewsLetter />;
-      // case "listNewsLetter":
-      //   return <ListNewsLetter />;
-      case "members":
-        return <Members />;
-      case "contactList":
-        return <ContactList />;
-      case "Comment":
-        return <Comment />;
-      case "Appointment":
-        return <Appointment />;
-      default:
-        return <div>Select an option from the sidebar</div>;
+  useEffect(() => {
+    if (
+      location.pathname.includes("listInsighs") ||
+      location.pathname.includes("createInsights") ||
+      location.pathname.includes("Comment")
+    ) {
+      setInsightsOpen(true);
     }
-  };
+    if (
+      location.pathname.includes("createNewsLetter") ||
+      location.pathname.includes("members")
+    ) {
+      setNewsletterOpen(true);
+    }
+  }, [location.pathname]);
 
-  const dropdownVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: "auto" },
+  const handleLogout = () => {
+    localStorage.removeItem("jwtToken");
+    window.location.href = "/admin";
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div
-        className={`${
-          isSidebarOpen ? "block" : "hidden"
-        } lg:block w-full lg:w-64 bg-white shadow-lg flex-shrink-0`}
-      >
-        <div className="p-6 fixed lg:relative h-full w-full lg:w-64 z-50 bg-[#BCBDC0]">
-          <span className="text-base font-semibold inline-flex gap-2 items-center">
-            Dashboard
-            <Logout />
-          </span>
-          <nav className="mt-8">
-            <ul className="space-y-4">
-              <li>
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeTab === "dashboard"
-                      ? "bg-[#28469f] text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => setActiveTab("dashboard")}
-                >
-                  Dashboard
-                </button>
-              </li>
-
-              {/* Dropdown for Insights options */}
-              <li>
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeDropdown === "insights"
-                      ? "bg-[#28469f] text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => handleDropdownToggle("insights")}
-                >
-                  Insights
-                </button>
-                {activeDropdown === "insights" && (
-                  <motion.ul
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={dropdownVariants}
-                    className="pl-4 mt-2 space-y-2"
-                  >
-                    <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "listInsighs"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => handleBlogOptionClick("listInsighs")}
-                      >
-                        Insights List
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "createInsights"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => handleBlogOptionClick("createInsights")}
-                      >
-                        Create Insights
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "Comment"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => setActiveTab("Comment")}
-                      >
-                        Comment List
-                      </button>
-                    </li>
-                  </motion.ul>
-                )}
-              </li>
-
-              {/* Dropdown for Newsletter options */}
-              <li>
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeDropdown === "newsletters"
-                      ? "bg-[#28469f] text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => handleDropdownToggle("newsletters")}
-                >
-                  Newsletter
-                </button>
-                {activeDropdown === "newsletters" && (
-                  <motion.ul
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={dropdownVariants}
-                    className="pl-4 mt-2 space-y-2"
-                  >
-                    {/* <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "listNewsLetter"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => handleBlogOptionClick("listNewsLetter")}
-                      >
-                        Newsletter List
-                      </button>
-                    </li> */}
-                    <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "createNewsLetter"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() =>
-                          handleBlogOptionClick("createNewsLetter")
-                        }
-                      >
-                        Create Newsletter
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        className={`w-full text-left px-4 py-2 rounded-lg ${
-                          activeTab === "members"
-                            ? "bg-[#28469f] text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => handleBlogOptionClick("members")}
-                      >
-                        Subscribers
-                      </button>
-                    </li>
-                  </motion.ul>
-                )}
-              </li>
-
-              <li>
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeTab === "contactList"
-                      ? "bg-[#28469f] text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => setActiveTab("contactList")}
-                >
-                  Leads
-                </button>
-              </li>
-
-              <li>
-                <button
-                  className={`w-full text-left px-4 py-2 rounded-lg ${
-                    activeTab === "Appointment"
-                      ? "bg-[#28469f] text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() => setActiveTab("Appointment")}
-                >
-                  Appointments
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-4 mt-6 lg:mt-0">{renderContent()}</div>
-
-      {/* Mobile Sidebar Toggle */}
+    <div className="min-h-screen flex z-50">
+      {/* Sidebar Toggle Button */}
       <button
-        className="lg:hidden z-50 fixed top-4 left-4 bg-[#28469f] text-white px-4 py-2 rounded"
+        className={`md:hidden p-3 fixed top-4 left-4 bg-gray-700 text-white rounded-md z-50 shadow-lg transition-all ${
+          isSidebarOpen ? "translate-x-56" : "translate-x-0"
+        }`}
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <GiHamburgerMenu className="text-end" /> : "Open Menu"}
+        {isSidebarOpen ? (
+          <X className="w-6 h-6" />
+        ) : (
+          <Menu className="w-6 h-6" />
+        )}
       </button>
+
+      {/* Sidebar */}
+      <nav
+        className={`fixed md:relative top-0 left-0 h-screen bg-[#F4F4F5] text-[#1F2937] p-4 w-1/6 transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 md:translate-x-0 shadow-md`}
+      >
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col items-start space-y-4">
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
+                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
+                }`
+              }
+              to="dashboard"
+            >
+              <Home className="w-5 h-5" />
+              Home
+            </NavLink>
+
+            {/* Insights Dropdown */}
+            <div className="w-full">
+              <button
+                className="flex items-center justify-between text-lg font-medium w-full px-4 py-2 rounded-lg hover:bg-[#E5E7EB]"
+                onClick={() => setInsightsOpen(!insightsOpen)}
+              >
+                <div className="flex items-center gap-3">
+                  <BookOpen className="w-5 h-5" />
+                  Insights
+                </div>
+                {insightsOpen ? "▲" : "▼"}
+              </button>
+              {insightsOpen && (
+                <div className="ml-6 space-y-2">
+                  <NavLink
+                    to="listInsighs"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-[#4B5563] text-white"
+                          : "hover:bg-[#E5E7EB]"
+                      }`
+                    }
+                  >
+                    <FileText className="w-4 h-4" />
+                    Insights List
+                  </NavLink>
+                  <NavLink
+                    to="createInsights"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-[#4B5563] text-white"
+                          : "hover:bg-[#E5E7EB]"
+                      }`
+                    }
+                  >
+                    <PlusCircle className="w-4 h-4" />
+                    Create Insights
+                  </NavLink>
+                  <NavLink
+                    to="Comment"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-[#4B5563] text-white"
+                          : "hover:bg-[#E5E7EB]"
+                      }`
+                    }
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    Comments
+                  </NavLink>
+                </div>
+              )}
+            </div>
+
+            {/* Newsletter Dropdown */}
+            <div className="w-full">
+              <button
+                className="flex items-center justify-between text-lg font-medium w-full px-4 py-2 rounded-lg hover:bg-[#E5E7EB]"
+                onClick={() => setNewsletterOpen(!newsletterOpen)}
+              >
+                <div className="flex items-center gap-3">
+                  <FileText className="w-5 h-5" />
+                  Newsletter
+                </div>
+                {newsletterOpen ? "▲" : "▼"}
+              </button>
+              {newsletterOpen && (
+                <div className="ml-6 space-y-2">
+                  <NavLink
+                    to="createNewsLetter"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-[#4B5563] text-white"
+                          : "hover:bg-[#E5E7EB]"
+                      }`
+                    }
+                  >
+                    <PlusCircle className="w-4 h-4" />
+                    Create Newsletter
+                  </NavLink>
+                  <NavLink
+                    to="members"
+                    className={({ isActive }) =>
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-[#4B5563] text-white"
+                          : "hover:bg-[#E5E7EB]"
+                      }`
+                    }
+                  >
+                    <Users className="w-4 h-4" />
+                    Subscribers
+                  </NavLink>
+                </div>
+              )}
+            </div>
+
+            <NavLink
+              to="contactList"
+              className={({ isActive }) =>
+                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
+                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
+                }`
+              }
+            >
+              <Phone className="w-5 h-5" />
+              Leads
+            </NavLink>
+
+            <NavLink
+              to="Appointment"
+              className={({ isActive }) =>
+                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
+                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
+                }`
+              }
+            >
+              <Calendar className="w-5 h-5" />
+              Appointments
+            </NavLink>
+          </div>
+
+          {/* Logout Button */}
+          <button
+            className="flex items-center gap-3 justify-center w-full px-4 py-2 text-lg font-medium rounded-lg bg-[#EF4444] text-white hover:bg-[#DC2626] transition"
+            onClick={handleLogout} // Replace with your logout function
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="flex-1 p-6 h-screen overflow-auto bg-gray-100">
+        <Outlet />
+      </div>
     </div>
   );
 };
 
-export default Admindashboard;
+export default Sidebar;

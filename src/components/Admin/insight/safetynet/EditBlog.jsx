@@ -138,7 +138,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
   return (
     <>
       <form onSubmit={handleUpdate} className="mt-6 bg-gray-100 p-4 rounded-lg">
-        <h2 className="text-xl font-semibold">Safety Bit Blog</h2>
+        <h2 className="text-xl font-semibold">Edit SafetyNet</h2>
 
         {error && <div className="text-red-500 mb-4">{error}</div>}
 
@@ -230,7 +230,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "https://enrichminds.co.in/safety_images/" +
+                  ? "https://newcheck.evvisolutions.com/safety_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -254,7 +254,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "https://enrichminds.co.in/safety_images/" + imagePreview
+                  ? "https://newcheck.evvisolutions.com/safety_images/" +
+                    imagePreview
                   : URL.createObjectURL(imagePreview)
               }
               alt={formData.title}

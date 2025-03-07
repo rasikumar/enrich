@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-import { Suspense, useEffect, useState, lazy } from "react";
-import { SquareLoader } from "react-spinners";
+import { Suspense, useState, lazy } from "react";
 // import Lenis from "lenis";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Cursor from "./components/Cursor";
 import BookSession from "./components/BookSession";
 import CookieBanner from "./components/CookieBanner";
 import CookiePolicy from "./components/Cookie-policy";
@@ -43,29 +41,44 @@ const Psychometric = lazy(() =>
 const NotFound = lazy(() => import("./components/NotFound"));
 // admin
 
-const Login = lazy(() => import("./components/Admin/Login"));
+const Login = lazy(() => import("./components/auth/Login"));
 const Admindashboard = lazy(() => import("./components/Admin/Admindashboard"));
-const ForgotPassword = lazy(() => import("./components/Admin/ForgotPassword"));
+const ForgotPassword = lazy(() => import("./components/auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("./components/Admin/resetPassword"));
 
 // blogPages
 const InsightPage = lazy(() => import("./components/feature/InsightPage"));
 const BlogDetail = lazy(() => import("./components/feature/blog/BlogDetails"));
-const BlogDetails = lazy(() => import("./components/feature/safetynet/BlogDetails"));
-const BlogDetailss = lazy(() => import("./components/feature/changeabit/BlogDetails"));
+const BlogDetails = lazy(() =>
+  import("./components/feature/safetynet/BlogDetails")
+);
+const BlogDetailss = lazy(() =>
+  import("./components/feature/changeabit/BlogDetails")
+);
 
 // testing
-import Apps from "./components/Apps";
+// import Apps from "./components/Apps";
 import Termsandcondtions from "./components/forms/Terms-and-condtions";
 import PrivacyPolicy from "./components/Policy";
 import BlogPage from "./components/feature/blog/BlogPage";
 import ChangeABit from "./components/feature/changeabit/ChangeABitPage";
 import SafetyNetPage from "./components/feature/safetynet/SafetyNetPage";
 import FlotingApps from "./components/FlotingApps";
-
-const ProtectedRoute = ({ isAuthenticated, children }) => {
-  return isAuthenticated ? children : <Navigate to="/admin" />;
-};
+import EditBlog from "./components/Admin/insight/blog/EditBlog";
+import EditChangABit from "./components/Admin/insight/changeabit/EditChangeABit";
+import EditSafetyNet from "./components/Admin/insight/safetynet/EditBlog";
+import Dashboard from "./components/Admin/dashboard/dashboard";
+import Create from "./components/Admin/insight/Create";
+import List from "./components/Admin/insight/List";
+import CreateNewsLetter from "./components/Admin/newsletter/CreateNewsLetter";
+import Members from "./components/Admin/newsletter/Members";
+import ContactList from "./components/Admin/contactList";
+import Comment from "./components/Admin/insight/Comment";
+import Appointment from "./components/Admin/appointment/Appointment";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import NotAuthorized from "./components/auth/NotAuthorized";
+import SessionExpired from "./components/auth/SessionExpired";
+import Cursor from "./components/Cursor";
 
 const App = () => {
   const location = useLocation();
@@ -83,135 +96,126 @@ const App = () => {
   const hideHeaderAndFooter =
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/forgotpassword") ||
-    location.pathname.startsWith("/resetPassword");
-
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem("jwtToken") ? true : false;
-  });
-
-  const handleLogin = () => setIsAuthenticated(true);
+    location.pathname.startsWith("/resetPassword") ||
+    location.pathname.startsWith("/dashboard");
 
   const [showCookiePolicy, setShowCookiePolicy] = useState(false);
 
   const handleOpenPolicy = () => setShowCookiePolicy(true);
   const handleClosePolicy = () => setShowCookiePolicy(false);
 
-  // Preloading
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 10);
-  }, []);
-
   return (
     <div className="scroll-smooth">
-      {loading ? (
-        <SquareLoader
-          color={"yellow"}
-          loading={loading}
-          size={50}
-          className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-full h-full z-[1000]"
-        />
-      ) : (
-        <>
-          <AnimatePresence mode="wait">
-            <Suspense fallback={<Loader />}>
-              <Cursor />
-              {!hideHeaderAndFooter && (
-                <Suspense fallback={<Loader />}>
-                  <Navbar onOpenPolicy={handleOpenPolicy} />
-                  <BookSession />
-                  <FlotingApps/>
-                </Suspense>
-              )}
-              {!hideHeaderAndFooter && (
-                <Suspense fallback={<Loader />}>
-                  <CookieBanner />
-                </Suspense>
-              )}
-              <ScrollTop />
+      <>
+        <Cursor />
+        <AnimatePresence mode="wait">
+          <Suspense fallback={<Loader />}>
+            {!hideHeaderAndFooter && (
+              <Suspense fallback={<Loader />}>
+                <Navbar onOpenPolicy={handleOpenPolicy} />
+                <BookSession />
+                <FlotingApps />
+              </Suspense>
+            )}
+            {!hideHeaderAndFooter && (
+              <Suspense fallback={<Loader />}>
+                <CookieBanner />
+              </Suspense>
+            )}
+            <ScrollTop />
 
-              {showCookiePolicy && (
-                <div className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                  <div className="bg-white p-6 rounded-lg shadow-lg">
-                    <Suspense fallback={<Loader />}>
-                      <CookiePolicy />
-                    </Suspense>
-                    <button
-                      className="mt-4 p-2 bg-primary text-white rounded"
-                      onClick={handleClosePolicy}
-                    >
-                      Close
-                    </button>
-                  </div>
+            {showCookiePolicy && (
+              <div className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <Suspense fallback={<Loader />}>
+                    <CookiePolicy />
+                  </Suspense>
+                  <button
+                    className="mt-4 p-2 bg-primary text-white rounded"
+                    onClick={handleClosePolicy}
+                  >
+                    Close
+                  </button>
                 </div>
-              )}
-              <Routes location={location} key={location.pathname}>
-                <Route index path="/" element={<Heart />} />
-                <Route path="/aboutus" element={<Aboutus />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/ourprogram" element={<ProgramDisplay />} />
-                <Route path="/contactus" element={<GetIn />} />
-                <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
-                <Route path="/cookie-policy" element={<CookiePolicy />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                {/* blogarticles */}
-                <Route path="/insights" element={<InsightPage />} />
+              </div>
+            )}
+            <Routes location={location} key={location.pathname}>
+              <Route index path="/" element={<Heart />} />
+              <Route path="/aboutus" element={<Aboutus />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/ourprogram" element={<ProgramDisplay />} />
+              <Route path="/contactus" element={<GetIn />} />
+              <Route path="/ProgramDisplay" element={<ProgramDisplay />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              {/* Admin */}
+              <Route path="/admin" element={<Login />} />
+              <Route
+                path="dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Admindashboard />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="createInsights" element={<Create />} />
+                <Route path="listInsighs" element={<List />} />
+                <Route path="Comment" element={<Comment />} />
+                <Route path="createNewsLetter" element={<CreateNewsLetter />} />
+                <Route path="members" element={<Members />} />
+                <Route path="contactList" element={<ContactList />} />
+                <Route path="Appointment" element={<Appointment />} />
+              </Route>
+              {/* editContent */}
+              <Route path="/blog/edit/:id" element={<EditBlog />} />
+              <Route path="/changeABit/edit/:id" element={<EditChangABit />} />
+              <Route path="/safetyNet/edit/:id" element={<EditSafetyNet />} />
+              {/* <Route path="/:type/delete/:id" element={<DeleteConfirmation />} /> */}
 
-                <Route path="/insights/blog/:id" element={<BlogDetail />} />
-                <Route path="/insights/blog" element={<BlogPage />} />
+              {/* blogarticles */}
+              <Route path="/insights" element={<InsightPage />} />
 
-                <Route path="/insights/changeABit/:id" element={<BlogDetailss />} />
-                <Route path="/insights/changeABit" element={<ChangeABit />} />
+              <Route path="/insights/blog/:id" element={<BlogDetail />} />
+              <Route path="/insights/blog" element={<BlogPage />} />
 
-                <Route path="/insights/safetyNet/:id" element={<BlogDetails />} />
-                <Route path="/insights/safetyNet" element={<SafetyNetPage />} />
+              <Route
+                path="/insights/changeABit/:id"
+                element={<BlogDetailss />}
+              />
+              <Route path="/insights/changeABit" element={<ChangeABit />} />
 
-                {/* service */}
-                <Route path="/individuals" element={<Individuals />} />
-                <Route path="/corporates" element={<Corporates />} />
-                <Route path="/compliance-training" element={<Compliance />} />
-                <Route path="/psychometric" element={<Psychometric />} />
-                <Route path="/Apps" element={<Apps />} />
-                {/* terms and conditions */}
-                <Route
-                  path="/terms-and-conditions"
-                  element={<Termsandcondtions />}
-                />
-                <Route
-                  path="/admin"
-                  element={
-                    isAuthenticated ? (
-                      <Navigate to="/admindashboard" />
-                    ) : (
-                      <Login onLogin={handleLogin} />
-                    )
-                  }
-                />
-                <Route
-                  path="/admindashboard"
-                  element={
-                    <ProtectedRoute isAuthenticated={isAuthenticated}>
-                      <Admindashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/forgotpassword" element={<ForgotPassword />} />
-                <Route path="/resetPassword" element={<ResetPassword />} />
+              <Route path="/insights/safetyNet/:id" element={<BlogDetails />} />
+              <Route path="/insights/safetyNet" element={<SafetyNetPage />} />
 
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              {!hideHeaderAndFooter && (
-                <Suspense fallback={<Loader />}>
-                  <Footer />
-                </Suspense>
-              )}
-            </Suspense>
-          </AnimatePresence>
-        </>
-      )}
+              {/* service */}
+              <Route path="/individuals" element={<Individuals />} />
+              <Route path="/corporates" element={<Corporates />} />
+              <Route path="/compliance-training" element={<Compliance />} />
+              <Route path="/psychometric" element={<Psychometric />} />
+              {/* <Route path="/Apps" element={<Apps />} /> */}
+              {/* terms and conditions */}
+              <Route
+                path="/terms-and-conditions"
+                element={<Termsandcondtions />}
+              />
+
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/resetPassword" element={<ResetPassword />} />
+
+              <Route path="*" element={<NotFound />} />
+              <Route path="not-authorized" element={<NotAuthorized />} />
+              <Route path="session-expired" element={<SessionExpired />} />
+            </Routes>
+            {!hideHeaderAndFooter && (
+              <Suspense fallback={<Loader />}>
+                <Footer />
+              </Suspense>
+            )}
+          </Suspense>
+        </AnimatePresence>
+      </>
     </div>
   );
 };

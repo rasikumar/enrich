@@ -16,11 +16,11 @@ const Card = ({
 }) => {
   let imagePath;
   if (linkPrefix === "blog") {
-    imagePath = "https://enrichminds.co.in/blog_images/";
+    imagePath = "https://newcheck.evvisolutions.com/blog_images/";
   } else if (linkPrefix === "changeABit") {
-    imagePath = "https://enrichminds.co.in/changeAbit_images/";
+    imagePath = "https://newcheck.evvisolutions.com/changeAbit_images/";
   } else if (linkPrefix === "safetyNet") {
-    imagePath = "https://enrichminds.co.in/safety_images/";
+    imagePath = "https://newcheck.evvisolutions.com/safety_images/";
   }
 
   return (
@@ -73,49 +73,62 @@ const App = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const [blogsResponse, changeBitResponse, safetyNetResponse] =
-          await Promise.all([
-            Instance.get("/getAllBlogs"),
-            Instance.get("/getallChangeAbitList"),
-            Instance.get("/getAllSafetyList"),
-          ]);
+        const responses = await Promise.allSettled([
+          Instance.get("/getAllBlogs"),
+          Instance.get("/getallChangeAbitList"),
+          Instance.get("/getAllSafetyList"),
+        ]);
 
-        const blogs = blogsResponse.data.blogs.map((item) => ({
-          id: item.id,
-          title: item.blog_title,
-          body: item.blog_body,
-          author: item.blog_author,
-          date: item.blog_date,
-          category: item.blog_category,
-          thumbnail: item.blog_thumbnail,
-          linkPrefix: "blog",
-        }));
+        const blogs =
+          responses[0].status === "fulfilled" &&
+          responses[0].value.data.blogs?.length
+            ? responses[0].value.data.blogs.map((item) => ({
+                id: item.id,
+                title: item.blog_title,
+                body: item.blog_body,
+                author: item.blog_author,
+                date: item.blog_date,
+                category: item.blog_category,
+                thumbnail: item.blog_thumbnail,
+                linkPrefix: "blog",
+              }))
+            : [];
 
-        const changeBits = changeBitResponse.data.changeAbits.map((item) => ({
-          id: item.id,
-          title: item.changeAbit_title,
-          body: item.changeAbit_content,
-          author: item.changeAbit_author,
-          date: item.createdAt,
-          category: item.changeAbit_category,
-          thumbnail: item.changeAbit_thumbnail,
-          linkPrefix: "changeABit",
-        }));
+        const changeBits =
+          responses[1].status === "fulfilled" &&
+          responses[1].value.data.changeAbits?.length
+            ? responses[1].value.data.changeAbits.map((item) => ({
+                id: item.id,
+                title: item.changeAbit_title,
+                body: item.changeAbit_content,
+                author: item.changeAbit_author,
+                date: item.createdAt,
+                category: item.changeAbit_category,
+                thumbnail: item.changeAbit_thumbnail,
+                linkPrefix: "changeABit",
+              }))
+            : [];
 
-        const safetyNets = safetyNetResponse.data.safetyRecords.map((item) => ({
-          id: item.id,
-          title: item.safety_title,
-          body: item.safety_body,
-          author: item.safety_author,
-          date: item.createdAt,
-          category: item.safety_category,
-          thumbnail: item.safety_thumbnail,
-          linkPrefix: "safetyNet",
-        }));
+        const safetyNets =
+          responses[2].status === "fulfilled" &&
+          responses[2].value.data.safetyRecords?.length
+            ? responses[2].value.data.safetyRecords.map((item) => ({
+                id: item.id,
+                title: item.safety_title,
+                body: item.safety_body,
+                author: item.safety_author,
+                date: item.createdAt,
+                category: item.safety_category,
+                thumbnail: item.safety_thumbnail,
+                linkPrefix: "safetyNet",
+              }))
+            : [];
 
+        // Combine and sort all data
         const combinedData = [...blogs, ...changeBits, ...safetyNets].sort(
           (a, b) =>
-            new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt)
+            new Date(b.date || b.createdAt || 0) -
+            new Date(a.date || a.createdAt || 0)
         );
 
         setContent(combinedData);
@@ -140,18 +153,24 @@ const App = () => {
   };
 
   const next = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 2) % filteredContent.length);
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + 2;
+      return nextIndex >= filteredContent.length ? 0 : nextIndex;
+    });
   };
 
   const prev = () => {
-    setCurrentIndex(
-      (prevIndex) =>
-        (prevIndex - 2 + filteredContent.length) % filteredContent.length
-    );
+    setCurrentIndex((prevIndex) => {
+      const prevIndexCalc = prevIndex - 2;
+      return prevIndexCalc < 0
+        ? filteredContent.length - (filteredContent.length % 2 || 2)
+        : prevIndexCalc;
+    });
   };
 
   return (
     <div className="container mx-auto px-4">
+      {/* Filter Buttons */}
       <div className="flex justify-center md:space-x-4 gap-2 mb-4">
         <button
           className={`px-4 py-2 rounded hover:scale-105 transition-all ${
@@ -179,7 +198,7 @@ const App = () => {
           }`}
           onClick={() => filterContent("changeABit")}
         >
-          ChangeAbit
+          ChangeABit
         </button>
         <button
           className={`px-4 py-2 rounded hover:scale-105 transition-all ${
@@ -193,20 +212,28 @@ const App = () => {
         </button>
       </div>
 
+      {/* Content Section */}
       <div className="flex items-center justify-center md:justify-start">
-        <div className="flex flex-wrap md:flex-nowrap overflow-hidden gap-2">
-          {filteredContent
-            .slice(currentIndex, currentIndex + 2)
-            .map((item, index) => (
-              <Card key={index} {...item} />
-            ))}
-        </div>
+        {filteredContent.length > 0 ? (
+          <div className="flex flex-wrap md:flex-nowrap overflow-hidden gap-2">
+            {filteredContent
+              .slice(currentIndex, currentIndex + 2)
+              .map((item, index) => (
+                <Card key={index} {...item} />
+              ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600">No content available.</p>
+        )}
       </div>
 
-      <div className="flex items-center justify-between md:justify-center gap-4 md:ml-4 mt-4">
-        <GrFormPrevious className="cursor-pointer" onClick={prev} size={24} />
-        <GrFormNext className="cursor-pointer" onClick={next} size={24} />
-      </div>
+      {/* Navigation Buttons */}
+      {filteredContent.length > 0 && (
+        <div className="flex items-center justify-between md:justify-center gap-4 md:ml-4 mt-4">
+          <GrFormPrevious className="cursor-pointer" onClick={prev} size={24} />
+          <GrFormNext className="cursor-pointer" onClick={next} size={24} />
+        </div>
+      )}
     </div>
   );
 };

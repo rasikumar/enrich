@@ -207,7 +207,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:image"
-          content={`https://enrichminds.co.in/safety_images/${
+          content={`https://newcheck.evvisolutions.com/safety_images/${
             blog && blog[0].safety_image
           }`}
         />
@@ -231,7 +231,7 @@ const BlogDetail = () => {
                   <p className="text-gray-600">{blog.safety_visitors_count}</p>
                   <p className="text-gray-600">
                     Posted on{" "}
-                    {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                    {new Date(blog.created_at).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
@@ -239,7 +239,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
+                  src={`https://newcheck.evvisolutions.com/safety_images/${blog.safety_image}`}
                   alt={blog.safety_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
@@ -458,7 +458,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.safety_author}</p>
                       <img
-                        src={`https://enrichminds.co.in/safety_images/${blog.safety_image}`}
+                        src={`https://newcheck.evvisolutions.com/safety_images/${blog.safety_image}`}
                         alt={blog.safety_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

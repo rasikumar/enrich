@@ -61,7 +61,7 @@ const ChangeABit = () => {
           date: item.createdAt,
           author: item.changeAbit_author,
           views: item.changeAbit_visit_count,
-          thumbnail: `https://enrichminds.co.in/changeAbit_images/${item.changeAbit_thumbnail}`,
+          thumbnail: `https://newcheck.evvisolutions.com/changeAbit_images/${item.changeAbit_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(
@@ -145,7 +145,7 @@ const ChangeABit = () => {
     <>
       <DynamicBreadcrumb />
       <h1 className="text-4xl tablet:text-5xl font-semibold mt-20 text-center mb-3">
-        Latest Blogs
+        Latest ChangeABit
       </h1>
       <p className="text-center mb-4">
         Stay updated with the latest trends and insights in technology,

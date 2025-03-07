@@ -3,6 +3,7 @@ import { serviceList } from "../../constant";
 import { Link } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Cursor from "../Cursor";
 
 const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -13,6 +14,7 @@ const Services = () => {
   return (
     <>
       <div className="bg-white mt-7">
+      <Cursor />
         {" "}
         <div className="mx-auto p-4">
           {" "}

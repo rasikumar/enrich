@@ -234,7 +234,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string"
-                  ? "https://enrichminds.co.in/changeAbit_images/" +
+                  ? "https://newcheck.evvisolutions.com/changeAbit_images/" +
                     thumbnailImagePreview
                   : URL.createObjectURL(thumbnailImagePreview)
               }
@@ -257,7 +257,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof imagePreview === "string"
-                  ? "https://enrichminds.co.in/changeAbit_images/" +
+                  ? "https://newcheck.evvisolutions.com/changeAbit_images/" +
                     imagePreview
                   : URL.createObjectURL(imagePreview)
               }

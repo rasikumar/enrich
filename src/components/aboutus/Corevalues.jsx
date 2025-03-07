@@ -15,7 +15,7 @@ const Corevalues = () => {
           <Cards
             image={Resourcefulness}
             alt="Resourcefulness"
-            title="Resourcefulnes"
+            title="Resourcefulness"
           />
           <Cards image={Integrity} title="Integrity" alt="Integrity" />
         </div>

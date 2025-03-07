@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { programDisplays } from "../../constant";
 import { Suspense } from "react";
 import { Helmet } from "react-helmet";
+import Cursor from "../Cursor";
 
 const Skeleton = () => {
   return (
@@ -46,6 +47,7 @@ const ProgramDisplay = () => {
           Our Programs
         </h1>
         <div className="m-auto w-[90%] ">
+          <Cursor />
           <Suspense fallback={<Skeleton />}>
             <section className="grid md:grid-cols-4 md:grid-rows-2 w-full m-auto">
               {programDisplays.map((programDisplay, index) => (

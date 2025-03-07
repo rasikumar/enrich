@@ -106,7 +106,7 @@ const ListChangeAbit = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">ChangeABit List</h1>
 
       {/* Search bar */}
@@ -126,7 +126,7 @@ const ListChangeAbit = () => {
           {currentBlogs.map((changeABit) => (
             <li
               key={changeABit.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 max-h-32 sm:max-h-36 min-w-full"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full"
             >
               <div className="w-full ">
                 <div className="flex text-sm">
@@ -171,16 +171,11 @@ const ListChangeAbit = () => {
                   />
                 </div>
               </div>
-              {changeABit.changeAbit_image && (
+              {changeABit.changeAbit_thumbnail && (
                 <img
-                  src={`https://enrichminds.co.in/changeAbit_images/${changeABit.changeAbit_image}`}
+                  src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABit.changeAbit_thumbnail}`}
                   alt={changeABit.changeAbit_title}
-                  className="rounded-lg"
-                  style={{
-                    width: "20%",
-                    objectFit: "cover",
-                    height: "auto",
-                  }}
+                  className="rounded-lg w-24 object-cover"
                 />
               )}
             </li>

@@ -10,7 +10,6 @@ const Logout = () => {
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
     navigate("/admin"); // Redirect to admin login
-    window.location.reload(); // Refresh the page to clear local storage and force login again
   };
 
   const showConfirmDialog = () => {

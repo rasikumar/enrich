@@ -4,6 +4,8 @@ import Instance from "../../Admin/Instance";
 import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SkeletonLoader = () => {
   return (
@@ -116,7 +118,22 @@ const BlogDetail = () => {
   // Handle comment submission
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
+    if (!username.trim()) {
+      setCommentError("Username is required!");
+      return;
+    }
+    if (username.length > 75) {
+      setCommentError("Username must be within 75 characters.");
+      return;
+    }
+    if (!comment.trim()) {
+      setCommentError("Comment cannot be empty.");
+      return;
+    }
+    if (comment.length > 200) {
+      setCommentError("Comment must be within 200 characters.");
+      return;
+    }
     if (!comment || !username) {
       setCommentError("Both username and comment are required.");
       return;
@@ -129,11 +146,15 @@ const BlogDetail = () => {
         comment,
       });
 
-      setComments([...comments, response.data.newComment]);
+      // setComments([...comments, response.data.newComment]);
+      toast.success("Comment added successfully!" || response.data);
       setComment("");
       setUsername("");
       setCommentError(null);
-      window.location.reload();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (err) {
       console.error("Failed to post comment:", err);
       setCommentError("Failed to post comment. Please try again.");
@@ -212,13 +233,13 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
+                  src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="w-full object-cover h-full rounded-xl"
                 />
 
                 <div
-                  className="mt-4 flex gap-2 flex-col text-justify"
+                  className="mt-4 flex gap-2 flex-col text-justify [&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor"
                   dangerouslySetInnerHTML={{ __html: blog.blog_body }}
                 />
               </div>
@@ -229,29 +250,29 @@ const BlogDetail = () => {
 
             {/* Display Comments */}
             <div className="mb-6">
-              {comments.length > 0 ? (
+              {comments?.length > 0 ? (
                 comments.map((cmt) => {
-                  const replyCount = replies[cmt.comment_id]?.length || 0;
+                  const replyCount = replies[cmt?.comment_id]?.length || 0;
                   return (
                     <div
-                      key={cmt.comment_id}
+                      key={cmt?.comment_id}
                       className="mb-4 p-4 bg-slate-300/20 rounded-lg border border-gray-200 duration-300"
                     >
                       <div className="flex items-center gap-4 mb-2">
                         <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0">
                           <img
-                            src={`https://ui-avatars.com/api/?name=${cmt.comment_username}&background=random`}
-                            alt={cmt.comment_username}
+                            src={`https://ui-avatars.com/api/?name=${cmt?.comment_username}&background=random`}
+                            alt={cmt?.comment_username}
                             className="rounded-full w-full h-full object-cover"
                           />
                         </div>
 
                         <div className="flex flex-col">
                           <p className="font-semibold text-lg">
-                            {cmt.comment_username}
+                            {cmt?.comment_username}
                           </p>
                           <p className="text-sm text-gray-500">
-                            {new Date(cmt.comment_created_at).toLocaleString(
+                            {new Date(cmt?.comment_created_at).toLocaleString(
                               "en-IN",
                               {
                                 year: "numeric",
@@ -266,11 +287,11 @@ const BlogDetail = () => {
                       </div>
 
                       <p className="text-gray-800 text-base leading-relaxed inline-flex gap-5 items-center ">
-                        {cmt.comment}
+                        {cmt?.comment}
                         <button
                           onClick={() =>
                             setCommentToReply((prev) =>
-                              prev === cmt.comment_id ? null : cmt.comment_id
+                              prev === cmt?.comment_id ? null : cmt?.comment_id
                             )
                           }
                           className="text-teal-500 hover:text-teal-700 inline-flex items-center gap-1 "
@@ -279,7 +300,7 @@ const BlogDetail = () => {
                         </button>
                       </p>
 
-                      {commentToReply === cmt.comment_id && (
+                      {commentToReply === cmt?.comment_id && (
                         <motion.div
                           className="flex flex-col gap-4 mb-2"
                           initial={{ opacity: 0, y: -20 }}
@@ -431,7 +452,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.blog_author}</p>
                       <img
-                        src={`https://enrichminds.co.in/blog_images/${blog.blog_image}`}
+                        src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_image}`}
                         alt={blog.blog_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

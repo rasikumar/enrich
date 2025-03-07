@@ -33,24 +33,34 @@ const Members = () => {
   }, []);
 
   const exportToExcel = () => {
+    if (selectedContacts.length === 0) return;
+    
     const columnHeaders = [
       { header: "ID", key: "id" },
       { header: "Email", key: "email" },
       { header: "Created At", key: "subscription_date" },
     ];
 
-    const data = contacts.map((contact) => ({
-      id: contact.id,
-      email: contact.email,
-      subscription_date: new Date(contact.subscription_date).toLocaleString(
-        "en-IN",
-        {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        }
-      ),
-    }));
+    // Filter selected contacts
+    const data = contacts
+      .filter((contact) => selectedContacts.includes(contact.id))
+      .map((contact) => ({
+        id: contact.id,
+        email: contact.email,
+        subscription_date: new Date(contact.subscription_date).toLocaleString(
+          "en-IN",
+          {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          }
+        ),
+      }));
+
+    if (data.length === 0) {
+      alert("No contacts selected for export.");
+      return;
+    }
 
     const worksheetData = [
       columnHeaders.map((header) => header.header),
@@ -59,8 +69,8 @@ const Members = () => {
 
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Contacts");
-    XLSX.writeFile(workbook, "contact_list.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Selected Contacts");
+    XLSX.writeFile(workbook, "selected_contacts.xlsx");
   };
 
   const filteredContacts = contacts.filter((contact) => {
@@ -111,10 +121,6 @@ const Members = () => {
     } else {
       setSelectedContacts(paginatedContacts.map((contact) => contact.id));
     }
-  };
-
-  const openNewsletterModal = () => {
-    setShowModal(true);
   };
 
   const closeNewsletterModal = () => {
@@ -181,7 +187,13 @@ const Members = () => {
 
       <button
         onClick={exportToExcel}
-        className="mb-4 px-4 py-2 mr-4 bg-green-500 text-white rounded-md hover:bg-green-600 inline-flex items-center gap-4"
+        disabled={selectedContacts.length === 0}
+        className={`mb-4 px-4 py-2 mr-4 rounded-md inline-flex items-center gap-4 
+    ${
+      selectedContacts.length === 0
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-green-500 hover:bg-green-600 text-white"
+    }`}
       >
         Export <FaFileExport />
       </button>
@@ -231,15 +243,6 @@ const Members = () => {
           )}
         </tbody>
       </table>
-
-      {selectedContacts.length > 0 && (
-        <button
-          onClick={openNewsletterModal}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Send to Selected
-        </button>
-      )}
 
       {/* Modal */}
       {showModal && (

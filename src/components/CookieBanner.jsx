@@ -17,15 +17,15 @@ const CookieBanner = () => {
   }, []);
 
   const acceptCookies = () => {
-    const expireSeconds = 1; // Set the number of seconds until the cookie expires
-    const expireDays = expireSeconds / (60 * 60 * 24); // Convert seconds to days for js-cookie
+    const expireDays = 30;
+    // const expireDays = expireSeconds / (60 * 60 * 24);
     Cookies.set("cookieAccepted", "true", { expires: expireDays });
     setIsCookieAccepted(true);
   };
 
   const rejectCookies = () => {
-    const expireSeconds = 1; // Set the number of seconds until the cookie expires
-    const expireDays = expireSeconds / (60 * 60 * 24); // Convert seconds to days for js-cookie
+    // const expireSeconds = 1; // Set the number of seconds until the cookie expires
+    const expireDays = 30;
     Cookies.set("cookieRejected", "true", { expires: expireDays });
     setIsCookieRejected(true);
   };

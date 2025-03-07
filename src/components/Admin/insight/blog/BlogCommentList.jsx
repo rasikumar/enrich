@@ -4,9 +4,10 @@ import CommentItem from "../../comment/CommentItem";
 import Pagination from "../../comment/Pagination";
 import ConfirmModal from "../../comment/ConfirmModal"; // Import the ConfirmModal
 import Loader from "../../comment/Loader";
+import { toast } from "react-toastify";
 
 // CommentList Component
-const   CommentList = () => {
+const CommentList = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,6 +51,10 @@ const   CommentList = () => {
       setComments(comments.filter((comment) => comment.id !== commentId));
       setIsDeleteModalOpen(false);
       setCommentToDelete(null);
+      toast.success("Comment deleted successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Failed to delete comment:", error);
     }
@@ -125,7 +130,7 @@ const   CommentList = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md">
       <h1 className="text-center text-3xl font-bold mb-5">Comment List</h1>
 
       <div className="relative mb-6">
@@ -139,14 +144,18 @@ const   CommentList = () => {
       </div>
 
       <ul className="flex flex-wrap gap-3">
-        {currentComments.map((comment) => (
-          <CommentItem
-            key={comment.id}
-            comment={comment}
-            onDelete={handleDeleteComment}
-            onToggleVisibility={handleToggleVisibility}
-          />
-        ))}
+        {currentComments.length > 0 ? (
+          currentComments.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              onDelete={handleDeleteComment}
+              onToggleVisibility={handleToggleVisibility}
+            />
+          ))
+        ) : (
+          <p className="text-center w-full">Invalid matching record</p>
+        )}
       </ul>
 
       {filteredComments.length > commentsPerPage && (

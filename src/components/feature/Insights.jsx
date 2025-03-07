@@ -39,7 +39,7 @@ const App = () => {
     } catch (error) {
       console.log(error.response.data);
       toast.error(
-        error.error || "Oops! We encountered an issue. Please retry in a bit."
+        error.error || "Please enter your email address"
       );
     }
   };
@@ -72,7 +72,7 @@ const App = () => {
         </h1>
         <form
           onSubmit={handleSubmit}
-          className="lg:flex border lg:w-[38rem] justify-center m-auto border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2 "
+          className="lg:flex border lg:w-[38rem] w-full justify-center m-auto border-gray-300 focus-within:border-primary rounded-lg gap-3 bg-white px-4 py-2 "
         >
           <input
             type="email"

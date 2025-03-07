@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
+import { useRef, useState } from "react";
 import { Button } from "flowbite-react";
 import Instance from "../../Instance";
-import { useState } from "react";
-import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const DeleteBlog = ({ blogId, setBlogs }) => {
   const [error, setError] = useState(null);
+  const deleteButtonRef = useRef(null); // Ref for the button
 
   const handleDelete = async () => {
     try {
@@ -30,14 +31,18 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
                 onClick={() => {
                   handleDelete();
-                  onClose(); // Close modal after confirmation
+                  onClose();
+                  deleteButtonRef.current?.focus(); // Reset focus
                 }}
               >
                 Yes
               </button>
               <button
                 className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                onClick={onClose} // Close modal on cancel
+                onClick={() => {
+                  onClose();
+                  deleteButtonRef.current?.focus(); // Reset focus on cancel
+                }}
               >
                 No
               </button>
@@ -52,7 +57,7 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
 
   return (
     <div>
-      <Button color="failure" onClick={showConfirmDialog}>
+      <Button ref={deleteButtonRef} color="failure" onClick={showConfirmDialog}>
         Delete
       </Button>
       {error && <div className="text-red-500">{error}</div>}

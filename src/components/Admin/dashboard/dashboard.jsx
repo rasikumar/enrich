@@ -4,49 +4,87 @@ import Instance from "../Instance";
 import "react-calendar/dist/Calendar.css"; // Import calendar styles
 
 const Dashboard = () => {
-  const [FullBlog, setFullBlog] = useState([]);
-  const [FullLead, setFullLead] = useState([]);
-  const [FullComment, setFullComment] = useState([]);
-  const [ChangeAbitList, setChangeAbitList] = useState([]);
-  const [SafetyNetList, setSafetyNetList] = useState([]);
-  const [Loading, setLoading] = useState(true);
-  const [BlogError, setBlogError] = useState(null);
-  const [LeadError, setLeadError] = useState(null);
-  const [CommentError, setCommentError] = useState(null);
-  const [CurrentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
-  const [CurrentDate] = useState(new Date().toLocaleDateString()); // State for current date
+  const [dashboardData, setDashboardData] = useState({
+    blogs: [],
+    leads: [],
+    comments: [],
+    changeAbitList: [],
+    safetyNetList: [],
+    subscribers: [],
+  });
 
-  // Fetch data on component mount
+  const [errors, setErrors] = useState({
+    blogs: null,
+    leads: null,
+    comments: null,
+  });
+
+  const [loading, setLoading] = useState(true);
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+  const [currentDate] = useState(new Date().toLocaleDateString());
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
 
       try {
-        const blogResponse = await Instance.get("/admin/getAllBlogs");
-        setFullBlog(blogResponse.data.blogs);
+        const responses = await Promise.allSettled([
+          Instance.get("/admin/getAllBlogs"),
+          Instance.post("/admin/getallChangeAbitList"),
+          Instance.post("/admin/getAllSafetyList"),
+          Instance.post("/admin/getleads"),
+          Instance.post("/admin/getAllSubscribers"),
+          Instance.post("/admin/getAllComments"),
+        ]);
 
-        const changeAbitResponse = await Instance.post("/admin/getallChangeAbitList");
-        setChangeAbitList(changeAbitResponse.data.changeAbits);
+        const updatedData = { ...dashboardData };
+        const updatedErrors = { ...errors };
 
-        const safetyNetResponse = await Instance.post("/admin/getAllSafetyList");
-        setSafetyNetList(safetyNetResponse.data.safetyRecords);
+        responses.forEach((result, index) => {
+          if (result.status === "fulfilled") {
+            const data = result.value.data;
 
-        const leadResponse = await Instance.post("/admin/getleads");
-        setFullLead(leadResponse.data);
+            switch (index) {
+              case 0:
+                updatedData.blogs = data.blogs;
+                break;
+              case 1:
+                updatedData.changeAbitList = data.changeAbits;
+                break;
+              case 2:
+                updatedData.safetyNetList = data.safetyRecords;
+                break;
+              case 3:
+                updatedData.leads = data;
+                break;
+              case 4:
+                updatedData.subscribers = data.results;
+                break;
+              case 5:
+                updatedData.comments = data.comments;
+                break;
+              default:
+                break;
+            }
+          } else {
+            const { reason } = result;
+            const errorUrl = reason.response?.config?.url;
 
-        const commentResponse = await Instance.post("/admin/getAllSubscribers");
-        setFullComment(commentResponse.data.results);
+            if (errorUrl === "/admin/getAllBlogs")
+              updatedErrors.blogs = "Failed to fetch blogs";
+            if (errorUrl === "/admin/getleads")
+              updatedErrors.leads = "Failed to fetch leads";
+            if (errorUrl === "/admin/getAllSubscribers")
+              updatedErrors.comments = "Failed to fetch comments";
+          }
+        });
+
+        setDashboardData(updatedData);
+        setErrors(updatedErrors);
       } catch (error) {
-        console.error(error);
-        if (error.response?.config?.url === "/admin/getAllBlogs") {
-          setBlogError("Failed to fetch blogs");
-        }
-        if (error.response?.config?.url === "/admin/getleads") {
-          setLeadError("Failed to fetch leads");
-        }
-        if (error.response?.config?.url === "/admin/getAllSubscribers") {
-          setCommentError("Failed to fetch comments");
-        }
+        console.error("Unexpected error during data fetching", error);
       }
 
       setLoading(false);
@@ -55,7 +93,6 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  // Update current time every second
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString());
@@ -64,38 +101,57 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Calculate total combined data
   const calculateTotalData = () => {
-    const totalBlogs = FullBlog.length;
-    const totalChangeAbit = ChangeAbitList.length;
-    const totalSafetyNets = SafetyNetList.length;
-    return totalBlogs + totalChangeAbit + totalSafetyNets;
+    return (
+      dashboardData.blogs.length +
+      dashboardData.changeAbitList.length +
+      dashboardData.safetyNetList.length
+    );
   };
 
   return (
     <div>
       {/* Clock Header */}
       <header className="text-end p-2 text-lg font-semibold">
-        Time: {CurrentTime} | Date: {CurrentDate}
+        Time: {currentTime} | Date: {currentDate}
       </header>
 
       {/* Dashboard Content */}
-      {Loading ? (
+      {loading ? (
         <p className="text-center">Loading...</p>
       ) : (
         <main className="flex flex-col gap-4">
           <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-blue-100">
             <h2>Total Insights: {calculateTotalData()}</h2>
           </div>
-          <div className="flex w-full gap-4">
-            <Card title="Blogs" totalCount={FullBlog.length} error={BlogError} />
-            <Card title="ChangeABits" totalCount={ChangeAbitList.length} error={null} />
-            <Card title="SafetyNets" totalCount={SafetyNetList.length} error={null} />
-          </div>
-          <div className="flex gap-4">
-            <Card title="Leads" totalCount={FullLead.length} error={LeadError} />
-            <Card title="Comments" totalCount={FullComment.length} error={CommentError} />
-            <Card title="Subscribers" totalCount={FullComment.length} error={CommentError} />
+          <div className="grid grid-cols-3 gap-4">
+            <Card
+              title="Blogs"
+              totalCount={dashboardData.blogs.length}
+              error={errors.blogs}
+            />
+            <Card
+              title="ChangeABits"
+              totalCount={dashboardData.changeAbitList.length}
+            />
+            <Card
+              title="SafetyNets"
+              totalCount={dashboardData.safetyNetList.length}
+            />
+            <Card
+              title="Leads"
+              totalCount={dashboardData.leads.length}
+              error={errors.leads}
+            />
+            <Card
+              title="Comments"
+              totalCount={dashboardData.comments.length}
+              error={errors.comments}
+            />
+            <Card
+              title="Subscribers"
+              totalCount={dashboardData.subscribers.length}
+            />
           </div>
         </main>
       )}

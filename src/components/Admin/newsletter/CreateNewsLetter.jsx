@@ -267,7 +267,7 @@ const CreateNewsLetter = () => {
             className="line-clamp-4"
           />
           <img
-            src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
+            src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
             alt={blogs.blog_title}
             width={200}
           />
@@ -291,7 +291,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
+            src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
             alt={changeABits.changeAbit_title}
             width={200}
           />
@@ -315,7 +315,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
+            src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
             alt={safetyNets.safety_title}
             width={200}
           />
@@ -405,6 +405,7 @@ const CreateNewsLetter = () => {
         {/* Preview Button */}
       </div>
       <button
+        className="bg-orange-600 text-custom-white rounded-sm mr-4"
         onClick={handlePreviewToggle}
         style={{ marginTop: "10px", padding: "10px" }}
       >
@@ -490,7 +491,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4"
                   />
                   <img
-                    src={`https://enrichminds.co.in/blog_images/${blogs.blog_image}`}
+                    src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
                     alt={blogs.blog_title}
                     width={300}
                   />
@@ -517,7 +518,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4"
                   />
                   <img
-                    src={`https://enrichminds.co.in/changeAbit_images/${changeABits.changeAbit_image}`}
+                    src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
                     alt={changeABits.changeAbit_title}
                     width={300}
                   />
@@ -542,7 +543,7 @@ const CreateNewsLetter = () => {
                     className="line-clamp-4 "
                   />
                   <img
-                    src={`https://enrichminds.co.in/safety_images/${safetyNets.safety_image}`}
+                    src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
                     alt={safetyNets.safety_title}
                     width={300}
                   />
@@ -672,7 +673,7 @@ const CreateNewsLetter = () => {
                     </a>{" "}
                     |
                     <a
-                      href="https://enrichminds.co.in/privacy-policy"
+                      href="https://newcheck.evvisolutions.com/privacy-policy"
                       className="text-gray-600 underline"
                     >
                       Privacy Policy
