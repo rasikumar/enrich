@@ -16,7 +16,7 @@ const Create = () => {
   return (
     <div className="flex flex-col gap-4 md:p-4 max-md:mt-16">
       <Select onValueChange={setSelectedList} defaultValue={selectedList}>
-        <SelectTrigger className="w-64">
+        <SelectTrigger className="w-64 bg-blue-500 text-white">
           <SelectValue placeholder="Select an option" />
         </SelectTrigger>
         <SelectContent>
