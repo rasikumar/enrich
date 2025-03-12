@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Instance from "../Instance";
 import * as XLSX from "xlsx";
-import { GrPowerReset } from "react-icons/gr";
 import { FaFileExport } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
