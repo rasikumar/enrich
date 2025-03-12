@@ -34,7 +34,7 @@ const Members = () => {
 
   const exportToExcel = () => {
     if (selectedContacts.length === 0) return;
-    
+
     const columnHeaders = [
       { header: "ID", key: "id" },
       { header: "Email", key: "email" },
@@ -179,9 +179,9 @@ const Members = () => {
         />
         <button
           onClick={resetFilters}
-          className="bg-red-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-red-600 p-2"
+          className="bg-blue-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-red-600 p-2"
         >
-          <GrPowerReset />Reset Filter
+          Reset Filter
         </button>
       </div>
 
