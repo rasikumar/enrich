@@ -178,7 +178,7 @@ const Members = () => {
         />
         <button
           onClick={resetFilters}
-          className="bg-blue-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-red-600 p-2"
+          className="bg-blue-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-blue-600 p-2"
         >
           Reset Filter
         </button>
