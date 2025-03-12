@@ -99,8 +99,6 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
     // Validate required fields and show specific error messages
     if (
       formData.title.trim().length < 10 ||
@@ -138,7 +136,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
       formData.metaKeywords.trim().split(",").length > 15
     ) {
       toast.error(
-        "Meta keywords must contain exactly 15 items, separated by commas."
+        "Meta keywords must be between 2 to 15 items, separated by commas."
       );
       return;
     }
@@ -172,11 +170,11 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             b.id === blog.id ? { ...b, ...response.data.blog } : b
           )
         );
-        toast.success(response.data.message);
         setTimeout(() => {
           setEditing(false);
-        }, 1000);
-        window.location.reload();
+          window.location.reload();
+        }, 2000);
+        toast.success(response.data.message);
       } else {
         throw new Error(response.data.message);
       }

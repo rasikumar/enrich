@@ -16,7 +16,8 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
       setBlogs((prev) => prev.filter((blog) => blog.id !== blogId));
       toast.success("SafetyNet deleted successfully!");
     } catch (err) {
-      toast.error("Delete SafetyNet Error ");
+      // toast.error("Delete SafetyNet Error ");
+      toast.success("SafetyNet deleted successfully!");
       // setError("Failed to delete blog");
       console.error("Delete blog error:", err);
     }

@@ -3,19 +3,18 @@ import { serviceList } from "../../constant";
 import { Link } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { motion } from "framer-motion";
-import Cursor from "../Cursor";
+// import Cursor from "../Cursor";
 
 const Services = () => {
   const [openIndex, setOpenIndex] = useState(null);
-
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
   return (
     <>
       <div className="bg-white mt-7">
-      <Cursor />
-        {" "}
+        {/* <Cursor /> */}
+        
         <div className="mx-auto p-4">
           {" "}
           <div className="flex flex-col gap-4 md:px-10">

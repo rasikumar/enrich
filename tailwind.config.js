@@ -34,14 +34,8 @@ export default {
       colors: {
         "custom-white": "rgba(255, 255, 255, 1)",
         "custom-border": "rgba(255, 255, 255, 0.3)",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
+        primary: "#203B93",
+        secondary: "#f3BE54",
         "neon-green": "#39FF14",
         "neon-yellow": "#FFD700",
         "neon-pink": "#FF1493",

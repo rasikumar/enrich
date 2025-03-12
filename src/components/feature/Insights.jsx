@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import InsightList from "./InsightsLists";
 import { useState } from "react";
 import Instance from "../Admin/Instance";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -38,9 +38,7 @@ const App = () => {
       });
     } catch (error) {
       console.log(error.response.data);
-      toast.error(
-        error.error || "Please enter your email address"
-      );
+      toast.error(error.error || "Please enter your email address");
     }
   };
 
@@ -64,7 +62,9 @@ const App = () => {
         <InsightList />
       </main>
       <Link to={"/insights"}>
-        <button className="mt-10 mb-10 btn-primary flex m-auto">More Insights</button>
+        <button className="mt-10 mb-10 btn-primary flex m-auto">
+          More Insights
+        </button>
       </Link>
       <div className="py-6 px-4 m-auto w-full gap-3 flex flex-col bg-slate-300">
         <h1 className="text-center xl:text-lg md:text-sm  ">
@@ -84,13 +84,12 @@ const App = () => {
           />
           <button
             type="submit"
-            className="py-2 px-5 max-md:text-xs bg-yellow-600 transition max-md:w-full delay-75 text-white font-semibold rounded-md hover:shadow-md hover:bg-white hover:text-yellow-600 cursor-none"
+            className="py-2 px-5 max-md:text-xs bg-yellow-600 transition max-md:w-full delay-75 text-white font-semibold rounded-md hover:shadow-md hover:bg-white hover:text-yellow-600 "
           >
             Subscribe
           </button>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };

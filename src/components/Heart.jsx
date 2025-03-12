@@ -7,14 +7,11 @@ import Testimonials from "./Testimonials";
 import Newsletter from "./Newsletter";
 import Insights from "../components/feature/Insights";
 import GetIn from "./GetIn";
-import Cursor from "./Cursor";
 // import ScrollAlert from "./ScrollMsg";
 
 const Heart = () => {
   return (
-    <div className="cursor-none ">
-      {/* <Navbar /> */}
-      <Cursor />
+    <div>
       <Hero />
       <Introduction />
       <Services />

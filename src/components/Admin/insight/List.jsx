@@ -21,14 +21,14 @@ const List = () => {
   // };
 
   return (
-    <div>
+    <div className="max-md:mt-16">
       <Select
         name="listSelector"
         id="listSelector"
         defaultValue={selectedList}
         onValueChange={setSelectedList}
       >
-        <SelectTrigger className="w-64">
+        <SelectTrigger className="w-64 bg-blue-500 text-white">
           <SelectValue placeholder="Select an option" />
         </SelectTrigger>
         <SelectContent>

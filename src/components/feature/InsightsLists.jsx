@@ -171,7 +171,7 @@ const App = () => {
   return (
     <div className="container mx-auto px-4">
       {/* Filter Buttons */}
-      <div className="flex justify-center md:space-x-4 gap-2 mb-4">
+      <div className="flex justify-center flex-wrap md:space-x-4 gap-2 mb-4">
         <button
           className={`px-4 py-2 rounded hover:scale-105 transition-all ${
             selectedCategory === "all" ? "bg-primary text-white" : "bg-gray-200"

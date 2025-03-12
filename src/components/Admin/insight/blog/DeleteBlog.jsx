@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button } from "flowbite-react";
 import Instance from "../../Instance";
 import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import { toast } from "react-toastify";
 
 const DeleteBlog = ({ blogId, setBlogs }) => {
   const [error, setError] = useState(null);
@@ -13,6 +13,7 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
     try {
       await Instance.delete(`/admin/deleteBlog/${blogId}`);
       setBlogs((prev) => prev.filter((blog) => blog.id !== blogId));
+      toast.success("Blog deleted successfully!");
     } catch (err) {
       setError("Failed to delete blog");
       console.error("Delete blog error:", err);

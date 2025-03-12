@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select";
 import CreateBlog from "./blog/CreateBlog";
 import CreateChangeaBit from "./changeabit/CreateChangeaBit";
 import CreateSafetyNet from "./safetynet/CreateSafetyNet";
@@ -8,7 +14,7 @@ const Create = () => {
   const [selectedList, setSelectedList] = useState("CreateBlog");
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4 md:p-4 max-md:mt-16">
       <Select onValueChange={setSelectedList} defaultValue={selectedList}>
         <SelectTrigger className="w-64">
           <SelectValue placeholder="Select an option" />
@@ -19,7 +25,7 @@ const Create = () => {
           <SelectItem value="CreateSafetyNet">Safety Net</SelectItem>
         </SelectContent>
       </Select>
-      
+
       <div className="mt-4">
         {selectedList === "CreateBlog" && <CreateBlog />}
         {selectedList === "CreateChangeaBit" && <CreateChangeaBit />}

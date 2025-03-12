@@ -112,7 +112,7 @@ const CreateBlog = () => {
       metaKeywords.trim().split(",").length > 15
     ) {
       toast.error(
-        "Meta keywords must contain exactly 15 items, separated by commas."
+        "Meta keywords must be between 2 to 15 items, separated by commas."
       );
       return;
     }
@@ -166,8 +166,8 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="flex mx-auto bg-white p-6 rounded-lg shadow-md">
-      <div className="w-1/2 pr-4">
+    <div className="flex mx-auto bg-white md:p-6 rounded-lg shadow-md">
+      <div className="md:w-1/2 px-4">
         <h2 className="text-2xl font-bold mb-6">Create a New Blog</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -350,7 +350,7 @@ const CreateBlog = () => {
         </form>
       </div>
 
-      <div className="w-1/2 border p-4 quill-preview">
+      <div className="md:w-1/2 hidden md:flex flex-col border p-4 quill-preview">
         <h2 className="text-2xl font-bold mb-2">Preview</h2>
         <hr />
         <div
@@ -361,7 +361,7 @@ const CreateBlog = () => {
             <img
               src={URL.createObjectURL(image)}
               alt="News"
-              className="max-h-64 mt-2 w-full"
+              className="w-full object-cover h-64 rounded-xl"
             />
           )}
         </div>
@@ -371,7 +371,7 @@ const CreateBlog = () => {
           <p className="text-slate-600 text-sm">{blog?.author || author}</p>
         </div>
         <div
-          // className="quill-content ql-editor"
+          // className="[&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor"
           className="[&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor"
           dangerouslySetInnerHTML={{ __html: blog?.content || content }}
         />

@@ -5,7 +5,8 @@ import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 const SkeletonLoader = () => {
   return (
@@ -187,8 +188,11 @@ const BlogDetail = () => {
 
       setReplyText(""); // Clear reply text
       setReplyError(null);
+      toast.success("Reply Comment added successfully!" || response.data);
       setCommentToReply(null);
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (err) {
       console.error("Failed to post reply:", err);
       setReplyError("Failed to post reply. Please try again.");
@@ -209,6 +213,29 @@ const BlogDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Enrich || {blog && blog[0].blog_title}</title>
+
+        <meta
+          name="description"
+          content={blog && blog[0].blog_meta_description}
+        />
+        <meta name="keywords" content={blog && blog[0].blog_meta_keywords} />
+        <meta property="og:title" content={blog && blog[0].blog_title} />
+        <meta
+          property="og:description"
+          content={blog && blog[0].blog_meta_description}
+        />
+        <meta
+          property="og:image"
+          content={`https://newcheck.evvisolutions.com/safety_images/${
+            blog && blog[0].blog_image
+          }`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`http://localhost:3000/blog/${id}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <motion.div
         className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
         style={{ scaleX: scrollYProgress, transform: origin }}
@@ -235,7 +262,7 @@ const BlogDetail = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
-                  className="w-full object-cover h-full rounded-xl"
+                  className="w-full object-cover h-96 rounded-xl"
                 />
 
                 <div
@@ -313,7 +340,6 @@ const BlogDetail = () => {
                             placeholder="Your Username"
                             value={replyName}
                             onChange={(e) => setReplyName(e.target.value)} // Fix this line
-                            required
                           />
                           <textarea
                             className="w-full p-2 border border-gray-300 rounded-lg"
@@ -321,7 +347,6 @@ const BlogDetail = () => {
                             placeholder="Write a reply..."
                             value={replyText} // Change this line to use replyText
                             onChange={(e) => setReplyText(e.target.value)} // Fix this line
-                            required
                             spellCheck={true}
                           />
                           {replyError && (

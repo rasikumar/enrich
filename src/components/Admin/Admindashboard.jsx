@@ -15,13 +15,15 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [insightsOpen, setInsightsOpen] = useState(false);
   const [newsletterOpen, setNewsletterOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth >= 768) {
+      setIsSidebarOpen(true);
+    } else {
       setIsSidebarOpen(false);
     }
   }, []);
@@ -48,34 +50,40 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="min-h-screen flex z-50">
+    <div className="min-h-screen flex">
       {/* Sidebar Toggle Button */}
-      <button
-        className={`md:hidden p-3 fixed top-4 left-4 bg-gray-700 text-white rounded-md z-50 shadow-lg transition-all ${
-          isSidebarOpen ? "translate-x-56" : "translate-x-0"
-        }`}
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-      >
-        {isSidebarOpen ? (
+      {isSidebarOpen ? (
+        <button
+          className="md:hidden fixed top-4 right-4 bg-gray-700 text-white p-3 rounded-md z-50 shadow-lg transition"
+          onClick={() => setIsSidebarOpen(false)} // Close the sidebar
+        >
           <X className="w-6 h-6" />
-        ) : (
+        </button>
+      ) : (
+        <button
+          className="md:hidden fixed top-4 left-4 bg-gray-700 text-white p-3 rounded-md z-50 shadow-lg transition"
+          onClick={() => setIsSidebarOpen(true)} // Open the sidebar
+        >
           <Menu className="w-6 h-6" />
-        )}
-      </button>
+        </button>
+      )}
 
       {/* Sidebar */}
       <nav
-        className={`fixed md:relative top-0 left-0 h-screen bg-[#F4F4F5] text-[#1F2937] p-4 w-1/6 transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 md:translate-x-0 shadow-md`}
+        className={`fixed md:relative top-0 left-0 h-screen bg-[#F4F4F5] text-[#1F2937] p-4 transition-transform duration-300 z-40 
+          ${
+            isSidebarOpen
+              ? "w-64 translate-x-0"
+              : "-translate-x-full md:w-1/6 md:translate-x-0"
+          } 
+          md:shadow-md shadow-lg`}
       >
         <div className="flex flex-col justify-between h-full">
-          <div className="flex flex-col items-start space-y-4">
+          <div className="flex flex-col space-y-4">
             <NavLink
               className={({ isActive }) =>
-                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
-                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
-                }`
+                `flex items-center gap-3 text-lg font-medium px-4 py-2 rounded-lg transition 
+                 ${isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"}`
               }
               to="dashboard"
             >
@@ -84,7 +92,7 @@ const Sidebar = () => {
             </NavLink>
 
             {/* Insights Dropdown */}
-            <div className="w-full">
+            <div>
               <button
                 className="flex items-center justify-between text-lg font-medium w-full px-4 py-2 rounded-lg hover:bg-[#E5E7EB]"
                 onClick={() => setInsightsOpen(!insightsOpen)}
@@ -100,11 +108,12 @@ const Sidebar = () => {
                   <NavLink
                     to="listInsighs"
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
-                        isActive
-                          ? "bg-[#4B5563] text-white"
-                          : "hover:bg-[#E5E7EB]"
-                      }`
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
+                     ${
+                       isActive
+                         ? "bg-[#4B5563] text-white"
+                         : "hover:bg-[#E5E7EB]"
+                     }`
                     }
                   >
                     <FileText className="w-4 h-4" />
@@ -113,11 +122,12 @@ const Sidebar = () => {
                   <NavLink
                     to="createInsights"
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
-                        isActive
-                          ? "bg-[#4B5563] text-white"
-                          : "hover:bg-[#E5E7EB]"
-                      }`
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
+                     ${
+                       isActive
+                         ? "bg-[#4B5563] text-white"
+                         : "hover:bg-[#E5E7EB]"
+                     }`
                     }
                   >
                     <PlusCircle className="w-4 h-4" />
@@ -126,11 +136,12 @@ const Sidebar = () => {
                   <NavLink
                     to="Comment"
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
-                        isActive
-                          ? "bg-[#4B5563] text-white"
-                          : "hover:bg-[#E5E7EB]"
-                      }`
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
+                     ${
+                       isActive
+                         ? "bg-[#4B5563] text-white"
+                         : "hover:bg-[#E5E7EB]"
+                     }`
                     }
                   >
                     <MessageSquare className="w-4 h-4" />
@@ -141,7 +152,7 @@ const Sidebar = () => {
             </div>
 
             {/* Newsletter Dropdown */}
-            <div className="w-full">
+            <div>
               <button
                 className="flex items-center justify-between text-lg font-medium w-full px-4 py-2 rounded-lg hover:bg-[#E5E7EB]"
                 onClick={() => setNewsletterOpen(!newsletterOpen)}
@@ -157,11 +168,12 @@ const Sidebar = () => {
                   <NavLink
                     to="createNewsLetter"
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
-                        isActive
-                          ? "bg-[#4B5563] text-white"
-                          : "hover:bg-[#E5E7EB]"
-                      }`
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
+                     ${
+                       isActive
+                         ? "bg-[#4B5563] text-white"
+                         : "hover:bg-[#E5E7EB]"
+                     }`
                     }
                   >
                     <PlusCircle className="w-4 h-4" />
@@ -170,11 +182,12 @@ const Sidebar = () => {
                   <NavLink
                     to="members"
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition ${
-                        isActive
-                          ? "bg-[#4B5563] text-white"
-                          : "hover:bg-[#E5E7EB]"
-                      }`
+                      `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
+                     ${
+                       isActive
+                         ? "bg-[#4B5563] text-white"
+                         : "hover:bg-[#E5E7EB]"
+                     }`
                     }
                   >
                     <Users className="w-4 h-4" />
@@ -187,9 +200,8 @@ const Sidebar = () => {
             <NavLink
               to="contactList"
               className={({ isActive }) =>
-                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
-                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
-                }`
+                `flex items-center gap-3 text-lg font-medium px-4 py-2 rounded-lg transition 
+               ${isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"}`
               }
             >
               <Phone className="w-5 h-5" />
@@ -199,9 +211,8 @@ const Sidebar = () => {
             <NavLink
               to="Appointment"
               className={({ isActive }) =>
-                `flex items-center gap-3 text-lg font-medium w-full px-4 py-2 rounded-lg transition ${
-                  isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"
-                }`
+                `flex items-center gap-3 text-lg font-medium px-4 py-2 rounded-lg transition 
+               ${isActive ? "bg-[#4B5563] text-white" : "hover:bg-[#E5E7EB]"}`
               }
             >
               <Calendar className="w-5 h-5" />
@@ -212,7 +223,7 @@ const Sidebar = () => {
           {/* Logout Button */}
           <button
             className="flex items-center gap-3 justify-center w-full px-4 py-2 text-lg font-medium rounded-lg bg-[#EF4444] text-white hover:bg-[#DC2626] transition"
-            onClick={handleLogout} // Replace with your logout function
+            onClick={handleLogout}
           >
             <LogOut className="w-5 h-5" />
             Logout

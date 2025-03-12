@@ -54,7 +54,7 @@ const BlogDetail = () => {
     const fetchSuggestedBlogs = async () => {
       try {
         const response = await Instance.get("/getallChangeAbitList");
-        console.log(response.data);
+        // console.log(response.data);
 
         const sortedBlogs = response.data.changeAbits;
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
@@ -117,7 +117,7 @@ const BlogDetail = () => {
                 <h2 className="text-4xl font-semibold">
                   {blog.changeAbit_title}
                 </h2>
-                <div className="flex gap-5 items-center">
+                <div className="md:flex gap-5 items-center">
                   <p className="text-gray-600">{blog.changeAbit_author}</p>
                   <p className="text-gray-600">{blog.changeAbit_visit_count}</p>
                   <p className="text-gray-600">
@@ -132,11 +132,11 @@ const BlogDetail = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/changeAbit_images/${blog.changeAbit_image}`}
                   alt={blog.changeAbit_title}
-                  className="w-full object-cover h-full rounded-xl"
+                  className="md:w-full w-72 object-cover h-96 rounded-xl"
                 />
 
                 <div
-                  className="mt-4 flex gap-2 flex-col text-justify"
+                  className="mt-4 flex gap-2 flex-col text-justify [&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor "
                   dangerouslySetInnerHTML={{ __html: blog.changeAbit_content }}
                 />
               </div>
@@ -151,7 +151,7 @@ const BlogDetail = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {suggestedBlogs.map((blog) => (
-                  <div key={blog.id} className="p-4 bg-white rounded shadow-md">
+                  <div key={blog.id} className="p-4 bg-white rounded shadow-md w-72">
                     <Link to={`/insights/changeABit/${blog.id}`}>
                       <h4 className="font-semibold text-lg">
                         {blog.changeAbit_title}

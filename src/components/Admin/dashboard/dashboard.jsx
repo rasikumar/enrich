@@ -11,6 +11,7 @@ const Dashboard = () => {
     changeAbitList: [],
     safetyNetList: [],
     subscribers: [],
+    appointment: [],
   });
 
   const [errors, setErrors] = useState({
@@ -23,8 +24,9 @@ const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
-  const [currentDate] = useState(new Date().toLocaleDateString());
-
+  const [currentDate] = useState(
+    new Intl.DateTimeFormat("en-US").format(new Date())
+  );
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -37,6 +39,7 @@ const Dashboard = () => {
           Instance.post("/admin/getleads"),
           Instance.post("/admin/getAllSubscribers"),
           Instance.post("/admin/getAllComments"),
+          Instance.post("/admin/getAllAppointments"),
         ]);
 
         const updatedData = { ...dashboardData };
@@ -65,6 +68,9 @@ const Dashboard = () => {
               case 5:
                 updatedData.comments = data.comments;
                 break;
+              case 6:
+                updatedData.appointment = data;
+                break;
               default:
                 break;
             }
@@ -78,6 +84,8 @@ const Dashboard = () => {
               updatedErrors.leads = "Failed to fetch leads";
             if (errorUrl === "/admin/getAllSubscribers")
               updatedErrors.comments = "Failed to fetch comments";
+            if (errorUrl === "/admin/getAllAppointments")
+              updatedErrors.appointment = "Failed to fetch appointments";
           }
         });
 
@@ -121,10 +129,15 @@ const Dashboard = () => {
         <p className="text-center">Loading...</p>
       ) : (
         <main className="flex flex-col gap-4">
-          <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-blue-100">
-            <h2>Total Insights: {calculateTotalData()}</h2>
+          <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-white bg-primary text-white">
+            <h2>
+              Total Insights:{" "}
+              <span className="font-bold text-yellow-300">
+                {calculateTotalData()}
+              </span>
+            </h2>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             <Card
               title="Blogs"
               totalCount={dashboardData.blogs.length}
@@ -151,6 +164,10 @@ const Dashboard = () => {
             <Card
               title="Subscribers"
               totalCount={dashboardData.subscribers.length}
+            />
+            <Card
+              title="Appointments"
+              totalCount={dashboardData.appointment?.length}
             />
           </div>
         </main>

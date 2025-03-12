@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cursor from "./Cursor";
+// import Cursor from "./Cursor";
 
 const GetIn = () => {
   const [formData, setFormData] = useState({
@@ -85,7 +85,7 @@ const GetIn = () => {
 
   return (
     <div id="getIn" className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between mb-8">
-      <Cursor />
+      {/* <Cursor /> */}
       <div className="md:w-[40%] p-4 flex flex-col gap-5 md:mb-10">
         <h2 className="text-black md:text-4xl text-2xl font-semibold">Get in touch</h2>
         <p className="md:text-base xl:text-lg text-justify">

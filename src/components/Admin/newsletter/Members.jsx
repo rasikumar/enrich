@@ -151,10 +151,10 @@ const Members = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="max-md:mt-10">
       <h2 className="text-2xl font-semibold mb-4">Contact List</h2>
 
-      <div className="mb-4 flex">
+      <div className="mb-4 w-full flex flex-wrap gap-5">
         <input
           type="text"
           placeholder="Filter by ID"
@@ -179,9 +179,9 @@ const Members = () => {
         />
         <button
           onClick={resetFilters}
-          className="bg-red-500 text-white rounded-md hover:bg-red-600 p-4"
+          className="bg-red-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-red-600 p-2"
         >
-          <GrPowerReset />
+          <GrPowerReset />Reset Filter
         </button>
       </div>
 
@@ -198,7 +198,7 @@ const Members = () => {
         Export <FaFileExport />
       </button>
 
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full bg-white border border-gray-300 overflow-auto">
         <thead>
           <tr>
             <th className="border border-gray-300 p-2">

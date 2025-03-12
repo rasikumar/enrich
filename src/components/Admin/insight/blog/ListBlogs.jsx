@@ -114,9 +114,9 @@ const ListBlog = () => {
           {currentBlogs.map((blog) => (
             <li
               key={blog.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full max-md:flex-wrap"
             >
-              <div className="w-full ">
+              <div className="w-full">
                 <div className="flex text-sm">
                   <h2 className="text-md font-semibold">{blog.blog_title}</h2>
                 </div>
@@ -155,7 +155,7 @@ const ListBlog = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_thumbnail}`}
                   alt={blog.blog_title}
-                  className="rounded-lg w-24 object-cover"
+                  className="rounded-lg w-24 h-24 object-cover"
                 />
               )}
             </li>
@@ -183,10 +183,7 @@ const ListBlog = () => {
       </div>
 
       {/* Custom Modal for Edit Blog */}
-      <Dialog
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      >
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit Blog</DialogTitle>

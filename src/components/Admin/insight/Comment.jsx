@@ -13,7 +13,7 @@ const Comment = () => {
   // };
 
   return (
-    <div>
+    <div className="mt-12">
       <BlogCommentList/>
       {/* <select
         name="listSelector"

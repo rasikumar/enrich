@@ -58,27 +58,42 @@ const BlogDetailss = lazy(() =>
 
 // testing
 // import Apps from "./components/Apps";
-import Termsandcondtions from "./components/forms/Terms-and-condtions";
-import PrivacyPolicy from "./components/Policy";
-import BlogPage from "./components/feature/blog/BlogPage";
-import ChangeABit from "./components/feature/changeabit/ChangeABitPage";
-import SafetyNetPage from "./components/feature/safetynet/SafetyNetPage";
-import FlotingApps from "./components/FlotingApps";
-import EditBlog from "./components/Admin/insight/blog/EditBlog";
-import EditChangABit from "./components/Admin/insight/changeabit/EditChangeABit";
-import EditSafetyNet from "./components/Admin/insight/safetynet/EditBlog";
-import Dashboard from "./components/Admin/dashboard/dashboard";
-import Create from "./components/Admin/insight/Create";
-import List from "./components/Admin/insight/List";
-import CreateNewsLetter from "./components/Admin/newsletter/CreateNewsLetter";
-import Members from "./components/Admin/newsletter/Members";
-import ContactList from "./components/Admin/contactList";
-import Comment from "./components/Admin/insight/Comment";
-import Appointment from "./components/Admin/appointment/Appointment";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
-import NotAuthorized from "./components/auth/NotAuthorized";
-import SessionExpired from "./components/auth/SessionExpired";
-import Cursor from "./components/Cursor";
+const Termsandcondtions = lazy(() =>
+  import("./components/forms/Terms-and-condtions")
+);
+const PrivacyPolicy = lazy(() => import("./components/Policy"));
+const BlogPage = lazy(() => import("./components/feature/blog/BlogPage"));
+const ChangeABit = lazy(() =>
+  import("./components/feature/changeabit/ChangeABitPage")
+);
+const SafetyNetPage = lazy(() =>
+  import("./components/feature/safetynet/SafetyNetPage")
+);
+const FlotingApps = lazy(() => import("./components/FlotingApps"));
+const EditBlog = lazy(() => import("./components/Admin/insight/blog/EditBlog"));
+const EditChangABit = lazy(() =>
+  import("./components/Admin/insight/changeabit/EditChangeABit")
+);
+const EditSafetyNet = lazy(() =>
+  import("./components/Admin/insight/safetynet/EditBlog")
+);
+const Dashboard = lazy(() => import("./components/Admin/dashboard/dashboard"));
+const Create = lazy(() => import("./components/Admin/insight/Create"));
+const List = lazy(() => import("./components/Admin/insight/List"));
+const CreateNewsLetter = lazy(() =>
+  import("./components/Admin/newsletter/CreateNewsLetter")
+);
+const Members = lazy(() => import("./components/Admin/newsletter/Members"));
+const ContactList = lazy(() => import("./components/Admin/contactList"));
+const Comment = lazy(() => import("./components/Admin/insight/Comment"));
+const Appointment = lazy(() =>
+  import("./components/Admin/appointment/Appointment")
+);
+const ProtectedRoute = lazy(() => import("./components/auth/ProtectedRoute"));
+const NotAuthorized = lazy(() => import("./components/auth/NotAuthorized"));
+const SessionExpired = lazy(() => import("./components/auth/SessionExpired"));
+
+// import Cursor from "./components/Cursor";
 
 const App = () => {
   const location = useLocation();
@@ -107,7 +122,7 @@ const App = () => {
   return (
     <div className="scroll-smooth">
       <>
-        <Cursor />
+        {/* <Cursor /> */}
         <AnimatePresence mode="wait">
           <Suspense fallback={<Loader />}>
             {!hideHeaderAndFooter && (

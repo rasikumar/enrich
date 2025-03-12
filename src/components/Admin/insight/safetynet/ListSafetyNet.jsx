@@ -6,26 +6,16 @@ import DeleteBlog from "./DeleteBlog";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { ThreeCircles } from "react-loader-spinner";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 // Custom Modal Component
 // eslint-disable-next-line react/prop-types
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[50rem] relative max-h-[30rem] overflow-y-scroll">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-700"
-        >
-          &times;
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-};
 
 const ListSafetyNet = () => {
   const [safetyNets, setSafetyNets] = useState([]);
@@ -109,7 +99,7 @@ const ListSafetyNet = () => {
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
-      <h1 className="text-center text-3xl mb-5">Safety Net</h1>
+      <h1 className="text-center text-3xl mb-5">Safety Net List</h1>
 
       {/* Search bar */}
       <div className="mb-4">
@@ -128,7 +118,7 @@ const ListSafetyNet = () => {
           {currentsafetyNets.map((safetyNet) => (
             <li
               key={safetyNet.id}
-              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6  min-w-full"
+              className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full max-md:flex-wrap"
             >
               <div className="w-full ">
                 <div className="flex text-sm">
@@ -177,7 +167,7 @@ const ListSafetyNet = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/safety_images/${safetyNet.safety_thumbnail}`}
                   alt={safetyNet.safety_title}
-                  className="rounded-lg w-24 object-cover"
+                  className="rounded-lg w-24 h-24 object-cover"
                 />
               )}
             </li>
@@ -205,16 +195,22 @@ const ListSafetyNet = () => {
       </div>
 
       {/* Custom Modal for Edit Blog */}
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        {selectedSafetyNet && (
-          <EditBlog
-            safety={selectedSafetyNet}
-            setEditing={setIsModalOpen}
-            setSafetyNets={setSafetyNets}
-            closeModal={handleCloseModal} // Pass the function to close modal
-          />
-        )}
-      </Modal>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit SafetyNet</DialogTitle>
+            <DialogClose />
+          </DialogHeader>
+          {selectedSafetyNet && (
+            <EditBlog
+              safety={selectedSafetyNet}
+              setEditing={setIsModalOpen}
+              setSafetyNets={setSafetyNets}
+              closeModal={handleCloseModal} // Pass the function to close modal
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

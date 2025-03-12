@@ -7,7 +7,7 @@ const Appointment = () => {
   const [filters, setFilters] = useState({
     name: "",
     assessment: "",
-    date: ""
+    date: "",
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +19,7 @@ const Appointment = () => {
         const response = await Instance.post("/admin/getAllAppointments");
         setAppointments(response.data);
         setFilteredAppointments(response.data); // Initialize filtered list
-        console.log(response.data);
+        // console.log(response);
       } catch (error) {
         console.error("Error fetching appointments:", error);
       }
@@ -30,17 +30,20 @@ const Appointment = () => {
   useEffect(() => {
     // Apply filters when any filter value changes
     let filteredData = [...appointments];
-    
+
     if (filters.name) {
-      filteredData = filteredData.filter((contact) =>
-        contact.name.toLowerCase().includes(filters.name.toLowerCase())
+      filteredData = filteredData.filter(
+        (contact) =>
+          contact.name.toLowerCase().includes(filters.name.toLowerCase()) ||
+          contact.email.toLowerCase().includes(filters.name.toLowerCase())
       );
     }
 
     if (filters.date) {
       const filterDate = new Date(filters.date).toLocaleDateString();
-      filteredData = filteredData.filter((contact) =>
-        new Date(contact.selectDate).toLocaleDateString() === filterDate
+      filteredData = filteredData.filter(
+        (contact) =>
+          new Date(contact.selectDate).toLocaleDateString() === filterDate
       );
     }
 
@@ -52,7 +55,7 @@ const Appointment = () => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -60,14 +63,17 @@ const Appointment = () => {
     setFilters({
       name: "",
       assessment: "",
-      date: ""
+      date: "",
     });
   };
 
   // Pagination logic
   const indexOfLastAppointment = currentPage * itemsPerPage;
   const indexOfFirstAppointment = indexOfLastAppointment - itemsPerPage;
-  const currentAppointments = filteredAppointments.slice(indexOfFirstAppointment, indexOfLastAppointment);
+  const currentAppointments = filteredAppointments.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
 
   const totalPages = Math.ceil(filteredAppointments.length / itemsPerPage);
 
@@ -83,19 +89,21 @@ const Appointment = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50">
+    <div className="md:p-6 bg-gray-50 max-md:mt-14">
       <div className="mb-4">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">Filter Appointments</h2>
-        <div className="flex gap-4">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+          Filter Appointments
+        </h2>
+        <div className="flex gap-4 flex-wrap">
           <input
             type="text"
             name="name"
-            placeholder="Filter by Name"
-            className="border p-2 rounded-md"
+            placeholder="Search by Name or Email"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full md:w-1/3"
             value={filters.name}
             onChange={handleFilterChange}
           />
-          
+
           <input
             type="date"
             name="date"
@@ -125,8 +133,8 @@ const Appointment = () => {
                   <th className="border border-gray-300 p-2">Name</th>
                   <th className="border border-gray-300 p-2">Phone</th>
                   <th className="border border-gray-300 p-2">Email</th>
-                  <th className="border border-gray-300 p-2">Assessment</th>
-                  <th className="border border-gray-300 p-2">Slots</th>
+                  <th className="border border-gray-300 p-2 ">Assessment</th>
+                  <th className="border border-gray-300 p-2 ">Slots</th>
                   <th className="border border-gray-300 p-2">Booked Date</th>
                 </tr>
               </thead>
@@ -139,11 +147,21 @@ const Appointment = () => {
                     <td className="border border-gray-300 p-2 text-center">
                       {filteredAppointments.indexOf(contact) + 1}
                     </td>
-                    <td className="border border-gray-300 p-2">{contact.name}</td>
-                    <td className="border border-gray-300 p-2">{contact.number}</td>
-                    <td className="border border-gray-300 p-2">{contact.email}</td>
-                    <td className="border border-gray-300 p-2">{contact.assessmentType}</td>
-                    <td className="border border-gray-300 p-2">{contact.slot}</td>
+                    <td className="border border-gray-300 p-2">
+                      {contact.name}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {contact.number}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {contact.email}
+                    </td>
+                    <td className="border border-gray-300 p-2 line-clamp-4 overflow-hidden">
+                      {contact.assessmentType}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {contact.slot}
+                    </td>
                     <td className="border border-gray-300 p-2">
                       {new Date(contact.selectDate).toLocaleDateString()}
                     </td>
@@ -158,7 +176,7 @@ const Appointment = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50"
+              className="p-2 bg-green-500  hover:bg-green-700 rounded-md disabled:opacity-50"
             >
               Previous
             </button>
@@ -166,18 +184,20 @@ const Appointment = () => {
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
-                className={`p-2 border border-gray-300 rounded-md hover:bg-gray-100 ${currentPage === page ? "bg-blue-500 text-white" : "text-gray-700"}`}
+                className={`p-2 border border-gray-300 rounded-md hover:bg-gray-100 ${
+                  currentPage === page
+                    ? "bg-blue-500 text-white"
+                    : "text-gray-700"
+                }`}
               >
                 {page}
               </button>
             ))}
-            {totalPages > 5 && (
-              <span className="p-2 text-gray-700">...</span>
-            )}
+            {totalPages > 5 && <span className="p-2 text-gray-700">...</span>}
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50"
+              className="p-2 bg-green-500 rounded-md hover:bg-green-700 disabled:opacity-50"
             >
               Next
             </button>

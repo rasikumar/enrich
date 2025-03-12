@@ -90,7 +90,7 @@ export const serviceList = [
     answer:
       "We provide comprehensive psychometric assessments to gain insights into personality traits and cognitive abilities. Our psychological counseling services, informed by evidence-based practices, support individuals in their journey toward self-discovery and personal growth.",
     image: corporate,
-    btn: "Book a Session",
+    btn: "Know More",
     path: "/psychometric",
   },
 ];

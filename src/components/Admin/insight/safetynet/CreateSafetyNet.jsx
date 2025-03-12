@@ -1,11 +1,8 @@
-import { useState, useRef } from "react";
-import ReactQuill, { Quill } from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { useState } from "react";
 import Instance from "../../Instance";
-import imageCompressor from "quill-image-compress";
-Quill.register("modules/imageCompressor", imageCompressor);
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import QuillEditor from "@/lib/QuillEditor";
 
 const CreateSafetyNet = () => {
   const [content, setContent] = useState("");
@@ -16,7 +13,6 @@ const CreateSafetyNet = () => {
   const [metaDescription, setMetaDescription] = useState(""); // State for meta description
   const [metaKeywords, setMetaKeywords] = useState(""); // State for meta keywords
   const [safetyNet, setSafetyNet] = useState(null); // State to track the latest blog
-  const quillRef = useRef(null); // Ref to access Quill editor instance
 
   // Handle content change
   const handleContentChange = (value) => {
@@ -25,39 +21,107 @@ const CreateSafetyNet = () => {
 
   // Handle image upload
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      e.target.value = "";
+      setImage(null);
+      alert("File size must be less than 5MB.");
+      return;
+    }
+
+    // Check file type
+    if (!file.type.startsWith("image/")) {
+      e.target.value = "";
+      alert("Please upload a valid image file.");
+      return;
+    }
+
+    // Read image dimensions
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width <= 2000 && img.height <= 3000) {
+          setImage(file);
+        } else {
+          e.target.value = "";
+          alert("Image dimensions must not exceed 2000x3000 pixels.");
+        }
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleThumbnailChange = (e) => {
-    const file = e.target.files[0];
-    setThumbnail(file);
+    const file = e.target.files?.[0];
+
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        // Reset file input
+        e.target.value = "";
+        setThumbnail(null);
+        return;
+      }
+      setThumbnail(file);
+    }
+
+    if (file && file.type.startsWith("image/")) {
+      setThumbnail(file);
+    } else {
+      alert("Please upload a valid image file.");
+    }
   };
 
   const handleSubmit = async (e) => {
-    // console.log(
-    //   head,
-    //   author,
-    //   image,
-    //   thumbnail,
-    //   metaDescription,
-    //   metaKeywords,
-    //   content
-    // );
-
     e.preventDefault();
-    if (
-      !head.trim() ||
-      !author.trim() ||
-      !image ||
-      !thumbnail ||
-      !metaDescription.trim() ||
-      !metaKeywords.trim() ||
-      !content.trim()
-    ) {
-      toast.error("all fields are required");
+    if (head.trim().length < 10 || head.trim().length > 100) {
+      toast.error("Title must be between 10 and 100 characters.");
       return;
     }
+
+    if (!author.trim()) {
+      toast.error("Author name is required.");
+      return;
+    }
+
+    if (!image) {
+      toast.error("Image is required.");
+      return;
+    }
+
+    if (!thumbnail) {
+      toast.error("Thumbnail is required.");
+      return;
+    }
+
+    if (
+      metaDescription.trim().length < 10 ||
+      metaDescription.trim().length > 200
+    ) {
+      toast.error("Meta description must be between 10 and 200 characters.");
+      return;
+    }
+
+    if (
+      metaKeywords.trim().split(",").length < 2 ||
+      metaKeywords.trim().split(",").length > 15
+    ) {
+      toast.error(
+        "Meta keywords must be between 2 to 15 items, separated by commas."
+      );
+      return;
+    }
+
+    if (content.trim().length < 100 || content.trim().length > 2500) {
+      toast.error("Content must be between 100 and 2500 characters.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", head);
     formData.append("author", author);
@@ -82,7 +146,7 @@ const CreateSafetyNet = () => {
           author,
           content,
         });
-        alert(response.data.message);
+        toast.success(response.data.message);
         // Clear form fields after successful submission
         setHead("");
         setAuthor("");
@@ -94,53 +158,16 @@ const CreateSafetyNet = () => {
       } else {
         alert(response.data.message);
       }
-      console.log("SafetyNet submitted successfully:", response.data);
+      window.location.reload();
     } catch (error) {
-      console.error("Error submitting blog:", error);
+      console.error("Error submitting SafetyNet:", error);
+      toast.error("Error submitting SafetyNet: " + error.message);
     }
   };
 
-  const Formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "align",
-    "link",
-    "image",
-  ];
-
-  const modules = {
-    toolbar: {
-      container: [
-        [{ header: "1" }, { header: "2" }, { font: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        ["link", "image"], // Add image button to toolbar
-        [{ align: [] }],
-        ["clean"],
-      ],
-      imageCompress: {
-        quality: 0.7, // default
-        maxWidth: 1000, // default
-        maxHeight: 1000, // default
-        imageType: "image/jpeg", // default
-        debug: true, // default
-        suppressErrorLogging: false, // default
-        handleOnPaste: true, //default
-        insertIntoEditor: undefined, // default
-      },
-    },
-  };
-
   return (
-    <div className="flex mx-auto bg-white p-6 rounded-lg shadow-md">
-      <div className="w-1/2 pr-4">
+    <div className="flex mx-auto bg-white md:p-6 rounded-lg shadow-md">
+      <div className="md:w-1/2 px-4">
         <h2 className="text-2xl font-bold mb-6">Create Safety Net</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -223,6 +250,13 @@ const CreateSafetyNet = () => {
                 <span className="text-black font-bold text-sm">i</span>
               </button>
             </label>
+            {thumbnail && (
+              <img
+                src={URL.createObjectURL(thumbnail)}
+                alt="News"
+                className="max-w-xs rounded-md shadow-md mt-2"
+              />
+            )}
             <input
               id="thumbnail"
               name="thumbnail"
@@ -297,14 +331,10 @@ const CreateSafetyNet = () => {
                 Maximum Image Value is 50Kb
               </span>
             </label>
-            <ReactQuill
-              ref={quillRef}
+            <QuillEditor
               value={content}
               onChange={handleContentChange}
-              placeholder="Write your blog content here..."
-              modules={modules}
-              formats={Formats}
-              className="mt-1 block w-full h-96 overflow-y-scroll border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Write your SafetyNet content here..."
             />
           </div>
 
@@ -319,9 +349,21 @@ const CreateSafetyNet = () => {
         </form>
       </div>
 
-      <div className="w-1/2 border p-4 quill-preview">
+      <div className="md:w-1/2 hidden md:flex flex-col border p-4 quill-preview">
         <h2 className="text-2xl font-bold mb-2">Preview</h2>
         <hr />
+        <div
+          className="relative max-h-64 mt-2 w-full bg-center bg-cover"
+          // style={{ backgroundImage: `url(${URL.createObjectURL(image)})` }}
+        >
+          {image && (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="News"
+              className="w-full object-cover h-64 rounded-xl"
+            />
+          )}
+        </div>
         <div className="flex flex-col gap-4 mb-4 mt-2">
           <h3 className="text-2xl">{safetyNet?.head || head}</h3>
           <p className="text-slate-600 text-sm">
@@ -329,7 +371,7 @@ const CreateSafetyNet = () => {
           </p>
         </div>
         <div
-          className="quill-content ql-editor"
+          className="[&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor"
           dangerouslySetInnerHTML={{ __html: safetyNet?.content || content }}
         />
       </div>

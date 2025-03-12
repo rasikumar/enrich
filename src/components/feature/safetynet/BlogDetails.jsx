@@ -241,11 +241,11 @@ const BlogDetail = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/safety_images/${blog.safety_image}`}
                   alt={blog.safety_title}
-                  className="w-full object-cover h-full rounded-xl"
+                  className="w-full object-cover h-96 rounded-xl"
                 />
 
                 <div
-                  className="mt-4 flex gap-2 flex-col text-justify"
+                  className="mt-4 flex gap-2 flex-col text-justify [&>h1]:text-4xl [&>h1]:font-bold [&>h2]:text-3xl [&>h2]:font-semibold quill-content ql-editor"
                   dangerouslySetInnerHTML={{ __html: blog.safety_body }}
                 />
               </div>

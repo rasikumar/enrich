@@ -209,7 +209,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
                       minute: "numeric",
                     })}
                   </p>
-                  <p className="text-sm text-t-primary font-semibold">
+                  <p className="text-sm capitalize text-primary bg-secondary w-fit px-2 py-1 rounded-md shadow-drop hover:shadow-none duration-300 cursor-pointer font-semibold">
                     {reply.reply_username}
                   </p>
                   <p className="mt-1 text-sm text-green-600 overflow-x-auto">

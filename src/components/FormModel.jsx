@@ -16,7 +16,7 @@ const FormModel = ({ message, onClose, children }) => {
         <motion.button
           whileHover={{ scale: 1.3 }}
           onClick={onClose}
-          className="absolute top-2 right-4 text-4xl font-bold text-gray-700 cursor-none"
+          className="absolute top-2 right-4 text-4xl font-bold text-gray-700 "
         >
           &times;
         </motion.button>

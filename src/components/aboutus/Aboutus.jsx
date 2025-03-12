@@ -6,9 +6,11 @@ import Mission from "./Mission";
 import Moto from "./Moto";
 // import SquiggleScroll from "./components/SquiggleScroll";
 import { Helmet } from "react-helmet";
-import Cursor from "../Cursor";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Aboutus = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative">
       <Helmet>
@@ -19,11 +21,14 @@ const Aboutus = () => {
         />
       </Helmet>
       {/* <SquiggleScroll /> */}
+
       <h1 className="text-6xl font-bold rotate-0 max-md:flex hidden sticky top-28 text-slate-100 uppercase -z-20">
         YOUR BEST SELF{" "}
       </h1>
-      <Cursor />
-
+      <IoArrowBackCircle
+        className="text-3xl"
+        onClick={() => navigate(-1)}
+      />
       <Hero />
       <Details />
       <Whoweare />

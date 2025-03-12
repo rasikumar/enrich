@@ -59,7 +59,7 @@ const Footer = () => {
           <div className="mb-4 lg:mb-0 flex items-center justify-center">
             <ul className="md:flex md:gap-3 xl:text-lg md:text-sm text-xs text-center lg:text-left ">
               <AnchorLink
-                href="#hero"
+                href="/#hero"
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex text-sm"
               >
                 Home
@@ -80,7 +80,7 @@ const Footer = () => {
                 to={"/ourprogram"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex text-sm"
               >
-                Program
+                Our Programs
               </Link>
               {/* <AnchorLink
                 href="#testimonials"
