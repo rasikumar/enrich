@@ -29,14 +29,14 @@ const CreateBlog = () => {
     if (file.size > 5 * 1024 * 1024) {
       e.target.value = "";
       setImage(null);
-      alert("File size must be less than 5MB.");
+      toast.error("File size must be less than 5MB.");
       return;
     }
 
     // Check file type
     if (!file.type.startsWith("image/")) {
       e.target.value = "";
-      alert("Please upload a valid image file.");
+      toast.error("Please upload a valid image file.");
       return;
     }
 
@@ -49,7 +49,7 @@ const CreateBlog = () => {
           setImage(file);
         } else {
           e.target.value = "";
-          alert("Image dimensions must not exceed 2000x3000 pixels.");
+          toast.error("Image dimensions must not exceed 2000x3000 pixels.");
         }
       };
       img.src = event.target.result;
@@ -73,7 +73,7 @@ const CreateBlog = () => {
     if (file && file.type.startsWith("image/")) {
       setThumbnail(file);
     } else {
-      alert("Please upload a valid image file.");
+      toast.error("Please upload a valid image file.");
     }
   };
 
@@ -155,7 +155,7 @@ const CreateBlog = () => {
         setMetaDescription(""); // Clear meta description
         setMetaKeywords(""); // Clear meta keywords
       } else {
-        alert(response.data.message);
+        toast.error(response.data.message);
       }
       window.location.reload();
       // console.log("Blog submitted successfully:", response.data);
