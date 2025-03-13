@@ -54,7 +54,7 @@ const BlogDetail = () => {
     const fetchSuggestedBlogs = async () => {
       try {
         const response = await Instance.get("/getallChangeAbitList");
-        // console.log(response.data);
+        console.log(response.data);
 
         const sortedBlogs = response.data.changeAbits;
         setSuggestedBlogs(sortedBlogs.slice(0, 3));
@@ -87,11 +87,12 @@ const BlogDetail = () => {
     <>
       <Helmet>
         <title>{blogs[0]?.changeAbit_title}</title>
-        <meta name="description" content={blogs[0]?.changeAbit_summary} />
+        <meta name="description" content={blogs[0]?.changeAbit_meta_description} />
+        <meta name="keywords" content={blogs[0]?.changeAbit_meta_keywords} />
         <meta property="og:title" content={blogs[0]?.changeAbit_title} />
         <meta
           property="og:description"
-          content={blogs[0]?.changeAbit_summary}
+          content={blogs[0]?.changeAbit_meta_description}
         />
         <meta
           property="og:image"
@@ -99,7 +100,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:url"
-          content={`http://localhost:3000/blog/${blogs[0]?.id}`}
+          content={`http://localhost:3000/changeAbit_images/${blogs[0]?.id}`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Enrich" />
