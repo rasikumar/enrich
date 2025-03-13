@@ -1,12 +1,9 @@
-// import { useState, useRef, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import SliderCard from "./SliderCard";
+import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+// import { TiArrowRightThick } from "react-icons/ti";
+// import { TiArrowLeftThick } from "react-icons/ti";
 
-const testimonials = [
+const testimonialsData = [
   {
     id: 1,
     name: "Shrikant Hegde",
@@ -58,8 +55,56 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const testimonialsRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  // const handlePrev = () => {
+  //   const newIndex =
+  //     (currentIndex - 1 + testimonialsData.length) % testimonialsData.length;
+  //   animateCards(newIndex);
+  // };
+
+  // const handleNext = () => {
+  //   const newIndex = (currentIndex + 1) % testimonialsData.length;
+  //   animateCards(newIndex);
+  // };
+
+  const animateCards = (newIndex) => {
+    const currentCards = cardsRef.current;
+    gsap.to(currentCards, {
+      opacity: 0,
+      x: -20,
+      duration: 0.5,
+      ease: "power1.inOut",
+      onComplete: () => {
+        setCurrentIndex(newIndex);
+        gsap.fromTo(
+          currentCards,
+          { opacity: 0, x: 20 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: "power1.inOut",
+          }
+        );
+      },
+    });
+  };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const newIndex = (currentIndex + 1) % testimonialsData.length;
+      animateCards(newIndex);
+    }, 3000); // Change every 3 seconds
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
+
   return (
     <div
+      ref={testimonialsRef}
       id="testimonials"
       className="w-full bg-gradient-to-r from-primary to-primary/90 flex flex-col lg:flex-row items-center justify-center md:p-10 px-4 py-8"
     >
@@ -78,32 +123,65 @@ const Testimonials = () => {
           </p>
           {/* <span className="bg-yellow-600 rounded-full w-6 h-6  mt-4 flex text-start"></span> */}
         </div>
+        <div className="card flex flex-col lg:flex-row items-center gap-4 lg:gap-10 mt-10 lg:mt-16">
+          {/* <button
+            onClick={handlePrev}
+            className="bg-yellow-600 text-white p-4 rounded-full hover:bg-yellow-700 transition duration-300"
+          >
+            <TiArrowLeftThick />
+          </button> */}
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-10">
+            {[0, 1].map((i) => (
+              <div
+                key={
+                  testimonialsData[(currentIndex + i) % testimonialsData.length]
+                    .id
+                }
+                ref={(el) => (cardsRef.current[i] = el)}
+                className="testimonial-card flex flex-col items-center gap-4 bg-white p-6 py-8 shadow-lg rounded-xl transform transition-transform duration-500 hover:scale-105 w-full lg:w-80 mx-auto"
+              >
+                <img
+                  src={
+                    testimonialsData[
+                      (currentIndex + i) % testimonialsData.length
+                    ].img
+                  }
+                  width={50}
+                  height={50}
+                  className="rounded-full w-20 h-20 object-cover"
+                />
+                <h1 className="text-xl font-semibold text-gray-800">
+                  {
+                    testimonialsData[
+                      (currentIndex + i) % testimonialsData.length
+                    ].name
+                  }
+                </h1>
+                <p className="text-gray-500">
+                  {
+                    testimonialsData[
+                      (currentIndex + i) % testimonialsData.length
+                    ].position
+                  }
+                </p>
+                <p className="w-full leading-5 text-sm text-gray-700 text-justify">
+                  {
+                    testimonialsData[
+                      (currentIndex + i) % testimonialsData.length
+                    ].feedback
+                  }
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* <button
+            onClick={handleNext}
+            className="bg-yellow-600 text-white p-4 rounded-full hover:bg-yellow-700 transition duration-300"
+          >
+            <TiArrowRightThick />
+          </button> */}
+        </div>
       </div>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={20}
-        slidesPerView={2} // Show 2 slides at a time
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 1 }, // Mobile view: 1 slide
-          375: { slidesPerView: 1 }, // Mobile view: 1 slide
-          320: { slidesPerView: 1 }, // Mobile view: 1 slide
-          1024: { slidesPerView: 2 }, // Larger screens: 2 slides
-        }}
-        className="md:w-1/2 w-full"
-      >
-        {testimonials.map((testimonial) => (
-          <SwiperSlide key={testimonial.id} className="px-4">
-            <SliderCard
-              name={testimonial.name}
-              position={testimonial.position}
-              feedback={testimonial.feedback}
-              img={testimonial.img}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
     </div>
   );
 };

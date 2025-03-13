@@ -19,7 +19,6 @@ import {
 
 const ListSafetyNet = () => {
   const [safetyNets, setSafetyNets] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSafetyNet, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
@@ -38,7 +37,6 @@ const ListSafetyNet = () => {
         );
         setSafetyNets(sortedBlogList);
       } catch (err) {
-        setError("Failed to fetch blogs");
         console.log(err);
       } finally {
         setLoading(false);
@@ -93,9 +91,6 @@ const ListSafetyNet = () => {
     );
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
@@ -112,7 +107,7 @@ const ListSafetyNet = () => {
         />
       </div>
       {filteredBlogs.length === 0 ? (
-        <div className="text-center text-red-600">No Results Found</div>
+        <div className="text-center text-red-600">Create Saftery Net</div>
       ) : (
         <ul className="flex flex-wrap gap-3">
           {currentsafetyNets.map((safetyNet) => (

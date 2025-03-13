@@ -19,7 +19,6 @@ import {
 
 const ListChangeAbit = () => {
   const [changeABits, setChangeAbits] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedChangeABit, setSelectedChangeABit] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
@@ -37,7 +36,6 @@ const ListChangeAbit = () => {
         setChangeAbits(sortedBlogList);
         console.log(response.data.changeAbits);
       } catch (err) {
-        setError("Failed to fetch changeABits");
         console.log(err);
       } finally {
         setLoading(false);
@@ -91,10 +89,6 @@ const ListChangeAbit = () => {
     );
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">ChangeABit List</h1>
@@ -110,7 +104,7 @@ const ListChangeAbit = () => {
         />
       </div>
       {filteredBlogs.length === 0 ? (
-        <div className="text-center text-red-600">No Results Found</div>
+        <div className="text-center text-red-600">Create ChangeABit</div>
       ) : (
         <ul className="flex flex-wrap gap-3">
           {currentBlogs.map((changeABit) => (

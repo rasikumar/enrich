@@ -6,8 +6,10 @@ import { confirmAlert } from "react-confirm-alert"; // Import confirm alert
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { useRef } from "react";
 const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
   // const [error, setError] = useState(null);
+  const deleteButtonRef = useRef(null); // Ref for the button
 
   const handleDelete = async () => {
     try {
@@ -16,6 +18,7 @@ const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
         prev.filter((changeABit) => changeABit.id !== changeABitId)
       );
       toast.success("ChangeABit deleted successfully!");
+      
     } catch (err) {
       // setError("Failed to delete changeABit");
       toast.error("Delete ChangeABit Error ");
@@ -35,14 +38,18 @@ const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
                 onClick={() => {
                   handleDelete();
-                  onClose(); // Close modal after confirmation
+                  onClose();
+                  deleteButtonRef.current?.focus(); // Reset focus
                 }}
               >
                 Yes
               </button>
               <button
                 className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                onClick={onClose} // Close modal on cancel
+                onClick={() => {
+                  onClose();
+                  deleteButtonRef.current?.focus(); // Reset focus on cancel
+                }}
               >
                 No
               </button>
@@ -57,7 +64,7 @@ const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
 
   return (
     <div>
-      <Button color="failure" onClick={showConfirmDialog}>
+      <Button ref={deleteButtonRef} color="failure" onClick={showConfirmDialog}>
         Delete
       </Button>
       <ToastContainer position="top-right" />
