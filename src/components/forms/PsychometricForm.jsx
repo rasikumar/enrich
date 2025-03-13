@@ -152,13 +152,73 @@ const PsychometricForm = () => {
     }
     if (!formData.isConsentChecked || !formData.isTermsChecked) {
       alert("You must agree to the consent and terms and conditions.");
-      return;
+      return false; // Return false to indicate validation failure
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setFormData((prevData) => ({ ...prevData, file }));
+    setPreviewUrl(URL.createObjectURL(file));
+
+    try {
+      const processedImage = await preprocessImage(file);
+
+      // Perform OCR
+      const {
+        data: { text },
+      } = await Tesseract.recognize(processedImage, "eng", {
+        tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
+        psm: 6, // Assume a single uniform block of text
+        oem: 1, // Use LSTM OCR engine
+      });
+
+      // Normalize the text for easier processing
+      const normalizedText = text
+        .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
+        .replace(/\s+/g, " ") // Remove extra spaces
+        .toLowerCase();
+
+      // Look for amount (499) or key phrases
+      const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
+      const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
+
+      const amountMatch = normalizedText.match(amountRegex);
+      const keywordMatch = normalizedText.match(keywordRegex);
+
+      if (amountMatch || keywordMatch) {
+        // toast.success("✅ Image added successfully!");
+        return true; // Image is valid
+      } else {
+        toast.error(
+          "❌ Uploaded image does not contain required keywords (rupees, to, from, upi)."
+        );
+        setFormData((prevData) => ({ ...prevData, file: null })); // Clear invalid file
+        setPreviewUrl(null);
+        return false; // Image is invalid
+      }
+    } catch (error) {
+      console.error("Error during OCR:", error);
+      toast.error("⚠️ Failed to process the image. Try again.");
+      setFormData((prevData) => ({ ...prevData, file: null })); // Clear file on error
+      setPreviewUrl(null);
+      return false; // Image processing failed
+    }
+  };
+
+  // Combined validation function
+  const validateAndProcessImage = async (e) => {
+    const isImageValid = await handleImageChange(e);
+    if (!isImageValid) return false; // Stop if image is invalid
+
+    const isStepValid = validateStepThree();
+    return isStepValid; // Return true only if both image and step are valid
+  };
   const handleNext = () => {
     if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
@@ -206,55 +266,55 @@ const PsychometricForm = () => {
     });
   };
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  // const handleImageChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
 
-    setFormData((prevData) => ({ ...prevData, file }));
-    setPreviewUrl(URL.createObjectURL(file));
+  //   setFormData((prevData) => ({ ...prevData, file }));
+  //   setPreviewUrl(URL.createObjectURL(file));
 
-    try {
-      const processedImage = await preprocessImage(file);
+  //   try {
+  //     const processedImage = await preprocessImage(file);
 
-      // Perform OCR
-      const {
-        data: { text },
-      } = await Tesseract.recognize(processedImage, "eng", {
-        tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
-        psm: 6, // Assume a single uniform block of text
-        oem: 1, // Use LSTM OCR engine
-        // logger: (m) => console.log(m),
-      });
+  //     // Perform OCR
+  //     const {
+  //       data: { text },
+  //     } = await Tesseract.recognize(processedImage, "eng", {
+  //       tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
+  //       psm: 6, // Assume a single uniform block of text
+  //       oem: 1, // Use LSTM OCR engine
+  //       // logger: (m) => console.log(m),
+  //     });
 
-      console.log("Extracted Text:", text);
+  //     // console.log("Extracted Text:", text);
 
-      // Normalize the text for easier processing
-      const normalizedText = text
-        .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
-        .replace(/\s+/g, " ") // Remove extra spaces
-        .toLowerCase();
+  //     // Normalize the text for easier processing
+  //     const normalizedText = text
+  //       .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
+  //       .replace(/\s+/g, " ") // Remove extra spaces
+  //       .toLowerCase();
 
-      console.log("Normalized Text:", normalizedText);
+  //     // console.log("Normalized Text:", normalizedText);
 
-      // Look for amount (499) or key phrases
-      const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
-      const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
+  //     // Look for amount (499) or key phrases
+  //     const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
+  //     const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
 
-      const amountMatch = normalizedText.match(amountRegex);
-      const keywordMatch = normalizedText.match(keywordRegex);
+  //     const amountMatch = normalizedText.match(amountRegex);
+  //     const keywordMatch = normalizedText.match(keywordRegex);
 
-      if (amountMatch || keywordMatch) {
-        toast.success("✅ Image added successfully!");
-      } else {
-        toast.error("❌ *Upload a Image does contain rupees, to, from, upi");
-      }
-    } catch (error) {
-      console.error("Error during OCR:", error);
-      toast.error("⚠️ Failed to process the image. Try again.");
-      setFormData((prevData) => ({ ...prevData, file: null }));
-      setPreviewUrl(null);
-    }
-  };
+  //     if (amountMatch || keywordMatch) {
+  //       toast.success("✅ Image added successfully!");
+  //     } else {
+  //       toast.error("❌ *Upload a Image does contain rupees, to, from, upi");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during OCR:", error);
+  //     toast.error("⚠️ Failed to process the image. Try again.");
+  //     setFormData((prevData) => ({ ...prevData, file: null }));
+  //     setPreviewUrl(null);
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -796,7 +856,7 @@ const PsychometricForm = () => {
                         accept="image/*"
                         className="relative w-full mb-4"
                         placeholder="Enter payment details"
-                        onChange={handleImageChange}
+                        onChange={validateAndProcessImage}
                       />
                       {errors.file && (
                         <p className="text-red-500 text-sm">{errors.file}</p>
@@ -888,7 +948,7 @@ const PsychometricForm = () => {
                     transition={{ duration: 0.5, x: 10 }}
                     className="text-2xl font-semibold"
                   >
-                    Pesronal info
+                    Personal info
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, x: 20 }}
@@ -896,7 +956,7 @@ const PsychometricForm = () => {
                     transition={{ duration: 0.5, x: 10 }}
                     className="text-slate-400 text-sm"
                   >
-                    Kindly Provide your pesronal Information
+                    Kindly Provide your Personal Information
                   </motion.p>
                   <div className="mb-4 max-md:h-64 h-72 overflow-auto w-96">
                     <p>

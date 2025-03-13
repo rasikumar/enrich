@@ -515,7 +515,7 @@ const Discovery = () => {
                 transition={{ duration: 0.5, x: 10 }}
                 className="text-2xl font-semibold"
               >
-                Pesronal info
+                Personal infos
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, x: 20 }}
@@ -523,7 +523,7 @@ const Discovery = () => {
                 transition={{ duration: 0.5, x: 10 }}
                 className="text-slate-400 text-sm"
               >
-                Kindly Provide your pesronal Information
+                Kindly Provide your Personal Information
               </motion.p>
               <div className="mb-4">
                 <p>
