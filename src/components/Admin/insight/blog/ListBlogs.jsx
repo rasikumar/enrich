@@ -87,7 +87,6 @@ const ListBlog = () => {
     );
   }
 
-
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">Blog List</h1>
@@ -111,7 +110,7 @@ const ListBlog = () => {
               key={blog.id}
               className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full max-md:flex-wrap"
             >
-              <div className="w-full">
+              <div className="w-full overflow-hidden">
                 <div className="flex text-sm">
                   <h2 className="text-md font-semibold">{blog.blog_title}</h2>
                 </div>
@@ -179,7 +178,7 @@ const ListBlog = () => {
 
       {/* Custom Modal for Edit Blog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-6xl">
           <DialogHeader>
             <DialogTitle>Edit Blog</DialogTitle>
             <DialogClose />

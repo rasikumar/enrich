@@ -1,9 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QR, Sending } from "../../assets";
 import Instance from "../Admin/Instance";
 import { ChevronDown } from "lucide-react";
 // import { FaClock, FaVideo } from "react-icons/fa";
+import Tesseract from "tesseract.js";
+import { toast } from "react-toastify";
 
 const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -14,6 +16,7 @@ const PsychometricForm = () => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isBoxopen, setIsBoxopen] = useState(true);
   const [availableSlot, setAvailableSlot] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClick = () => setIsBoxopen((prev) => !prev);
 
@@ -183,15 +186,73 @@ const PsychometricForm = () => {
     isConsentChecked: false, // New field for consent checkbox
     isTermsChecked: false, // New field for terms checkbox
   });
+  const preprocessImage = async (file) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
 
-  const handleImageChange = (e) => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // **Increase contrast & sharpness**
+        ctx.filter = "grayscale(100%) contrast(250%) brightness(130%)";
+        ctx.drawImage(img, 0, 0);
+
+        resolve(canvas.toDataURL()); // Convert processed image to Data URL
+      };
+    });
+  };
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setFormData((prevData) => ({
-        ...prevData,
-        file: file, // Store the file object
-      }));
-      setPreviewUrl(URL.createObjectURL(file));
+    if (!file) return;
+
+    setFormData((prevData) => ({ ...prevData, file }));
+    setPreviewUrl(URL.createObjectURL(file));
+
+    try {
+      const processedImage = await preprocessImage(file);
+
+      // Perform OCR
+      const {
+        data: { text },
+      } = await Tesseract.recognize(processedImage, "eng", {
+        tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
+        psm: 6, // Assume a single uniform block of text
+        oem: 1, // Use LSTM OCR engine
+        // logger: (m) => console.log(m),
+      });
+
+      console.log("Extracted Text:", text);
+
+      // Normalize the text for easier processing
+      const normalizedText = text
+        .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
+        .replace(/\s+/g, " ") // Remove extra spaces
+        .toLowerCase();
+
+      console.log("Normalized Text:", normalizedText);
+
+      // Look for amount (499) or key phrases
+      const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
+      const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
+
+      const amountMatch = normalizedText.match(amountRegex);
+      const keywordMatch = normalizedText.match(keywordRegex);
+
+      if (amountMatch || keywordMatch) {
+        toast.success("✅ Image added successfully!");
+      } else {
+        toast.error("❌ *Upload a Image does contain rupees, to, from, upi");
+      }
+    } catch (error) {
+      console.error("Error during OCR:", error);
+      toast.error("⚠️ Failed to process the image. Try again.");
+      setFormData((prevData) => ({ ...prevData, file: null }));
+      setPreviewUrl(null);
     }
   };
 
@@ -237,6 +298,7 @@ const PsychometricForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const formSubmissionData = new FormData();
     const fields = [
@@ -264,10 +326,10 @@ const PsychometricForm = () => {
       formSubmissionData.append("file", formData.file);
     }
 
-    console.log(
-      "Form Submission Data:",
-      Array.from(formSubmissionData.entries())
-    );
+    // console.log(
+    //   "Form Submission Data:",
+    //   Array.from(formSubmissionData.entries())
+    // );
 
     try {
       const response = await Instance.post(
@@ -292,8 +354,15 @@ const PsychometricForm = () => {
     } catch (error) {
       console.error(error);
       setErrorMessage(error.data.message || "Failed to create appointment");
+      setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (currentStep !== 4) {
+      setIsSubmitting(false);
+    }
+  }, [currentStep]);
 
   const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
   const maxDate = new Date();
@@ -719,11 +788,12 @@ const PsychometricForm = () => {
                       transition={{ duration: 0.5, x: 15 }}
                     >
                       <label className="block text-gray-700">
-                        Payment Details
+                        Payment Details{" "}
                       </label>
                       <input
                         type="file"
                         name="file"
+                        accept="image/*"
                         className="relative w-full mb-4"
                         placeholder="Enter payment details"
                         onChange={handleImageChange}
@@ -828,7 +898,7 @@ const PsychometricForm = () => {
                   >
                     Kindly Provide your pesronal Information
                   </motion.p>
-                  <div className="mb-4 max-md:h-64 overflow-scroll w-96">
+                  <div className="mb-4 max-md:h-64 h-72 overflow-auto w-96">
                     <p>
                       <strong>Name:</strong> {formData.name}
                     </p>
@@ -876,15 +946,18 @@ const PsychometricForm = () => {
                   <button
                     type="button"
                     onClick={handlePrev}
-                    className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 md:-bottom-0 -bottom-4"
+                    className={`bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2 absolute right-20 md:-bottom-0 -bottom-4 ${
+                      isSubmitting ? "right-24" : "right-20"
+                    }`}
                   >
                     Previous
                   </button>
                   <button
                     type="submit"
                     className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 absolute right-0 md:-bottom-0 -bottom-4"
+                    disabled={isSubmitting}
                   >
-                    Book
+                    {isSubmitting ? "Booking" : "Book"}
                   </button>
                 </>
               )}

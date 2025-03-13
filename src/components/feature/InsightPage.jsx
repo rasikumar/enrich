@@ -24,7 +24,7 @@ const InsightPage = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6; // Number of blogs per page
-  const pageLimit = 10; // Number of pages before showing dots
+  const pageLimit = 3; // Number of pages before showing dots
 
   useEffect(() => {
     const fetchAllContent = async () => {
@@ -157,6 +157,18 @@ const InsightPage = () => {
     if (totalPages <= pageLimit) {
       return (
         <>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-lg ${
+              currentPage === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+          >
+            Prev
+          </button>
+
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
@@ -164,12 +176,24 @@ const InsightPage = () => {
               className={`px-4 py-2 rounded-lg ${
                 currentPage === index + 1
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  : "bg-gray-200 text-gray-700 hover:bg-blue-300"
               }`}
             >
               {index + 1}
             </button>
           ))}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-lg ${
+              currentPage === totalPages
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+          >
+            Next
+          </button>
         </>
       );
     }
@@ -198,6 +222,18 @@ const InsightPage = () => {
 
     return (
       <>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg ${
+            currentPage === 1
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          Prev
+        </button>
+
         {pagesToShow.map((page, index) => (
           <button
             key={index}
@@ -205,13 +241,25 @@ const InsightPage = () => {
             className={`px-4 py-2 rounded-lg ${
               page === currentPage
                 ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                : "bg-gray-200 text-gray-700 hover:bg-blue-300"
             }`}
             disabled={page === "..."}
           >
             {page}
           </button>
         ))}
+
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded-lg ${
+            currentPage === totalPages
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+        >
+          Next
+        </button>
       </>
     );
   };

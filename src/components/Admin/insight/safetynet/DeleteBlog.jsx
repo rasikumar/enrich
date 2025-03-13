@@ -17,11 +17,13 @@ const DeleteBlog = ({ blogId, setBlogs }) => {
       await Instance.delete(`/admin/deleteSafety/${blogId}`);
       setBlogs((prev) => prev.filter((blog) => blog.id !== blogId));
       toast.success("SafetyNet deleted successfully!");
-      window.location.reload();
     } catch (err) {
       // toast.error("Delete SafetyNet Error ");
       toast.success("SafetyNet deleted successfully!");
       // setError("Failed to delete blog");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
       console.error("Delete blog error:", err);
     }
   };

@@ -34,7 +34,7 @@ const ListChangeAbit = () => {
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         setChangeAbits(sortedBlogList);
-        console.log(response.data.changeAbits);
+        // console.log(response.data.changeAbits);
       } catch (err) {
         console.log(err);
       } finally {
@@ -102,6 +102,7 @@ const ListChangeAbit = () => {
           onChange={handleSearch}
           className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-teal-300"
         />
+
       </div>
       {filteredBlogs.length === 0 ? (
         <div className="text-center text-red-600">Create ChangeABit</div>
@@ -112,7 +113,7 @@ const ListChangeAbit = () => {
               key={changeABit.id}
               className="even:bg-white odd:bg-zinc-100 border border-teal-800 rounded-lg p-4 mb-1 flex gap-6 min-w-full max-md:flex-wrap"
             >
-              <div className="w-full ">
+              <div className="w-full overflow-hidden">
                 <div className="flex text-sm">
                   <h2 className="text-md font-semibold">
                     {changeABit.changeAbit_title}
@@ -188,7 +189,7 @@ const ListChangeAbit = () => {
 
       {/* Custom Modal for Edit Blog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-6xl">
           <DialogHeader>
             <DialogTitle>Edit ChangeABit</DialogTitle>
             <DialogClose />

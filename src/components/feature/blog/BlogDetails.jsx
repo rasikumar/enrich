@@ -298,7 +298,7 @@ const BlogDetail = () => {
                           <p className="font-semibold text-lg">
                             {cmt?.comment_username}
                           </p>
-                          <p className="text-sm text-gray-500">
+                          {/* <p className="text-sm text-gray-500">
                             {new Date(cmt?.comment_created_at).toLocaleString(
                               "en-IN",
                               {
@@ -309,7 +309,7 @@ const BlogDetail = () => {
                                 minute: "numeric",
                               }
                             )}
-                          </p>
+                          </p> */}
                         </div>
                       </div>
 
@@ -411,7 +411,7 @@ const BlogDetail = () => {
                                     <p className="font-medium">
                                       {reply.reply_username}
                                     </p>
-                                    <p className="text-sm text-gray-500">
+                                    {/* <p className="text-sm text-gray-500">
                                       {new Date(
                                         reply.reply_created_at
                                       ).toLocaleString("en-IN", {
@@ -421,7 +421,7 @@ const BlogDetail = () => {
                                         hour: "numeric",
                                         minute: "numeric",
                                       })}
-                                    </p>
+                                    </p> */}
                                   </div>
                                 </div>
                                 <p>{reply.reply}</p>

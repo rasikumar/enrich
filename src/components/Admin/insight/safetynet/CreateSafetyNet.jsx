@@ -83,6 +83,12 @@ const CreateSafetyNet = () => {
       toast.error("Title must be between 10 and 100 characters.");
       return;
     }
+    if (/[^a-zA-Z0-9\s]{3,}/.test(head)) {
+      toast.error(
+        "Title cannot contain three or more consecutive special characters."
+      );
+      return;
+    }
 
     if (!author.trim()) {
       toast.error("Author name is required.");

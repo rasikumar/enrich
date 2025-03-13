@@ -83,6 +83,12 @@ const CreateChangeaBit = () => {
       toast.error("Title must be between 10 and 100 characters.");
       return;
     }
+    if (/[^a-zA-Z0-9\s]{3,}/.test(head)) {
+      toast.error(
+        "Title cannot contain three or more consecutive special characters."
+      );
+      return;
+    }
 
     if (!author.trim()) {
       toast.error("Author name is required.");
@@ -361,7 +367,7 @@ const CreateChangeaBit = () => {
             <img
               src={URL.createObjectURL(image)}
               alt="News"
-               className="w-full object-cover h-64 rounded-xl"
+              className="w-full object-cover h-64 rounded-xl"
             />
           )}
         </div>

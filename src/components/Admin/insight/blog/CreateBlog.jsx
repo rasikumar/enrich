@@ -84,6 +84,13 @@ const CreateBlog = () => {
       return;
     }
 
+    if (/[^a-zA-Z0-9\s]{3,}/.test(head)) {
+      toast.error(
+        "Title cannot contain three or more consecutive special characters."
+      );
+      return;
+    }
+
     if (!author.trim()) {
       toast.error("Author name is required.");
       return;
