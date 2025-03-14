@@ -136,6 +136,20 @@ input[type="number"] {
 }
 
 
+.quill-content ul {
+  list-style-type: disc; /* Use 'circle' or 'square' if needed */
+  padding-left: 20px;
+}
+
+.quill-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.quill-content li {
+  margin-bottom: 5px;
+}
+
 
 @layer base {
   :root {

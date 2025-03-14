@@ -172,32 +172,84 @@ const Appointment = () => {
           </div>
 
           {/* Pagination controls */}
-          <div className="flex justify-center gap-2 mt-4">
+          {/* Pagination controls */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {/* Previous Button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-2 bg-green-500  hover:bg-green-700 rounded-md disabled:opacity-50"
+              className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === 1
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
             >
               Previous
             </button>
-            {pageNumbers.slice(0, 5).map((page) => (
-              <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`p-2 border border-gray-300 rounded-md hover:bg-gray-100 ${
-                  currentPage === page
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-700"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
-            {totalPages > 5 && <span className="p-2 text-gray-700">...</span>}
+
+            {/* First Page + Ellipsis */}
+            {currentPage > 2 && (
+              <>
+                <button
+                  onClick={() => handlePageChange(1)}
+                  className="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all shadow-sm text-gray-700"
+                >
+                  1
+                </button>
+                {currentPage > 3 && (
+                  <span className="px-2 text-gray-500">...</span>
+                )}
+              </>
+            )}
+
+            {/* Dynamic Page Numbers */}
+            {pageNumbers
+              .filter(
+                (page) =>
+                  page === currentPage ||
+                  page === currentPage - 1 ||
+                  page === currentPage + 1
+              )
+              .map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                      : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+            {/* Last Page + Ellipsis */}
+            {currentPage < totalPages - 1 && (
+              <>
+                {currentPage < totalPages - 2 && (
+                  <span className="px-2 text-gray-500">...</span>
+                )}
+                <button
+                  onClick={() => handlePageChange(totalPages)}
+                  className="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all shadow-sm text-gray-700"
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+
+            {/* Next Button */}
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-2 bg-green-500 rounded-md hover:bg-green-700 disabled:opacity-50"
+              className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === totalPages
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
             >
               Next
             </button>

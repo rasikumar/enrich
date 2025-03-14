@@ -14,24 +14,19 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// Custom Modal Component
-// eslint-disable-next-line react/prop-types
-
 const ListSafetyNet = () => {
   const [safetyNets, setSafetyNets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSafetyNet, setSelectedBlog] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [currentPage, setCurrentPage] = useState(1); // For pagination
-  const [blogsPerPage] = useState(5); // Limit blogs per page
-  const [searchQuery, setSearchQuery] = useState(""); // Search by author
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [blogsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await Instance.post("/admin/getAllSafetyList");
-        // console.log(response.data);
-
         const sortedBlogList = response.data.safetyRecords.sort(
           (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
         );
@@ -52,27 +47,23 @@ const ListSafetyNet = () => {
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Close modal
+    setIsModalOpen(false);
   };
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Filter blogs based on search query
   const filteredBlogs = safetyNets.filter((safetyNet) =>
     safetyNet.safety_author.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Pagination logic
   const indexOfLastSafetyNet = currentPage * blogsPerPage;
   const indexOfFirstsafetyNets = indexOfLastSafetyNet - blogsPerPage;
   const currentsafetyNets = filteredBlogs.slice(
     indexOfFirstsafetyNets,
     indexOfLastSafetyNet
   );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -91,7 +82,6 @@ const ListSafetyNet = () => {
     );
   }
 
-
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
       <h1 className="text-center text-3xl mb-5">Safety Net List</h1>
@@ -107,7 +97,7 @@ const ListSafetyNet = () => {
         />
       </div>
       {filteredBlogs.length === 0 ? (
-        <div className="text-center text-red-600">Create Saftery Net</div>
+        <div className="text-center text-red-600">Create Safety Net</div>
       ) : (
         <ul className="flex flex-wrap gap-3">
           {currentsafetyNets.map((safetyNet) => (
@@ -128,14 +118,11 @@ const ListSafetyNet = () => {
                   </p>
                   <p className="text-gray-500 inline-flex items-center text-xs gap-2">
                     <MdDateRange />
-                    {new Date(safetyNet.updated_at).toLocaleDateString(
-                      "en-IN",
-                      {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      }
-                    )}
+                    {new Date(safetyNet.updated_at).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </p>
                 </div>
 
@@ -171,22 +158,73 @@ const ListSafetyNet = () => {
       )}
 
       {/* Pagination Controls */}
-      <div className="flex justify-center mt-6">
-        {[...Array(Math.ceil(filteredBlogs.length / blogsPerPage)).keys()].map(
-          (number) => (
-            <button
-              key={number}
-              onClick={() => paginate(number + 1)}
-              className={`px-3 py-1 mx-1 rounded-md border ${
-                currentPage === number + 1
-                  ? "bg-teal-600 text-white"
-                  : "bg-gray-200"
-              }`}
-            >
-              {number + 1}
-            </button>
-          )
-        )}
+      <div className="flex items-center justify-center gap-2 mt-6">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+            ${
+              currentPage === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+            }`}
+        >
+          Previous
+        </button>
+
+        {Array.from({ length: Math.ceil(filteredBlogs.length / blogsPerPage) }, (_, index) => {
+          const page = index + 1;
+
+          if (
+            page === 1 ||
+            page === Math.ceil(filteredBlogs.length / blogsPerPage) ||
+            (page >= currentPage - 1 && page <= currentPage + 1)
+          ) {
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                  currentPage === page
+                    ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                    : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          }
+
+          if (
+            (page === currentPage - 2 && currentPage > 3) ||
+            (page === currentPage + 2 && currentPage < Math.ceil(filteredBlogs.length / blogsPerPage) - 2)
+          ) {
+            return (
+              <span key={page} className="px-2 text-gray-500">
+                ...
+              </span>
+            );
+          }
+
+          return null;
+        })}
+
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              Math.min(prev + 1, Math.ceil(filteredBlogs.length / blogsPerPage))
+            )
+          }
+          disabled={currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+            ${
+              currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+            }`}
+        >
+          Next
+        </button>
       </div>
 
       {/* Custom Modal for Edit Blog */}
@@ -201,7 +239,7 @@ const ListSafetyNet = () => {
               safety={selectedSafetyNet}
               setEditing={setIsModalOpen}
               setSafetyNets={setSafetyNets}
-              closeModal={handleCloseModal} // Pass the function to close modal
+              closeModal={handleCloseModal}
             />
           )}
         </DialogContent>

@@ -10,9 +10,6 @@ const CookiePolicy = () => {
             <h2 className="text-2xl font-bold mb-4 text-t-primary">
               Cookies Policy
             </h2>
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>Last updated: 25/09/2024</strong>
-            </p>
             <p className="mb-4 ">
               This Cookie Policy explains what cookies are, how we use them, the
               types of cookies we use, and how you can control or delete

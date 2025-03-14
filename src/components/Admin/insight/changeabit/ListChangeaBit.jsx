@@ -70,7 +70,6 @@ const ListChangeAbit = () => {
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -102,7 +101,6 @@ const ListChangeAbit = () => {
           onChange={handleSearch}
           className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-teal-300"
         />
-
       </div>
       {filteredBlogs.length === 0 ? (
         <div className="text-center text-red-600">Create ChangeABit</div>
@@ -169,24 +167,87 @@ const ListChangeAbit = () => {
       )}
 
       {/* Pagination Controls */}
-      <div className="flex justify-center mt-6">
-        {[...Array(Math.ceil(filteredBlogs.length / blogsPerPage)).keys()].map(
-          (number) => (
-            <button
-              key={number}
-              onClick={() => paginate(number + 1)}
-              className={`px-3 py-1 mx-1 rounded-md border ${
-                currentPage === number + 1
-                  ? "bg-teal-600 text-white"
-                  : "bg-gray-200"
-              }`}
-            >
-              {number + 1}
-            </button>
-          )
-        )}
-      </div>
+      {/* Pagination Controls */}
+      <div className="flex items-center justify-center gap-2 mt-6">
+        {/* Previous Button */}
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === 1
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
+        >
+          Previous
+        </button>
 
+        {/* Page Numbers with Dots */}
+        {Array.from(
+          { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
+          (_, index) => {
+            const page = index + 1;
+
+            // Always show first page, last page, and pages around current page
+            if (
+              page === 1 || // Always show first page
+              page === Math.ceil(filteredBlogs.length / blogsPerPage) || // Always show last page
+              (page >= currentPage - 1 && page <= currentPage + 1) // Show pages around current page
+            ) {
+              return (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                      : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            }
+
+            // Show dots for skipped pages
+            if (
+              (page === currentPage - 2 && currentPage > 3) || // Dots before current page
+              (page === currentPage + 2 &&
+                currentPage <
+                  Math.ceil(filteredBlogs.length / blogsPerPage) - 2) // Dots after current page
+            ) {
+              return (
+                <span key={page} className="px-2 text-gray-500">
+                  ...
+                </span>
+              );
+            }
+
+            return null; // Hide other pages
+          }
+        )}
+
+        {/* Next Button */}
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              Math.min(prev + 1, Math.ceil(filteredBlogs.length / blogsPerPage))
+            )
+          }
+          disabled={
+            currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)
+          }
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
+        >
+          Next
+        </button>
+      </div>
       {/* Custom Modal for Edit Blog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="max-w-6xl">

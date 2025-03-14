@@ -241,8 +241,8 @@ const BlogDetail = () => {
         style={{ scaleX: scrollYProgress, transform: origin }}
       />
       <DynamicBreadcrumb />
-      <div className="w-[90%] m-auto py-12 flex justify-between mt-10">
-        <div className="sm:w-[80%] m-auto">
+      <div className="md:w-[90%] w-32 md:m-auto py-12 flex justify-between mt-10">
+        <div className="sm:w-[80%] m-auto mt-6">
           {blog &&
             blog.map((blog) => (
               <div key={blog.id} className="flex flex-col gap-4">

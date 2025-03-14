@@ -14,17 +14,14 @@ import {
   DialogTitle,
 } from "../../../ui/dialog";
 
-// Custom Modal Component
-// eslint-disable-next-line react/prop-types
-
 const ListBlog = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedBlog, setSelectedBlog] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [currentPage, setCurrentPage] = useState(1); // For pagination
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage] = useState(5);
-  const [searchQuery, setSearchQuery] = useState(""); // Search by author
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -34,7 +31,6 @@ const ListBlog = () => {
           (a, b) => new Date(b.blog_date) - new Date(a.blog_date)
         );
         setBlogs(sortedBlogList);
-        // console.log(response);
       } catch (err) {
         console.log(err);
       } finally {
@@ -47,28 +43,24 @@ const ListBlog = () => {
 
   const handleEditClick = (blog) => {
     setSelectedBlog(blog);
-    setIsModalOpen(true); // Open modal
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Close modal
+    setIsModalOpen(false);
   };
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Filter blogs based on search query
   const filteredBlogs = blogs.filter((blog) =>
     blog.blog_author.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Pagination logic
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -158,22 +150,73 @@ const ListBlog = () => {
       )}
 
       {/* Pagination Controls */}
-      <div className="flex justify-center mt-6">
-        {[...Array(Math.ceil(filteredBlogs.length / blogsPerPage)).keys()].map(
-          (number) => (
-            <button
-              key={number}
-              onClick={() => paginate(number + 1)}
-              className={`px-3 py-1 mx-1 rounded-md border ${
-                currentPage === number + 1
-                  ? "bg-teal-600 text-white"
-                  : "bg-gray-200"
-              }`}
-            >
-              {number + 1}
-            </button>
-          )
-        )}
+      <div className="flex items-center justify-center gap-2 mt-6">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+            ${
+              currentPage === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+            }`}
+        >
+          Previous
+        </button>
+
+        {Array.from({ length: Math.ceil(filteredBlogs.length / blogsPerPage) }, (_, index) => {
+          const page = index + 1;
+
+          if (
+            page === 1 ||
+            page === Math.ceil(filteredBlogs.length / blogsPerPage) ||
+            (page >= currentPage - 1 && page <= currentPage + 1)
+          ) {
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                  currentPage === page
+                    ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                    : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          }
+
+          if (
+            (page === currentPage - 2 && currentPage > 3) ||
+            (page === currentPage + 2 && currentPage < Math.ceil(filteredBlogs.length / blogsPerPage) - 2)
+          ) {
+            return (
+              <span key={page} className="px-2 text-gray-500">
+                ...
+              </span>
+            );
+          }
+
+          return null;
+        })}
+
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              Math.min(prev + 1, Math.ceil(filteredBlogs.length / blogsPerPage))
+            )
+          }
+          disabled={currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+            ${
+              currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+            }`}
+        >
+          Next
+        </button>
       </div>
 
       {/* Custom Modal for Edit Blog */}

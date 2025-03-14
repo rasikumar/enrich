@@ -8,6 +8,13 @@ const ContactList = () => {
   const [search, setSearch] = useState("");
   const [phone, setPhone] = useState("");
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  // Pagination logic (Move this above where it's used)
+  const totalPages = Math.ceil(filteredContacts.length / itemsPerPage);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   useEffect(() => {
     const fetchContacts = async () => {
       try {
@@ -18,7 +25,6 @@ const ContactList = () => {
         console.error("Error fetching contacts:", error);
       }
     };
-
     fetchContacts();
   }, []);
 
@@ -33,6 +39,7 @@ const ContactList = () => {
       );
     });
     setFilteredContacts(filtered);
+    setCurrentPage(1); // Reset to first page when filtering
   }, [search, phone, contacts]);
 
   // Reset Filters
@@ -41,6 +48,16 @@ const ContactList = () => {
     setPhone("");
     setFilteredContacts(contacts);
   };
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
+  // const pageNumbers = [];
+  // for (let i = 1; i <= totalPages; i++) {
+  //   pageNumbers.push(i);
+  // }
 
   // Export Data to Excel
   const exportToExcel = () => {
@@ -78,6 +95,13 @@ const ContactList = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Contacts");
     XLSX.writeFile(workbook, "contact_list.xlsx");
   };
+
+  // Pagination logic
+  // const totalPages = Math.ceil(filteredContacts.length / itemsPerPage);
+  const currentData = filteredContacts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="p-4 max-md:mt-8">
@@ -139,7 +163,7 @@ const ContactList = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredContacts.map((contact) => (
+            {currentData.map((contact) => (
               <tr key={contact.id} className="text-sm">
                 <td className="border border-gray-300 p-2">{contact.id}</td>
                 <td className="border border-gray-300 p-2">{contact.name}</td>
@@ -156,6 +180,87 @@ const ContactList = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex items-center justify-center gap-2 mt-6">
+        {/* Previous Button */}
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === 1
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
+        >
+          Previous
+        </button>
+
+        {/* First Page + Ellipsis */}
+        {currentPage > 2 && (
+          <>
+            <button
+              onClick={() => handlePageChange(1)}
+              className="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all shadow-sm text-gray-700"
+            >
+              1
+            </button>
+            {currentPage > 3 && <span className="px-2 text-gray-500">...</span>}
+          </>
+        )}
+
+        {/* Dynamic Page Numbers */}
+        {pageNumbers
+          .filter(
+            (page) =>
+              page === currentPage ||
+              page === currentPage - 1 ||
+              page === currentPage + 1
+          )
+          .map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                currentPage === page
+                  ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                  : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+        {/* Last Page + Ellipsis */}
+        {currentPage < totalPages - 1 && (
+          <>
+            {currentPage < totalPages - 2 && (
+              <span className="px-2 text-gray-500">...</span>
+            )}
+            <button
+              onClick={() => handlePageChange(totalPages)}
+              className="px-3 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all shadow-sm text-gray-700"
+            >
+              {totalPages}
+            </button>
+          </>
+        )}
+
+        {/* Next Button */}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === totalPages
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
+        >
+          Next
+        </button>
       </div>
 
       {/* No Data Message */}

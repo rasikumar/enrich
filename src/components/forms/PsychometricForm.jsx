@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 // import { FaClock, FaVideo } from "react-icons/fa";
 import Tesseract from "tesseract.js";
 import { toast } from "react-toastify";
+import { Input } from "../ui/input";
 
 const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -735,16 +736,18 @@ const PsychometricForm = () => {
                     <label className="block text-gray-700 mb-2">
                       Preferred Appointment Date
                     </label>
-                    <input
+
+                    <Input
                       type="date"
                       name="selectDate"
                       value={formData.selectDate}
                       onChange={handleDateChange}
                       min={today}
                       max={maxDateString}
-                      className="w-full p-2 border rounded"
-                      onKeyDown={(e) => e.preventDefault()}
+                      className="w-full p-2 border rounded appearance-none bg-white"
+                      inputMode="none"
                     />
+
                     {errors.selectDate && (
                       <p className="text-red-500 text-sm">
                         {errors.selectDate}

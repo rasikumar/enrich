@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Instance from "../Instance";
 import * as XLSX from "xlsx";
 import { FaFileExport } from "react-icons/fa";
-import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 
 const Members = () => {
   const [contacts, setContacts] = useState([]);
@@ -267,23 +266,73 @@ const Members = () => {
         </div>
       )}
 
-      <div className="mt-4 flex justify-between">
+      <div className="flex items-center justify-center gap-2 mt-6">
+        {/* Previous Button */}
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === 1
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
         >
-          <HiArrowLeft />
+          Previous
         </button>
-        <span className="px-4 py-2">
-          Page {currentPage} of {totalPages}
-        </span>
+
+        {/* Page Numbers with Dots */}
+        {Array.from({ length: totalPages }, (_, index) => {
+          const page = index + 1;
+
+          // Show first page, last page, current page, and pages around current page
+          if (
+            page === 1 || // Always show first page
+            page === totalPages || // Always show last page
+            (page >= currentPage - 1 && page <= currentPage + 1) // Show pages around current page
+          ) {
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                  currentPage === page
+                    ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                    : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          }
+
+          // Show dots for skipped pages
+          if (
+            (page === currentPage - 2 && currentPage > 3) || // Dots before current page
+            (page === currentPage + 2 && currentPage < totalPages - 2) // Dots after current page
+          ) {
+            return (
+              <span key={page} className="px-2 text-gray-500">
+                ...
+              </span>
+            );
+          }
+
+          return null; // Hide other pages
+        })}
+
+        {/* Next Button */}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+          className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
+      ${
+        currentPage === totalPages
+          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+          : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
+      }`}
         >
-          <HiArrowRight />
+          Next
         </button>
       </div>
     </div>
