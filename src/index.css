@@ -150,6 +150,27 @@ input[type="number"] {
   margin-bottom: 5px;
 }
 
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-right {
+  text-align: right;
+}
+.ql-align-left {
+  text-align: left;
+}
+.ql-align-justify {
+  text-align: justify;
+}
+
+.ql-font-serif {
+  font-family: 'Times New Roman', serif;
+}
+
+.ql-font-monospace {
+  font-family: 'Courier New', monospace;
+}
+
 
 @layer base {
   :root {

@@ -13,7 +13,7 @@ const Members = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [newsletterContent] = useState(""); // Newsletter content state
+  // const [newsletterContent] = useState(""); // Newsletter content state
   const itemsPerPage = 10;
   const [blog, setBlog] = useState(0);
 
@@ -103,6 +103,7 @@ const Members = () => {
       subscription_date: "",
     });
     setCurrentPage(1);
+    setSelectedContacts([]); // Reset selected contacts
   };
 
   const toggleSelectContact = (id) => {
@@ -114,10 +115,10 @@ const Members = () => {
   };
 
   const handleSelectAll = () => {
-    if (selectedContacts.length === paginatedContacts.length) {
+    if (selectedContacts.length === filteredContacts.length) {
       setSelectedContacts([]);
     } else {
-      setSelectedContacts(paginatedContacts.map((contact) => contact.id));
+      setSelectedContacts(filteredContacts.map((contact) => contact.id));
     }
   };
 
@@ -142,8 +143,8 @@ const Members = () => {
   }, []);
 
   const sendNewsletter = () => {
-    console.log("Sending newsletter to:", selectedContacts);
-    console.log("Newsletter content:", newsletterContent);
+    // console.log("Sending newsletter to:", selectedContacts);
+    // console.log("Newsletter content:", newsletterContent);
     blog();
     closeNewsletterModal();
   };
@@ -203,7 +204,10 @@ const Members = () => {
               <input
                 type="checkbox"
                 onChange={handleSelectAll}
-                checked={selectedContacts.length === paginatedContacts.length}
+                checked={
+                  filteredContacts.length > 0 &&
+                  selectedContacts.length === filteredContacts.length
+                }
               />
             </th>
             <th className="border border-gray-300 p-2">ID</th>
@@ -324,10 +328,12 @@ const Members = () => {
         {/* Next Button */}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={
+            currentPage === totalPages || paginatedContacts.length === 0
+          }
           className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
       ${
-        currentPage === totalPages
+        currentPage === totalPages || paginatedContacts.length === 0
           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
           : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
       }`}

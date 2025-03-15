@@ -319,7 +319,11 @@ const InsightPage = () => {
                 />
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-gray-400">
-                    {new Date(item.date).toLocaleDateString()}
+                    {new Date(item.date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
                   </span>
                   <Link
                     to={`/insights/${item.linkPrefix}/${item.id}`}

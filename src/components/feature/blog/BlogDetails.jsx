@@ -295,7 +295,7 @@ const BlogDetail = () => {
                         </div>
 
                         <div className="flex flex-col">
-                          <p className="font-semibold text-lg">
+                          <p className="font-semibold text-lg capitalize  ">
                             {cmt?.comment_username}
                           </p>
                           {/* <p className="text-sm text-gray-500">
@@ -408,7 +408,7 @@ const BlogDetail = () => {
                                   </div>
 
                                   <div className="flex items-end gap-2">
-                                    <p className="font-medium">
+                                    <p className="font-medium capitalize">
                                       {reply.reply_username}
                                     </p>
                                     {/* <p className="text-sm text-gray-500">

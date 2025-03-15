@@ -251,10 +251,10 @@ const ContactList = () => {
         {/* Next Button */}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || filteredContacts.length === 0}
           className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
       ${
-        currentPage === totalPages
+        currentPage === totalPages || filteredContacts.length === 0
           ? "bg-gray-300 text-gray-500 cursor-not-allowed"
           : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
       }`}

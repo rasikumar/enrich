@@ -15,6 +15,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
   const [replyToToggle, setReplyToToggle] = useState(null); // Track the reply being toggled
   const [isReplyHidden, setIsReplyHidden] = useState(0); // Track the current visibility state for replies
   const [isReplyToggleModalOpen, setIsReplyToggleModalOpen] = useState(false); // Modal state for reply toggle
+  const [showRedBorder, setShowRedBorder] = useState(false); // State to track red border
 
   const toggleShow = () => {
     setShowReplies((prev) => !prev);
@@ -27,8 +28,11 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
   const handleReply = async (comment_id) => {
     if (replyText.trim().length < 3 || replyText.trim().length > 100) {
       toast.error("Reply must be between 10 and 100 characters.");
+      setShowRedBorder(true); // Show red border if reply is invalid
       return;
     }
+
+    setShowRedBorder(false); // Hide red border if reply is valid
 
     try {
       await Instance.post(`/admin/replyToComment`, {
@@ -46,8 +50,10 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
       setComments(updatedComments);
       setReplyText(""); // Clear input field
       setCommentToReply(null); // Reset selected comment for reply
-
       toast.success("Reply added successfully!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Failed to reply to comment:", error);
       toast.error("Failed to reply to comment. Please try again.");
@@ -170,7 +176,9 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
               value={replyText}
               onChange={handleReplyChange}
               placeholder="Please enter a reply"
-              className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-teal-300"
+              className={`w-full px-4 py-2 border rounded-md shadow-sm focus:ring focus:ring-teal-300 ${
+                showRedBorder ? "border-red-500" : ""
+              }`}
             />
             <button
               onClick={() => handleReply(comment.comment_id)}

@@ -32,17 +32,6 @@ const CreateNewsLetter = () => {
   const [isPreview, setIsPreview] = useState(false);
 
   useEffect(() => {
-    const savedWord = localStorage.getItem("wordData");
-    if (savedWord) {
-      setWord(JSON.parse(savedWord));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("wordData", JSON.stringify(word));
-  }, [word]);
-
-  useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await Instance.get("/admin/getAllBlogs");
@@ -485,9 +474,7 @@ const CreateNewsLetter = () => {
                       width={300}
                     />
                   </div>
-                  <a href="#" className="p-2 text-blue-600 underline">
-                    Learn More
-                  </a>
+                  <a className="p-2 text-blue-600 underline">Learn More</a>
                 </div>
 
                 <div className="mt-4">
@@ -512,9 +499,7 @@ const CreateNewsLetter = () => {
                       width={300}
                     />
                   </div>
-                  <a href="#" className="p-2 text-primary underline">
-                    Learn More
-                  </a>
+                  <a className="p-2 text-primary underline">Learn More</a>
                 </div>
 
                 <div className="mt-4">
@@ -539,9 +524,7 @@ const CreateNewsLetter = () => {
                       width={300}
                     />
                   </div>
-                  <a href="#" className="p-2 text-primary underline">
-                    Learn More
-                  </a>
+                  <a className="p-2 text-primary underline">Learn More</a>
                 </div>
 
                 <div className="mt-4">
@@ -585,7 +568,7 @@ const CreateNewsLetter = () => {
                     <span className="text-secondary">Insights Hub</span>
                   </h4>
                   <p>{insights}</p>
-                  <a href="#" className="text-primary p-2 underline">
+                  <a className="text-primary p-2 underline">
                     Visit the Insights Hub for articles, guides, and tools that
                     inspire change.
                   </a>
@@ -597,18 +580,12 @@ const CreateNewsLetter = () => {
                   </h2>
                   <p className="mb-4">
                     Stay in touch! Follow us on{" "}
-                    <a href="#" className="text-primary no-underline">
-                      LinkedIn
-                    </a>
-                    ,{" "}
-                    <a href="#" className="text-primary no-underline">
+                    <span className="text-primary no-underline">LinkedIn</span>,{" "}
+                    <span className="text-primary no-underline">
                       Instagram{" "}
-                    </a>
+                    </span>
                     and{" "}
-                    <a href="#" className="text-primary no-underline">
-                      Facebook
-                    </a>
-                    .
+                    <span className="text-primary no-underline">Facebook</span>.
                   </p>
 
                   <h2 className="text-lg font-bold mb-2 mt-4">
@@ -622,7 +599,7 @@ const CreateNewsLetter = () => {
 
                   <h2 className="text-lg font-bold mb-2 mt-4">
                     🔍 Expert <span className="text-secondary">Guidance</span>,
-                    Just a Click Away
+                    Just span Click Away
                   </h2>
                   <p className="mb-4">
                     Ready to explore more? Discover counseling options and
@@ -637,8 +614,8 @@ const CreateNewsLetter = () => {
                       <span className="text-primary">Minds</span> community.
                     </h2>
                     <p className="mt-4 mb-6">
-                      Together, we’re making each day a step closer to our best
-                      selves.
+                      Together, we’re making each day span step closer to our
+                      best selves.
                     </p>
                     <div className="mt-4">
                       <p className="font-bold mb-1">Warmly,</p>
@@ -657,19 +634,19 @@ const CreateNewsLetter = () => {
                       Insights Hub through our website.
                     </p>
                     <p>
-                      <a
-                        href="unsubscribe-link"
+                      <span
+                        // href="unsubscribe-link"
                         className="text-gray-600 underline"
                       >
                         Unsubscribe
-                      </a>{" "}
+                      </span>{" "}
                       |
-                      <a
-                        href="https://newcheck.evvisolutions.com/privacy-policy"
+                      <span
+                        // href="https://newcheck.evvisolutions.com/privacy-policy"
                         className="text-gray-600 underline"
                       >
                         Privacy Policy
-                      </a>
+                      </span>
                     </p>
                   </footer>
                 </div>

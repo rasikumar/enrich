@@ -1,7 +1,7 @@
 // import { FaInstagram } from "react-icons/fa";
 // import { FaWhatsapp } from "react-icons/fa";
 // import { CiLinkedin } from "react-icons/ci";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+// import AnchorLink from "react-anchor-link-smooth-scroll";
 import { Link } from "react-router-dom";
 import { logo } from "../assets";
 
@@ -58,12 +58,12 @@ const Footer = () => {
           </h1>
           <div className="mb-4 lg:mb-0 flex items-center justify-center">
             <ul className="md:flex md:gap-3 xl:text-lg md:text-sm text-xs text-center lg:text-left ">
-              <AnchorLink
-                href="/#hero"
+              <Link
+                to="/"
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex text-sm"
               >
                 Home
-              </AnchorLink>
+              </Link>
               <Link
                 to={"/Aboutus"}
                 className="text-black hover:text-yellow-700 transition delay-100 cursor-pointer md:border-r-2 border-primary pr-2 h-5 items-center flex text-sm"

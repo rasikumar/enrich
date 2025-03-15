@@ -94,7 +94,7 @@ const ListBlog = () => {
         />
       </div>
       {filteredBlogs.length === 0 ? (
-        <div className="text-center text-red-600">Create Blogs</div>
+        <div className="text-center text-red-600">No result found</div>
       ) : (
         <ul className="flex flex-wrap gap-3">
           {currentBlogs.map((blog) => (
@@ -164,42 +164,47 @@ const ListBlog = () => {
           Previous
         </button>
 
-        {Array.from({ length: Math.ceil(filteredBlogs.length / blogsPerPage) }, (_, index) => {
-          const page = index + 1;
+        {Array.from(
+          { length: Math.ceil(filteredBlogs.length / blogsPerPage) },
+          (_, index) => {
+            const page = index + 1;
 
-          if (
-            page === 1 ||
-            page === Math.ceil(filteredBlogs.length / blogsPerPage) ||
-            (page >= currentPage - 1 && page <= currentPage + 1)
-          ) {
-            return (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
-                  currentPage === page
-                    ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
-                    : "border border-gray-300 hover:bg-gray-100 text-gray-700"
-                }`}
-              >
-                {page}
-              </button>
-            );
+            if (
+              page === 1 ||
+              page === Math.ceil(filteredBlogs.length / blogsPerPage) ||
+              (page >= currentPage - 1 && page <= currentPage + 1)
+            ) {
+              return (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 rounded-lg transition-all shadow-sm font-semibold ${
+                    currentPage === page
+                      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+                      : "border border-gray-300 hover:bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            }
+
+            if (
+              (page === currentPage - 2 && currentPage > 3) ||
+              (page === currentPage + 2 &&
+                currentPage <
+                  Math.ceil(filteredBlogs.length / blogsPerPage) - 2)
+            ) {
+              return (
+                <span key={page} className="px-2 text-gray-500">
+                  ...
+                </span>
+              );
+            }
+
+            return null;
           }
-
-          if (
-            (page === currentPage - 2 && currentPage > 3) ||
-            (page === currentPage + 2 && currentPage < Math.ceil(filteredBlogs.length / blogsPerPage) - 2)
-          ) {
-            return (
-              <span key={page} className="px-2 text-gray-500">
-                ...
-              </span>
-            );
-          }
-
-          return null;
-        })}
+        )}
 
         <button
           onClick={() =>
@@ -207,10 +212,14 @@ const ListBlog = () => {
               Math.min(prev + 1, Math.ceil(filteredBlogs.length / blogsPerPage))
             )
           }
-          disabled={currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)}
+          disabled={
+            currentPage === Math.ceil(filteredBlogs.length / blogsPerPage) ||
+            filteredBlogs.length === 0
+          }
           className={`px-4 py-2 rounded-lg transition-all shadow-md font-semibold 
             ${
-              currentPage === Math.ceil(filteredBlogs.length / blogsPerPage)
+              currentPage === Math.ceil(filteredBlogs.length / blogsPerPage) ||
+              filteredBlogs.length === 0
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-600 hover:to-blue-800"
             }`}

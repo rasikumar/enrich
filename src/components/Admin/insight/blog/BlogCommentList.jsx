@@ -154,7 +154,7 @@ const CommentList = () => {
             />
           ))
         ) : (
-          <p className="text-center w-full">Invalid matching record</p>
+          <p className="text-center w-full">No Comments found</p>
         )}
       </ul>
 

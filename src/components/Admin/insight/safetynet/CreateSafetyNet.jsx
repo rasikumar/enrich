@@ -152,7 +152,7 @@ const CreateSafetyNet = () => {
           author,
           content,
         });
-        toast.success(response.data.message);
+        toast.success("SafetyNet created sucessfully");
         // Clear form fields after successful submission
         setHead("");
         setAuthor("");
@@ -164,7 +164,9 @@ const CreateSafetyNet = () => {
       } else {
         toast.error(response.data.message);
       }
-      window.location.reload();
+      setTimeout(() => {
+          window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Error submitting SafetyNet:", error);
       toast.error("Error submitting SafetyNet: " + error.message);

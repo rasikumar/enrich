@@ -116,10 +116,6 @@ const CookiePolicy = () => {
               If you have any questions about this Cookie Policy, you can
               contact us at:
             </p>
-            <p className="mb-2">
-              <strong>Email:</strong> [Your Contact Email] <br />
-              <strong>Address:</strong> [Your Company Address]
-            </p>
           </section>
         </section>
       </div>
