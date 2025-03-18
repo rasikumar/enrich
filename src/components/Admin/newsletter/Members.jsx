@@ -39,7 +39,6 @@ const Members = () => {
       { header: "Created At", key: "subscription_date" },
     ];
 
-    // Filter selected contacts
     const data = contacts
       .filter((contact) => selectedContacts.includes(contact.id))
       .map((contact) => ({

@@ -113,7 +113,8 @@ const App = () => {
     location.pathname.startsWith("/forgotpassword") ||
     location.pathname.startsWith("/resetPassword") ||
     location.pathname.startsWith("/dashboard")||
-    location.pathname.startsWith("/session-expired")
+    location.pathname.startsWith("/session-expired")||
+    location.pathname.startsWith("*")
 
   const [showCookiePolicy, setShowCookiePolicy] = useState(false);
 

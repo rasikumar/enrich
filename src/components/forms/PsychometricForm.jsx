@@ -26,7 +26,6 @@ const PsychometricForm = () => {
   // const timeOptions = [
   //   {availableSlot }
   // ];
-
   const formatDate = (dateString, slot) => {
     const date = new Date(dateString);
     const day = date.getDate(); // Removes leading zero automatically
@@ -377,7 +376,7 @@ const PsychometricForm = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 45); // Add 45 days to today's date
   const maxDateString = maxDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
-  // console.log(formData)
+  console.log(formData);
 
   return (
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
@@ -822,7 +821,7 @@ const PsychometricForm = () => {
                         name="file"
                         accept="image/*"
                         className="relative w-full mb-4"
-                        key={formData.file ? formData.file.name : "no-file"} // Use file name as key
+                        key={formData.file ? formData.file?.name : "no-file"} // Use file name as key
                         onChange={validateAndProcessImage}
                       />
                       {errors.file && (
