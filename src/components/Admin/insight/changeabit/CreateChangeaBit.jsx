@@ -123,8 +123,8 @@ const CreateChangeaBit = () => {
       return;
     }
 
-    if (content.trim().length < 100 || content.trim().length > 2500) {
-      toast.error("Content must be between 100 and 2500 characters.");
+    if (content.trim().length < 100 ) {
+      toast.error("Content must be minimum 100 characters.");
       return;
     }
     const formData = new FormData();

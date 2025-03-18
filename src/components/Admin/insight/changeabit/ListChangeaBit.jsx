@@ -56,6 +56,7 @@ const ListChangeAbit = () => {
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to first page on search
   };
 
   // Filter changeABits based on search query

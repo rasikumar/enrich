@@ -262,7 +262,7 @@ const BlogDetail = () => {
                 <img
                   src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
-                  className="w-full object-cover h-96 rounded-xl"
+                  className="md:w-full w-80 object-cover h-96 rounded-xl"
                 />
 
                 <div

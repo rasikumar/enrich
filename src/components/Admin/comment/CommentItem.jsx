@@ -6,6 +6,7 @@ import Instance from "../Instance";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import ConfirmModal from "./ConfirmModal";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
   const [replyText, setReplyText] = useState("");
@@ -111,6 +112,7 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
       setComments(updatedComments);
       setIsReplyToggleModalOpen(false);
       setReplyToToggle(null);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to toggle reply visibility:", error);
     }

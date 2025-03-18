@@ -112,7 +112,8 @@ const App = () => {
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/forgotpassword") ||
     location.pathname.startsWith("/resetPassword") ||
-    location.pathname.startsWith("/dashboard");
+    location.pathname.startsWith("/dashboard")||
+    location.pathname.startsWith("/session-expired")
 
   const [showCookiePolicy, setShowCookiePolicy] = useState(false);
 
@@ -196,7 +197,7 @@ const App = () => {
               <Route path="/insights/blog" element={<BlogPage />} />
 
               <Route
-                path="/insights/changeABit/:id"
+                path="/insights/changeABit/:changeAbit_title"
                 element={<BlogDetailss />}
               />
               <Route path="/insights/changeABit" element={<ChangeABit />} />

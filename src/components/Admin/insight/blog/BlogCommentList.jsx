@@ -26,6 +26,7 @@ const CommentList = () => {
       try {
         const response = await Instance.post("/admin/getAllComments");
         setComments(response.data.comments);
+        // console.log(response.data.comments);
       } catch (err) {
         setError("Failed to fetch comments");
       } finally {
@@ -95,6 +96,7 @@ const CommentList = () => {
       // Close the modal and reset the state
       setIsToggleModalOpen(false);
       setCommentToToggle(null);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to toggle comment visibility:", error);
     }

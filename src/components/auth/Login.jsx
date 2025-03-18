@@ -47,7 +47,7 @@ const Login = () => {
       }, 1000);
       console.log(response.data.message);
     } catch (err) {
-      toast.error("give valid email or password");
+      toast.error("Please enter valid mail id or password");
     }
   };
 

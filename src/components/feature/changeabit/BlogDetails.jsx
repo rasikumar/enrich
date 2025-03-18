@@ -23,16 +23,18 @@ const SkeletonLoader = () => {
 };
 
 const BlogDetail = () => {
-  const { id } = useParams(); // Assuming you pass the blog ID in the URL
+  const { changeAbit_title } = useParams(); // Assuming you pass the blog ID in the URL
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [suggestedBlogs, setSuggestedBlogs] = useState([]);
   const [suggestedLoading, setSuggestedLoading] = useState(true);
   const [suggestedError, setSuggestedError] = useState(null);
+  console.log("useParams:", useParams());
 
   const { scrollYProgress } = useScroll();
-
+  // console.log(changeAbit_title)
+  const id = changeAbit_title;
   useEffect(() => {
     const fetchBlogDetail = async () => {
       try {

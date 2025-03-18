@@ -152,7 +152,7 @@ const PsychometricForm = () => {
       newErrors.file = "Payment is required";
     }
     if (!formData.isConsentChecked || !formData.isTermsChecked) {
-      alert("You must agree to the consent and terms and conditions.");
+      toast.error("You must agree to the consent and terms and conditions.");
       return false; // Return false to indicate validation failure
     }
 
@@ -197,7 +197,7 @@ const PsychometricForm = () => {
         return true; // Image is valid
       } else {
         toast.error(
-          "❌ Uploaded image does not contain required keywords (rupees, to, from, upi)."
+          "Please upload valid image and it should contain payment details (UPI id,from,to & rupees)"
         );
         setFormData((prevData) => ({ ...prevData, file: null })); // Clear invalid file
         setPreviewUrl(null);
@@ -217,8 +217,7 @@ const PsychometricForm = () => {
     const isImageValid = await handleImageChange(e);
     if (!isImageValid) return false; // Stop if image is invalid
 
-    const isStepValid = validateStepThree();
-    return isStepValid; // Return true only if both image and step are valid
+    return true;
   };
   const handleNext = () => {
     if (currentStep === 1 && validateStepOne()) {
@@ -267,56 +266,6 @@ const PsychometricForm = () => {
     });
   };
 
-  // const handleImageChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
-
-  //   setFormData((prevData) => ({ ...prevData, file }));
-  //   setPreviewUrl(URL.createObjectURL(file));
-
-  //   try {
-  //     const processedImage = await preprocessImage(file);
-
-  //     // Perform OCR
-  //     const {
-  //       data: { text },
-  //     } = await Tesseract.recognize(processedImage, "eng", {
-  //       tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
-  //       psm: 6, // Assume a single uniform block of text
-  //       oem: 1, // Use LSTM OCR engine
-  //       // logger: (m) => console.log(m),
-  //     });
-
-  //     // console.log("Extracted Text:", text);
-
-  //     // Normalize the text for easier processing
-  //     const normalizedText = text
-  //       .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
-  //       .replace(/\s+/g, " ") // Remove extra spaces
-  //       .toLowerCase();
-
-  //     // console.log("Normalized Text:", normalizedText);
-
-  //     // Look for amount (499) or key phrases
-  //     const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
-  //     const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
-
-  //     const amountMatch = normalizedText.match(amountRegex);
-  //     const keywordMatch = normalizedText.match(keywordRegex);
-
-  //     if (amountMatch || keywordMatch) {
-  //       toast.success("✅ Image added successfully!");
-  //     } else {
-  //       toast.error("❌ *Upload a Image does contain rupees, to, from, upi");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during OCR:", error);
-  //     toast.error("⚠️ Failed to process the image. Try again.");
-  //     setFormData((prevData) => ({ ...prevData, file: null }));
-  //     setPreviewUrl(null);
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -324,14 +273,6 @@ const PsychometricForm = () => {
       [name]: value,
     }));
   };
-
-  // const handleDateChange = (e) => {
-  //   const { value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     selectDate: value,
-  //   }));
-  // };
 
   const handleDateChange = async (e) => {
     const selectedDate = e.target.value;
@@ -360,6 +301,9 @@ const PsychometricForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const isStepValid = validateStepThree();
+    if (!isStepValid) return; // Stop if validation fails
+  
 
     const formSubmissionData = new FormData();
     const fields = [
@@ -429,6 +373,7 @@ const PsychometricForm = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 45); // Add 45 days to today's date
   const maxDateString = maxDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
+  console.log(formData)
 
   return (
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
@@ -858,7 +803,8 @@ const PsychometricForm = () => {
                         name="file"
                         accept="image/*"
                         className="relative w-full mb-4"
-                        placeholder="Enter payment details"
+                        // placeholder="Enter payment details"
+                        key={formData.file ? "file-selected" : "no-file"} // Force re-render
                         onChange={validateAndProcessImage}
                       />
                       {errors.file && (

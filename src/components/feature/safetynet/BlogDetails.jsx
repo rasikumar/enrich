@@ -178,7 +178,7 @@ const BlogDetail = () => {
   //     setReplyError("Failed to post reply. Please try again.");
   //   }
   // };
-
+blog_title
   if (loading) {
     return (
       <div>

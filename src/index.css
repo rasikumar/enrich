@@ -171,6 +171,17 @@ input[type="number"] {
   font-family: 'Courier New', monospace;
 }
 
+sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+
 
 @layer base {
   :root {

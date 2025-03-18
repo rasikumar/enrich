@@ -52,6 +52,7 @@ const ListSafetyNet = () => {
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to first page on search
   };
 
   const filteredBlogs = safetyNets.filter((safetyNet) =>

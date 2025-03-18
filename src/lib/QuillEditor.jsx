@@ -43,8 +43,8 @@ const QuillEditor = ({
           ["bold", "italic", "underline", "strike"],
           [{ list: "ordered" }, { list: "bullet" }],
           ["blockquote", "code-block"],
+          [{ script: "sub" }, { script: "super" }], // Subscript and Superscript
           [{ size: ["small", false, "large", "huge"] }],
-          [{ color: [] }, { background: [] }],
           [{ font: [] }],
           [{ align: [] }], // Alignment options
           ["image"], // Image button

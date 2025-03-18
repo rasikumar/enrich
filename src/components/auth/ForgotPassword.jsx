@@ -34,7 +34,7 @@ const ForgotPassword = () => {
         toast.error(response.data.message);
       }
     } catch (err) {
-      toast.error("email is not registered");
+      toast.error("Email is not registered");
     }
   };
 

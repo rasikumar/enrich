@@ -11,11 +11,12 @@ const quillModules = {
   toolbar: [
     [{ header: [1, 2, false] }],
     ["bold", "italic", "underline", "strike"],
+    [{ script: 'sub' }, { script: 'super' }],
     [{ list: "ordered" }, { list: "bullet" }],
     ["blockquote", "code-block"],
     [{ size: ["small", false, "large", "huge"] }],
-    [{ color: [] }, { background: [] }],
     [{ font: [] }],
+    [{ color: [] }, { background: [] }],
     [{ align: [] }], // Alignment options
     ["image"], // Image button
     ["clean"], // Remove formatting
@@ -37,6 +38,9 @@ const quillFormats = [
   "link",
   "image",
   "indent",
+  "script",
+  "color", // Text color
+  "background", // Background color
 ];
 const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
   const [formData, setFormData] = useState({
@@ -163,10 +167,9 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
     }
 
     if (
-      formData.content.trim().length < 100 ||
-      formData.content.trim().length > 2500
+      formData.content.trim().length < 100 
     ) {
-      toast.error("Content must be between 100 and 2500 characters.");
+      toast.error("Content must be minimum 100 characters.");
       return;
     }
 

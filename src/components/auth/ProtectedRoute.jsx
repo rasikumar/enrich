@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
       return <Navigate to="/not-authorized" replace />;
     }
   } catch (error) {
-    console.error("Error decoding token:", error);
+    // console.error("Error decoding token:", error);
     localStorage.removeItem("jwtToken");
     return <Navigate to="/not-authorized" replace />;
   }
