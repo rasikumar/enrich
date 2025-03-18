@@ -1,7 +1,9 @@
+import { useModal } from "@/providers/ModalContext";
 import { Psychometric_Content } from "..";
 import { psychometric_footer } from "../../../assets";
 const Programs = () => {
   const { heading, content, btn } = Psychometric_Content[4];
+  const { toggleModal } = useModal();
 
   return (
     <div className="relative xl:h-[18rem] h-[12rem] items-center flex xl:px-24 lg:px-20 md:px-32 px-4">
@@ -17,9 +19,9 @@ const Programs = () => {
           {heading}
         </h1>
         <p className="text-justify xl:text-lg text-sm text-white">{content}</p>
-        <a className="btn-primary w-fit" href="#">
+        <button className="btn-primary w-fit" onClick={toggleModal}>
           {btn}
-        </a>
+        </button>
       </div>
     </div>
   );

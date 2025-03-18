@@ -1,18 +1,14 @@
 /* eslint-disable react/prop-types */
 // import { FaBook } from "react-icons/fa";
 import FormModel from "./FormModel";
-import { useState } from "react";
 // import PsychometricForm from "./allservice/psychometric/components/PsychometricForm";
 import { motion } from "framer-motion";
 import { MdOutlineDateRange } from "react-icons/md";
 import Psychometric from "./forms/PsychometricForm";
+import { useModal } from "@/providers/ModalContext";
 
 const BookSession = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+  const { isOpen, toggleModal } = useModal();
 
   return (
     <div className="fixed z-[999] bottom-40 right-0 bg-secondary py-2 px-3 rounded-tl-xl">

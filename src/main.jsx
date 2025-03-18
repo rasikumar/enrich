@@ -5,13 +5,16 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import ScrollIndicator from "./components/ScrollIndicator.jsx";
 import { ToastContainer } from "react-toastify";
+import { ModalProvider } from "./providers/ModalContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ScrollIndicator />
-      <App />
-      <ToastContainer />
-    </BrowserRouter>
+    <ModalProvider>
+      <BrowserRouter>
+        <ScrollIndicator />
+        <App />
+        <ToastContainer />
+      </BrowserRouter>
+    </ModalProvider>
   </React.StrictMode>
 );
