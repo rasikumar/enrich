@@ -25,7 +25,7 @@ const Dashboard = () => {
     new Date().toLocaleTimeString()
   );
   const [currentDate] = useState(
-    new Intl.DateTimeFormat("en-US").format(new Date())
+    new Intl.DateTimeFormat("en-GB").format(new Date())
   );
   useEffect(() => {
     const fetchData = async () => {

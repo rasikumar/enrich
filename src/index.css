@@ -182,6 +182,18 @@ sub {
 }
 
 
+/* Hide the default calendar icon in WebKit browsers (Chrome, Safari) */
+.no-calendar-icon::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Optional: Ensure the input looks consistent across all browsers */
+.no-calendar-icon {
+  appearance: none; /* Remove default styling in Firefox */
+  -moz-appearance: none; /* Remove default styling in older Firefox */
+  -webkit-appearance: none; /* Remove default styling in WebKit browsers */
+  background: none; /* Remove any background */
+}
 
 @layer base {
   :root {

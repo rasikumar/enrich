@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QR, Sending } from "../../assets";
 import Instance from "../Admin/Instance";
 import { ChevronDown } from "lucide-react";
@@ -18,6 +18,8 @@ const PsychometricForm = () => {
   const [isBoxopen, setIsBoxopen] = useState(true);
   const [availableSlot, setAvailableSlot] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const dateRef = useRef(null);
 
   const handleClick = () => setIsBoxopen((prev) => !prev);
 
@@ -74,8 +76,6 @@ const PsychometricForm = () => {
     setIsOpenTime(false);
   };
 
-  // const today = new Date().toISOString().split("T")[0];
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -93,6 +93,9 @@ const PsychometricForm = () => {
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
+    } else if (!/^[A-Za-z\s'-]+$/.test(formData.name)) {
+      newErrors.name =
+        "Name should only contain letters, spaces, hyphens, and apostrophes";
     } else if (formData.name.length > 100) {
       newErrors.name = "Name must not exceed 100 characters";
     }
@@ -219,6 +222,7 @@ const PsychometricForm = () => {
 
     return true;
   };
+
   const handleNext = () => {
     if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
@@ -246,6 +250,7 @@ const PsychometricForm = () => {
     isConsentChecked: false, // New field for consent checkbox
     isTermsChecked: false, // New field for terms checkbox
   });
+
   const preprocessImage = async (file) => {
     return new Promise((resolve) => {
       const img = new Image();
@@ -303,7 +308,6 @@ const PsychometricForm = () => {
     setIsSubmitting(true);
     const isStepValid = validateStepThree();
     if (!isStepValid) return; // Stop if validation fails
-  
 
     const formSubmissionData = new FormData();
     const fields = [
@@ -373,7 +377,7 @@ const PsychometricForm = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 45); // Add 45 days to today's date
   const maxDateString = maxDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
-  console.log(formData)
+  // console.log(formData)
 
   return (
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
@@ -499,6 +503,19 @@ const PsychometricForm = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onKeyDown={(e) => {
+                        // Allow only letters, spaces, hyphens, and apostrophes
+                        if (
+                          !/^[A-Za-z\s'-]*$/.test(e.key) &&
+                          e.key !== "Backspace" &&
+                          e.key !== "Delete" &&
+                          e.key !== "ArrowLeft" &&
+                          e.key !== "ArrowRight" &&
+                          e.key !== "Tab"
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
                       className="w-full p-2 border rounded"
                       placeholder="Enter your name"
                     />
@@ -683,13 +700,15 @@ const PsychometricForm = () => {
                     </label>
 
                     <Input
+                      onClick={() => dateRef.current.showPicker()}
+                      ref={dateRef}
                       type="date"
                       name="selectDate"
                       value={formData.selectDate}
                       onChange={handleDateChange}
                       min={today}
                       max={maxDateString}
-                      className="w-full p-2 border rounded appearance-none bg-white"
+                      className="w-full p-2 border rounded appearance-none bg-white no-calendar-icon" // Add a custom class
                       inputMode="none"
                     />
 
@@ -803,8 +822,7 @@ const PsychometricForm = () => {
                         name="file"
                         accept="image/*"
                         className="relative w-full mb-4"
-                        // placeholder="Enter payment details"
-                        key={formData.file ? "file-selected" : "no-file"} // Force re-render
+                        key={formData.file ? formData.file.name : "no-file"} // Use file name as key
                         onChange={validateAndProcessImage}
                       />
                       {errors.file && (

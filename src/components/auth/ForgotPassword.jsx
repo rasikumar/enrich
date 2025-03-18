@@ -68,7 +68,7 @@ const ForgotPassword = () => {
               Send Reset Link
             </button>
             <p className="text-center text-gray-500 text-sm">
-              @{new Date().getFullYear()} Powered By EvviSolutions
+              @{new Date().getFullYear()} Powered By Evvi Solutions
             </p>
           </div>
         </form>
