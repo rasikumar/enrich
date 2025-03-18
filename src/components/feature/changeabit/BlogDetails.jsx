@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Instance from "../../Admin/Instance";
 // import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
@@ -23,6 +23,7 @@ const SkeletonLoader = () => {
 };
 
 const BlogDetail = () => {
+  const navigate = useNavigate();
   const { changeAbit_title } = useParams(); // Assuming you pass the blog ID in the URL
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,12 +31,17 @@ const BlogDetail = () => {
   const [suggestedBlogs, setSuggestedBlogs] = useState([]);
   const [suggestedLoading, setSuggestedLoading] = useState(true);
   const [suggestedError, setSuggestedError] = useState(null);
-  console.log("useParams:", useParams());
+  // console.log("useParams:", useParams());
 
   const { scrollYProgress } = useScroll();
   // console.log(changeAbit_title)
   const id = changeAbit_title;
   useEffect(() => {
+    if (!/^\d+$/.test(id)) {
+      navigate("*");
+      setLoading(false);
+      return;
+    }
     const fetchBlogDetail = async () => {
       try {
         const response = await Instance.get(`/getchangeAbit/${id}`);
@@ -89,7 +95,10 @@ const BlogDetail = () => {
     <>
       <Helmet>
         <title>{blogs[0]?.changeAbit_title}</title>
-        <meta name="description" content={blogs[0]?.changeAbit_meta_description} />
+        <meta
+          name="description"
+          content={blogs[0]?.changeAbit_meta_description}
+        />
         <meta name="keywords" content={blogs[0]?.changeAbit_meta_keywords} />
         <meta property="og:title" content={blogs[0]?.changeAbit_title} />
         <meta
@@ -154,7 +163,10 @@ const BlogDetail = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {suggestedBlogs.map((blog) => (
-                  <div key={blog.id} className="p-4 bg-white rounded shadow-md w-72">
+                  <div
+                    key={blog.id}
+                    className="p-4 bg-white rounded shadow-md w-72"
+                  >
                     <Link to={`/insights/changeABit/${blog.id}`}>
                       <h4 className="font-semibold text-lg">
                         {blog.changeAbit_title}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Instance from "../../Admin/Instance";
 import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
@@ -25,6 +25,7 @@ const SkeletonLoader = () => {
 };
 
 const BlogDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams(); // Assuming you pass the blog ID in the URL
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,6 +52,11 @@ const BlogDetail = () => {
 
   // Fetch blog details
   useEffect(() => {
+    if (!/^\d+$/.test(id)) {
+      navigate("*");
+      setLoading(false);
+      return;
+    }
     const fetchBlogDetail = async () => {
       try {
         const response = await Instance.get(`/getBlogById/${id}`);
