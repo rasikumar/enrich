@@ -44,7 +44,7 @@ const QuillEditor = ({
           [{ list: "ordered" }, { list: "bullet" }],
           ["blockquote", "code-block"],
           [{ script: "sub" }, { script: "super" }], // Subscript and Superscript
-          [{ size: ["small", false, "large", "huge"] }],
+          // [{ size: ["small", false, "large", "huge"] }],
           [{ font: [] }],
           [{ align: [] }], // Alignment options
           ["image"], // Image button

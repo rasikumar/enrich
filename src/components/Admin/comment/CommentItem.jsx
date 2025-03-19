@@ -215,8 +215,8 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
+                      // hour: "numeric",
+                      // minute: "numeric",
                     })}
                   </p>
                   <p className="text-sm capitalize text-primary bg-secondary w-fit px-2 py-1 rounded-md shadow-drop hover:shadow-none duration-300 cursor-pointer font-semibold">

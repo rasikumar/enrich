@@ -11,10 +11,10 @@ const quillModules = {
   toolbar: [
     [{ header: [1, 2, false] }],
     ["bold", "italic", "underline", "strike"],
-    [{ script: 'sub' }, { script: 'super' }],
+    [{ script: "sub" }, { script: "super" }],
     [{ list: "ordered" }, { list: "bullet" }],
     ["blockquote", "code-block"],
-    [{ size: ["small", false, "large", "huge"] }],
+    //
     [{ font: [] }],
     [{ color: [] }, { background: [] }],
     [{ align: [] }], // Alignment options
@@ -166,9 +166,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
       return;
     }
 
-    if (
-      formData.content.trim().length < 100 
-    ) {
+    if (formData.content.trim().length < 100) {
       toast.error("Content must be minimum 100 characters.");
       return;
     }

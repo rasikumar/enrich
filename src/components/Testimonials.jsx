@@ -7,15 +7,15 @@ const testimonialsData = [
   {
     id: 1,
     name: "Shrikant Hegde",
-    position: "Emotional Intelligence",
+    // position: "Emotional Intelligence",
     feedback:
-      "I had the privilege of attending various webinars conducted by Ms. Shanthi Subramani. All those webinars were very informative and educative, and were true testimonies of her thorough knowledge, rich experience and authentic professional expertise. ",
+      "I had the privilege of attending various webinars conducted by Ms. Shanthi Subramani. All those webinars were very informative and educative, and were true testimonies of her thorough knowledge, rich experience and authentic professional expertise.",
     img: "https://ui-avatars.com/api/?name=sh&background=random",
   },
   {
     id: 2,
     name: "Shiva Kumar .B",
-    position: "Master Trainer, Leadership Coach,",
+    position: "AGM - HR & Admin at BSCPL Infrastructure Limited",
     feedback:
       "A transformative workshop that significantly enhanced our CRM team's behavioral skills for customer service. The tailored approach empowered participants, refreshing their mindset and effectiveness in their roles. Highly recommended for organizations aiming to elevate team performance and individual growth.",
     img: "https://ui-avatars.com/api/?name=sk&background=random",

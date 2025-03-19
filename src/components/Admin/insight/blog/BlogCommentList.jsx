@@ -25,8 +25,12 @@ const CommentList = () => {
     const fetchComments = async () => {
       try {
         const response = await Instance.post("/admin/getAllComments");
-        setComments(response.data.comments);
-        // console.log(response.data.comments);
+        const sortedComments = response.data.comments.sort(
+          (a, b) =>
+            new Date(b.comment_created_at) - new Date(a.comment_created_at)
+        );
+        setComments(sortedComments);
+        // console.log(sortedComments);
       } catch (err) {
         setError("Failed to fetch comments");
       } finally {
