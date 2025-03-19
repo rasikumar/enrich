@@ -20,6 +20,12 @@ const App = () => {
     e.preventDefault();
     // console.log("Submitting form data:", formData);
 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     try {
       const response = await Instance.post("/subscribe", formData);
       // if (response.status === true) {
