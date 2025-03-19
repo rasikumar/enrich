@@ -46,7 +46,10 @@ const GetIn = () => {
 
     if (!email.trim()) {
       newErrors.email = "Email is required!";
-    } else if (!/^\S+@\S+\.\S+$/.test(email) || email.length > 100) {
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      email.length > 100
+    ) {
       newErrors.email = "Enter a valid email!";
     }
 
@@ -54,6 +57,8 @@ const GetIn = () => {
       newErrors.number = "Number is required!";
     } else if (!/^\d{10}$/.test(number)) {
       newErrors.number = "Must be exactly 10 digits!";
+    } else if (/^0000/.test(number)) {
+      newErrors.number = "First four digits cannot be zeros!";
     }
 
     if (!message.trim()) {
@@ -165,6 +170,9 @@ const GetIn = () => {
               value={formData[name]}
               onChange={handleChange}
             />
+            {errors[name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
+            )}
           </div>
         ))}
 
@@ -204,6 +212,9 @@ const GetIn = () => {
             value={formData.message}
             onChange={handleChange}
           />
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+          )}
         </div>
 
         <div>

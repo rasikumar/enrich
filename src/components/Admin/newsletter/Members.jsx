@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Instance from "../Instance";
 import * as XLSX from "xlsx";
 import { FaFileExport } from "react-icons/fa";
@@ -17,11 +17,21 @@ const Members = () => {
   const itemsPerPage = 10;
   const [blog, setBlog] = useState(0);
 
+  const dateRef = useRef(null);
+
   useEffect(() => {
     const fetchContacts = async () => {
       try {
         const response = await Instance.post("admin/getAllSubscribers");
-        setContacts(response.data.results);
+        const contactsWithId = response.data.results.map((contact, index) => ({
+          ...contact,
+          frontendId: index + 1,
+        }));
+        const sortedContacts = contactsWithId.sort(
+          (a, b) =>
+            new Date(b.subscription_date) - new Date(a.subscription_date)
+        );
+        setContacts(sortedContacts);
       } catch (error) {
         console.error("Error fetching contacts:", error);
       }
@@ -34,15 +44,15 @@ const Members = () => {
     if (selectedContacts.length === 0) return;
 
     const columnHeaders = [
-      { header: "ID", key: "id" },
+      { header: "ID", key: "frontendId" },
       { header: "Email", key: "email" },
       { header: "Created At", key: "subscription_date" },
     ];
 
     const data = contacts
-      .filter((contact) => selectedContacts.includes(contact.id))
+      .filter((contact) => selectedContacts.includes(contact.frontendId))
       .map((contact) => ({
-        id: contact.id,
+        frontendId: contact.frontendId,
         email: contact.email,
         subscription_date: new Date(contact.subscription_date).toLocaleString(
           "en-IN",
@@ -50,6 +60,9 @@ const Members = () => {
             year: "numeric",
             month: "short",
             day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
           }
         ),
       }));
@@ -67,12 +80,24 @@ const Members = () => {
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Selected Contacts");
-    XLSX.writeFile(workbook, "selected_contacts.xlsx");
+    const now = new Date();
+    const formattedDate = now
+      .toLocaleString("en-IN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+      .replace(/[/, ]/g, "_")
+      .replace(/:/g, "-");
+    XLSX.writeFile(workbook, `selected_contacts_${formattedDate}.xlsx`);
   };
 
   const filteredContacts = contacts.filter((contact) => {
     const { id, email, subscription_date } = filter;
-    const matchesId = id ? contact.id.toString().includes(id) : true;
+    const matchesId = id ? contact.frontendId.toString().includes(id) : true;
     const matchesEmail = email
       ? contact.email.toLowerCase().includes(email.toLowerCase())
       : true;
@@ -82,6 +107,10 @@ const Members = () => {
       : true;
     return matchesId && matchesEmail && matchesDate;
   });
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filter]);
 
   const totalItems = filteredContacts.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -105,11 +134,11 @@ const Members = () => {
     setSelectedContacts([]); // Reset selected contacts
   };
 
-  const toggleSelectContact = (id) => {
+  const toggleSelectContact = (frontendId) => {
     setSelectedContacts((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((contactId) => contactId !== id)
-        : [...prevSelected, id]
+      prevSelected.includes(frontendId)
+        ? prevSelected.filter((contactId) => contactId !== frontendId)
+        : [...prevSelected, frontendId]
     );
   };
 
@@ -117,7 +146,9 @@ const Members = () => {
     if (selectedContacts.length === filteredContacts.length) {
       setSelectedContacts([]);
     } else {
-      setSelectedContacts(filteredContacts.map((contact) => contact.id));
+      setSelectedContacts(
+        filteredContacts.map((contact) => contact.frontendId)
+      );
     }
   };
 
@@ -173,6 +204,8 @@ const Members = () => {
           onChange={(e) =>
             setFilter({ ...filter, subscription_date: e.target.value })
           }
+          ref={dateRef}
+          onClick={() => dateRef.current.showPicker()}
           className="mr-2 border border-gray-300 rounded-md p-2"
         />
         <button
@@ -221,11 +254,13 @@ const Members = () => {
                 <td className="border border-gray-300 p-2 text-center">
                   <input
                     type="checkbox"
-                    checked={selectedContacts.includes(contact.id)}
-                    onChange={() => toggleSelectContact(contact.id)}
+                    checked={selectedContacts.includes(contact.frontendId)}
+                    onChange={() => toggleSelectContact(contact.frontendId)}
                   />
                 </td>
-                <td className="border border-gray-300 p-2">{contact.id}</td>
+                <td className="border border-gray-300 p-2">
+                  {contact.frontendId}
+                </td>
                 <td className="border border-gray-300 p-2">{contact.email}</td>
                 <td className="border border-gray-300 p-2">
                   {new Date(contact.subscription_date).toLocaleString()}

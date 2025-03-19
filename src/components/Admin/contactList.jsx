@@ -19,8 +19,11 @@ const ContactList = () => {
     const fetchContacts = async () => {
       try {
         const response = await Instance.post("/admin/getleads");
-        setContacts(response.data);
-        setFilteredContacts(response.data);
+        const sortedContacts = response.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        ); // Sort by date in descending order
+        setContacts(sortedContacts);
+        setFilteredContacts(sortedContacts);
       } catch (error) {
         console.error("Error fetching contacts:", error);
       }
@@ -71,19 +74,25 @@ const ContactList = () => {
       { header: "Created At", key: "date" },
     ];
 
-    const data = filteredContacts.map((contact) => ({
-      id: contact.id,
-      name: contact.name,
-      number: contact.number,
-      email: contact.email,
-      type: contact.type,
-      message: contact.message,
-      date: new Date(contact.date).toLocaleString("en-IN", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      }),
-    }));
+    const data = filteredContacts
+      .slice()
+      .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date in descending order
+      .map((contact) => ({
+        id: contact.id,
+        name: contact.name,
+        number: contact.number,
+        email: contact.email,
+        type: contact.type,
+        message: contact.message,
+        date: new Date(contact.date).toLocaleString("en-IN", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        }),
+      }));
 
     const worksheetData = [
       columnHeaders.map((header) => header.header),
@@ -93,7 +102,21 @@ const ContactList = () => {
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Contacts");
-    XLSX.writeFile(workbook, "contact_list.xlsx");
+
+    const now = new Date();
+    const formattedDate = now
+      .toLocaleString("en-IN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+      .replace(/[/, ]/g, "_")
+      .replace(/:/g, "-");
+
+    XLSX.writeFile(workbook, `contact_list_${formattedDate}.xlsx`);
   };
 
   // Pagination logic

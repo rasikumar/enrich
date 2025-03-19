@@ -100,11 +100,12 @@ const PsychometricForm = () => {
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    } else if (formData.email.length > 100) {
-      newErrors.email = "Email must not exceed 100 characters";
+      newErrors.email = "Email is required!";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ||
+      formData.email.length > 100
+    ) {
+      newErrors.email = "Enter a valid email!";
     }
 
     if (!formData.number.trim()) {

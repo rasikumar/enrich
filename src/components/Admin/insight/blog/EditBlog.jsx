@@ -14,7 +14,7 @@ const quillModules = {
     [{ script: 'sub' }, { script: 'super' }],
     [{ list: "ordered" }, { list: "bullet" }],
     ["blockquote", "code-block"],
-    [{ size: ["small", false, "large", "huge"] }],
+    // [{ size: ["small", false, "large", "huge"] }],
     [{ font: [] }],
     [{ color: [] }, { background: [] }],
     [{ align: [] }], // Alignment options
