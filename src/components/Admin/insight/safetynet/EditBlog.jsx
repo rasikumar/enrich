@@ -222,7 +222,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
           setEditing(false);
           window.location.reload();
         }, 2000);
-        toast.success(response.data.message);
+        toast.success("SafetyNet Updated Successfully");
       } else {
         throw new Error(response.data.message);
       }

@@ -85,9 +85,9 @@ const ContactList = () => {
         type: contact.type,
         message: contact.message,
         date: new Date(contact.date).toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "2-digit",
           year: "numeric",
-          month: "short",
-          day: "numeric",
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
@@ -197,7 +197,14 @@ const ContactList = () => {
                   {contact.message}
                 </td>
                 <td className="border border-gray-300 p-2">
-                  {new Date(contact.date).toLocaleString()}
+                  {new Date(contact.date).toLocaleString("en-IN", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                  })}
                 </td>
               </tr>
             ))}

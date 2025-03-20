@@ -58,8 +58,8 @@ const Members = () => {
           "en-IN",
           {
             year: "numeric",
-            month: "short",
-            day: "numeric",
+            month: "2-digit",
+            day: "2-digit",
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -102,8 +102,8 @@ const Members = () => {
       ? contact.email.toLowerCase().includes(email.toLowerCase())
       : true;
     const matchesDate = subscription_date
-      ? new Date(contact.subscription_date).toLocaleDateString() ===
-        new Date(subscription_date).toLocaleDateString()
+      ? new Date(contact.subscription_date).toLocaleDateString("en-IN") ===
+        new Date(subscription_date).toLocaleDateString("en-IN")
       : true;
     return matchesId && matchesEmail && matchesDate;
   });
@@ -263,7 +263,9 @@ const Members = () => {
                 </td>
                 <td className="border border-gray-300 p-2">{contact.email}</td>
                 <td className="border border-gray-300 p-2">
-                  {new Date(contact.subscription_date).toLocaleString()}
+                  {new Date(contact.subscription_date).toLocaleDateString(
+                    "en-IN"
+                  )}
                 </td>
               </tr>
             ))

@@ -13,6 +13,14 @@ const Appointment = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -40,10 +48,9 @@ const Appointment = () => {
     }
 
     if (filters.date) {
-      const filterDate = new Date(filters.date).toLocaleDateString();
+      const filterDate = formatDate(filters.date);
       filteredData = filteredData.filter(
-        (contact) =>
-          new Date(contact.selectDate).toLocaleDateString() === filterDate
+        (contact) => formatDate(contact.selectDate) === filterDate
       );
     }
 
@@ -163,7 +170,7 @@ const Appointment = () => {
                       {contact.slot}
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {new Date(contact.selectDate).toLocaleDateString()}
+                      {formatDate(contact.selectDate)}
                     </td>
                   </tr>
                 ))}

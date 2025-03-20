@@ -109,7 +109,7 @@ import newsletter from "./newsletter.jpg";
 import Sending from "./Sending.webm";
 
 // payment Picture
-import QR from "./QR.jpg";
+import QR from "./QR.jpeg";
 
 export {
   // blog images

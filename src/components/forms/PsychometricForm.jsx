@@ -68,6 +68,7 @@ const PsychometricForm = () => {
       otherAssessment: e.target.value,
     }));
   };
+
   const timeDropDown = () => setIsOpenTime(!isOpenTime);
 
   const handleTimeSelect = (value) => {
@@ -808,6 +809,13 @@ const PsychometricForm = () => {
                     scanning the QR code.
                   </motion.p>
                   <div className="mb-4">
+                    <img
+                      src={QR}
+                      width={150}
+                      height={150}
+                      alt="QR"
+                      className="m-auto"
+                    />
                     <motion.div
                       className="mb-4"
                       initial={{ opacity: 0, x: 40 }}
@@ -822,20 +830,13 @@ const PsychometricForm = () => {
                         name="file"
                         accept="image/*"
                         className="relative w-full mb-4"
-                        key={formData.file ? formData.file?.name : "no-file"} // Use file name as key
                         onChange={validateAndProcessImage}
                       />
                       {errors.file && (
                         <p className="text-red-500 text-sm">{errors.file}</p>
                       )}
                     </motion.div>
-                    <img
-                      src={QR}
-                      width={150}
-                      height={150}
-                      alt="QR"
-                      className="m-auto"
-                    />
+
                     <p className="text-sm italic mb-2">
                       <span className="text-primary">Note:</span> If you decide
                       to proceed with a psychometric assessment after the
