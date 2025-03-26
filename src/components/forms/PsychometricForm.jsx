@@ -473,7 +473,7 @@ const PsychometricForm = () => {
             </div>
           </div>
 
-          <div className="w-full bg-formback bg-center bg-contain bg-no-repeat md:px-16 py-2 relative h-[32rem] overflow-y-auto">
+          <div className="w-full bg-formback bg-center bg-contain bg-no-repeat md:px-16 py-2 relative">
             <form onSubmit={handleSubmit}>
               {currentStep === 1 && (
                 <>

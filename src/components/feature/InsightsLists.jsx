@@ -208,7 +208,7 @@ const App = () => {
           }`}
           onClick={() => filterContent("safetyNet")}
         >
-          SafetyNet
+          Safety Net
         </button>
       </div>
 
