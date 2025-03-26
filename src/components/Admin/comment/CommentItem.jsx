@@ -8,7 +8,12 @@ import ConfirmModal from "./ConfirmModal";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
-const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
+const CommentItem = ({
+  comment,
+  onDelete,
+  onToggleVisibility,
+  onReplyDelete,
+}) => {
   const [replyText, setReplyText] = useState("");
   const [commentToReply, setCommentToReply] = useState(null);
   const [comments, setComments] = useState([]);
@@ -226,12 +231,18 @@ const CommentItem = ({ comment, onDelete, onToggleVisibility }) => {
                     {reply.reply}
                   </p>
                 </div>
-                <div>
+                <div className="flex gap-3">
                   <button
                     onClick={() => handleReplyVisibilityToggle(reply)}
                     className="text-red-500 hover:text-red-700"
                   >
                     {reply.reply_is_hidden == 1 ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                  <button
+                    onClick={() => onReplyDelete(reply.reply_id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <FaTrash />
                   </button>
                 </div>
               </li>

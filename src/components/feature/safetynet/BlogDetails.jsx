@@ -104,7 +104,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:image"
-          content={`https://newcheck.evvisolutions.com/safety_images/${
+          content={`http://localhost:5001/safety_images/${
             blog && blog[0].safety_image
           }`}
         />
@@ -136,7 +136,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://newcheck.evvisolutions.com/safety_images/${blog.safety_image}`}
+                  src={`http://localhost:5001/safety_images/${blog.safety_image}`}
                   alt={blog.safety_title}
                   className="w-full object-cover h-96 rounded-xl"
                 />
@@ -164,7 +164,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.safety_author}</p>
                       <img
-                        src={`https://newcheck.evvisolutions.com/safety_images/${blog.safety_image}`}
+                        src={`http://localhost:5001/safety_images/${blog.safety_image}`}
                         alt={blog.safety_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

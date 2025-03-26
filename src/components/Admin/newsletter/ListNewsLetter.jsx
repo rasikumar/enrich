@@ -163,7 +163,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_image && (
                 <img
-                  src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_image}`}
+                  src={`http://localhost:5001/blog_images/${blog.blog_image}`}
                   alt={blog.blog_title}
                   className="rounded-lg"
                   style={{ maxWidth: "10%", height: "auto" }}

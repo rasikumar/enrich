@@ -4,7 +4,7 @@ import CommentItem from "../../comment/CommentItem";
 import Pagination from "../../comment/Pagination";
 import ConfirmModal from "../../comment/ConfirmModal"; // Import the ConfirmModal
 import Loader from "../../comment/Loader";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 // CommentList Component
 const CommentList = () => {
@@ -17,6 +17,8 @@ const CommentList = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isToggleModalOpen, setIsToggleModalOpen] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
+  const [replyDelete, setReplyDelete] = useState(null);
+  const [isReplyDeleteModalOpen, setIsReplyDeleteModalOpen] = useState(false);
   const [commentToToggle, setCommentToToggle] = useState(null);
   const [isCommentHidden, setIsCommentHidden] = useState(null);
 
@@ -45,6 +47,29 @@ const CommentList = () => {
     setCommentToDelete({ blog_id, commentId });
     setIsDeleteModalOpen(true);
   };
+  const handleDeleteReplyComment = (reply_id) => {
+    setReplyDelete(reply_id);
+    setIsReplyDeleteModalOpen(true); // Use the new state
+  };
+
+  const confirmDeleteReplyComment = async () => {
+    if (!replyDelete) return;
+
+    console.log(replyDelete);
+    try {
+      await Instance.delete(`/admin/deleteReply`, {
+        data: { reply_id: replyDelete }, // Send it as a body
+      });
+      setIsReplyDeleteModalOpen(false);
+      setReplyDelete(null);
+      toast.success("Reply deleted successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      console.error("Failed to delete reply:", error);
+    }
+  };
 
   const confirmDeleteComment = async () => {
     if (!commentToDelete) return;
@@ -67,7 +92,7 @@ const CommentList = () => {
 
   // Handle comment visibility toggle with modal confirmation
   const handleToggleVisibility = (comment_id, isHidden) => {
-    console.log(comment_id, isHidden);
+    // console.log(comment_id, isHidden);
 
     setCommentToToggle({ comment_id });
     setIsCommentHidden(isHidden); // Track the current visibility state
@@ -158,6 +183,7 @@ const CommentList = () => {
               key={comment.id}
               comment={comment}
               onDelete={handleDeleteComment}
+              onReplyDelete={handleDeleteReplyComment}
               onToggleVisibility={handleToggleVisibility}
             />
           ))
@@ -183,7 +209,17 @@ const CommentList = () => {
         btn1="Cancel"
         btn2="Delete"
       />
-
+      <ConfirmModal
+        isOpen={isReplyDeleteModalOpen}
+        onConfirm={confirmDeleteReplyComment}
+        onCancel={() => {
+          setIsReplyDeleteModalOpen(false);
+          setReplyDelete(null);
+        }}
+        message="Are you sure you want to delete this reply?"
+        btn1="Cancel"
+        btn2="Delete"
+      />
       <ConfirmModal
         isOpen={isToggleModalOpen}
         onConfirm={() => confirmToggleVisibility(isCommentHidden)}
@@ -194,6 +230,7 @@ const CommentList = () => {
         btn1="Cancel"
         btn2={isCommentHidden ? "Unhide" : "Hide"}
       />
+      <ToastContainer />
     </div>
   );
 };

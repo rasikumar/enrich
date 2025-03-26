@@ -85,7 +85,7 @@ const PsychometricForm = () => {
     otherAssessement: "",
     selectDate: "",
     slots: "",
-    file: "",
+    paymentDetails: "",
   });
 
   const validateStepOne = () => {
@@ -154,8 +154,8 @@ const PsychometricForm = () => {
   const validateStepThree = () => {
     const newErrors = {};
 
-    if (!formData.file) {
-      newErrors.file = "Payment is required";
+    if (!formData.paymentDetails) {
+      newErrors.paymentDetails = "Payment is required";
     }
     if (!formData.isConsentChecked || !formData.isTermsChecked) {
       toast.error("You must agree to the consent and terms and conditions.");
@@ -167,14 +167,14 @@ const PsychometricForm = () => {
   };
 
   const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const paymentDetails = e.target.files[0];
+    if (!paymentDetails) return;
 
-    setFormData((prevData) => ({ ...prevData, file }));
-    setPreviewUrl(URL.createObjectURL(file));
+    setFormData((prevData) => ({ ...prevData, paymentDetails }));
+    setPreviewUrl(URL.createObjectURL(paymentDetails));
 
     try {
-      const processedImage = await preprocessImage(file);
+      const processedImage = await preprocessImage(paymentDetails);
 
       // Perform OCR
       const {
@@ -249,15 +249,15 @@ const PsychometricForm = () => {
     otherAssessement: "",
     selectDate: "",
     slots: "",
-    file: "",
+    paymentDetails: "",
     isConsentChecked: false, // New field for consent checkbox
     isTermsChecked: false, // New field for terms checkbox
   });
 
-  const preprocessImage = async (file) => {
+  const preprocessImage = async (paymentDetails) => {
     return new Promise((resolve) => {
       const img = new Image();
-      img.src = URL.createObjectURL(file);
+      img.src = URL.createObjectURL(paymentDetails);
       img.onload = () => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
@@ -333,9 +333,9 @@ const PsychometricForm = () => {
     if (formData.selectedAssessment === "Other") {
       formSubmissionData.append("otherAssessement", formData.otherAssessement);
     }
-    // Include file if it exists
-    if (formData.file) {
-      formSubmissionData.append("file", formData.file);
+    // Include paymentDetails if it exists
+    if (formData.paymentDetails) {
+      formSubmissionData.append("paymentDetails", formData.paymentDetails);
     }
 
     // console.log(
@@ -822,15 +822,15 @@ const PsychometricForm = () => {
                       Payment Details
                     </label>
                     <div className="relative w-full  mb-4">
-                      {formData.file ? (
+                      {formData.paymentDetails ? (
                         <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
                           <span className="text-gray-700">
-                            {formData.file.name}
+                            {formData.paymentDetails.name}
                           </span>
                           <button
                             className="text-red-500 hover:text-red-700"
                             onClick={() =>
-                              setFormData({ ...formData, file: null })
+                              setFormData({ ...formData, paymentDetails: null })
                             }
                           >
                             ✖
@@ -849,9 +849,9 @@ const PsychometricForm = () => {
                             className="relative w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer"
                             onChange={validateAndProcessImage}
                           />
-                          {errors.file && (
+                          {errors.paymentDetails && (
                             <p className="text-red-500 text-sm mt-1">
-                              {errors.file}
+                              {errors.paymentDetails}
                             </p>
                           )}
                         </motion.div>

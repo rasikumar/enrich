@@ -164,9 +164,11 @@ const Appointment = () => {
                       {contact.email}
                     </td>
                     <td className="border border-gray-300 p-2 line-clamp-4 overflow-hidden">
-                      {contact.assessmentType === "Other"
-                        ? contact.otherAssessement
-                        : contact.assessmentType}
+                      {contact.assessmentType === "Other" ? (
+                        <>Other - {contact.otherAssessement}</>
+                      ) : (
+                        contact.assessmentType
+                      )}
                     </td>
 
                     <td className="border border-gray-300 p-2">

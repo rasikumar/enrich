@@ -85,10 +85,7 @@ const HomeGetIn = () => {
     if (!validateForm()) return;
 
     try {
-      await axios.post(
-        "https://newcheck.evvisolutions.com/api/createmessages",
-        formData
-      );
+      await axios.post("http://localhost:5001/api/createmessages", formData);
       toast.success("Message sent successfully!");
       setFormData({ name: "", email: "", message: "", number: "", type: "" });
       setErrors({});

@@ -5,6 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { logo } from "../../../assets";
 import { IoClose } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const CreateNewsLetter = () => {
   const [blogs, setBlogs] = useState([]);
@@ -71,7 +72,7 @@ const CreateNewsLetter = () => {
         if (sortedBlogList.length > 0) {
           const latestChangeABit = sortedBlogList[0];
           setchangeABits(latestChangeABit);
-          console.log(latestChangeABit);
+          // console.log(latestChangeABit);
 
           setChangeABit(
             `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestChangeABit.changeAbit_title} to help you make small, meaningful changes that add up to big growth.`
@@ -103,7 +104,7 @@ const CreateNewsLetter = () => {
         if (sortedSafetyNetList.length > 0) {
           const latestSafetyNet = sortedSafetyNetList[0];
           setSafetyNets(latestSafetyNet);
-          console.log(latestSafetyNet);
+          // console.log(latestSafetyNet);
 
           setSafetyNet(
             `Welcome to the SafetyNet Series, where we explore various aspects of psychological safety in the workplace. Each month, we’ll highlight a different topic to help you understand how to create a safer, more supportive environment for your team. This month, we’re focusing on ${latestSafetyNet.safety_title}, providing you with practical steps to foster trust, openness, and effective communication.`
@@ -154,7 +155,7 @@ const CreateNewsLetter = () => {
       tip,
       word,
     };
-    console.log(data);
+    // console.log(data);
 
     setLoading(true); // Set loading to true before the request
     try {
@@ -165,13 +166,13 @@ const CreateNewsLetter = () => {
       });
 
       if (response.status === 200) {
-        alert("Newsletter content saved successfully!");
+        toast.success("Newsletter content saved successfully!");
       } else {
-        alert("Failed to save the newsletter content.");
+        toast.error("Failed to save the newsletter content.");
       }
     } catch (error) {
       console.error("Error submitting data:", error);
-      alert("Error submitting data.");
+      toast.error("Error submitting data.");
     } finally {
       setLoading(false); // Set loading to false after the request
     }
@@ -257,7 +258,7 @@ const CreateNewsLetter = () => {
             className="line-clamp-4"
           />
           <img
-            src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
+            src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
             alt={blogs.blog_title}
             width={200}
           />
@@ -281,7 +282,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
+            src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
             alt={changeABits.changeAbit_title}
             width={200}
           />
@@ -305,7 +306,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
+            src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
             alt={safetyNets.safety_title}
             width={200}
           />
@@ -469,7 +470,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
+                      src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
                       alt={blogs.blog_title}
                       width={300}
                     />
@@ -494,7 +495,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
+                      src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
                       alt={changeABits.changeAbit_title}
                       width={300}
                     />
@@ -519,7 +520,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4 "
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
+                      src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
                       alt={safetyNets.safety_title}
                       width={300}
                     />
@@ -642,7 +643,7 @@ const CreateNewsLetter = () => {
                       </span>{" "}
                       |
                       <span
-                        // href="https://newcheck.evvisolutions.com/privacy-policy"
+                        // href="http://localhost:5001/privacy-policy"
                         className="text-gray-600 underline"
                       >
                         Privacy Policy
