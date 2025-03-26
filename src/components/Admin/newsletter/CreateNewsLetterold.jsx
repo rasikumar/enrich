@@ -67,7 +67,7 @@
 //             featuredInsight: {
 //               title: "📌 This Month’s Featured Insight",
 //               subtitle: `Get inspired by our latest piece on "${latestBlog.blog_title}". Explore strategies to elevate your personal and professional life, and gain insights to build resilience, confidence, and self-awareness.`,
-//               image: `http://localhost:5001/blog_images/${latestBlog.blog_image}`,
+//               image: `https://newcheck.evvisolutions.com/blog_images/${latestBlog.blog_image}`,
 //               content: latestBlog.blog_body,
 //             },
 //           }));
@@ -101,7 +101,7 @@
 //             changeABit: {
 //               title: "✨ Spotlight: ChangeABit",
 //               subtitle: `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestChangedAbit.changeAbit_title} to help you make small, meaningful changes that add up to big growth.`,
-//               image: `http://localhost:5001/changeAbit_images/${latestChangedAbit.changeAbit_image}`,
+//               image: `https://newcheck.evvisolutions.com/changeAbit_images/${latestChangedAbit.changeAbit_image}`,
 //               content: latestChangedAbit.changeAbit_content,
 //             },
 //           }));
@@ -133,7 +133,7 @@
 //             safetyNets: {
 //               title: "🎯  In Focus: SafetyNet Series",
 //               subtitle: `Check out the latest edition of ChangeABit, our signature newsletter focused on brain optimization and behavioral transformation. This month, we’re covering ${latestSafetyNet.safety_title} to help you make small, meaningful changes that add up to big growth.`,
-//               image: `http://localhost:5001/safety_images/${latestSafetyNet.safety_image}`,
+//               image: `https://newcheck.evvisolutions.com/safety_images/${latestSafetyNet.safety_image}`,
 //               content: latestSafetyNet.safety_body,
 //             },
 //           }));

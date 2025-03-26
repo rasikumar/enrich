@@ -16,11 +16,11 @@ const Card = ({
 }) => {
   let imagePath;
   if (linkPrefix === "blog") {
-    imagePath = "http://localhost:5001/blog_images/";
+    imagePath = "https://newcheck.evvisolutions.com/blog_images/";
   } else if (linkPrefix === "changeABit") {
-    imagePath = "http://localhost:5001/changeAbit_images/";
+    imagePath = "https://newcheck.evvisolutions.com/changeAbit_images/";
   } else if (linkPrefix === "safetyNet") {
-    imagePath = "http://localhost:5001/safety_images/";
+    imagePath = "https://newcheck.evvisolutions.com/safety_images/";
   }
 
   return (

@@ -349,7 +349,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string" &&
-                "http://localhost:5001/safety_images/" + thumbnailImagePreview
+                "https://newcheck.evvisolutions.com/safety_images/" +
+                  thumbnailImagePreview
               }
               // alt={formData.title}
               className="mt-4 w-44 m-auto rounded"
@@ -394,7 +395,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof imagePreview === "string" &&
-                "http://localhost:5001/safety_images/" + imagePreview
+                "https://newcheck.evvisolutions.com/safety_images/" +
+                  imagePreview
               }
               // alt={formData.title}
               className="mt-4 max-w-full rounded m-auto"

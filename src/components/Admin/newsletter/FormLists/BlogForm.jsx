@@ -30,7 +30,7 @@ const FeaturedInsight = ({
           />
         )}
       </div>
-      <a href="http://localhost:5001/">Read the Full Article</a>
+      <a href="https://newcheck.evvisolutions.com/">Read the Full Article</a>
     </div>
   );
 };

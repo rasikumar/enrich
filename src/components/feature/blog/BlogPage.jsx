@@ -20,7 +20,7 @@ const BlogPage = () => {
           date: item.blog_date,
           author: item.blog_author,
           views: item.blog_visitors_count,
-          thumbnail: `http://localhost:5001/blog_images/${item.blog_thumbnail}`,
+          thumbnail: `https://newcheck.evvisolutions.com/blog_images/${item.blog_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(
