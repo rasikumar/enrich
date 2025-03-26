@@ -67,6 +67,8 @@ const CommentList = () => {
 
   // Handle comment visibility toggle with modal confirmation
   const handleToggleVisibility = (comment_id, isHidden) => {
+    console.log(comment_id, isHidden);
+
     setCommentToToggle({ comment_id });
     setIsCommentHidden(isHidden); // Track the current visibility state
     setIsToggleModalOpen(true); // Open the modal for confirmation

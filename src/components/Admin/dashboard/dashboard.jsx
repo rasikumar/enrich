@@ -126,7 +126,19 @@ const Dashboard = () => {
 
       {/* Dashboard Content */}
       {loading ? (
-        <p className="text-center">Loading...</p>
+        <main className="flex flex-col gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
+            {Array.from({ length: 7 }).map((_, index) => (
+              <div
+                key={index}
+                className="border-2 p-4 rounded-md border-gray-300 bg-gray-100 animate-pulse"
+              >
+                <div className="h-6 bg-gray-300 rounded w-24 mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-16"></div>
+              </div>
+            ))}
+          </div>
+        </main>
       ) : (
         <main className="flex flex-col gap-4">
           <div className="text-center mt-4 border-2 w-fit p-4 rounded-md border-white bg-primary text-white">
