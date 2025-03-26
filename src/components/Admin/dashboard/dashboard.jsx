@@ -154,32 +154,46 @@ const Dashboard = () => {
               title="Blogs"
               totalCount={dashboardData.blogs.length}
               error={errors.blogs}
+              link="/dashboard/listInsights"
+              listType="ListBlog"
             />
             <Card
               title="ChangeABits"
               totalCount={dashboardData.changeAbitList.length}
+              error={errors.changeAbitList}
+              link="/dashboard/listInsights"
+              listType="ListChangeABit"
             />
             <Card
-              title="SafetyNets"
+              title="Safety Nets"
               totalCount={dashboardData.safetyNetList.length}
+              error={errors.safetyNetList}
+              link={"/dashboard/listInsights"}
+              listType="ListSafetyNet"
             />
             <Card
               title="Leads"
               totalCount={dashboardData.leads.length}
               error={errors.leads}
+              link={"/dashboard/contactList"}
             />
             <Card
               title="Comments"
               totalCount={dashboardData.comments.length}
               error={errors.comments}
+              link={"/dashboard/Comment"}
             />
             <Card
               title="Subscribers"
               totalCount={dashboardData.subscribers.length}
+              error={errors.subscribers}
+              link={"/dashboard/members"}
             />
             <Card
               title="Appointments"
               totalCount={dashboardData.appointment?.length}
+              error={errors.appointment}
+              link={"/dashboard/Appointment"}
             />
           </div>
         </main>

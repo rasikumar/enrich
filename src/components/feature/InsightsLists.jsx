@@ -117,7 +117,7 @@ const App = () => {
                 title: item.safety_title,
                 body: item.safety_body,
                 author: item.safety_author,
-                date: item.createdAt,
+                date: item.created_at,
                 category: item.safety_category,
                 thumbnail: item.safety_thumbnail,
                 linkPrefix: "safetyNet",

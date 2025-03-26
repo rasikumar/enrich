@@ -5,6 +5,7 @@ import Instance from "../../Admin/Instance";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { Helmet } from "react-helmet";
+import NotFound from "@/components/NotFound";
 
 const SkeletonLoader = () => {
   return (
@@ -84,7 +85,7 @@ const BlogDetail = () => {
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <NotFound />;
   }
 
   return (

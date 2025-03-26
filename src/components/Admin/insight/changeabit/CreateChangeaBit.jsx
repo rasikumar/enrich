@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import Instance from "../../Instance";
 import { toast, ToastContainer } from "react-toastify";
 import QuillEditor from "@/lib/QuillEditor";
 
 const CreateChangeaBit = () => {
+
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus(); // Focus the name input on component mount
+    }
+  }, []);
+
+  const nameInputRef = useRef(null);
+
   const [content, setContent] = useState("");
   const [head, setHead] = useState("");
   const [author, setAuthor] = useState("");
@@ -123,7 +132,7 @@ const CreateChangeaBit = () => {
       return;
     }
 
-    if (content.trim().length < 100 ) {
+    if (content.trim().length < 100) {
       toast.error("Content must be minimum 100 characters.");
       return;
     }
@@ -164,6 +173,9 @@ const CreateChangeaBit = () => {
         setThumbnail(null); // Clear thumbnail
         setMetaDescription(""); // Clear meta description
         setMetaKeywords(""); // Clear meta keywords
+        if (nameInputRef.current) {
+          nameInputRef.current.focus(); // Refocus after submission
+        }
       } else {
         toast.error(response.data.message);
       }
@@ -193,6 +205,7 @@ const CreateChangeaBit = () => {
               type="text"
               required
               value={head}
+              ref={nameInputRef}
               onChange={(e) => setHead(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter changeABit title"

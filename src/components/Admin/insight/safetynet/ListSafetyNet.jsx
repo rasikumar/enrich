@@ -244,7 +244,7 @@ const ListSafetyNet = () => {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="max-w-6xl">
           <DialogHeader>
-            <DialogTitle>Edit SafetyNet</DialogTitle>
+            <DialogTitle>Edit Safety Net</DialogTitle>
             <DialogClose />
           </DialogHeader>
           {selectedSafetyNet && (

@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Instance from "../../Instance";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import QuillEditor from "@/lib/QuillEditor";
 
 const CreateSafetyNet = () => {
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus(); // Focus the name input on component mount
+    }
+  }, []);
+
+  const nameInputRef = useRef(null);
+
   const [content, setContent] = useState("");
   const [head, setHead] = useState("");
   const [author, setAuthor] = useState("");
@@ -152,7 +160,7 @@ const CreateSafetyNet = () => {
           author,
           content,
         });
-        toast.success("SafetyNet created sucessfully");
+        toast.success("Safety Net created sucessfully");
         // Clear form fields after successful submission
         setHead("");
         setAuthor("");
@@ -161,15 +169,18 @@ const CreateSafetyNet = () => {
         setThumbnail(null); // Clear thumbnail
         setMetaDescription(""); // Clear meta description
         setMetaKeywords(""); // Clear meta keywords
+        if (nameInputRef.current) {
+          nameInputRef.current.focus(); // Refocus after submission
+        }
       } else {
         toast.error(response.data.message);
       }
       setTimeout(() => {
-          window.location.reload();
+        window.location.reload();
       }, 2000);
     } catch (error) {
-      console.error("Error submitting SafetyNet:", error);
-      toast.error("Error submitting SafetyNet: " + error.message);
+      console.error("Error submitting Safety Net:", error);
+      toast.error("Error submitting Safety Net: " + error.message);
     }
   };
 
@@ -183,7 +194,7 @@ const CreateSafetyNet = () => {
               htmlFor="title"
               className="block text-sm font-medium text-gray-700"
             >
-              SafetyNet Title
+              Safety Net Title
             </label>
             <input
               id="title"
@@ -191,9 +202,10 @@ const CreateSafetyNet = () => {
               type="text"
               required
               value={head}
+              ref={nameInputRef}
               onChange={(e) => setHead(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter SafetyNet title"
+              placeholder="Enter Safety Net title"
             />
           </div>
 
@@ -221,7 +233,7 @@ const CreateSafetyNet = () => {
               htmlFor="image"
               className="block text-sm font-medium text-gray-700"
             >
-              SafetyNet Image
+              Safety Net Image
               <button
                 type="button"
                 className="btn btn-secondary ml-4 border p-0 rounded-full w-6 h-6 inline-flex items-center justify-center bg-gray-300 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
@@ -334,7 +346,7 @@ const CreateSafetyNet = () => {
               htmlFor="content"
               className="block text-sm font-medium text-gray-700 w-full"
             >
-              SafetyNet Content{" "}
+              Safety Net Content{" "}
               <span className="text-slate-500 ml-24">
                 Maximum Image Value is 50Kb
               </span>
@@ -342,7 +354,7 @@ const CreateSafetyNet = () => {
             <QuillEditor
               value={content}
               onChange={handleContentChange}
-              placeholder="Write your SafetyNet content here..."
+              placeholder="Write your Safety Net content here..."
             />
           </div>
 
@@ -351,7 +363,7 @@ const CreateSafetyNet = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Publish SafetyNet
+              Publish Safety Net
             </button>
           </div>
         </form>

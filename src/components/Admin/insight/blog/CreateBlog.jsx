@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Instance from "../../Instance";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import QuillEditor from "../../../../lib/QuillEditor";
 
 const CreateBlog = () => {
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus(); // Focus the name input on component mount
+    }
+  }, []);
+
+  const nameInputRef = useRef(null);
+
   const [content, setContent] = useState("");
   const [head, setHead] = useState("");
   const [author, setAuthor] = useState("");
@@ -161,6 +169,9 @@ const CreateBlog = () => {
         setThumbnail(null); // Clear thumbnail
         setMetaDescription(""); // Clear meta description
         setMetaKeywords(""); // Clear meta keywords
+        if (nameInputRef.current) {
+          nameInputRef.current.focus(); // Refocus after submission
+        }
       } else {
         toast.error(response.data.message);
       }
@@ -173,7 +184,9 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="flex mx-auto bg-white md:p-6 rounded-lg shadow-md">
+    <div
+      className="flex mx-auto bg-white md:p-6 rounded-lg shadow-md"
+    >
       <div className="md:w-1/2 px-4">
         <h2 className="text-2xl font-bold mb-6">Create a New Blog</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -190,6 +203,7 @@ const CreateBlog = () => {
               type="text"
               required
               value={head}
+              ref={nameInputRef}
               onChange={(e) => setHead(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter blog title"

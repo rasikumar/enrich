@@ -5,7 +5,7 @@ import FormModel from "./FormModel";
 import { motion } from "framer-motion";
 import { MdOutlineDateRange } from "react-icons/md";
 import Psychometric from "./forms/PsychometricForm";
-import { useModal } from "@/providers/ModalContext";
+import { useModal } from "@/providers/ModalProvider";
 
 const BookSession = () => {
   const { isOpen, toggleModal } = useModal();

@@ -204,7 +204,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
         data.append("thumbnail", formData.thumbnail);
       }
       // console.log(formData.data);
-      console.log("Form Submission Data:", Array.from(data.entries()));
+      // console.log("Form Submission Data:", Array.from(data.entries()));
 
       const response = await Instance.put(`/admin/updateSafety`, data, {
         headers: {
@@ -222,7 +222,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
           setEditing(false);
           window.location.reload();
         }, 2000);
-        toast.success("SafetyNet Updated Successfully");
+        toast.success("Safety Net Updated Successfully");
       } else {
         throw new Error(response.data.message);
       }
@@ -240,7 +240,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
         onSubmit={handleUpdate}
         className="mt-6 bg-gray-100 p-4 rounded-lg max-h-96 overflow-y-scroll"
       >
-        <h2 className="text-xl font-semibold">Edit SafetyNet</h2>
+        {/* <h2 className="text-xl font-semibold">Edit SafetyNet</h2> */}
 
         {/* Title */}
         <div className="mb-4">
@@ -418,7 +418,7 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             className="text-white bg-blue-500 rounded px-4 py-2"
             disabled={loading} // Disable button while loading
           >
-            {loading ? "Updating..." : "Update SafetyNet"}
+            {loading ? "Updating..." : "Update Safety Net"}
           </Button>
           <Button
             type="button"

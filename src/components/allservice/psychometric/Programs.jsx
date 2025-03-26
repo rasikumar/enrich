@@ -1,4 +1,4 @@
-import { useModal } from "@/providers/ModalContext";
+import { useModal } from "@/providers/ModalProvider";
 import { Psychometric_Content } from "..";
 import { psychometric_footer } from "../../../assets";
 const Programs = () => {

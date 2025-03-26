@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useList } from "@/providers/ListProvider";
 import ListBlog from "./blog/ListBlogs";
 import ListChangeaBit from "./changeabit/ListChangeaBit";
 import ListSafetyNet from "./safetynet/ListSafetyNet";
@@ -12,39 +14,36 @@ import {
 } from "../../../components/ui/select";
 
 const List = () => {
-  // State to hold the selected component
-  const [selectedList, setSelectedList] = useState("All");
+  const { selectedList, setSelectedList } = useList();
+  const location = useLocation();
 
-  // Function to handle changes in the select dropdown
-  // const handleSelectChange = (e) => {
-  //   setSelectedList(e.target.value);
-  // };
+  // Set selected list from navigation state
+  useEffect(() => {
+    if (location.state?.selectedList) {
+      setSelectedList(location.state.selectedList);
+    }
+  }, [location.state, setSelectedList]);
 
   return (
     <div className="max-md:mt-16">
-      <Select
-        name="listSelector"
-        id="listSelector"
-        defaultValue={selectedList}
-        onValueChange={setSelectedList}
-      >
+      <Select value={selectedList} onValueChange={setSelectedList}>
         <SelectTrigger className="w-64 bg-blue-500 text-white">
           <SelectValue placeholder="Select an option" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="All">All List</SelectItem>
           <SelectItem value="ListBlog">Blog List</SelectItem>
-          <SelectItem value="ListChangeaBit">Change a Bit List</SelectItem>
+          <SelectItem value="ListChangeABit">ChangeABit List</SelectItem>
           <SelectItem value="ListSafetyNet">Safety Net List</SelectItem>
         </SelectContent>
       </Select>
 
-      {/* Conditionally render the selected component */}
-      {/* <option value="All">All List</option> */}
-      {selectedList === "All" && <AllList />}
-      {selectedList === "ListBlog" && <ListBlog />}
-      {selectedList === "ListChangeaBit" && <ListChangeaBit />}
-      {selectedList === "ListSafetyNet" && <ListSafetyNet />}
+      <div className="mt-6">
+        {selectedList === "All" && <AllList />}
+        {selectedList === "ListBlog" && <ListBlog />}
+        {selectedList === "ListChangeABit" && <ListChangeaBit />}
+        {selectedList === "ListSafetyNet" && <ListSafetyNet />}
+      </div>
     </div>
   );
 };

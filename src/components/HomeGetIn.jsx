@@ -1,18 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Cursor from "./Cursor";
 
-const GetIn = () => {
-  useEffect(() => {
-    if (nameInputRef.current) {
-      nameInputRef.current.focus(); // Focus the name input on component mount
-    }
-  }, []);
-
-  const nameInputRef = useRef(null);
-
+const HomeGetIn = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,8 +21,6 @@ const GetIn = () => {
     if (name === "name" && /[^a-zA-Z\s.]/.test(value)) {
       return; // Only accept characters, spaces, and periods for the name field
     }
-
-    // Reference for the first input field
 
     setFormData({
       ...formData,
@@ -102,9 +92,6 @@ const GetIn = () => {
       toast.success("Message sent successfully!");
       setFormData({ name: "", email: "", message: "", number: "", type: "" });
       setErrors({});
-      if (nameInputRef.current) {
-        nameInputRef.current.focus(); // Refocus after submission
-      }
     } catch (error) {
       toast.error("Error sending message. Try again!");
     }
@@ -153,7 +140,6 @@ const GetIn = () => {
             name: "name",
             type: "text",
             placeholder: "Enter your Name",
-            ref: nameInputRef,
           },
           {
             label: "Email",
@@ -167,13 +153,12 @@ const GetIn = () => {
             type: "number",
             placeholder: "Enter your Number",
           },
-        ].map(({ label, name, type, placeholder, ref }) => (
+        ].map(({ label, name, type, placeholder }) => (
           <div key={name}>
             <label className="block xl:text-lg text-sm font-medium text-gray-700">
               {label}
             </label>
             <input
-              ref={ref}
               type={type}
               name={name}
               className={`mt-1 block w-full px-3 py-2 border ${
@@ -244,4 +229,4 @@ const GetIn = () => {
   );
 };
 
-export default GetIn;
+export default HomeGetIn;

@@ -57,7 +57,7 @@ const PsychometricForm = () => {
     setFormData((prevData) => ({
       ...prevData,
       selectedAssessment: value,
-      otherAssessment: value === "Other" ? "" : null, // Reset or clear custom input if "Other" is selected
+      otherAssessement: value === "Other" ? "" : null, // Reset or clear custom input if "Other" is selected
     }));
     setIsOpenAssesment(false); // Close dropdown after selection
   };
@@ -65,7 +65,7 @@ const PsychometricForm = () => {
   const handleOtherInputChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
-      otherAssessment: e.target.value,
+      otherAssessement: e.target.value,
     }));
   };
 
@@ -82,7 +82,7 @@ const PsychometricForm = () => {
     number: "",
     location: "",
     selectedAssessment: "",
-    otherAssessment: "",
+    otherAssessement: "",
     selectDate: "",
     slots: "",
     file: "",
@@ -93,7 +93,7 @@ const PsychometricForm = () => {
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
-    } else if (!/^[A-Za-z\s'-]+$/.test(formData.name)) {
+    } else if (!/^[A-Za-z\s.'-]+$/.test(formData.name)) {
       newErrors.name =
         "Name should only contain letters, spaces, hyphens, and apostrophes";
     } else if (formData.name.length > 100) {
@@ -111,6 +111,8 @@ const PsychometricForm = () => {
 
     if (!formData.number.trim()) {
       newErrors.number = "Number is required";
+    } else if (/^0000/.test(formData.number)) {
+      newErrors.number = "First four digits cannot be zeros!";
     } else if (formData.number.length < 10) {
       newErrors.number = "Number must be at least 10 digits";
     } else if (formData.number.length > 13) {
@@ -134,9 +136,9 @@ const PsychometricForm = () => {
       newErrors.selectedAssessment = "Assessment type is required";
     } else if (
       formData.selectedAssessment === "Other" &&
-      !formData.otherAssessment
+      !formData.otherAssessement
     ) {
-      newErrors.otherAssessment = "Please specify the assessment type";
+      newErrors.otherAssessement = "Please specify the assessment type";
     }
     if (!formData.slots) {
       newErrors.slots = "Slots type is required";
@@ -244,7 +246,7 @@ const PsychometricForm = () => {
     number: "",
     location: "",
     selectedAssessment: "",
-    otherAssessment: "",
+    otherAssessement: "",
     selectDate: "",
     slots: "",
     file: "",
@@ -329,7 +331,7 @@ const PsychometricForm = () => {
     });
 
     if (formData.selectedAssessment === "Other") {
-      formSubmissionData.append("otherAssessment", formData.otherAssessment);
+      formSubmissionData.append("otherAssessement", formData.otherAssessement);
     }
     // Include file if it exists
     if (formData.file) {
@@ -378,7 +380,7 @@ const PsychometricForm = () => {
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 45); // Add 45 days to today's date
   const maxDateString = maxDate.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
-  console.log(formData);
+  // console.log(formData);
 
   return (
     <div className="flex my-auto mx-auto rounded-lg min-h-[26.5rem]">
@@ -471,7 +473,7 @@ const PsychometricForm = () => {
             </div>
           </div>
 
-          <div className="w-full bg-formback bg-center bg-contain bg-no-repeat md:px-16 py-2 relative">
+          <div className="w-full bg-formback bg-center bg-contain bg-no-repeat md:px-16 py-2 relative h-[32rem] overflow-y-auto">
             <form onSubmit={handleSubmit}>
               {currentStep === 1 && (
                 <>
@@ -507,7 +509,7 @@ const PsychometricForm = () => {
                       onKeyDown={(e) => {
                         // Allow only letters, spaces, hyphens, and apostrophes
                         if (
-                          !/^[A-Za-z\s'-]*$/.test(e.key) &&
+                          !/^[A-Za-z\s.'-]*$/.test(e.key) &&
                           e.key !== "Backspace" &&
                           e.key !== "Delete" &&
                           e.key !== "ArrowLeft" &&
@@ -672,7 +674,7 @@ const PsychometricForm = () => {
                       <input
                         type="text"
                         placeholder="Please specify"
-                        value={formData.otherAssessment || ""}
+                        value={formData.otherAssessement || ""}
                         onChange={handleOtherInputChange}
                         className="w-full p-2 mt-2 border rounded"
                       />
@@ -684,9 +686,9 @@ const PsychometricForm = () => {
                       </p>
                     )}
 
-                    {errors.otherAssessment && (
+                    {errors.otherAssessement && (
                       <p className="text-red-500 text-sm">
-                        {errors.otherAssessment}
+                        {errors.otherAssessement}
                       </p>
                     )}
                   </motion.div>
@@ -816,26 +818,45 @@ const PsychometricForm = () => {
                       alt="QR"
                       className="m-auto"
                     />
-                    <motion.div
-                      className="mb-4"
-                      initial={{ opacity: 0, x: 40 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, x: 15 }}
-                    >
-                      <label className="block text-gray-700">
-                        Payment Details{" "}
-                      </label>
-                      <input
-                        type="file"
-                        name="file"
-                        accept="image/*"
-                        className="relative w-full mb-4"
-                        onChange={validateAndProcessImage}
-                      />
-                      {errors.file && (
-                        <p className="text-red-500 text-sm">{errors.file}</p>
+                    <label className="block text-gray-700 mb-2">
+                      Payment Details
+                    </label>
+                    <div className="relative w-full  mb-4">
+                      {formData.file ? (
+                        <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
+                          <span className="text-gray-700">
+                            {formData.file.name}
+                          </span>
+                          <button
+                            className="text-red-500 hover:text-red-700"
+                            onClick={() =>
+                              setFormData({ ...formData, file: null })
+                            }
+                          >
+                            ✖
+                          </button>
+                        </div>
+                      ) : (
+                        <motion.div
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <input
+                            type="file"
+                            name="file"
+                            accept="image/*"
+                            className="relative w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer"
+                            onChange={validateAndProcessImage}
+                          />
+                          {errors.file && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.file}
+                            </p>
+                          )}
+                        </motion.div>
                       )}
-                    </motion.div>
+                    </div>
 
                     <p className="text-sm italic mb-2">
                       <span className="text-primary">Note:</span> If you decide
@@ -942,7 +963,7 @@ const PsychometricForm = () => {
                     <p>
                       <strong>Assessment Type:</strong>{" "}
                       {formData.selectedAssessment === "Other"
-                        ? formData.otherAssessment || "none" // Show the custom input value or "none" if it's empty
+                        ? formData.otherAssessement || "none" // Show the custom input value or "none" if it's empty
                         : formData.selectedAssessment || "none"}{" "}
                     </p>
 

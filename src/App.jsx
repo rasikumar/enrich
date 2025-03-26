@@ -178,7 +178,7 @@ const App = () => {
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="createInsights" element={<Create />} />
-                <Route path="listInsighs" element={<List />} />
+                <Route path="listInsights" element={<List />} />
                 <Route path="Comment" element={<Comment />} />
                 <Route path="createNewsLetter" element={<CreateNewsLetter />} />
                 <Route path="members" element={<Members />} />

@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (
-      location.pathname.includes("listInsighs") ||
+      location.pathname.includes("listInsights") ||
       location.pathname.includes("createInsights") ||
       location.pathname.includes("Comment")
     ) {
@@ -106,7 +106,7 @@ const Sidebar = () => {
               {insightsOpen && (
                 <div className="ml-6 space-y-2">
                   <NavLink
-                    to="listInsighs"
+                    to="listInsights"
                     className={({ isActive }) =>
                       `flex items-center gap-2 text-sm px-3 py-2 rounded-lg transition 
                      ${

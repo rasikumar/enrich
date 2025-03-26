@@ -6,7 +6,7 @@ import Program from "./allprogram/Program";
 import Testimonials from "./Testimonials";
 import Newsletter from "./Newsletter";
 import Insights from "../components/feature/Insights";
-import GetIn from "./GetIn";
+import HomeGetIn from "./HomeGetIn";
 // import ScrollAlert from "./ScrollMsg";
 
 const Heart = () => {
@@ -20,7 +20,7 @@ const Heart = () => {
       {/* <ScrollAlert /> */}
       <Newsletter />
       <Insights />
-      <GetIn />
+      <HomeGetIn />
     </div>
   );
 };

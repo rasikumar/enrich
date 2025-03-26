@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const BlogCard = ({ id, title, body, date, author, thumbnail, views }) => {
   return (
     <Link to={`/insights/safetyNet/${id}`}>
-      <div className="bg-white rounded-lg overflow-hidden max-w-sm mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform hover:shadow-lg">
+      <div className="bg-white rounded-lg overflow-hidden max-w-sm mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform hover:shadow-lg min-h-[27rem] max-h-[27rem] overflow-y-auto">
         <img
           src={thumbnail}
           alt={title}
@@ -57,7 +57,7 @@ const SafetyNetPage = () => {
           id: item.id,
           title: item.safety_title,
           body: item.safety_body,
-          date: item.createdAt,
+          date: item.created_at,
           author: item.safety_author,
           views: item.safety_visitors_count,
           thumbnail: `https://newcheck.evvisolutions.com/safety_images/${item.safety_thumbnail}`,
@@ -149,7 +149,7 @@ const SafetyNetPage = () => {
         business, and more!
       </p>
 
-      <div className="blog-list px-10 py-6 flex flex-wrap gap-3">
+      <div className="blog-list px-10 py-6 flex flex-wrap gap-3 ">
         {currentBlogs.map((blog) => (
           <BlogCard
             key={blog.id}

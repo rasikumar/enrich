@@ -7,6 +7,7 @@ import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { Helmet } from "react-helmet";
+import NotFound from "@/components/NotFound";
 
 const SkeletonLoader = () => {
   return (
@@ -64,7 +65,7 @@ const BlogDetail = () => {
         setLoading(false);
       } catch (err) {
         setError("Failed to load blog details");
-        console.log(err);
+        // console.log(err);
         setLoading(false);
       }
     };
@@ -214,7 +215,7 @@ const BlogDetail = () => {
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <NotFound />;
   }
 
   return (
