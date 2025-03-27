@@ -61,7 +61,7 @@ const ChangeABit = () => {
           date: item.createdAt,
           author: item.changeAbit_author,
           views: item.changeAbit_visit_count,
-          thumbnail: `https://newcheck.evvisolutions.com/changeAbit_images/${item.changeAbit_thumbnail}`,
+          thumbnail: `http://localhost:5001/changeAbit_images/${item.changeAbit_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(

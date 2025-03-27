@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Instance = axios.create({
-  baseURL: "https://newcheck.evvisolutions.com", // Correct usage
+  baseURL: "http://localhost:5001", // Correct usage
   headers: { "Content-Type": "application/json" },
 });
 

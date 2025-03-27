@@ -19,6 +19,9 @@ const PsychometricForm = () => {
   const [availableSlot, setAvailableSlot] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verificationMessage, setVerificationMessage] = useState(null);
+
   const dateRef = useRef(null);
 
   const handleClick = () => setIsBoxopen((prev) => !prev);
@@ -103,7 +106,8 @@ const PsychometricForm = () => {
     if (!formData.email.trim()) {
       newErrors.email = "Email is required!";
     } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ||
+      !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(formData.email) || // Basic format check
+      /(\.\.)/.test(formData.email) || // Prevents consecutive dots
       formData.email.length > 100
     ) {
       newErrors.email = "Enter a valid email!";
@@ -168,53 +172,62 @@ const PsychometricForm = () => {
 
   const handleImageChange = async (e) => {
     const paymentDetails = e.target.files[0];
-    if (!paymentDetails) return;
+    if (!paymentDetails) return false;
 
-    setFormData((prevData) => ({ ...prevData, paymentDetails }));
-    setPreviewUrl(URL.createObjectURL(paymentDetails));
+    setIsVerifying(true);
+    setVerificationMessage(null);
 
     try {
       const processedImage = await preprocessImage(paymentDetails);
-
-      // Perform OCR
       const {
         data: { text },
       } = await Tesseract.recognize(processedImage, "eng", {
-        tessedit_char_whitelist: "0123456789₹Rsrupeesamount",
-        psm: 6, // Assume a single uniform block of text
-        oem: 1, // Use LSTM OCR engine
+        tessedit_char_whitelist: "0123456789₹Rsrupeesamounttofromupi",
+        psm: 6,
+        oem: 1,
       });
 
       // Normalize the text for easier processing
       const normalizedText = text
-        .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ") // Keep relevant characters
-        .replace(/\s+/g, " ") // Remove extra spaces
+        .replace(/[^0-9₹rsrupeesamounttofromupi]/gi, " ")
+        .replace(/\s+/g, " ")
         .toLowerCase();
 
-      // Look for amount (499) or key phrases
-      const amountRegex = /(rupees|₹|rs|amount)?\s*(499)/i;
-      const keywordRegex = /\b(to|from|upi)\b/i; // Check for key words
+      // Check for all required elements
+      const hasFrom = /\bfrom\b/i.test(normalizedText);
+      const hasTo = /\bto\b/i.test(normalizedText);
+      const hasUPI = /\bupi\b/i.test(normalizedText);
 
-      const amountMatch = normalizedText.match(amountRegex);
-      const keywordMatch = normalizedText.match(keywordRegex);
-
-      if (amountMatch || keywordMatch) {
-        // toast.success("✅ Image added successfully!");
-        return true; // Image is valid
+      if (hasFrom && hasTo && hasUPI) {
+        // All required elements found
+        setFormData((prevData) => ({ ...prevData, paymentDetails }));
+        setPreviewUrl(URL.createObjectURL(paymentDetails));
+        setVerificationMessage("✅ Payment details verified successfully!");
+        return true;
       } else {
-        toast.error(
-          "Please upload valid image and it should contain payment details (UPI id,from,to & rupees)"
+        // Missing some required elements
+        let missingElements = [];
+        if (!hasFrom) missingElements.push("'from' field");
+        if (!hasTo) missingElements.push("'to' field");
+        if (!hasUPI) missingElements.push("UPI ID");
+
+        setVerificationMessage(
+          `Payment details must include: ${missingElements.join(", ")}`
         );
-        setFormData((prevData) => ({ ...prevData, file: null })); // Clear invalid file
+        setFormData((prevData) => ({ ...prevData, paymentDetails: null }));
         setPreviewUrl(null);
-        return false; // Image is invalid
+        return false;
       }
     } catch (error) {
       console.error("Error during OCR:", error);
-      toast.error("⚠️ Failed to process the image. Try again.");
-      setFormData((prevData) => ({ ...prevData, file: null })); // Clear file on error
+      setVerificationMessage(
+        "⚠️ Failed to process the image. Please try again."
+      );
+      setFormData((prevData) => ({ ...prevData, paymentDetails: null }));
       setPreviewUrl(null);
-      return false; // Image processing failed
+      return false;
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -226,13 +239,21 @@ const PsychometricForm = () => {
     return true;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStep === 1 && validateStepOne()) {
       setCurrentStep((prevStep) => prevStep + 1);
     } else if (currentStep === 2 && validateStepTwo()) {
       setCurrentStep((prevStep) => prevStep + 1);
-    } else if (currentStep === 3 && validateStepThree()) {
-      setCurrentStep((prevStep) => prevStep + 1);
+    } else if (currentStep === 3) {
+      // For payment step, we need to validate both the form and the image
+      const isFormValid = validateStepThree();
+      const isImageValid = formData.paymentDetails
+        ? true
+        : await validateAndProcessImage(); // You'll need to adjust this based on your file input handling
+
+      if (isFormValid && isImageValid) {
+        setCurrentStep((prevStep) => prevStep + 1);
+      }
     }
   };
 
@@ -823,19 +844,30 @@ const PsychometricForm = () => {
                     </label>
                     <div className="relative w-full  mb-4">
                       {formData.paymentDetails ? (
-                        <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
-                          <span className="text-gray-700">
-                            {formData.paymentDetails.name}
-                          </span>
-                          <button
-                            className="text-red-500 hover:text-red-700"
-                            onClick={() =>
-                              setFormData({ ...formData, paymentDetails: null })
-                            }
-                          >
-                            ✖
-                          </button>
-                        </div>
+                        <>
+                          <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
+                            <span className="text-gray-700">
+                              {formData.paymentDetails.name}
+                            </span>
+                            <button
+                              className="text-red-500 hover:text-red-700"
+                              onClick={() => {
+                                setFormData({
+                                  ...formData,
+                                  paymentDetails: null,
+                                });
+                                setVerificationMessage(null); // Clear the verification message
+                              }}
+                            >
+                              ✖
+                            </button>
+                          </div>
+                          {verificationMessage && (
+                            <p className={`my-2 text-sm text-green-500`}>
+                              {verificationMessage}
+                            </p>
+                          )}
+                        </>
                       ) : (
                         <motion.div
                           initial={{ opacity: 0, x: 40 }}
@@ -849,6 +881,19 @@ const PsychometricForm = () => {
                             className="relative w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer"
                             onChange={validateAndProcessImage}
                           />
+                          {isVerifying && (
+                            <div className="flex items-center justify-center my-2">
+                              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500"></div>
+                              <span className="ml-2">
+                                Verifying payment details...
+                              </span>
+                            </div>
+                          )}
+                          {verificationMessage && (
+                            <p className={`my-2 text-sm text-red-500`}>
+                              {verificationMessage}
+                            </p>
+                          )}
                           {errors.paymentDetails && (
                             <p className="text-red-500 text-sm mt-1">
                               {errors.paymentDetails}

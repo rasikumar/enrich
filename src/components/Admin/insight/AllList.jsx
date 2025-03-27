@@ -171,7 +171,7 @@ export default AllList;
 //     <div>
 //       <div className="flex flex-wrap gap-3">
 //         {blogs.map((item) => {
-//           const imagePath = `https://newcheck.evvisolutions.com/${
+//           const imagePath = `http://localhost:5001/${
 //             item.linkPrefix === "blog"
 //               ? "blog_images"
 //               : item.linkPrefix === "changeABit"

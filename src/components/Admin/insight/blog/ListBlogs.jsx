@@ -140,7 +140,7 @@ const ListBlog = () => {
               </div>
               {blog.blog_thumbnail && (
                 <img
-                  src={`https://newcheck.evvisolutions.com/blog_images/${blog.blog_thumbnail}`}
+                  src={`http://localhost:5001/blog_images/${blog.blog_thumbnail}`}
                   alt={blog.blog_title}
                   className="rounded-lg w-24 h-24 object-cover"
                 />

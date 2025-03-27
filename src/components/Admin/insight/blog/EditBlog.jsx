@@ -352,8 +352,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string" &&
-                "https://newcheck.evvisolutions.com/blog_images/" +
-                  thumbnailImagePreview
+                "http://localhost:5001/blog_images/" + thumbnailImagePreview
               }
               // alt={formData.title}
               className="mt-4 w-44 m-auto rounded"
@@ -397,7 +396,7 @@ const EditBlog = ({ blog, setEditing, setBlogs }) => {
             <img
               src={
                 typeof imagePreview === "string" &&
-                "https://newcheck.evvisolutions.com/blog_images/" + imagePreview
+                "http://localhost:5001/blog_images/" + imagePreview
               }
               // alt={formData.title}
               className="mt-4 max-w-full rounded m-auto"

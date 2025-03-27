@@ -108,7 +108,7 @@ const BlogDetail = () => {
         />
         <meta
           property="og:image"
-          content={`https://newcheck.evvisolutions.com/changeAbit_images/${blogs[0]?.changeAbit_image}`}
+          content={`http://localhost:5001/changeAbit_images/${blogs[0]?.changeAbit_image}`}
         />
         <meta
           property="og:url"
@@ -143,7 +143,7 @@ const BlogDetail = () => {
                   </p>
                 </div>
                 <img
-                  src={`https://newcheck.evvisolutions.com/changeAbit_images/${blog.changeAbit_image}`}
+                  src={`http://localhost:5001/changeAbit_images/${blog.changeAbit_image}`}
                   alt={blog.changeAbit_title}
                   className="md:w-full w-72 object-cover h-96 rounded-xl"
                 />
@@ -174,7 +174,7 @@ const BlogDetail = () => {
                       </h4>
                       <p className="text-gray-600">{blog.changeAbit_author}</p>
                       <img
-                        src={`https://newcheck.evvisolutions.com/changeAbit_images/${blog.changeAbit_thumbnail}`}
+                        src={`http://localhost:5001/changeAbit_images/${blog.changeAbit_thumbnail}`}
                         alt={blog.changeAbit_title}
                         className="w-full h-40 object-cover rounded mt-2"
                       />

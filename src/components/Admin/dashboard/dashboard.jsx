@@ -79,7 +79,7 @@ const Dashboard = () => {
             const errorUrl = reason.response?.config?.url;
 
             if (errorUrl === "/admin/getAllBlogs")
-              updatedErrors.blogs = "Failed to fetch blogs";
+              updatedErrors.blogs = "Total Blogs";
             if (errorUrl === "/admin/getleads")
               updatedErrors.leads = "Failed to fetch leads";
             if (errorUrl === "/admin/getAllSubscribers")

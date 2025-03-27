@@ -16,7 +16,9 @@ const Card = ({ title, totalCount, error, link, listType }) => {
       <h2 className="text-2xl font-semibold mb-3">{title}</h2>
 
       {error ? (
-        <p className="text-red-300 mt-2 font-medium">{error}</p>
+        <p className="text-lg mt-3">
+          {error}: <span className="font-bold text-yellow-300">0</span>
+        </p>
       ) : (
         <p className="text-lg mt-3">
           Total {title}:{" "}

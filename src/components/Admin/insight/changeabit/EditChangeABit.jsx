@@ -365,7 +365,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string" &&
-                "https://newcheck.evvisolutions.com/changeAbit_images/" +
+                "http://localhost:5001/changeAbit_images/" +
                   thumbnailImagePreview
               }
               // alt={formData.title}
@@ -409,8 +409,7 @@ const EditBlog = ({ change, setEditing, setChangeAbits }) => {
             <img
               src={
                 typeof imagePreview === "string" &&
-                "https://newcheck.evvisolutions.com/changeAbit_images/" +
-                  imagePreview
+                "http://localhost:5001/changeAbit_images/" + imagePreview
               }
               className="mt-4 max-w-full rounded m-auto"
             />

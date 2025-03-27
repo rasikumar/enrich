@@ -53,11 +53,12 @@ const GetIn = () => {
     } else if (name.length > 100) {
       newErrors.name = "Max 100 characters!";
     }
-
+    
     if (!email.trim()) {
       newErrors.email = "Email is required!";
     } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email) || // Basic format check
+      /(\.\.)/.test(email) || // Prevents consecutive dots
       email.length > 100
     ) {
       newErrors.email = "Enter a valid email!";
@@ -95,10 +96,7 @@ const GetIn = () => {
     if (!validateForm()) return;
 
     try {
-      await axios.post(
-        "https://newcheck.evvisolutions.com/api/createmessages",
-        formData
-      );
+      await axios.post("http://localhost:5001/api/createmessages", formData);
       toast.success("Message sent successfully!");
       setFormData({ name: "", email: "", message: "", number: "", type: "" });
       setErrors({});

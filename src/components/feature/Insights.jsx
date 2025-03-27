@@ -20,8 +20,12 @@ const App = () => {
     e.preventDefault();
     // console.log("Submitting form data:", formData);
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(formData.email)) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (
+      !emailPattern.test(formData.email) ||
+      /(\.\.)/.test(formData.email) ||
+      formData.email.length > 100
+    ) {
       toast.error("Please enter a valid email address");
       return;
     }

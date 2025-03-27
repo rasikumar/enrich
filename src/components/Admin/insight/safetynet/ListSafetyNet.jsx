@@ -151,7 +151,7 @@ const ListSafetyNet = () => {
               </div>
               {safetyNet.safety_thumbnail && (
                 <img
-                  src={`https://newcheck.evvisolutions.com/safety_images/${safetyNet.safety_thumbnail}`}
+                  src={`http://localhost:5001/safety_images/${safetyNet.safety_thumbnail}`}
                   alt={safetyNet.safety_title}
                   className="rounded-lg w-24 h-24 object-cover"
                 />

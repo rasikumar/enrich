@@ -154,14 +154,19 @@ const InsightPage = () => {
 
   // Helper function to render pagination with dots
   const renderPagination = () => {
+    // If there are no blogs, don't show pagination at all
+    if (blogs.length === 0) {
+      return null;
+    }
+
     if (totalPages <= pageLimit) {
       return (
         <>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
+            disabled={currentPage === 1 || blogs.length === 0}
             className={`px-4 py-2 rounded-lg ${
-              currentPage === 1
+              currentPage === 1 || blogs.length === 0
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
@@ -178,6 +183,7 @@ const InsightPage = () => {
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-blue-300"
               }`}
+              disabled={blogs.length === 0}
             >
               {index + 1}
             </button>
@@ -185,9 +191,9 @@ const InsightPage = () => {
 
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || blogs.length === 0}
             className={`px-4 py-2 rounded-lg ${
-              currentPage === totalPages
+              currentPage === totalPages || blogs.length === 0
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
@@ -224,9 +230,9 @@ const InsightPage = () => {
       <>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || blogs.length === 0}
           className={`px-4 py-2 rounded-lg ${
-            currentPage === 1
+            currentPage === 1 || blogs.length === 0
               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
@@ -243,7 +249,7 @@ const InsightPage = () => {
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-blue-300"
             }`}
-            disabled={page === "..."}
+            disabled={page === "..." || blogs.length === 0}
           >
             {page}
           </button>
@@ -251,9 +257,9 @@ const InsightPage = () => {
 
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || blogs.length === 0}
           className={`px-4 py-2 rounded-lg ${
-            currentPage === totalPages
+            currentPage === totalPages || blogs.length === 0
               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
@@ -284,11 +290,11 @@ const InsightPage = () => {
         {currentBlogs.map((item) => {
           let imagePath = "";
           if (item.linkPrefix === "blog") {
-            imagePath = "https://newcheck.evvisolutions.com/blog_images/";
+            imagePath = "http://localhost:5001/blog_images/";
           } else if (item.linkPrefix === "changeABit") {
-            imagePath = "https://newcheck.evvisolutions.com/changeAbit_images/";
+            imagePath = "http://localhost:5001/changeAbit_images/";
           } else if (item.linkPrefix === "safetyNet") {
-            imagePath = "https://newcheck.evvisolutions.com/safety_images/";
+            imagePath = "http://localhost:5001/safety_images/";
           }
 
           return (

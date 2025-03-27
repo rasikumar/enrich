@@ -5,7 +5,7 @@ import { useState } from "react";
 import Instance from "../Instance";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import ConfirmModal from "./ConfirmModal";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 
 const CommentItem = ({
@@ -260,7 +260,6 @@ const CommentItem = ({
         btn1="Cancel"
         btn2={isReplyHidden ? "Hide" : "Unhide"}
       />
-      <ToastContainer />
     </>
   );
 };

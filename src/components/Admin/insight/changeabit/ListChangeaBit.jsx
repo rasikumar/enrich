@@ -156,7 +156,7 @@ const ListChangeAbit = () => {
               </div>
               {changeABit.changeAbit_thumbnail && (
                 <img
-                  src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABit.changeAbit_thumbnail}`}
+                  src={`http://localhost:5001/changeAbit_images/${changeABit.changeAbit_thumbnail}`}
                   alt={changeABit.changeAbit_title}
                   className="rounded-lg w-24  h-24 object-cover"
                 />

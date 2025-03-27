@@ -55,7 +55,7 @@ const CommentList = () => {
   const confirmDeleteReplyComment = async () => {
     if (!replyDelete) return;
 
-    console.log(replyDelete);
+    // console.log(replyDelete);
     try {
       await Instance.delete(`/admin/deleteReply`, {
         data: { reply_id: replyDelete }, // Send it as a body

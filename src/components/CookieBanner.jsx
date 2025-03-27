@@ -17,7 +17,7 @@ const CookieBanner = () => {
   }, []);
 
   const acceptCookies = () => {
-    const expireDays = 30;
+    const expireDays = 1;
     // const expireDays = expireSeconds / (60 * 60 * 24);
     Cookies.set("cookieAccepted", "true", { expires: expireDays });
     setIsCookieAccepted(true);
@@ -25,7 +25,7 @@ const CookieBanner = () => {
 
   const rejectCookies = () => {
     // const expireSeconds = 1; // Set the number of seconds until the cookie expires
-    const expireDays = 30;
+    const expireDays = 1; // Set the number of days until the cookie expires
     Cookies.set("cookieRejected", "true", { expires: expireDays });
     setIsCookieRejected(true);
   };

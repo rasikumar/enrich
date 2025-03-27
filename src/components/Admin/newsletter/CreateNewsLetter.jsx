@@ -258,7 +258,7 @@ const CreateNewsLetter = () => {
             className="line-clamp-4"
           />
           <img
-            src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
+            src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
             alt={blogs.blog_title}
             width={200}
           />
@@ -282,7 +282,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
+            src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
             alt={changeABits.changeAbit_title}
             width={200}
           />
@@ -306,7 +306,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
+            src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
             alt={safetyNets.safety_title}
             width={200}
           />
@@ -470,7 +470,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
+                      src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
                       alt={blogs.blog_title}
                       width={300}
                     />
@@ -495,7 +495,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
+                      src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
                       alt={changeABits.changeAbit_title}
                       width={300}
                     />
@@ -520,7 +520,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4 "
                     />
                     <img
-                      src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
+                      src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
                       alt={safetyNets.safety_title}
                       width={300}
                     />
@@ -643,7 +643,7 @@ const CreateNewsLetter = () => {
                       </span>{" "}
                       |
                       <span
-                        // href="https://newcheck.evvisolutions.com/privacy-policy"
+                        // href="http://localhost:5001/privacy-policy"
                         className="text-gray-600 underline"
                       >
                         Privacy Policy
