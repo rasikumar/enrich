@@ -32,7 +32,7 @@ const DeleteBlog = ({ changeABitId, setChangeAbits }) => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 shadow-md max-w-sm mx-auto">
             <h2 className="text-lg font-semibold mb-4">Confirm to delete</h2>
-            <p>Are you sure you want to delete this changeABit?</p>
+            <p>Are you sure you want to delete this ChangeABit?</p>
             <div className="flex justify-between mt-4">
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
