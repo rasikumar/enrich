@@ -8,11 +8,12 @@ import Moto from "./Moto";
 import { Helmet } from "react-helmet";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import Cursor from "../Cursor";
 
 const Aboutus = () => {
   const navigate = useNavigate();
   return (
-    <div className="relative">
+    <div className="relative cursor-none">
       <Helmet>
         <title>About Us | Enrich Minds</title>
         <meta
@@ -20,6 +21,7 @@ const Aboutus = () => {
           content="Learn more about Enrich mission and our mission."
         />
       </Helmet>
+      <Cursor />
       {/* <SquiggleScroll /> */}
 
       <h1 className="text-6xl font-bold rotate-0 max-md:flex hidden sticky top-28 text-slate-100 uppercase -z-20">

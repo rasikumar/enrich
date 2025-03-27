@@ -33,7 +33,15 @@ const CreateSafetyNet = () => {
 
     if (!file) return;
 
-    // Check file size (max 5MB)
+    // Check if the file is a document (not an image)
+    if (!file.type.startsWith("image/")) {
+      e.target.value = "";
+      setImage(null);
+      toast.error("Please upload an image file, documents are not allowed.");
+      return;
+    }
+
+    // Rest of the existing image validation checks
     if (file.size > 5 * 1024 * 1024) {
       e.target.value = "";
       setImage(null);
@@ -41,14 +49,6 @@ const CreateSafetyNet = () => {
       return;
     }
 
-    // Check file type
-    if (!file.type.startsWith("image/")) {
-      e.target.value = "";
-      toast.error("Please upload a valid image file.");
-      return;
-    }
-
-    // Read image dimensions
     const reader = new FileReader();
     reader.onload = (event) => {
       const img = new Image();
@@ -68,25 +68,60 @@ const CreateSafetyNet = () => {
   const handleThumbnailChange = (e) => {
     const file = e.target.files?.[0];
 
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        // Reset file input
-        e.target.value = "";
-        setThumbnail(null);
-        return;
-      }
-      setThumbnail(file);
+    if (!file) return;
+
+    // Check if the file is a document (not an image)
+    if (!file.type.startsWith("image/")) {
+      e.target.value = "";
+      setThumbnail(null);
+      toast.error(
+        "Please upload an image file for thumbnail, documents are not allowed."
+      );
+      return;
     }
 
-    if (file && file.type.startsWith("image/")) {
-      setThumbnail(file);
-    } else {
-      toast.error("Please upload a valid image file.");
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      e.target.value = "";
+      setThumbnail(null);
+      toast.error("Thumbnail file size must be less than 5MB.");
+      return;
     }
+
+    // Read image dimensions for thumbnail
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width <= 1080 && img.height <= 1080) {
+          setThumbnail(file);
+        } else {
+          e.target.value = "";
+          toast.error("Thumbnail dimensions must not exceed 1080x1080 pixels.");
+        }
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (image && !image.type.startsWith("image/")) {
+      toast.error(
+        "Please upload a valid image file, documents are not allowed."
+      );
+      return;
+    }
+
+    if (thumbnail && !thumbnail.type.startsWith("image/")) {
+      toast.error(
+        "Please upload a valid image file for thumbnail, documents are not allowed."
+      );
+      return;
+    }
+
     if (head.trim().length < 10 || head.trim().length > 100) {
       toast.error("Title must be between 10 and 100 characters.");
       return;

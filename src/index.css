@@ -93,19 +93,19 @@ input[type="number"] {
   left: 0;
   pointer-events: none;
   } */
-  /* .cursor{
+  .cursor{
     position: fixed;
     width: 40px;
     height: 40px;
     top: 0;
     left: 0;
     background-image: url("assets/nicon.png");
-  background-color: black;
+  /* background-color: black; */
   border-radius: 50%;
   pointer-events: none;
   rotate: -230deg;
 
-} */
+}
 .parallax {
   transform: translateY(0);
   transition: transform 0.1s ease-out;

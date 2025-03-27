@@ -163,7 +163,7 @@ const Appointment = () => {
                     <td className="border border-gray-300 p-2">
                       {contact.email}
                     </td>
-                    <td className="border border-gray-300 p-2 line-clamp-4 overflow-hidden">
+                    <td className="border border-gray-300 p-2 overflow-hidden">
                       {contact.assessmentType === "Other" ? (
                         <>Other - {contact.otherAssessement}</>
                       ) : (

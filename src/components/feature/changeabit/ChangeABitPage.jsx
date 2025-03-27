@@ -5,6 +5,7 @@ import Instance from "../../Admin/Instance";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { Link } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
+import Cursor from "@/components/Cursor";
 
 const Card = ({ id, title, body, date, author, thumbnail, views }) => {
   return (
@@ -142,7 +143,8 @@ const ChangeABit = () => {
   };
 
   return (
-    <>
+    <div className="cursor-none">
+      <Cursor />
       <DynamicBreadcrumb />
       <h1 className="text-4xl tablet:text-5xl font-semibold mt-20 text-center mb-3">
         Latest ChangeABit
@@ -168,7 +170,7 @@ const ChangeABit = () => {
       </div>
 
       {renderPagination()}
-    </>
+    </div>
   );
 };
 

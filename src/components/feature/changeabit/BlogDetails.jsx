@@ -6,6 +6,7 @@ import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { Helmet } from "react-helmet";
 import NotFound from "@/components/NotFound";
+import Cursor from "@/components/Cursor";
 
 const SkeletonLoader = () => {
   return (
@@ -118,9 +119,10 @@ const BlogDetail = () => {
         <meta property="og:site_name" content="Enrich" />
       </Helmet>
       <motion.div
-        className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
+        className="bg-t-primary fixed top-0 left-0 right-0 h-2 line cursor-none"
         style={{ scaleX: scrollYProgress, transform: origin }}
       />
+      <Cursor />
       <DynamicBreadcrumb />
       <div className="w-[90%] m-auto py-12 flex justify-between mb-10 mt-10">
         <div className="sm:w-[80%] m-auto">

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { programDisplays } from "../../constant";
 import { Suspense } from "react";
 import { Helmet } from "react-helmet";
+import Cursor from "../Cursor";
 
 const Skeleton = () => {
   return (
@@ -37,7 +38,9 @@ const ProgramDisplay = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        className="cursor-none"
       >
+        <Cursor />
         <h1 className="bg-yellow-500 relative p-10 text-center font-semibold text-3xl">
           <IoArrowBackCircle
             className="text-3xl absolute bottom-11 left-0"

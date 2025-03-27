@@ -3,6 +3,7 @@ import Instance from "../Admin/Instance";
 import { Link } from "react-router-dom";
 import DynamicBreadcrumb from "../DynamicBreadcrumb";
 import { FaPen } from "react-icons/fa";
+import Cursor from "../Cursor";
 
 const SkeletonLoader = () => {
   return (
@@ -113,7 +114,7 @@ const InsightPage = () => {
 
   if (loading) {
     return (
-      <div className="w-[90%] m-auto py-12">
+      <div className="w-[90%] m-auto py-12 cursor-none">
         <div className="flex flex-col gap-3 w-full mb-10 text-center">
           <h2 className="text-4xl tablet:text-5xl font-semibold">
             Insights Hub
@@ -271,7 +272,8 @@ const InsightPage = () => {
   };
 
   return (
-    <div className="w-[90%] m-auto py-12">
+    <div className="w-[90%] m-auto py-12 cursor-none">
+      <Cursor />
       <DynamicBreadcrumb />
       <div className="flex flex-col gap-3 w-full mb-4 text-center mt-5">
         <h2 className="text-4xl tablet:text-5xl font-semibold mt-8">

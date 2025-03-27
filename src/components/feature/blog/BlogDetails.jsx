@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import NotFound from "@/components/NotFound";
+import Cursor from "@/components/Cursor";
 
 const SkeletonLoader = () => {
   return (
@@ -244,9 +245,10 @@ const BlogDetail = () => {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <motion.div
-        className="bg-t-primary fixed top-0 left-0 right-0 h-2 line"
+        className="bg-t-primary fixed top-0 left-0 right-0 h-2 line cursor-none"
         style={{ scaleX: scrollYProgress, transform: origin }}
       />
+      <Cursor />
       <DynamicBreadcrumb />
       <div className="md:w-[90%] w-32 md:m-auto py-12 flex justify-between mt-10">
         <div className="sm:w-[80%] m-auto mt-6">

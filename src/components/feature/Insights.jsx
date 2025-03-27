@@ -32,23 +32,21 @@ const App = () => {
 
     try {
       const response = await Instance.post("/subscribe", formData);
-      // if (response.status === true) {
-      console.log(response);
-      toast.success("You're in! Welcome aboard!");
-      // } else {
-      //   console.log(response);
-      //   toast.error("Failed to subscribe");
-      //   toast.error(
-      //     response.error ||
-      //       "Oops! We encountered an issue. Please retry in a bit."
-      //   );
-      // }
+      if (response.status === true) {
+        console.log("asdasd", response);
+        toast.success("You're in! Welcome aboard!");
+      } else {
+        console.log(response);
+        toast.error("Failed to subscribe");
+      }
       setFormData({
         email: "",
       });
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.error || "Please enter your email address");
+      console.log(error.response.data.message);
+      toast.error(
+        error.response.data.message || "Please enter your email address"
+      );
     }
   };
 

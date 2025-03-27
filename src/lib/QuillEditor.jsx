@@ -46,6 +46,7 @@ const QuillEditor = ({
           [{ script: "sub" }, { script: "super" }], // Subscript and Superscript
           // [{ size: ["small", false, "large", "huge"] }],
           [{ font: [] }],
+          [{ color: [] }, { background: [] }], // Color and background color options
           [{ align: [] }], // Alignment options
           ["image"], // Image button
           ["clean"], // Remove formatting

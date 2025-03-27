@@ -1,6 +1,9 @@
+import Cursor from "./Cursor";
+
 const PrivacyPolicy = () => {
   return (
-    <>
+    <div className="cursor-none">
+      <Cursor />
       <section className="from-t-primary to-slate-400 bg-gradient-to-r md:p-10 p-4 mt-10 w-full text-primary md:text-5xl text-3xl">
         Enrich Minds Consulting Privacy Policy
       </section>
@@ -204,7 +207,7 @@ const PrivacyPolicy = () => {
           </section>
         </section>
       </div>
-    </>
+    </div>
   );
 };
 

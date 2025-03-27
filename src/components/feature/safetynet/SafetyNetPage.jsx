@@ -4,6 +4,7 @@ import Instance from "../../Admin/Instance";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Cursor from "@/components/Cursor";
 
 // Updated BlogCard component
 const BlogCard = ({ id, title, body, date, author, thumbnail, views }) => {
@@ -139,7 +140,8 @@ const SafetyNetPage = () => {
   };
 
   return (
-    <>
+    <div className="cursor-none">
+      <Cursor />
       <DynamicBreadcrumb />
       <h1 className="text-4xl tablet:text-5xl font-semibold mt-20 text-center mb-3">
         Latest Safety Net
@@ -165,7 +167,7 @@ const SafetyNetPage = () => {
       </div>
 
       {renderPagination()}
-    </>
+    </div>
   );
 };
 

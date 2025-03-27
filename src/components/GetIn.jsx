@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cursor from "./Cursor";
 // import Cursor from "./Cursor";
 
 const GetIn = () => {
@@ -53,7 +54,7 @@ const GetIn = () => {
     } else if (name.length > 100) {
       newErrors.name = "Max 100 characters!";
     }
-    
+
     if (!email.trim()) {
       newErrors.email = "Email is required!";
     } else if (
@@ -110,10 +111,10 @@ const GetIn = () => {
 
   return (
     <div
-      id="getIn"
-      className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between mb-8"
+      // id="getIn"
+      className="bg-gray-300 md:flex md:p-10 p-2 max-md:my-5 justify-between mb-8 cursor-none"
     >
-      {/* <Cursor /> */}
+      <Cursor />
       <div className="md:w-[40%] p-4 flex flex-col gap-5 md:mb-10">
         <h2 className="text-black md:text-4xl text-2xl font-semibold">
           Get in touch

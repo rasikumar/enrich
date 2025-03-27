@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Instance from "../../Admin/Instance";
 import Card from "../component/Card"; // Make sure the path to Card is correct
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
+import Cursor from "@/components/Cursor";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -101,7 +102,8 @@ const BlogPage = () => {
   };
 
   return (
-    <>
+    <div className="cursor-none">
+      <Cursor />
       <DynamicBreadcrumb />
       <h1 className="text-4xl tablet:text-5xl font-semibold mt-20 text-center mb-3">
         Latest Blogs
@@ -127,7 +129,7 @@ const BlogPage = () => {
       </div>
 
       {renderPagination()}
-    </>
+    </div>
   );
 };
 
