@@ -61,7 +61,7 @@ const SafetyNetPage = () => {
           date: item.created_at,
           author: item.safety_author,
           views: item.safety_visitors_count,
-          thumbnail: `http://localhost:5001/safety_images/${item.safety_thumbnail}`,
+          thumbnail: `https://newcheck.evvisolutions.com/safety_images/${item.safety_thumbnail}`,
         }));
 
         const latestBlogs = blogData.sort(

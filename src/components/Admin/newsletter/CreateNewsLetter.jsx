@@ -5,7 +5,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { logo } from "../../../assets";
 import { IoClose } from "react-icons/io5";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const CreateNewsLetter = () => {
   const [blogs, setBlogs] = useState([]);
@@ -165,14 +166,14 @@ const CreateNewsLetter = () => {
         },
       });
 
-      if (response.status === 200) {
-        toast.success("Newsletter content saved successfully!");
-      } else {
+      if (response?.status === 200) {
+        toast.success("Newsletter content Sent successfully!");
+      } else if (response.status === false) {
         toast.error("Failed to save the newsletter content.");
       }
     } catch (error) {
-      console.error("Error submitting data:", error);
-      toast.error("Error submitting data.");
+      console.error("Error submitting data:", error.response?.data.message);
+      toast.error(error.response?.data.details || "Error submitting data.");
     } finally {
       setLoading(false); // Set loading to false after the request
     }
@@ -258,7 +259,7 @@ const CreateNewsLetter = () => {
             className="line-clamp-4"
           />
           <img
-            src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
+            src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
             alt={blogs.blog_title}
             width={200}
           />
@@ -282,7 +283,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
+            src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
             alt={changeABits.changeAbit_title}
             width={200}
           />
@@ -306,7 +307,7 @@ const CreateNewsLetter = () => {
             }}
           />
           <img
-            src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
+            src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
             alt={safetyNets.safety_title}
             width={200}
           />
@@ -470,7 +471,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`http://localhost:5001/blog_images/${blogs.blog_image}`}
+                      src={`https://newcheck.evvisolutions.com/blog_images/${blogs.blog_image}`}
                       alt={blogs.blog_title}
                       width={300}
                     />
@@ -495,7 +496,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4"
                     />
                     <img
-                      src={`http://localhost:5001/changeAbit_images/${changeABits.changeAbit_image}`}
+                      src={`https://newcheck.evvisolutions.com/changeAbit_images/${changeABits.changeAbit_image}`}
                       alt={changeABits.changeAbit_title}
                       width={300}
                     />
@@ -520,7 +521,7 @@ const CreateNewsLetter = () => {
                       className="line-clamp-4 "
                     />
                     <img
-                      src={`http://localhost:5001/safety_images/${safetyNets.safety_image}`}
+                      src={`https://newcheck.evvisolutions.com/safety_images/${safetyNets.safety_image}`}
                       alt={safetyNets.safety_title}
                       width={300}
                     />
@@ -643,7 +644,7 @@ const CreateNewsLetter = () => {
                       </span>{" "}
                       |
                       <span
-                        // href="http://localhost:5001/privacy-policy"
+                        // href="https://newcheck.evvisolutions.com/privacy-policy"
                         className="text-gray-600 underline"
                       >
                         Privacy Policy
@@ -672,6 +673,7 @@ const CreateNewsLetter = () => {
       >
         {loading ? "Loading...." : "Send Newsletter"}
       </button>
+      <ToastContainer />
     </div>
   );
 };

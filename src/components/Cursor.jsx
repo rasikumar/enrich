@@ -1,4 +1,3 @@
-// import { motion, useMotionValue, useSpring } from "framer-motion";
 import { motion, useMotionValue } from "framer-motion";
 import { useEffect } from "react";
 
@@ -8,11 +7,6 @@ const Cursor = () => {
     x: useMotionValue(0),
     y: useMotionValue(0),
   };
-
-  // const smoothMouse = {
-  //   x: useSpring(mouse.x),
-  //   y: useSpring(mouse.y),
-  // };
 
   const manageMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -25,24 +19,14 @@ const Cursor = () => {
     return () => window.removeEventListener("mousemove", manageMouseMove);
   });
 
-  // const variants = {
-  //   default: {
-  //     x: mousePosition.x - 16,
-  //     y: mousePosition.y - 16,
-  //     transition: {
-  //       type: "spring",
-  //       damping: 20,
-  //       stiffness: 150,
-  //       delay: 0.2,
-  //       ease: "easeInOut",
-  //     },
-  //   },
-  // };
-
   return (
     <motion.div
       className="cursor z-[9999]"
-      style={{ left: mouse.x, top: mouse.y }}
+      style={{
+        left: mouse.x,
+        top: mouse.y,
+        cursor: "none !important", // Ensure cursor is hidden with !important
+      }}
     />
   );
 };

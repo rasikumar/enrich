@@ -77,12 +77,9 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
 
-    if (!file) return; // Exit if no file is selected
-    if (file) {
-      setImagePreview(URL.createObjectURL(file)); // Generate preview URL
-      setImageName(file.name); // Store file name
-    }
+    // Check if it's an image file
     if (!file.type.startsWith("image/")) {
       toast.error("Only image files are allowed.");
       e.target.value = ""; // Clear input field
@@ -93,53 +90,90 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        if (img.width <= 2000 && img.height <= 3000) {
-          setFormData((prev) => ({ ...prev, image: file }));
-          setImagePreview(URL.createObjectURL(file)); // Show preview
-        } else {
-          e.target.value = ""; // Clear the input field
+        // Check dimensions
+        if (img.width > 2000 || img.height > 3000) {
           toast.error("Image dimensions must not exceed 2000x3000 pixels.");
+          e.target.value = ""; // Clear input field
+          // Don't update any state - keep old image
+          return;
         }
+
+        // Check file size (example: 5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+          toast.error("Image size must be less than 5MB.");
+          e.target.value = ""; // Clear input field
+          // Don't update any state - keep old image
+          return;
+        }
+
+        // If all validations pass
+        setFormData((prev) => ({ ...prev, image: file }));
+        setImagePreview(URL.createObjectURL(file));
+        setImageName(file.name);
+      };
+      img.onerror = () => {
+        toast.error("Failed to load image. Please try another file.");
+        e.target.value = ""; // Clear input field
+        // Don't update any state - keep old image
       };
       img.src = event.target.result;
     };
-
+    reader.onerror = () => {
+      toast.error("Failed to read file. Please try another file.");
+      e.target.value = ""; // Clear input field
+      // Don't update any state - keep old image
+    };
     reader.readAsDataURL(file);
   };
 
   const handleThumbnailImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
 
-    if (!file) return; // Exit if no file is selected
-
-    if (file) {
-      setThumbnailImagePreview(URL.createObjectURL(file)); // Generate preview URL
-      setThumbnailImageName(file.name); // Store file name
-    }
+    // Check if it's an image file
     if (!file.type.startsWith("image/")) {
       toast.error("Only image files are allowed.");
       e.target.value = ""; // Clear input field
       return;
     }
 
-    // If valid, update the state
     const reader = new FileReader();
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        if (img.width <= 2000 && img.height <= 3000) {
-          // setFormData((prev) => ({ ...prev, image: file }));
-          setFormData((prev) => ({ ...prev, thumbnail: file }));
-          // setImagePreview(URL.createObjectURL(file)); // Show preview
-          setThumbnailImagePreview(URL.createObjectURL(file));
-        } else {
-          e.target.value = ""; // Clear the input field
+        // Check dimensions
+        if (img.width > 2000 || img.height > 3000) {
           toast.error("Image dimensions must not exceed 2000x3000 pixels.");
+          e.target.value = ""; // Clear input field
+          // Don't update any state - keep old thumbnail
+          return;
         }
+
+        // Check file size (example: 5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+          toast.error("Image size must be less than 5MB.");
+          e.target.value = ""; // Clear input field
+          // Don't update any state - keep old thumbnail
+          return;
+        }
+
+        // If all validations pass
+        setFormData((prev) => ({ ...prev, thumbnail: file }));
+        setThumbnailImagePreview(URL.createObjectURL(file));
+        setThumbnailImageName(file.name);
+      };
+      img.onerror = () => {
+        toast.error("Failed to load image. Please try another file.");
+        e.target.value = ""; // Clear input field
+        // Don't update any state - keep old thumbnail
       };
       img.src = event.target.result;
     };
-
+    reader.onerror = () => {
+      toast.error("Failed to read file. Please try another file.");
+      e.target.value = ""; // Clear input field
+      // Don't update any state - keep old thumbnail
+    };
     reader.readAsDataURL(file);
   };
 
@@ -349,7 +383,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof thumbnailImagePreview === "string" &&
-                "http://localhost:5001/safety_images/" + thumbnailImagePreview
+                "https://newcheck.evvisolutions.com/safety_images/" +
+                  thumbnailImagePreview
               }
               // alt={formData.title}
               className="mt-4 w-44 m-auto rounded"
@@ -394,7 +429,8 @@ const EditBlog = ({ safety, setEditing, setSafetyNets }) => {
             <img
               src={
                 typeof imagePreview === "string" &&
-                "http://localhost:5001/safety_images/" + imagePreview
+                "https://newcheck.evvisolutions.com/safety_images/" +
+                  imagePreview
               }
               // alt={formData.title}
               className="mt-4 max-w-full rounded m-auto"

@@ -32,11 +32,11 @@ const App = () => {
 
     try {
       const response = await Instance.post("/subscribe", formData);
-      if (response.status === true) {
-        console.log("asdasd", response);
+      if (response.status === 200) {
+        // console.log("asdasd", response);
         toast.success("You're in! Welcome aboard!");
       } else {
-        console.log(response);
+        // console.log(response);
         toast.error("Failed to subscribe");
       }
       setFormData({

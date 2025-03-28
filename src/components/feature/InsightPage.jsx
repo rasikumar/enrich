@@ -292,11 +292,11 @@ const InsightPage = () => {
         {currentBlogs.map((item) => {
           let imagePath = "";
           if (item.linkPrefix === "blog") {
-            imagePath = "http://localhost:5001/blog_images/";
+            imagePath = "https://newcheck.evvisolutions.com/blog_images/";
           } else if (item.linkPrefix === "changeABit") {
-            imagePath = "http://localhost:5001/changeAbit_images/";
+            imagePath = "https://newcheck.evvisolutions.com/changeAbit_images/";
           } else if (item.linkPrefix === "safetyNet") {
-            imagePath = "http://localhost:5001/safety_images/";
+            imagePath = "https://newcheck.evvisolutions.com/safety_images/";
           }
 
           return (
