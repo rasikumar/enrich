@@ -10,7 +10,7 @@ import Cursor from "@/components/Cursor";
 const BlogCard = ({ id, title, body, date, author, thumbnail, views }) => {
   return (
     <Link to={`/insights/safetyNet/${id}`}>
-      <div className="bg-white rounded-lg overflow-hidden max-w-sm mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform hover:shadow-lg min-h-[27rem] max-h-[27rem] overflow-y-auto">
+      <div className="bg-white rounded-lg overflow-hidden mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform hover:shadow-lg min-h-[30rem] max-h-[30rem] overflow-y-auto min-w-[23rem] max-w-[23rem]">
         <img
           src={thumbnail}
           alt={title}
@@ -151,7 +151,7 @@ const SafetyNetPage = () => {
         business, and more!
       </p>
 
-      <div className="blog-list px-10 py-6 flex flex-wrap gap-3 ">
+      <div className="blog-list px-10 py-6 flex flex-wrap gap-3 max-w-7xl mx-auto w-full">
         {currentBlogs.map((blog) => (
           <BlogCard
             key={blog.id}

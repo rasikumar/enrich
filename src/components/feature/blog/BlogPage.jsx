@@ -113,7 +113,7 @@ const BlogPage = () => {
         business, and more!
       </p>
 
-      <div className="blog-list px-10 py-6 flex flex-wrap gap-3">
+      <div className="blog-list px-10 py-6 flex flex-wrap gap-3 max-w-7xl mx-auto w-full">
         {currentBlogs.map((blog) => (
           <Card
             key={blog.id}

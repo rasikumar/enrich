@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ id, title, body, date, author, thumbnail, views }) => {
   return (
     <Link to={`/insights/blog/${id}`}>
-      <div className="bg-white rounded-lg overflow-hidden max-w-sm mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform min-h-[27rem] max-h-[27rem] overflow-y-auto">
+      <div className="bg-white rounded-lg overflow-hidden mx-auto my-5 cursor-pointer border border-blue-300 duration-300 transform min-h-[30rem] max-h-[30rem] min-w-[23rem] max-w-[23rem] overflow-y-auto">
         <img
           src={thumbnail}
           alt={title}
