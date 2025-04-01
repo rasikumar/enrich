@@ -272,7 +272,7 @@ const InsightPage = () => {
   };
 
   return (
-    <div className="w-[90%] m-auto py-12 cursor-none">
+    <div className="max-w-[80%] m-auto py-12 cursor-none">
       <Cursor />
       <DynamicBreadcrumb />
       <div className="flex flex-col gap-3 w-full mb-4 text-center mt-5">
@@ -300,7 +300,8 @@ const InsightPage = () => {
           }
 
           return (
-            <div
+            <Link
+              to={`/insights/${item.linkPrefix}`}
               key={item.id}
               className="animate-fade bg-white shadow-lg rounded-lg overflow-hidden"
             >
@@ -323,7 +324,7 @@ const InsightPage = () => {
                 </div>
                 <div
                   dangerouslySetInnerHTML={{ __html: item.body }}
-                  className="text-gray-500 text-sm mb-4 line-clamp-3"
+                  className="text-gray-500 text-sm mb-4 line-clamp-3 ql-editor"
                 />
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-gray-400">
@@ -342,7 +343,7 @@ const InsightPage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

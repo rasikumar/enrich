@@ -21,11 +21,16 @@ const Card = ({ id, title, body, date, author, thumbnail, views }) => {
             {title}
           </h2>
           <p className="text-sm text-gray-500 mb-5">
-            By {author} on {new Date(date).toLocaleDateString()}
+            By {author} on{" "}
+            {new Date(date).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
           </p>
           <div
             dangerouslySetInnerHTML={{ __html: body }}
-            className="text-gray-700 text-base leading-relaxed line-clamp-3 mb-4"
+            className="text-gray-700 text-base leading-relaxed line-clamp-3 mb-4 ql-editor"
           />
           <div className="mt-4 flex justify-between items-center">
             <button className="text-blue-500 hover:text-blue-700 font-medium transition-colors duration-200">

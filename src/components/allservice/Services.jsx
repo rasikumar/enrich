@@ -13,7 +13,7 @@ const Services = () => {
   };
   return (
     <>
-      <div className="bg-white mt-7 cursor-none h-screen">
+      <div className="bg-white mt-7">
         <Cursor />
 
         <div className="mx-auto p-4">

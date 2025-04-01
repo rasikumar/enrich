@@ -4,7 +4,7 @@ import Instance from "../../Admin/Instance";
 import { FaAngleDown, FaAngleUp, FaComment, FaReply } from "react-icons/fa";
 import { motion, useScroll } from "framer-motion";
 import DynamicBreadcrumb from "../../DynamicBreadcrumb";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import NotFound from "@/components/NotFound";
@@ -39,7 +39,7 @@ const BlogDetail = () => {
   const [replyText, setReplyText] = useState(""); // State for the reply text
   const [replyError, setReplyError] = useState(null); // State for reply error messages
   const [replies, setReplies] = useState({}); // State to hold replies keyed by comment ID
-  const [showReply, setShowReply] = useState(false);
+  const [showReply, setShowReply] = useState(null); // Track the comment ID for toggled replies
   const [replyName, setReplyName] = useState(null);
   const [commentToReply, setCommentToReply] = useState(null); // Track which comment is being replied to
   const [suggestedBlogs, setSuggestedBlogs] = useState([]);
@@ -48,8 +48,8 @@ const BlogDetail = () => {
 
   const { scrollYProgress } = useScroll();
 
-  const toggleshowReply = () => {
-    setShowReply((prev) => !prev);
+  const toggleshowReply = (comment_id) => {
+    setShowReply((prev) => (prev === comment_id ? null : comment_id));
   };
 
   // Fetch blog details
@@ -154,16 +154,16 @@ const BlogDetail = () => {
         username,
         comment,
       });
-
-      // setComments([...comments, response.data.newComment]);
-      toast.success("Comment added successfully!" || response.data);
-      setComment("");
-      setUsername("");
-      setCommentError(null);
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      if (response.status === 200) {
+        // setComments([...comments, response.data.newComment]);
+        toast.success("Comment added successfully!" || response.data);
+        setComment("");
+        setUsername("");
+        setCommentError(null);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
     } catch (err) {
       console.error("Failed to post comment:", err);
       setCommentError("Failed to post comment. Please try again.");
@@ -372,17 +372,24 @@ const BlogDetail = () => {
                         </motion.div>
                       )}
                       <button
-                        onClick={toggleshowReply}
+                        onClick={() => toggleshowReply(cmt.comment_id)} // Pass the specific comment ID
                         className="float-end inline-flex items-center gap-2 mb-2"
                       >
                         <motion.span
-                          key={showReply ? "Up" : "Down"}
-                          initial={{ rotate: showReply ? -90 : 90, opacity: 0 }}
+                          key={showReply === cmt.comment_id ? "Up" : "Down"}
+                          initial={{
+                            rotate: showReply === cmt.comment_id ? -90 : 90,
+                            opacity: 0,
+                          }}
                           animate={{ rotate: 0, opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          {!showReply ? <FaAngleDown /> : <FaAngleUp />}
+                          {showReply === cmt.comment_id ? (
+                            <FaAngleUp />
+                          ) : (
+                            <FaAngleDown />
+                          )}
                         </motion.span>
                         <motion.span
                           className="inline-flex items-center gap-1"
@@ -391,10 +398,10 @@ const BlogDetail = () => {
                           transition={{ duration: 0.3 }}
                         >
                           <FaComment />
-                          {showReply || replyCount}
+                          {replies[cmt.comment_id]?.length || 0}
                         </motion.span>
                       </button>
-                      {showReply &&
+                      {showReply === cmt.comment_id &&
                         replies[cmt.comment_id] &&
                         replies[cmt.comment_id].length > 0 && (
                           <div className="mt-8 ml-4 ">
@@ -497,6 +504,7 @@ const BlogDetail = () => {
             )}
           </section>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

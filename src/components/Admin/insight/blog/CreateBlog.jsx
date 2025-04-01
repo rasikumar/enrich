@@ -210,7 +210,9 @@ const CreateBlog = () => {
       } else {
         toast.error(response.data.message);
       }
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
       // console.log("Blog submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting blog:", error);

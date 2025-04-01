@@ -15,17 +15,27 @@ const Cursor = () => {
   };
 
   useEffect(() => {
+    // Hide the default cursor
+    const style = document.createElement("style");
+    style.innerHTML = `* { cursor: none !important; }`;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style); // Cleanup on unmount
+    };
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("mousemove", manageMouseMove);
     return () => window.removeEventListener("mousemove", manageMouseMove);
   });
 
   return (
     <motion.div
-      className="cursor z-[9999]"
+      className="cursor z-[10000]"
       style={{
         left: mouse.x,
         top: mouse.y,
-        cursor: "none !important", // Ensure cursor is hidden with !important
       }}
     />
   );

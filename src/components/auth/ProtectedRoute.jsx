@@ -18,10 +18,10 @@ const ProtectedRoute = ({ children }) => {
       return <Navigate to="/session-expired" replace />; // Redirect to session expired page
     }
 
-    if (decodedToken.email !== "blogger@enrichminds.co.in") {
-      localStorage.removeItem("jwtToken");
-      return <Navigate to="/not-authorized" replace />;
-    }
+    // if (decodedToken.email !== "blogger@enrichminds.co.in") {
+    //   localStorage.removeItem("jwtToken");
+    //   return <Navigate to="/not-authorized" replace />;
+    // }
   } catch (error) {
     // console.error("Error decoding token:", error);
     localStorage.removeItem("jwtToken");

@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import BookSession from "./components/BookSession";
 import CookieBanner from "./components/CookieBanner";
 import CookiePolicy from "./components/Cookie-policy";
-import Cursor from "./components/Cursor";
+// import Cursor from "./components/Cursor";
 
 const Loader = () => {
   <div>
@@ -125,7 +125,7 @@ const App = () => {
   return (
     <div className="scroll-smooth">
       <>
-        <Cursor />
+        {/* <Cursor /> */}
         <AnimatePresence mode="wait">
           <Suspense fallback={<Loader />}>
             {!hideHeaderAndFooter && (

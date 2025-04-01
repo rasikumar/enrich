@@ -5,6 +5,7 @@ import Programs from "./Programs";
 import Skill from "./Skill";
 import Training from "./Training";
 import { motion } from "framer-motion";
+import Cursor from "@/components/Cursor";
 
 const pageVariants = {
   initial: { opacity: 0, y: 0 },
@@ -33,6 +34,7 @@ const Individuals = () => {
         variants={pageVariants}
         transition={pageTransition}
       >
+        <Cursor />
         <Hero />
         <Training />
         <Methodology />

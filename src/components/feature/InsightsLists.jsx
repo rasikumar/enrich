@@ -42,7 +42,7 @@ const Card = ({
           <div className="font-bold text-xl mb-2 text-primary">{title}</div>
           {body && (
             <div
-              className="text-gray-700 mt-2 mb-4 line-clamp-3" // Adjust line-clamp if text is cut off
+              className="text-gray-700 mt-2 mb-4 line-clamp-3 ql-editor" // Adjust line-clamp if text is cut off
               dangerouslySetInnerHTML={{ __html: body }}
             />
           )}

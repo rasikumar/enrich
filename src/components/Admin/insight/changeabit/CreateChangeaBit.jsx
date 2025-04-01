@@ -121,7 +121,7 @@ const CreateChangeaBit = () => {
       );
       return;
     }
-    
+
     if (head.trim().length < 10 || head.trim().length > 100) {
       toast.error("Title must be between 10 and 100 characters.");
       return;
@@ -213,7 +213,9 @@ const CreateChangeaBit = () => {
       } else {
         toast.error(response.data.message);
       }
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
       // console.log("changeABit submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting changeABit:", error);

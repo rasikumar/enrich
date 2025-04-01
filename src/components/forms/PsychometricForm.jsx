@@ -5,8 +5,10 @@ import Instance from "../Admin/Instance";
 import { ChevronDown } from "lucide-react";
 // import { FaClock, FaVideo } from "react-icons/fa";
 import Tesseract from "tesseract.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../ui/input";
+import "react-toastify/ReactToastify.css";
+import { FaCalendar } from "react-icons/fa";
 
 const PsychometricForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -714,7 +716,7 @@ const PsychometricForm = () => {
                     )}
                   </motion.div>
                   <motion.div
-                    className="mb-4"
+                    className="mb-4 relative"
                     initial={{ opacity: 0, x: 60 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, x: 10 }}
@@ -733,8 +735,15 @@ const PsychometricForm = () => {
                       min={today}
                       max={maxDateString}
                       className="w-full p-2 border rounded appearance-none bg-white no-calendar-icon" // Add a custom class
-                      inputMode="none"
+                      // inputMode="none"
                     />
+                    {formData.selectDate ? (
+                      <></>
+                    ) : (
+                      <span className="absolute top-[55%] ml-2 inline-flex items-center gap-4 md:hidden">
+                        Pick a Date <FaCalendar />
+                      </span>
+                    )}
 
                     {errors.selectDate && (
                       <p className="text-red-500 text-sm">
@@ -813,7 +822,7 @@ const PsychometricForm = () => {
                 </>
               )}
               {currentStep === 3 && (
-                <>
+                <div className=" overflow-auto h-[32rem] scrollbar-hidden">
                   <motion.h1
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -972,7 +981,7 @@ const PsychometricForm = () => {
                   >
                     Next
                   </button>
-                </>
+                </div>
               )}
               {currentStep === 4 && (
                 <>
@@ -1073,6 +1082,7 @@ const PsychometricForm = () => {
           </div>
         </>
       )}
+      <ToastContainer />
     </div>
   );
 };

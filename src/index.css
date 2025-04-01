@@ -29,7 +29,7 @@
   font-family: "Open Sans", sans-serif;
   margin: 0%;
   padding: 0%;
-  cursor:  none !important;
+  /* cursor:  none !important; */
 }
 /* body{
   cursor: none;
@@ -181,7 +181,20 @@ sub {
   font-size: smaller;
 }
 
+.ql-editor {
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal;
+}
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 /* Hide the default calendar icon in WebKit browsers (Chrome, Safari) */
 .no-calendar-icon::-webkit-calendar-picker-indicator {
   display: none;
