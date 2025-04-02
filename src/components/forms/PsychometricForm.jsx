@@ -855,8 +855,11 @@ const PsychometricForm = () => {
                       {formData.paymentDetails ? (
                         <>
                           <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm">
-                            <span className="text-gray-700">
-                              {formData.paymentDetails.name}
+                            <span className="text-gray-700 w-60">
+                              {formData.paymentDetails.name.length > 20
+                                ? formData.paymentDetails.name.slice(0, 20) +
+                                  "..."
+                                : formData.paymentDetails.name}
                             </span>
                             <button
                               className="text-red-500 hover:text-red-700"
@@ -887,7 +890,7 @@ const PsychometricForm = () => {
                             type="file"
                             name="file"
                             accept="image/*"
-                            className="relative w-full p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer"
+                            className="relative p-2 border border-gray-300 rounded-lg bg-white shadow-sm cursor-pointer"
                             onChange={validateAndProcessImage}
                           />
                           {isVerifying && (
@@ -1001,7 +1004,7 @@ const PsychometricForm = () => {
                   >
                     Kindly Provide your Personal Information
                   </motion.p>
-                  <div className="mb-4 max-md:h-64 h-72 overflow-auto w-96">
+                  <div className="mb-4 max-md:h-64 h-72 overflow-auto md:w-96">
                     <p>
                       <strong>Name:</strong> {formData.name}
                     </p>

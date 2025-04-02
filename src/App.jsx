@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import BookSession from "./components/BookSession";
 import CookieBanner from "./components/CookieBanner";
 import CookiePolicy from "./components/Cookie-policy";
+import Unsubscribe from "./components/Unsubscribe";
 // import Cursor from "./components/Cursor";
 
 const Loader = () => {
@@ -113,9 +114,10 @@ const App = () => {
     location.pathname.startsWith("/admin") ||
     location.pathname.startsWith("/forgotpassword") ||
     location.pathname.startsWith("/resetPassword") ||
-    location.pathname.startsWith("/dashboard")||
-    location.pathname.startsWith("/session-expired")||
-    location.pathname.startsWith("*")
+    location.pathname.startsWith("/dashboard") ||
+    location.pathname.startsWith("/session-expired") ||
+    location.pathname.startsWith("*") ||
+    location.pathname.startsWith("/unsubscribe");
 
   const [showCookiePolicy, setShowCookiePolicy] = useState(false);
 
@@ -225,6 +227,7 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
               <Route path="not-authorized" element={<NotAuthorized />} />
               <Route path="session-expired" element={<SessionExpired />} />
+              <Route path="unsubscribe" element={<Unsubscribe />} />
             </Routes>
             {!hideHeaderAndFooter && (
               <Suspense fallback={<Loader />}>

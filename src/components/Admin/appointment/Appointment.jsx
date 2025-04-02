@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Instance from "../Instance";
+import { FaCalendar } from "react-icons/fa";
 
 const Appointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -110,14 +111,20 @@ const Appointment = () => {
             value={filters.name}
             onChange={handleFilterChange}
           />
-
-          <input
-            type="date"
-            name="date"
-            className="border p-2 rounded-md"
-            value={filters.date}
-            onChange={handleFilterChange}
-          />
+          <div className="relative">
+            <input
+              type="date"
+              name="date"
+              className="border p-2 rounded-md"
+              value={filters.date}
+              onChange={handleFilterChange}
+            />
+            {!filters.date && (
+              <span className="absolute left-2 text-gray-800 top-2 inline-flex items-center gap-2 md:hidden">
+                Pick a Date <FaCalendar />
+              </span>
+            )}
+          </div>
           <button
             onClick={resetFilters}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"

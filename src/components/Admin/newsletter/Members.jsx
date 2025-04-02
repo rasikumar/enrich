@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Instance from "../Instance";
 import * as XLSX from "xlsx";
-import { FaFileExport } from "react-icons/fa";
+import { FaCalendar, FaFileExport } from "react-icons/fa";
 
 const Members = () => {
   const [contacts, setContacts] = useState([]);
@@ -181,7 +181,7 @@ const Members = () => {
 
   return (
     <div className="max-md:mt-10">
-      <h2 className="text-2xl font-semibold mb-4">Contact List</h2>
+      <h2 className="text-2xl font-semibold mb-4">Subscribers List</h2>
 
       <div className="mb-4 w-full flex flex-wrap gap-5">
         <input
@@ -198,16 +198,23 @@ const Members = () => {
           onChange={(e) => setFilter({ ...filter, email: e.target.value })}
           className="mr-2 border border-gray-300 rounded-md p-2"
         />
-        <input
-          type="date"
-          value={filter.subscription_date}
-          onChange={(e) =>
-            setFilter({ ...filter, subscription_date: e.target.value })
-          }
-          ref={dateRef}
-          onClick={() => dateRef.current.showPicker()}
-          className="mr-2 border border-gray-300 rounded-md p-2"
-        />
+        <div className="relative">
+          <input
+            type="date"
+            value={filter.subscription_date}
+            onChange={(e) =>
+              setFilter({ ...filter, subscription_date: e.target.value })
+            }
+            ref={dateRef}
+            onClick={() => dateRef.current.showPicker()}
+            className="mr-2 border border-gray-300 rounded-md p-2"
+          />
+          {!filter.subscription_date && (
+            <span className="absolute left-2 text-gray-800 top-2 inline-flex items-center gap-2 md:hidden">
+              Pick a Date <FaCalendar />
+            </span>
+          )}
+        </div>
         <button
           onClick={resetFilters}
           className="bg-blue-500 inline-flex items-center gap-2 text-white rounded-md hover:bg-blue-600 p-2"
@@ -275,7 +282,7 @@ const Members = () => {
                 colSpan="4"
                 className="border border-gray-300 p-2 text-center"
               >
-                No contacts found
+                No Subscribers found
               </td>
             </tr>
           )}

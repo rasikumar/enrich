@@ -1,6 +1,6 @@
 // components/Admin/Login.js
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Instance from "../Admin/Instance";
 import Evvi_new from "../../assets/logo.png";
@@ -15,6 +15,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   // const [error, setError] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      navigate("/dashboard"); // Redirect to dashboard if already logged in
+    }
+  }, [navigate]);
 
   // Helper function to validate email
   const validateEmail = (email) => {

@@ -9,7 +9,6 @@ const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [validationError, setValidationError] = useState("");
 
@@ -65,19 +64,25 @@ const ResetPassword = () => {
       setError("Passwords do not match.");
       return;
     }
+    setError(""); // Clear error if passwords match
     try {
       const response = await Instance.post(`/admin/resetPassword/${token}`, {
         newPassword,
       });
-      setMessage(response.data.message);
       toast.success(response.data.message);
       setTimeout(() => {
-        navigate("/admin");
+        navigate("/admin"); // Redirect to login page
       }, 2000);
     } catch (err) {
       setError("Failed to reset password.", err);
     }
   };
+
+  useEffect(() => {
+    if (newPassword === confirmPassword) {
+      setError(""); // Clear error when passwords match
+    }
+  }, [newPassword, confirmPassword]);
 
   return (
     <div>
@@ -87,10 +92,10 @@ const ResetPassword = () => {
             <h2 className="text-2xl font-semibold text-center">
               Reset Your Password
             </h2>
-            {error && <div className="text-red-500 text-center">{error}</div>}
-            {message && (
+            {error && <div className="text-red-500">{error}</div>}
+            {/* {message && (
               <div className="text-green-500 text-center">{message}</div>
-            )}
+            )} */}
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
                 <input

@@ -38,7 +38,7 @@ const ProgramDisplay = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="cursor-none"
+        className="cursor-none 2xl:mb-20"
       >
         <Cursor />
         <h1 className="bg-yellow-500 relative p-10 text-center font-semibold text-3xl">

@@ -7,50 +7,50 @@ const testimonialsData = [
   {
     id: 1,
     name: "Shrikant Hegde",
-    // position: "Emotional Intelligence",
+    position: "Master Trainer, Leadership Coach, and Motivational Speaker",
     feedback:
       "I had the privilege of attending various webinars conducted by Ms. Shanthi Subramani. All those webinars were very informative and educative, and were true testimonies of her thorough knowledge, rich experience and authentic professional expertise.",
-    img: "https://ui-avatars.com/api/?name=sh&background=random",
+    img: "https://ui-avatars.com/api/?name=sh&background=fadadd",
   },
   {
     id: 2,
     name: "Shiva Kumar .B",
-    position: "AGM - HR & Admin at BSCPL Infrastructure Limited",
+    position: "HR & Business Operations Professional",
     feedback:
       "A transformative workshop that significantly enhanced our CRM team's behavioral skills for customer service. The tailored approach empowered participants, refreshing their mindset and effectiveness in their roles. Highly recommended for organizations aiming to elevate team performance and individual growth.",
-    img: "https://ui-avatars.com/api/?name=sk&background=random",
+    img: "https://ui-avatars.com/api/?name=sk&background=ffe5d9",
   },
   {
     id: 3,
     name: "Zahira Pereira",
-    // position: "Time Management",
+    position: "Training & Coaching Professional",
     feedback:
       "I must compliment Shanthi Subramani for such an amazing representation of my Psychometric report.  She took me through every phase of it very articulately, I now understand myself much better.  The psychometric results are very accurate , and served as an exact mirror to what my actual personality is.",
-    img: "https://lh3.googleusercontent.com/a-/ALV-UjXqHGfZ5g8Y0fsAVw6ddN-gysfO8mb15LOyqYBeBTosvXJTZJsXRQ=w90-h90-p-rp-mo-br100",
+    img: "https://ui-avatars.com/api/?name=zp&background=cde7b0",
   },
-  {
+  { 
     id: 4,
     name: "Ashwini Murthy",
-    // position: "Presentation Skills",
+    position: "Teacher",
     feedback:
       "Had a great experience with ma'am.She motivated us in positive way. After attending this workshop my self confidence increased and l started to love myself, which is the great tool to improve my career.",
-    img: "https://lh3.googleusercontent.com/a-/ALV-UjVuX6KIRwaVRPn1mNVlTtzaVJiLDihZb8Tv7dHzCg59BUZal1qF=w90-h90-p-rp-mo-br100",
+    img: "https://ui-avatars.com/api/?name=am&background=a5d8ff",
   },
   {
     id: 5,
     name: "Archana V Kurli",
-    // position: "Presentation Skills",
+    position: "Presentation Skills",
     feedback:
       "Session was really worth to learn balancing life.... dear mam.We got to know Loving one self is not being selfish but self respect . Thank you 🙏🏻",
-    img: "https://lh3.googleusercontent.com/a-/ALV-UjVEBlcWObYVv1HD2BcxXyTL6LvLshkN82TsE9VOz1fq1_2cxgsX=w90-h90-p-rp-mo-br100",
+    img: "https://ui-avatars.com/api/?name=ak&background=d4a5ff",
   },
   {
     id: 6,
     name: "Sai Sharan",
-    // position: "Presentation Skills",
+    position: "IT Professional",
     feedback:
       "Personal development session was very nice and helpful. Session has improved me a lot in planning and up skilling in my daily activity of work and learning.",
-    img: "https://lh3.googleusercontent.com/a/ACg8ocLmRwsLkolXXjb-1wSPHlk6q70PnKa8R-cxHZuQ34a8b2bhqg0=w90-h90-p-rp-mo-br100",
+    img: "https://ui-avatars.com/api/?name=ss&background=ffcad4",
   },
 ];
 
@@ -138,39 +138,43 @@ const Testimonials = () => {
                     .id
                 }
                 ref={(el) => (cardsRef.current[i] = el)}
-                className="testimonial-card flex flex-col items-center gap-4 bg-white p-6 py-8 shadow-lg rounded-xl transform transition-transform duration-500 hover:scale-105 w-full lg:w-80 mx-auto"
+                className="testimonial-card flex flex-col items-center gap-4 bg-white p-6 shadow-lg rounded-xl transform transition-transform duration-500 hover:scale-105 w-full lg:w-80 mx-auto justify-between"
               >
-                <img
-                  src={
-                    testimonialsData[
-                      (currentIndex + i) % testimonialsData.length
-                    ].img
-                  }
-                  width={50}
-                  height={50}
-                  className="rounded-full w-20 h-20 object-cover"
-                />
-                <h1 className="text-xl font-semibold text-gray-800">
-                  {
-                    testimonialsData[
-                      (currentIndex + i) % testimonialsData.length
-                    ].name
-                  }
-                </h1>
-                <p className="text-gray-500">
-                  {
-                    testimonialsData[
-                      (currentIndex + i) % testimonialsData.length
-                    ].position
-                  }
-                </p>
-                <p className="w-full leading-5 text-sm text-gray-700 text-justify">
+                <p className="w-full leading-5 text-sm text-justify">
                   {
                     testimonialsData[
                       (currentIndex + i) % testimonialsData.length
                     ].feedback
                   }
                 </p>
+                <div className="flex justify-between items-center w-full">
+                  <div className="flex flex-col">
+                    <h1 className="text-lg font-semibold text-[#203B93]">
+                      {
+                        testimonialsData[
+                          (currentIndex + i) % testimonialsData.length
+                        ].name
+                      }
+                    </h1>
+                    <p className="text-gray-500 text-[12px] italic">
+                      {
+                        testimonialsData[
+                          (currentIndex + i) % testimonialsData.length
+                        ].position
+                      }
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      testimonialsData[
+                        (currentIndex + i) % testimonialsData.length
+                      ].img
+                    }
+                    // width={30}
+                    // height={30}
+                    className="rounded-full w-16 h-16 object-cover ml-2"
+                  />
+                </div>
               </div>
             ))}
           </div>

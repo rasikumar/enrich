@@ -1,7 +1,9 @@
 import { FaExclamationTriangle } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Use Link for navigation if you're using React Router
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const NotFound = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full text-center">
@@ -14,12 +16,12 @@ const NotFound = () => {
         <p className="text-gray-500 mb-6">
           Oops! The page you&apos;re looking for doesn&apos;t exist.
         </p>
-        <Link
-          to="/"
+        <button
+          onClick={() => navigate(-1)} // Navigate back to the previous route
           className="inline-block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition duration-200"
         >
-          Go Back Home
-        </Link>
+          Go Back
+        </button>
       </div>
     </div>
   );
